@@ -1,4 +1,4 @@
-package river.chat.chatevery;
+package river.chat.lib_core.app;
 
 import android.app.Activity;
 import android.app.Application;
@@ -29,15 +29,15 @@ public class BaseApplication extends Application {
 
     }
 
-//    /**
-//     * token过期
-//     *
-//     * @param code
-//     * @param msg
-//     */
-//    public void tokenExpire(int code, String msg) {
-//        AppManager.getInstance().finishAllActivity();
-//    }
+    /**
+     * token过期
+     *
+     * @param code
+     * @param msg
+     */
+    public void tokenExpire(int code, String msg) {
+        AppManager.getInstance().finishAllActivity();
+    }
 
     /**
      * 退出程序

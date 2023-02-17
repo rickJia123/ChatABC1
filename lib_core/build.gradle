@@ -3,7 +3,7 @@ ext {
     artifactId = "lib_core"
 }
 apply plugin: 'com.android.library'
-apply from: "../base.gradle"
+apply from: "../module_common.gradle"
 
 dependencies {
 
@@ -20,7 +20,7 @@ dependencies {
     api "androidx.core:core-ktx:$core_ktx"
     api "androidx.appcompat:appcompat:$appcompat"
     api "com.google.android.material:material:$material"
-    api "androidx.constraintlayout:constraintlayout$constraintlayout"
+    api "androidx.constraintlayout:constraintlayout:$constraintlayout"
     api 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     api 'androidx.navigation:navigation-fragment-ktx:2.5.3'
