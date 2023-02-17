@@ -1,0 +1,47 @@
+
+ext {
+    //basic version配置
+    build_versions = [
+            "build_tools" : "30.0.3",
+            "target_sdk"  : 30,
+            "min_sdk"     : 21,
+            "appid"       : "river.chat.chatevery",
+            "version_name": version_name,
+            "version_code": Integer.parseInt(version_code),
+    ]
+    //外部依赖
+    libVersion = [
+            //androidx.appcompat:appcompat
+            appcompat = '1.6.0',
+
+            //androidx.core:core-ktx
+            core_ktx = '1.9.0',
+
+            //com.google.android.material:material
+            material = '1.8.0',
+
+            //androidx.constraintlayout:constraintlayout
+            constraintlayout = '2.1.4',
+
+            //com.squareup.retrofit2:adapter-rxjava2
+            adapter_rxjava2 = '2.9.0',
+
+            //com.squareup.retrofit2:converter-gson
+            converter_gson = '2.9.0',
+
+            //com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter
+            retrofit2_kotlin_coroutines_adapter = '0.9.2',
+    ]
+
+
+    appModules = [
+//            "Baselibrary",
+    ]
+
+    duShuModules = [
+            'lib_core',
+
+    ]
+
+}
+

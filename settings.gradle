@@ -12,6 +12,9 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "ChatEvery"
+rootProject.name = "My Application"
 include ':app'
-include ':app:lib_core'
+apply from: "config.gradle"
+for (module in duShuModules) {
+    include module
+}

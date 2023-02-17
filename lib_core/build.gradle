@@ -1,0 +1,33 @@
+ext {
+    groupId = "river.chat"
+    artifactId = "lib_core"
+}
+apply plugin: 'com.android.library'
+apply from: "../base.gradle"
+
+dependencies {
+
+
+//    def networkModules = [
+//            "flog",
+//            "launcher",
+//            'futils',
+//            'lib_event',
+//            "HDAppArchitecture",
+//    ]
+//    implDependencies delegate, networkModules
+    //基础系统引用
+    api "androidx.core:core-ktx:$core_ktx"
+    api "androidx.appcompat:appcompat:$appcompat"
+    api "com.google.android.material:material:$material"
+    api "androidx.constraintlayout:constraintlayout$constraintlayout"
+    api 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    api 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    api 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
+    //第三方引用
+    api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit2_kotlin_coroutines_adapter"
+    api "com.squareup.retrofit2:adapter-rxjava2:$adapter_rxjava2"
+    api "com.squareup.retrofit2:converter-gson:$converter_gson"
+}

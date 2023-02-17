@@ -5,16 +5,32 @@ plugins {
 
 android {
     namespace 'river.chat.chatevery'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
-        applicationId "river.chat.chatevery"
-        minSdk 21
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
-
+        applicationId build_versions.appid
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode build_versions.version_code
+        versionName build_versions.version_name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        flavorDimensions "versionCode"
+
+        renderscriptTargetApi build_versions.min_sdk
+        renderscriptSupportModeEnabled true
+        multiDexEnabled true
+        //支持Java8
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+        kotlinOptions {
+            jvmTarget = '1.8'
+        }
+        dexOptions {
+            incremental true//打开dex增量编译  这还是一个实验性的功能，但是还是推荐打开试试
+            javaMaxHeapSize "4G"//设置允许分配的的最大堆内存
+        }
     }
 
     buildTypes {
@@ -35,17 +51,28 @@ android {
     }
 }
 
+boolean isRelease() {
+    if (gradle.startParameter.taskNames != null) {
+        for (String s : gradle.startParameter.taskNames) {
+            if (s.contains("Release") | s.contains("release")) {
+                return true
+            }
+        }
+    }
+    return false
+}
+
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    for (module in appModules) {
+        implementation project(":$module")
+    }
 }

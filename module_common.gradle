@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+apply from: "../base.gradle"
+android {
+    defaultConfig {
+        kapt {
+            includeCompileClasspath = false
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    lintOptions {
+        disable 'MissingTranslation'
+        //解决studio版本的报错：xx can only be called from within the same library
+        disable 'RestrictedApi'
+        abortOnError false
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+dependencies {
+//    def commonModules = ["lib_base"]
+//    implDependencies delegate, commonModules
+    kapt "com.alibaba:arouter-compiler:$arouter_compiler"
+}
