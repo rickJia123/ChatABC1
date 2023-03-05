@@ -1,0 +1,10 @@
+ext {
+    groupId = "river.chat"
+    artifactId = "businese_user"
+}
+apply plugin: 'com.android.library'
+apply from: "../module_common.gradle"
+
+dependencies {
+    api project(":common")
+}

@@ -5,17 +5,16 @@ ext {
 apply plugin: 'com.android.library'
 apply from: "../module_common.gradle"
 
+android {
+
+    buildFeatures {
+        dataBinding true
+    }
+}
+
 dependencies {
 
-
-//    def networkModules = [
-//            "flog",
-//            "launcher",
-//            'futils',
-//            'lib_event',
-//            "HDAppArchitecture",
-//    ]
-//    implDependencies delegate, networkModules
+//    api project(":lib_core")
     //基础系统引用
     api "androidx.core:core-ktx:$core_ktx"
     api "androidx.appcompat:appcompat:$appcompat"
@@ -27,7 +26,25 @@ dependencies {
     api 'androidx.navigation:navigation-ui-ktx:2.5.3'
 
     //第三方引用
+    api "com.squareup.okio:okio:$okioVersion"
+
+    //网络相关
+    api "com.squareup.okhttp3:okhttp:$okhttpLogging"
+    api "com.squareup.okhttp3:logging-interceptor:$okhttpLogging"
     api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit2_kotlin_coroutines_adapter"
     api "com.squareup.retrofit2:adapter-rxjava2:$adapter_rxjava2"
     api "com.squareup.retrofit2:converter-gson:$converter_gson"
+
+    //权限
+    api 'pub.devrel:easypermissions:3.0.0'
+
+
+    //效率提升
+    api "io.insert-koin:koin-core:$koin"
+    api "io.insert-koin:koin-android:$koin"
+
+    //数据库
+    api "io.objectbox:objectbox-android:$objectboxVersion"
+    api "io.objectbox:objectbox-kotlin:$objectboxVersion"
 }
+apply plugin: 'io.objectbox'

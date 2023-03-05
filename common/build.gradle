@@ -7,4 +7,5 @@ apply from: "../module_common.gradle"
 
 dependencies {
     api project(":lib_core")
+    api project(":businese_resource")
 }

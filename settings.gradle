@@ -18,3 +18,6 @@ apply from: "config.gradle"
 for (module in duShuModules) {
     include module
 }
+include ':common'
+include ':business_user'
+include ':businese_resource'
