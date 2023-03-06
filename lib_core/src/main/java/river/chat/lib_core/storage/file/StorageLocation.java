@@ -1,4 +1,4 @@
-package river.chat.lib_core.storage;
+package river.chat.lib_core.storage.file;
 
 /**
  * @Author :rickBei

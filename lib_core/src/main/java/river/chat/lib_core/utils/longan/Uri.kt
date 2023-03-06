@@ -34,7 +34,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
-import river.chat.lib_core.utils.longan.*
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.InputStream

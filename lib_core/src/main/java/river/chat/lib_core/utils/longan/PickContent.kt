@@ -23,7 +23,6 @@ import android.net.Uri
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultCaller
 import androidx.activity.result.contract.ActivityResultContract
-import river.chat.lib_core.utils.longan.MediaUriResultLauncher
 
 fun ActivityResultCaller.registerForPickContentResult(callback: ActivityResultCallback<Uri?>) =
   MediaUriResultLauncher(registerForActivityResult(PickContentContract(), callback))

@@ -20,7 +20,6 @@ import android.net.Uri
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultCaller
 import androidx.activity.result.contract.ActivityResultContracts
-import river.chat.lib_core.utils.longan.MediaUriResultLauncher
 
 fun ActivityResultCaller.registerForGetContentResult(callback: ActivityResultCallback<Uri?>) =
   MediaUriResultLauncher(registerForActivityResult(ActivityResultContracts.GetContent(), callback))

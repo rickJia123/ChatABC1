@@ -4,12 +4,7 @@ package river.chat.lib_core.view.main
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
-import org.koin.android.ext.android.getKoinScope
 import org.koin.core.annotation.KoinInternalApi
-import org.koin.core.scope.Scope
-import river.chat.lib_core.utils.other.getViewModel
-import river.chat.lib_core.view.ktx.bind
 import river.chat.lib_core.BR
 
 /**

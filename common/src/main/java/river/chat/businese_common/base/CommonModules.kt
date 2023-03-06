@@ -1,8 +1,8 @@
 package river.chat.businese_common.base
 
-import com.google.gson.Gson
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import river.chat.businese_common.dataBase.UserBox
 
 /**
  * Created by beiyongChao on 2023/3/1
@@ -10,7 +10,5 @@ import org.koin.dsl.module
  */
 val dataBaseModule = module {
 
-    single(named("gson")) {
-        Gson()
-    }
+
 }

@@ -2,13 +2,14 @@ package river.chat.lib_core.app;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 
 
 public class BaseApplication extends Application {
     private static BaseApplication baseApplication;
     private ActivityLifecycleCallbacks mActivityLifecycleCallbacks;
-
+    private AppLifeCycleImpl mAppLifeCycle;
 
     @Override
     public void onCreate() {
@@ -16,14 +17,24 @@ public class BaseApplication extends Application {
         baseApplication = this;
         registerActivityListener();
 
+        mAppLifeCycle.onCreate(this);
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        mAppLifeCycle=new AppLifeCycleImpl(this);
+    }
 
     public static BaseApplication getInstance() {
         return baseApplication;
     }
 
-
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        mAppLifeCycle.onTerminate(this);
+    }
 
     public void reloadApp(){
 

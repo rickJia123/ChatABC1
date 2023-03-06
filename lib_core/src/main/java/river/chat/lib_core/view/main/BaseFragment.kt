@@ -1,7 +1,6 @@
 package river.chat.lib_core.view.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import pub.devrel.easypermissions.EasyPermissions
 import river.chat.lib_core.utils.permission.permission.PermissionHelper

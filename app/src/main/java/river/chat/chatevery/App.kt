@@ -4,10 +4,10 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.module
-import river.chat.businese_common.base.testModule
+import river.chat.businese_common.base.dataBaseModule
 import river.chat.lib_core.app.AppManager
 import river.chat.lib_core.app.BaseApplication
-import river.chat.lib_core.storage.StorageUtil
+import river.chat.lib_core.storage.file.StorageUtil
 
 /**
  * Created by beiyongChao on 2023/3/1
@@ -28,7 +28,7 @@ class App : BaseApplication() {
             androidLogger()
             androidContext(this@App)
             // 添加 appModule
-            modules(testModule, appModule)
+            modules(dataBaseModule, appModule)
         }
 
     }

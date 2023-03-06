@@ -1,41 +1,47 @@
 package river.chat.chatevery.ui.notifications
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import river.chat.businese_common.dataBase.UserBox
 import river.chat.chatevery.databinding.FragmentNotificationsBinding
+import river.chat.lib_core.storage.database.model.User
+import river.chat.lib_core.utils.exts.singleClick
+import river.chat.lib_core.view.main.BaseBindingViewModelFragment
 
-class NotificationsFragment : Fragment() {
+class NotificationsFragment :
+    BaseBindingViewModelFragment<FragmentNotificationsBinding, NotificationsViewModel>() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    override fun createViewModel() = NotificationsViewModel()
 
 
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
-
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    var defaultId = 1
+    override fun initDataBinding(binding: FragmentNotificationsBinding) {
+        super.initDataBinding(binding)
+        binding.tvAdd.singleClick {
+            UserBox.add(createUser())
         }
-        return root
+        binding.tvDelete.singleClick {
+            UserBox.remove(defaultId.toLong())
+        }
+        binding.tvDeleteAll.singleClick {
+            UserBox.removeAll()
+        }
+        binding.tvUpdate.singleClick {
+            UserBox.add(User().apply {
+                id = defaultId.toLong()
+                name = "rick 更新"
+            })
+        }
+        binding.tvQuery.singleClick {
+            var msg = ""
+            UserBox.all.forEach {
+                msg += it.toString()
+            }
+            binding.tvMsg.text = UserBox.all.size.toString() + "  信息：" + msg
+        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun createUser() = User().apply {
+        id = (UserBox.all.size + 1).toLong()
+        name = "rick" + id
     }
+
 }

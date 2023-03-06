@@ -4,8 +4,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import river.chat.lib_core.BR
-import river.chat.lib_core.utils.other.injectViewModel
-import river.chat.lib_core.view.ktx.bind
 
 /**
  * @Description: Databinding + ViewModel BaseActivity

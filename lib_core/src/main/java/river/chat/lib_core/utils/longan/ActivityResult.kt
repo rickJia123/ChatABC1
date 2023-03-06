@@ -26,17 +26,16 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultCaller
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.RequiresPermission
-import river.chat.lib_core.utils.longan.*
 
 @Deprecated(
   "registerForStartActivityResult(callback) instead.",
-  ReplaceWith("registerForStartActivityResult(callback)", "river.chat.lib_core.utils.longan.registerForStartActivityResult")
+  ReplaceWith("registerForStartActivityResult(callback)", "river.chat.lib_core.storage.file.utils.longan.registerForStartActivityResult")
 )
 fun ActivityResultCaller.startActivityLauncher(callback: ActivityResultCallback<ActivityResult>) = registerForStartActivityResult(callback)
 
 @Deprecated(
   "registerForStartIntentSenderResult(callback) instead.",
-  ReplaceWith("registerForStartIntentSenderResult(callback)", "river.chat.lib_core.utils.longan.registerForStartIntentSenderResult")
+  ReplaceWith("registerForStartIntentSenderResult(callback)", "river.chat.lib_core.storage.file.utils.longan.registerForStartIntentSenderResult")
 )
 fun ActivityResultCaller.startIntentSenderLauncher(callback: ActivityResultCallback<ActivityResult>) = registerForStartIntentSenderResult(callback)
 
@@ -44,7 +43,7 @@ fun ActivityResultCaller.startIntentSenderLauncher(callback: ActivityResultCallb
   "registerForRequestPermissionResult(onGranted, onDenied, onShowRequestRationale) instead.",
   ReplaceWith(
     "registerForRequestPermissionResult(onGranted, onDenied, onShowRequestRationale)",
-    "river.chat.lib_core.utils.longan.registerForRequestPermissionResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForRequestPermissionResult"
   )
 )
 fun ActivityResultCaller.requestPermissionLauncher(
@@ -56,7 +55,7 @@ fun ActivityResultCaller.requestPermissionLauncher(
 
 @Deprecated(
   "registerForRequestPermissionResult(callback) instead.",
-  ReplaceWith("registerForRequestPermissionResult(callback)", "river.chat.lib_core.utils.longan.registerForRequestPermissionResult")
+  ReplaceWith("registerForRequestPermissionResult(callback)", "river.chat.lib_core.storage.file.utils.longan.registerForRequestPermissionResult")
 )
 fun ActivityResultCaller.requestPermissionLauncher(callback: ActivityResultCallback<Boolean>) = registerForRequestPermissionResult(callback)
 
@@ -64,7 +63,7 @@ fun ActivityResultCaller.requestPermissionLauncher(callback: ActivityResultCallb
   "registerForRequestMultiplePermissionsResult(onAllGranted, onDenied, onShowRequestRationale) instead.",
   ReplaceWith(
     "registerForRequestMultiplePermissionsResult(onAllGranted, onDenied, onShowRequestRationale)",
-    "river.chat.lib_core.utils.longan.registerForRequestMultiplePermissionsResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForRequestMultiplePermissionsResult"
   )
 )
 fun ActivityResultCaller.requestMultiplePermissionsLauncher(
@@ -77,7 +76,7 @@ fun ActivityResultCaller.requestMultiplePermissionsLauncher(
   "registerForRequestMultiplePermissionsResult(callback) instead.",
   ReplaceWith(
     "registerForRequestMultiplePermissionsResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForRequestMultiplePermissionsResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForRequestMultiplePermissionsResult"
   )
 )
 fun ActivityResultCaller.requestMultiplePermissionsLauncher(callback: ActivityResultCallback<Map<String, Boolean>>) =
@@ -87,7 +86,7 @@ fun ActivityResultCaller.requestMultiplePermissionsLauncher(callback: ActivityRe
   "registerForTakePicturePreviewResult(callback) instead.",
   ReplaceWith(
     "registerForTakePicturePreviewResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForTakePicturePreviewResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForTakePicturePreviewResult"
   )
 )
 fun ActivityResultCaller.takePicturePreviewLauncher(callback: ActivityResultCallback<Bitmap?>) =
@@ -97,7 +96,7 @@ fun ActivityResultCaller.takePicturePreviewLauncher(callback: ActivityResultCall
   "registerForTakePictureResult(callback) instead.",
   ReplaceWith(
     "registerForTakePictureResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForTakePictureResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForTakePictureResult"
   )
 )
 fun ActivityResultCaller.takePictureLauncher(callback: ActivityResultCallback<Boolean>) = registerForTakePictureResult(callback)
@@ -106,7 +105,7 @@ fun ActivityResultCaller.takePictureLauncher(callback: ActivityResultCallback<Bo
   "registerForTakeVideoResult(callback) instead.",
   ReplaceWith(
     "registerForTakeVideoResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForTakeVideoResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForTakeVideoResult"
   )
 )
 fun ActivityResultCaller.takeVideoLauncher(callback: ActivityResultCallback<Bitmap?>) = registerForTakeVideoResult(callback)
@@ -115,7 +114,7 @@ fun ActivityResultCaller.takeVideoLauncher(callback: ActivityResultCallback<Bitm
   "registerForPickContactResult(callback) instead.",
   ReplaceWith(
     "registerForPickContactResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForPickContactResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForPickContactResult"
   )
 )
 fun ActivityResultCaller.pickContactLauncher(callback: ActivityResultCallback<Uri?>) = registerForPickContactResult(callback)
@@ -124,7 +123,7 @@ fun ActivityResultCaller.pickContactLauncher(callback: ActivityResultCallback<Ur
   "registerForPickContentResult(callback) instead.",
   ReplaceWith(
     "registerForPickContentResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForPickContentResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForPickContentResult"
   )
 )
 fun ActivityResultCaller.pickContentLauncher(callback: ActivityResultCallback<Uri?>) = registerForPickContentResult(callback)
@@ -133,7 +132,7 @@ fun ActivityResultCaller.pickContentLauncher(callback: ActivityResultCallback<Ur
   "registerForGetContentResult(callback) instead.",
   ReplaceWith(
     "registerForGetContentResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForGetContentResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForGetContentResult"
   )
 )
 fun ActivityResultCaller.getContentLauncher(callback: ActivityResultCallback<Uri?>) = registerForGetContentResult(callback)
@@ -142,7 +141,7 @@ fun ActivityResultCaller.getContentLauncher(callback: ActivityResultCallback<Uri
   "registerForGetMultipleContentsResult(callback) instead.",
   ReplaceWith(
     "registerForGetMultipleContentsResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForGetMultipleContentsResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForGetMultipleContentsResult"
   )
 )
 fun ActivityResultCaller.getMultipleContentsLauncher(callback: ActivityResultCallback<List<Uri>>) = registerForGetMultipleContentsResult(callback)
@@ -151,7 +150,7 @@ fun ActivityResultCaller.getMultipleContentsLauncher(callback: ActivityResultCal
   "registerForOpenDocumentResult(callback) instead.",
   ReplaceWith(
     "registerForOpenDocumentResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForOpenDocumentResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForOpenDocumentResult"
   )
 )
 fun ActivityResultCaller.openDocumentLauncher(callback: ActivityResultCallback<Uri?>) = registerForOpenDocumentResult(callback)
@@ -160,7 +159,7 @@ fun ActivityResultCaller.openDocumentLauncher(callback: ActivityResultCallback<U
   "registerForOpenMultipleDocumentsResult(callback) instead.",
   ReplaceWith(
     "registerForOpenMultipleDocumentsResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForOpenMultipleDocumentsResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForOpenMultipleDocumentsResult"
   )
 )
 fun ActivityResultCaller.openMultipleDocumentsLauncher(callback: ActivityResultCallback<List<Uri>>) = registerForOpenMultipleDocumentsResult(callback)
@@ -169,7 +168,7 @@ fun ActivityResultCaller.openMultipleDocumentsLauncher(callback: ActivityResultC
   "registerForOpenDocumentTreeResult(callback) instead.",
   ReplaceWith(
     "registerForOpenDocumentTreeResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForOpenDocumentTreeResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForOpenDocumentTreeResult"
   )
 )
 fun ActivityResultCaller.openDocumentTreeLauncher(callback: ActivityResultCallback<Uri?>) = registerForOpenDocumentTreeResult(callback)
@@ -178,7 +177,7 @@ fun ActivityResultCaller.openDocumentTreeLauncher(callback: ActivityResultCallba
   "registerForCreateDocumentResult(callback) instead.",
   ReplaceWith(
     "registerForCreateDocumentResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForCreateDocumentResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForCreateDocumentResult"
   )
 )
 fun ActivityResultCaller.createDocumentLauncher(callback: ActivityResultCallback<Uri?>) = registerForCreateDocumentResult(callback)
@@ -187,7 +186,7 @@ fun ActivityResultCaller.createDocumentLauncher(callback: ActivityResultCallback
   "registerForLaunchAppSettingsResult(callback) instead.",
   ReplaceWith(
     "registerForLaunchAppSettingsResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForLaunchAppSettingsResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForLaunchAppSettingsResult"
   )
 )
 fun ActivityResultCaller.appSettingsLauncher(callback: ActivityResultCallback<Unit>) = registerForLaunchAppSettingsResult(callback)
@@ -196,7 +195,7 @@ fun ActivityResultCaller.appSettingsLauncher(callback: ActivityResultCallback<Un
   "registerForLaunchNotificationSettingsResult(callback) instead.",
   ReplaceWith(
     "registerForLaunchNotificationSettingsResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForLaunchNotificationSettingsResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForLaunchNotificationSettingsResult"
   )
 )
 fun ActivityResultCaller.notificationSettingsLauncher(callback: ActivityResultCallback<Unit>) = registerForLaunchNotificationSettingsResult(callback)
@@ -205,7 +204,7 @@ fun ActivityResultCaller.notificationSettingsLauncher(callback: ActivityResultCa
   "registerForCropPictureResult(callback) instead.",
   ReplaceWith(
     "registerForCropPictureResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForCropPictureResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForCropPictureResult"
   )
 )
 fun ActivityResultCaller.cropPictureLauncher(callback: ActivityResultCallback<Uri?>) = registerForCropPictureResult(callback)
@@ -214,7 +213,7 @@ fun ActivityResultCaller.cropPictureLauncher(callback: ActivityResultCallback<Ur
   "registerForEnableLocationResult(onLocationEnabled) instead.",
   ReplaceWith(
     "registerForEnableLocationResult(onLocationEnabled)",
-    "river.chat.lib_core.utils.longan.registerForEnableLocationResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForEnableLocationResult"
   )
 )
 fun ActivityResultCaller.enableLocationLauncher(onLocationEnabled: LocationScope.(Boolean) -> Unit) =
@@ -225,7 +224,7 @@ fun ActivityResultCaller.enableLocationLauncher(onLocationEnabled: LocationScope
   "registerForEnableBluetoothResult(onLocationDisabled, onBluetoothEnabled) instead.",
   ReplaceWith(
     "registerForEnableBluetoothResult(onLocationDisabled, onBluetoothEnabled)",
-    "river.chat.lib_core.utils.longan.registerForEnableBluetoothResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForEnableBluetoothResult"
   )
 )
 fun ActivityResultCaller.enableBluetoothLauncher(onLocationDisabled: LocationScope.() -> Unit, onBluetoothEnabled: BluetoothScope.(Boolean) -> Unit) =
@@ -236,7 +235,7 @@ fun ActivityResultCaller.enableBluetoothLauncher(onLocationDisabled: LocationSco
   "registerForEnableBluetoothResult(onBluetoothEnabled) instead.",
   ReplaceWith(
     "registerForEnableBluetoothResult(onBluetoothEnabled)",
-    "river.chat.lib_core.utils.longan.registerForEnableBluetoothResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForEnableBluetoothResult"
   )
 )
 fun ActivityResultCaller.enableBluetoothLauncher(onBluetoothEnabled: BluetoothScope.(Boolean) -> Unit) =
@@ -246,7 +245,7 @@ fun ActivityResultCaller.enableBluetoothLauncher(onBluetoothEnabled: BluetoothSc
   "registerForLaunchWifiSettingsResult(callback) instead.",
   ReplaceWith(
     "registerForLaunchWifiSettingsResult(callback)",
-    "river.chat.lib_core.utils.longan.registerForLaunchWifiSettingsResult"
+    "river.chat.lib_core.storage.file.utils.longan.registerForLaunchWifiSettingsResult"
   )
 )
 fun ActivityResultCaller.launchWifiSettingsLauncher(callback: ActivityResultCallback<Unit>) = registerForLaunchWifiSettingsResult(callback)
