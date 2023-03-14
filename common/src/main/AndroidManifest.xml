@@ -4,4 +4,21 @@
     package="river.chat.common">
 
 
+    <application >
+        <activity android:name="river.chat.businese_common.router.SchemeFilterActivity">
+            <!-- Scheme -->
+            <intent-filter>
+                <data
+                    android:host="m.aliyun.com"
+                    android:scheme="arouter"/>
+
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+
 </manifest>

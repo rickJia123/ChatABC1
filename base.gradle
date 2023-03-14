@@ -9,7 +9,7 @@ android {
         targetSdkVersion build_versions.target_sdk
         versionCode build_versions.version_code
         versionName build_versions.version_name
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         consumerProguardFiles 'consumer-rules.pro'
         ndk {
             abiFilters "armeabi", 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
@@ -49,11 +49,18 @@ android {
     }
 }
 
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
 dependencies {
     api fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    kapt "com.alibaba:arouter-compiler:$arouter_compiler"
 }
 
 task androidSourcesJar(type: Jar) {

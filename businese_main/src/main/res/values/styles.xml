@@ -1,0 +1,93 @@
+<resources>
+
+    <!--会话界面-->
+    <style name="conversation_item_time">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_margin">@dimen/conversation_item_margin</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="conversation_item_content_right">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">right</item>
+        <item name="android:gravity">right</item>
+        <item name="android:paddingLeft">32dp</item>
+        <item name="android:paddingRight">@dimen/conversation_item_slide_margin</item>
+        <item name="android:paddingBottom">@dimen/conversation_item_margin</item>
+    </style>
+
+    <style name="conversation_item_content_left">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:gravity">left</item>
+        <item name="android:paddingRight">32dp</item>
+        <item name="android:paddingLeft">@dimen/conversation_item_slide_margin</item>
+        <item name="android:paddingBottom">@dimen/conversation_item_margin</item>
+    </style>
+
+
+    <style name="conversation_item_head_left">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginLeft">@dimen/chat_avator_slide_margin</item>
+        <item name="android:layout_marginTop">@dimen/conversation_item_margin</item>
+        <item name="android:src">@mipmap/default_head</item>
+    </style>
+
+    <style name="conversation_item_head_right">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">@dimen/chat_avator_slide_margin</item>
+        <item name="android:layout_marginTop">@dimen/conversation_item_margin</item>
+        <item name="android:src">@mipmap/default_head</item>
+    </style>
+
+    <style name="conversation_item_cover">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <style name="conversation_item_nickname">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/color_666666</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="conversation_item_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:minWidth">44dp</item>
+        <item name="android:maxWidth">250dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+
+        <!--        <item name="android:textIsSelectable">true</item>-->
+    </style>
+
+
+    <style name="conversation_item_error">
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_height">22dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+
+
+
+
+</resources>

@@ -16,7 +16,7 @@ dependencies {
 
 //    api project(":lib_core")
     //基础系统引用
-    api "androidx.core:core-ktx:$core_ktx"
+    api "androidx.core:core-ktx:1.0.0"
     api "androidx.appcompat:appcompat:$appcompat"
     api "com.google.android.material:material:$material"
     api "androidx.constraintlayout:constraintlayout:$constraintlayout"
@@ -46,5 +46,10 @@ dependencies {
     //数据库
     api "io.objectbox:objectbox-android:$objectboxVersion"
     api "io.objectbox:objectbox-kotlin:$objectboxVersion"
+
+    api "com.alibaba:arouter-api:$arouter"
+    kapt "com.alibaba:arouter-compiler:$arouter"
+
+    api "io.coil-kt:coil-compose:$coil"
 }
 apply plugin: 'io.objectbox'

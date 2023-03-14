@@ -1,8 +1,9 @@
 package river.chat.businese_common.base
 
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import river.chat.businese_common.dataBase.UserBox
+import river.chat.businese_common.router.HomePlugin
+import river.chat.businese_common.router.UserPlugin
+import river.chat.lib_core.router.plugin.core.getPlugin
 
 /**
  * Created by beiyongChao on 2023/3/1
@@ -10,5 +11,11 @@ import river.chat.businese_common.dataBase.UserBox
  */
 val dataBaseModule = module {
 
+    single {
+        getPlugin<UserPlugin>()
+    }
 
+    single {
+        getPlugin<HomePlugin>()
+    }
 }

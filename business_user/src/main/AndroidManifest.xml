@@ -7,5 +7,6 @@
         <meta-data
             android:name="river.chat.business_user.config.UserConfigurationImpl"
             android:value="ConfigModule" />
+        <activity android:name=".login.home.LoginActivity"></activity>
     </application>
 </manifest>

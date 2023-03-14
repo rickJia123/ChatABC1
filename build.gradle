@@ -14,6 +14,7 @@ buildscript {
             name 'Google'
         }
         mavenCentral()
+        google()
     }
 
     dependencies {
@@ -30,6 +31,8 @@ plugins {
 apply from: "config.gradle"
 allprojects {
     repositories {
+//        google()
+
 //        maven {
 //            url 'https://maven.aliyun.com/repository/google'
 //            name 'Google'

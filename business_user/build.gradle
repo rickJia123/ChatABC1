@@ -1,3 +1,4 @@
+
 ext {
     groupId = "river.chat"
     artifactId = "businese_user"
@@ -5,6 +6,17 @@ ext {
 apply plugin: 'com.android.library'
 apply from: "../module_common.gradle"
 
+android {
+    defaultConfig {
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
+    }
+}
+
 dependencies {
-    api project(":common")
+    implementation project(":common")
+    kapt "com.alibaba:arouter-compiler:$arouter_compiler"
 }

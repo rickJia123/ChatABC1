@@ -6,7 +6,30 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
+import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.CircleCropTransformation
+import river.chat.lib_core.R
+
+
+fun ImageView.loadSimple(resource: Any) {
+    this.load(resource) {
+        crossfade(true)
+        placeholder(R.mipmap.ic_placeholder)
+    }
+}
+
+fun ImageView.loadCircle(resource: Any) {
+    this.load(resource) {
+        crossfade(true)
+        placeholder(R.mipmap.ic_placeholder)
+        transformations(CircleCropTransformation())
+    }
+}
+
+
+
 
 fun getFitInSampleSize(reqWidth: Int, reqHeight: Int, options: BitmapFactory.Options): Int {
     var inSampleSize = 1
@@ -47,8 +70,10 @@ fun View.toBitmap(): Bitmap {
     return when (this) {
         is RecyclerView -> {
             this.scrollToPosition(0)
-            this.measure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
-                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED))
+            this.measure(
+                View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+            )
 
             val bmp = Bitmap.createBitmap(width, measuredHeight, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(bmp)
@@ -62,12 +87,15 @@ fun View.toBitmap(): Bitmap {
             }
             this.draw(canvas)
             //恢复高度
-            this.measure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
-                    View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.AT_MOST))
+            this.measure(
+                View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.AT_MOST)
+            )
             bmp //return
         }
         else -> {
-            val screenshot = Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_4444)
+            val screenshot =
+                Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_4444)
             val canvas = Canvas(screenshot)
             if (background != null) {
                 background.setBounds(0, 0, width, measuredHeight)

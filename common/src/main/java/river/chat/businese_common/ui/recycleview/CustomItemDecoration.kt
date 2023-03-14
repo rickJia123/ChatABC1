@@ -23,7 +23,7 @@ class CustomItemDecoration : ItemDecoration() {
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        outRect.set(0, 0,0,10)
+        outRect.set(0, 0,0,100)
     }
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {

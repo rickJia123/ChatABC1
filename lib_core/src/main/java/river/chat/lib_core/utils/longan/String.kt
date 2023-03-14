@@ -20,8 +20,11 @@ package river.chat.lib_core.utils.longan
 
 import android.graphics.Color
 import android.text.format.Formatter
+import android.widget.Toast
 import androidx.core.util.PatternsCompat
 import org.json.JSONObject
+import river.chat.lib_core.app.BaseApplication
+import river.chat.lib_core.utils.log.LogUtil
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -105,3 +108,6 @@ fun Double.toNumberString(fractionDigits: Int = 2, minIntDigits: Int = 1, isGrou
     minimumFractionDigits = fractionDigits
     maximumFractionDigits = fractionDigits
   }.format(this)
+
+fun String.log() =
+  LogUtil.i("river :"+this)

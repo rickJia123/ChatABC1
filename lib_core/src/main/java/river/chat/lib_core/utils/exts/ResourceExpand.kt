@@ -49,6 +49,14 @@ fun Float.dp2px(): Int {
     return DisplayUtil.dp2px(this)
 }
 
+
+/**
+ * dp转px
+ */
+fun Int.dp2px(): Int {
+    return DisplayUtil.dp2px(this.toFloat())
+}
+
 /**
  * 字符串比较
  */

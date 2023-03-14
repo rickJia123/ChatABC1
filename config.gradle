@@ -32,18 +32,21 @@ ext {
             retrofit2_kotlin_coroutines_adapter = '0.9.2',
 
             //com.alibaba:arouter-compiler
-            arouter_compiler = '1.2.2',
+            arouter_compiler = '1.5.2',
             arouter = arouter_compiler,
 
             okioVersion = '3.0.0',
-            okhttp = '4.9.3',
+            okhttp = '4.10.0',
             okhttpLogging = okhttp,
 
             //io.insert-koin:koin-core
             koin='3.2.0',
 
             //io.objectbox:objectbox-android
-            objectboxVersion='3.2.1'
+            objectboxVersion='3.2.1',
+
+            coil='2.2.2'
+
     ]
 
 /**
@@ -51,7 +54,8 @@ ext {
  */
     appModules = [
             'business_user',
-//            'common',
+            'businese_main',
+            'common',
     ]
 
     /**
@@ -62,6 +66,7 @@ ext {
             'common',
             'business_user',
             'businese_resource',
+            'businese_main',
     ]
 
 }
