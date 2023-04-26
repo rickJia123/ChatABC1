@@ -1,4 +1,4 @@
-package river.chat.lib_core.view.main
+package river.chat.lib_core.view.main.fragment
 
 
 import androidx.databinding.ViewDataBinding
@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import org.koin.core.annotation.KoinInternalApi
 import river.chat.lib_core.BR
+import river.chat.lib_core.view.ktx.bind
+import river.chat.lib_core.view.main.BaseViewModel
+import river.chat.lib_core.view.main.OnEventListener
 
 /**
  * @Description: Databinding + ViewModel BaseFragment
@@ -14,7 +17,7 @@ import river.chat.lib_core.BR
  *
  */
 open abstract class BaseBindingViewModelFragment<BINDING : ViewDataBinding, VM : BaseViewModel> :
-    BaseBindingFragment<BINDING>() {
+    BaseBindingFragment<BINDING>(), OnEventListener {
 
     private var mActivityProvider: ViewModelProvider? = null
     private var mFragmentProvider: ViewModelProvider? = null
@@ -26,6 +29,7 @@ open abstract class BaseBindingViewModelFragment<BINDING : ViewDataBinding, VM :
     override fun initDataBinding(binding: BINDING) {
         //RDF 默认自动绑定 vm。具体业务实现中在实际的视图 xml 文件中声明当前视图的 ViewModel 为
         // vm 即可自动进行绑定。
+        viewModel.bind(this)
         binding.setVariable(BR.vm, viewModel)
     }
 
@@ -75,6 +79,10 @@ open abstract class BaseBindingViewModelFragment<BINDING : ViewDataBinding, VM :
             }
         }
         return mActivityProvider!![modelClass]
+
+    }
+
+    override fun onEvent(eventId: Int) {
 
     }
 }

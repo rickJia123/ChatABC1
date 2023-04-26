@@ -69,4 +69,30 @@ fun String?.isEquals(string: String?): Boolean {
  */
 fun String?.isStrEmpty(): Boolean {
     return TextUtils.isEmpty(this)
+
+}
+
+/**
+ * 字符串安全转换成int
+ */
+fun String?.safeToInt(): Int {
+    return try {
+        (this ?: "0").toInt()
+    } catch (e: Exception) {
+        0
+    }
+}
+
+/**
+ * int安全转换成字符串
+ */
+fun Int?.safeToString(): String {
+    return this?.toString() ?: ""
+}
+
+/**
+ * long安全转换成字符串
+ */
+fun Long?.safeToString(): String {
+    return this?.toString() ?: ""
 }

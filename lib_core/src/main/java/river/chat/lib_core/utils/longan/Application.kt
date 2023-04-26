@@ -34,7 +34,6 @@ import android.provider.Settings
 import androidx.core.content.pm.PackageInfoCompat
 
 lateinit var application: Application
-  internal set
 
 inline val packageName: String get() = application.packageName
 

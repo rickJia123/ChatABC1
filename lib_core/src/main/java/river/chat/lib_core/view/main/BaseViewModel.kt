@@ -13,6 +13,9 @@ import androidx.lifecycle.ViewModel
  *
  */
 open class BaseViewModel: ViewModel() {
+
+    // 事件
+    var event = MutableLiveData<BaseVmEvent<Int>>()
     var isLoading = MutableLiveData<Boolean>()
     private var showLoadingCount = ObservableInt(0)
 
@@ -37,6 +40,10 @@ open class BaseViewModel: ViewModel() {
         showLoadingCount.set(showLoadingCount.get() - 1)
     }
 
+
+      fun postEvent(eventId: Int) {
+        event.value = BaseVmEvent(eventId)
+    }
 
 
 }

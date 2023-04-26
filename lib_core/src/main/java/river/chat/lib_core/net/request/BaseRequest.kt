@@ -13,6 +13,7 @@ import river.chat.lib_core.net.common.NetRespoonseEnum
 import river.chat.lib_core.net.common.OperationException
 import river.chat.lib_core.utils.longan.isNetworkAvailable
 import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.view.main.BaseViewModel
 
 /**
  * Created on 2021/10/27
@@ -87,7 +88,7 @@ open class BaseRequest(var viewModel: BaseViewModel) {
             return true
         }
         if (isShowDialog) {
-            viewModel.uiObserver.showDialog.call()
+
         }
         return false
     }
@@ -105,13 +106,13 @@ open class BaseRequest(var viewModel: BaseViewModel) {
         val status: String = responseModel.status
         if (NetRespoonseEnum.SUCCESS.code == status) {
             onStatusChanged(ViewStatus.SUCCESS)
-            pageRes(responseModel.pageModel)
+            pageRes(responseModel.page)
             resp(responseModel.data)
         } else {
             if (NetRespoonseEnum.TOKEN_DATE_INVALID.code == status) {
                 notifyTokenExpired()
             }
-            val errorMsg: String? = responseModel.message
+            val errorMsg: String? = responseModel.msg
             val exception = OperationException(status, errorMsg)
             onStatusChanged(ViewStatus.FAIL)
             error(exception)
@@ -138,7 +139,7 @@ open class BaseRequest(var viewModel: BaseViewModel) {
      */
     private fun end(isShowDialog: Boolean, complete: () -> Unit) {
         if (isShowDialog) {
-            viewModel.uiObserver.dismissDialog.call()
+
         }
         complete()
     }
@@ -147,7 +148,7 @@ open class BaseRequest(var viewModel: BaseViewModel) {
      * 请求状态切换
      */
     fun onStatusChanged(status: String) {
-        viewModel.uiObserver.viewStatus.postValue(status)
+
     }
 
     /**

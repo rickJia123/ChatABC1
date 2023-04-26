@@ -1,4 +1,4 @@
-package river.chat.lib_core.view.main
+package river.chat.lib_core.view.main.activity
 
 
 import android.os.Bundle
@@ -12,7 +12,7 @@ import river.chat.lib_core.utils.other.getBindingType
  * @CreateDate： 2020/8/3 11:40 PM
  *
  */
-abstract class BaseBindingActivity<BINDING :ViewDataBinding>:BaseActivity() {
+abstract class BaseBindingActivity<BINDING :ViewDataBinding>: BaseActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

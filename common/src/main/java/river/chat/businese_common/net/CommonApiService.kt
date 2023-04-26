@@ -12,7 +12,7 @@ import river.chat.lib_core.net.retrofit.BaseApiService
  * Created by beiyongChao on 2023/2/24
  * Description:
  */
-interface CommonApiService : BaseApiService {
+interface CommonApiService : BaseApi {
 
    
     /**

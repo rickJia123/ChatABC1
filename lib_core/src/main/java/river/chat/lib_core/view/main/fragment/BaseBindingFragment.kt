@@ -1,11 +1,11 @@
-package river.chat.lib_core.view.main
+package river.chat.lib_core.view.main.fragment
 
+import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
+import river.chat.lib_core.R
 import river.chat.lib_core.utils.other.getBindingType
 
 /**
@@ -14,11 +14,15 @@ import river.chat.lib_core.utils.other.getBindingType
  * @CreateDate： 2020/8/4 11:46 PM
  *
  */
-abstract class BaseBindingFragment<BINDING:ViewDataBinding>: BaseFragment() {
+abstract class BaseBindingFragment<BINDING : ViewDataBinding> : BaseFragment() {
 
     protected var mActivity: AppCompatActivity? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         mActivity = context as AppCompatActivity
         //创建 ViewDataBinding 实例
         val binding = createDataBinding(inflater, container)
@@ -36,7 +40,12 @@ abstract class BaseBindingFragment<BINDING:ViewDataBinding>: BaseFragment() {
      */
     private fun createDataBinding(inflater: LayoutInflater, container: ViewGroup?): BINDING {
         return getBindingType(javaClass)// 获取泛型类型
-            ?.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java) // 反射获取 inflate 方法
+            ?.getMethod(
+                "inflate",
+                LayoutInflater::class.java,
+                ViewGroup::class.java,
+                Boolean::class.java
+            ) // 反射获取 inflate 方法
             ?.invoke(null, inflater, container, false) as BINDING // 通过反射调用 inflate 方法
     }
 
@@ -45,5 +54,7 @@ abstract class BaseBindingFragment<BINDING:ViewDataBinding>: BaseFragment() {
      * 子类实现该方法通过 binding 绑定数据
      */
     abstract fun initDataBinding(binding: BINDING)
+
+
 
 }

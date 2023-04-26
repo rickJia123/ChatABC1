@@ -1,6 +1,8 @@
 package river.chat.businese_common.base
 
+import org.koin.dsl.factory
 import org.koin.dsl.module
+import river.chat.businese_common.net.ApiStorage
 import river.chat.businese_common.router.HomePlugin
 import river.chat.businese_common.router.UserPlugin
 import river.chat.lib_core.router.plugin.core.getPlugin
@@ -11,6 +13,11 @@ import river.chat.lib_core.router.plugin.core.getPlugin
  */
 val dataBaseModule = module {
 
+    factory()
+    {
+        ApiStorage.getBasedBody()
+    }
+
     single {
         getPlugin<UserPlugin>()
     }
@@ -18,4 +25,6 @@ val dataBaseModule = module {
     single {
         getPlugin<HomePlugin>()
     }
+
+
 }

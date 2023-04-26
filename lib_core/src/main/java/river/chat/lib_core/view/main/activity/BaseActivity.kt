@@ -1,7 +1,8 @@
-package river.chat.lib_core.view.main
+package river.chat.lib_core.view.main.activity
 
 import android.content.Intent
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import org.greenrobot.eventbus.EventBus
 import pub.devrel.easypermissions.EasyPermissions
 import river.chat.lib_core.utils.permission.permission.PermissionHelper
 
@@ -10,19 +11,44 @@ import river.chat.lib_core.utils.permission.permission.PermissionHelper
  *Time: 2019-09-03
  *Description: xxx
  */
-open class BaseFragment : Fragment() , EasyPermissions.PermissionCallbacks,
-    EasyPermissions.RationaleCallbacks{
+open class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,
+    EasyPermissions.RationaleCallbacks {
 
+    /**
+     * 是否注册eventBus
+     *
+     * @return
+     */
+    protected open fun registerEventBus(): Boolean {
+        return false
+    }
 
+    /**
+     * 权限申请
+     * @param permissions 要申请的权限列表
+     * @param showPermanentlyDeniedDialog 是否引导去应用设置赋予权限
+     * @param onDenied 授权拒绝回调
+     * @param onGranted 授权成功回调
+     */
     fun requestPermissions(
         permissions: Array<out String>,
         showPermanentlyDeniedDialog: Boolean = false,
         onDenied: (() -> Unit)? = null,
         onGranted: () -> Unit
     ) {
-        PermissionHelper.requestPermissions(this, permissions, showPermanentlyDeniedDialog, onDenied, onGranted)
+        PermissionHelper.requestPermissions(
+            this,
+            permissions,
+            showPermanentlyDeniedDialog,
+            onDenied,
+            onGranted
+        )
     }
 
+
+    /**
+     * 权限申请结果回调
+     */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -31,6 +57,7 @@ open class BaseFragment : Fragment() , EasyPermissions.PermissionCallbacks,
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
+
 
     /**
      * 权限申请失败
@@ -47,12 +74,12 @@ open class BaseFragment : Fragment() , EasyPermissions.PermissionCallbacks,
         PermissionHelper.onGranted(requestCode, perms)
     }
 
+    /**
+     * 跳转设置界面授权后返回结果处理
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        context?.let {
-            PermissionHelper.onActivityResult(it, requestCode, resultCode, data)
-        }
-
+        PermissionHelper.onActivityResult(this, requestCode, resultCode, data)
     }
 
     /**
@@ -67,6 +94,20 @@ open class BaseFragment : Fragment() , EasyPermissions.PermissionCallbacks,
      */
     override fun onRationaleAccepted(requestCode: Int) {
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (registerEventBus()) {
+            EventBus.getDefault().register(this)
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (registerEventBus()) {
+            EventBus.getDefault().unregister(this)
+        }
     }
 
 }

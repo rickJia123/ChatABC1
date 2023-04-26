@@ -1,8 +1,11 @@
 package river.chat.businese_main.message
 
+import android.os.UserManager
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import river.chat.businese_common.router.UserPlugin
 import river.chat.businese_common.router.jump2Login
+import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.utils.longan.log
 import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_resource.model.MessageBean
@@ -80,9 +83,13 @@ object MessageCenter {
      * 检查消息发送 权限
      */
     private fun checkPermission(msg: MessageBean): Boolean {
-//        "先充钱啊 啊sir".toast()
-//        jump2Login()
-        return true
+        var hasPermission=true
+        var isLogin = getPlugin<UserPlugin>().isLogin()
+        if (!isLogin) {
+            hasPermission=false
+            getPlugin<UserPlugin>().check2Login { }
+        }
+        return hasPermission
     }
 
 }

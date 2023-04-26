@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:4905679635175817883",
-      "lastPropertyId": "4:7081396532297803775",
+      "lastPropertyId": "12:9022708040042814358",
       "name": "User",
       "properties": [
         {
@@ -20,14 +20,44 @@
           "type": 9
         },
         {
-          "id": "3:161990952056708685",
-          "name": "avatar",
+          "id": "5:1787912880923025571",
+          "name": "cityId",
+          "type": 5
+        },
+        {
+          "id": "6:8658760617162838965",
+          "name": "inviteUserId",
+          "type": 5
+        },
+        {
+          "id": "7:3861915201190615350",
+          "name": "sex",
+          "type": 5
+        },
+        {
+          "id": "8:7108170970039742079",
+          "name": "headImg",
           "type": 13
         },
         {
-          "id": "4:7081396532297803775",
-          "name": "name",
+          "id": "9:6090886342911295961",
+          "name": "realName",
           "type": 9
+        },
+        {
+          "id": "10:7752572497271752635",
+          "name": "nickName",
+          "type": 9
+        },
+        {
+          "id": "11:742464731764889602",
+          "name": "mobile",
+          "type": 9
+        },
+        {
+          "id": "12:9022708040042814358",
+          "name": "isNew",
+          "type": 5
         }
       ],
       "relations": []
@@ -41,7 +71,10 @@
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    161990952056708685,
+    7081396532297803775
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

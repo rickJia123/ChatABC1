@@ -47,7 +47,7 @@ object MessageHelper {
      * 创建ai 角色
      */
     fun buildAiUser() = User().apply {
-        avatar = river.chat.lib_resource.R.drawable.avatar_ai
+        headImg = river.chat.lib_resource.R.drawable.avatar_ai
     }
 
 

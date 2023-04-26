@@ -5,5 +5,5 @@ package river.chat.lib_core.config
  * Description:
  */
 object AppConfig {
-    private val CONFIGS: MutableMap<ConfigKey, Any> = mutableMapOf()
+    const val PLATFORM="ANDROID"
 }

@@ -3,8 +3,8 @@ package river.chat.lib_core.view.ktx
 
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
-import river.chat.lib_core.view.main.BaseBindingViewModelActivity
-import river.chat.lib_core.view.main.BaseBindingViewModelFragment
+import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
+import river.chat.lib_core.view.main.fragment.BaseBindingViewModelFragment
 import river.chat.lib_core.view.main.BaseViewModel
 
 /**
@@ -16,8 +16,8 @@ import river.chat.lib_core.view.main.BaseViewModel
  *
  */
 fun BaseViewModel.bind(activity: BaseBindingViewModelActivity<*, *>) {
-    observe(activity, activity){
-//        activity.onEvent(it)
+    observe(activity, activity) {
+        activity.onEvent(it)
     }
 }
 
@@ -30,12 +30,26 @@ fun BaseViewModel.bind(activity: BaseBindingViewModelActivity<*, *>) {
  *
  */
 fun BaseViewModel.bind(fragment: BaseBindingViewModelFragment<*, *>) {
-    observe(fragment, fragment.context){
-//        fragment.onEvent(it)
+    observe(fragment, fragment.context) {
+        fragment.onEvent(it)
     }
 }
 
 
-fun  BaseViewModel.observe( owner: LifecycleOwner, context: Context?, onEvent: (Int) -> Unit){
+fun BaseViewModel.observe(owner: LifecycleOwner, context: Context?, onEvent: (Int) -> Unit) {
+    // 订阅事件变化
+    event.observe(owner) {
+        event.value?.getValueIfNotHandled()?.let {
+            onEvent(it)
+        }
+    }
 
+
+    isLoading.observe(owner) {
+        if (it) {
+
+        } else {
+
+        }
+    }
 }

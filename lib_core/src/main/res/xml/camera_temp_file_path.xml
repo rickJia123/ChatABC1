@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <cache-path
+        name="captured_image"
+        path="photos/" />
+    <root-path
+        name="download_file"
+        path="" />
+    <external-path
+        name="external_storage_root"
+        path="." />
+    <cache-path
+        name="cache-path"
+        path="." />
+    <external-path
+        name="dcim"
+        path="DCIM/" />
+</paths>

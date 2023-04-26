@@ -10,7 +10,7 @@ import river.chat.lib_core.utils.exts.view.loadSimple
  *Time: 2019-09-04
  *Description: Data binding Adapter with recycler view
  */
-@BindingAdapter("load:imageCircle")
+@BindingAdapter("imageCircle")
 fun setImageCircle(
     imageView: AppCompatImageView,
     resource: Any?
@@ -21,7 +21,7 @@ fun setImageCircle(
 
 }
 
-@BindingAdapter("load:imageSimple")
+@BindingAdapter("imageSimple")
 fun setImageSimple(
     imageView: AppCompatImageView,
     resource: Any?

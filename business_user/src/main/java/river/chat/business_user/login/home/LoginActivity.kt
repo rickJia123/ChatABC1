@@ -5,7 +5,7 @@ import river.chat.businese_common.router.UserRouterConstants
 import river.chat.business_user.databinding.ActivityLoginBinding
 import river.chat.business_user.login.LoginViewModel
 import river.chat.lib_core.utils.exts.singleClick
-import river.chat.lib_core.view.main.BaseBindingViewModelActivity
+import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 import river.chat.businese_common.router.HomePlugin
 import org.koin.android.ext.android.inject
 
@@ -20,13 +20,10 @@ class LoginActivity : BaseBindingViewModelActivity<ActivityLoginBinding, LoginVi
 
     override fun initDataBinding(binding: ActivityLoginBinding) {
         super.initDataBinding(binding)
-        binding.tvProtocol.singleClick {
-            homePlugin.test()
-        }
+
     }
 
 
     override fun createViewModel() = LoginViewModel()
-
 
 }

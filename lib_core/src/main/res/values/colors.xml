@@ -17,9 +17,8 @@
     <color name="magenta">#FF00FF</color>
     <!--颜色规范-->
     <color name="default_text">#030303</color>
-    <color name="sub_default_text">#4C4948</color>
-    <color name="default_yellow">#FDD000</color>
-    <color name="BANNER">#88ffffff</color>
+
+
     <!--透明度-->
     <color name="color_FD6D0E_5PER">#0DFD6D0E</color><!-- 5%透明度-->
     <color name="color_FC2702_5PER">#0DFC2702</color><!-- 5%透明度-->

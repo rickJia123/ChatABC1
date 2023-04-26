@@ -9,6 +9,8 @@ import river.chat.businese_common.base.dataBaseModule
 import river.chat.lib_core.app.AppManager
 import river.chat.lib_core.app.BaseApplication
 import river.chat.lib_core.storage.file.StorageUtil
+import river.chat.lib_core.utils.log.LogUtil
+import river.chat.lib_core.utils.longan.application
 import river.chat.lib_core.utils.longan.isAppDebug
 
 /**
@@ -46,6 +48,8 @@ class App : BaseApplication() {
 
 
     private fun initConfig() {
+        application=this
+        LogUtil.init(isAppDebug)
         StorageUtil.init(this)
     }
 

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<data>
+
+<variable
+    name="vm"
+    type="river.chat.business_user.login.LoginViewModel" />
+
+</data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/ivLoginIcon"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@mipmap/logo_trans"
+            app:layout_constraintBottom_toTopOf="@+id/ivLoginBg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivLoginBg"
+            android:layout_width="0dp"
+            android:layout_height="400dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:src="@color/color_000000_10PER"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/tipButtonColor"
+            android:text="上一步"
+            android:textColor="@color/color_999999"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            app:cornerRadius="10dp"
+            android:visibility="@{vm.lastStepVisible}"
+            android:textSize="10sp"
+            android:layout_margin="10dp"
+            app:layout_constraintLeft_toLeftOf="@id/ivLoginBg"
+            app:layout_constraintTop_toTopOf="@id/ivLoginBg" />
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="@id/ivLoginBg"
+            app:layout_constraintLeft_toLeftOf="@id/ivLoginBg"
+            app:layout_constraintRight_toRightOf="@id/ivLoginBg"
+            app:layout_constraintTop_toTopOf="@id/ivLoginBg">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/llInput"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputLayoutPhone"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center_vertical"
+                    app:boxCornerRadiusBottomEnd="180dp"
+                    app:boxCornerRadiusBottomStart="180dp"
+                    app:boxCornerRadiusTopEnd="180dp"
+                    app:boxCornerRadiusTopStart="180dp"
+                    app:counterEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="请输入手机号"
+                        android:inputType="phone"
+                        android:maxLength="11" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputLayoutCode"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center_vertical"
+                    app:boxCornerRadiusBottomEnd="180dp"
+                    app:boxCornerRadiusBottomStart="180dp"
+                    app:boxCornerRadiusTopEnd="180dp"
+                    app:boxCornerRadiusTopStart="180dp"
+                    app:counterEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="请输入验证码"
+                        android:inputType="phone"
+                        android:maxLength="6" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </ScrollView>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivThirdWechat"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dp"
+            android:src="@mipmap/wechat"
+            app:layout_constraintBottom_toTopOf="@id/btConfirm"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btConfirm"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/defaultButtonColor"
+            android:text="获取验证码"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            app:cornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivLoginBg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivLoginBg" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

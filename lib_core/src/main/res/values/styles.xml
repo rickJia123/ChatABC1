@@ -1,0 +1,8 @@
+<resources>
+
+    <style name="DialogStyle_Common" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter_up</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit_down</item>
+    </style>
+
+</resources>

@@ -20,21 +20,23 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/conversation_item_content_left">
 
+
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_avatar"
                 style="@style/conversation_item_head_left"
-                imageCircle="@{item.user.avatar}"
+                imageCircle="@{item.user.headImg}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <river.chat.lib_core.view.roundview.EasyButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/tvMsg"
                 style="@style/conversation_item_text"
                 android:layout_marginLeft="11dp"
                 android:background="@color/color_666666"
                 android:text="@{item.msg}"
                 android:textColor="@color/white"
-                app:ev_radius="10dp"
+                app:cornerRadius="10dp"
                 app:layout_constraintLeft_toRightOf="@id/iv_avatar"
                 app:layout_constraintTop_toTopOf="@+id/iv_avatar"
                 tool:text="嗯" />

@@ -1,16 +1,13 @@
 package river.chat.businese_main.home
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.alibaba.android.arouter.facade.annotation.Route
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+import river.chat.businese_common.constants.CommonVmEvents
 import river.chat.businese_common.router.HomeRouterConstants
-import river.chat.business_main.R
 import river.chat.business_main.databinding.ActivityHomeBinding
-import river.chat.lib_core.view.main.BaseBindingViewModelActivity
+import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
+
 
 /**
  * Created by beiyongChao on 2023/3/8
@@ -20,11 +17,7 @@ import river.chat.lib_core.view.main.BaseBindingViewModelActivity
 class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewModel>() {
 
 
-    companion object {
-        fun launch(activity: AppCompatActivity) {
-            activity.startActivity(Intent(activity, HomeActivity::class.java))
-        }
-    }
+
 
     override fun initDataBinding(binding: ActivityHomeBinding) {
         super.initDataBinding(binding)
@@ -33,8 +26,21 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
 
     }
 
+    override fun onEvent(eventId: Int) {
+        when (eventId) {
+            CommonVmEvents.LOADING -> {
+//                LoadingDialog().showDialog(this)
+            }
+        }
+    }
+
 
     override fun createViewModel() = HomeViewModel()
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: String?) {
+        // Do something
+    }
 
 
 }

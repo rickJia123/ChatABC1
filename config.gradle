@@ -45,7 +45,11 @@ ext {
             //io.objectbox:objectbox-android
             objectboxVersion='3.2.1',
 
-            coil='2.2.2'
+            coil='2.2.2',
+
+
+            //org.greenrobot:eventbus
+            eventbus='3.3.1',
 
     ]
 

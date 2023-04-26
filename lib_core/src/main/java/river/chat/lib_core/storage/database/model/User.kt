@@ -6,14 +6,21 @@ import io.objectbox.annotation.Id
 
 @Entity
 data class User(
-    @Id(assignable = true)
-    var id: Long = 0,
     var token: String = "",
 
-    var avatar: Any ?=null,
+    @Id(assignable = true)
+    var id: Long = 0,
+    var cityId: Int = 0,
+    var inviteUserId: Int = 0,
 
-    var name: String = "",
 
+    var sex: Int = 0,
+    var headImg:  Any ?=null,
+    var realName: String = "",
+    var nickName: String = "",
+    var mobile: String = "",
+
+    var isNew: Int = 0,
 
     ) : java.io.Serializable
 

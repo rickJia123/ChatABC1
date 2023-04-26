@@ -9,18 +9,31 @@ import river.chat.lib_core.storage.database.BaseBox
  */
 object UserBox : BaseBox<User>() {
 
-    override fun getEntityClass()= User::class.java
+    override fun getEntityClass() = User::class.java
 
     override fun exit() {
 
     }
 
-//    override fun get(id: Long): UserBox {
-//        return if (box == null) null else box.query().equal(UserInfo_.memberId, id).build()
-//            .findFirst()
-//    }
-//
-//    override fun add(data: UserBox?): Long {
-//        return super.add(data)
-//    }
+    fun getCurrentUser(): User {
+        loop@ run {
+            box?.all
+                ?.forEach {
+                    if ((it?.id ?: 0) > 0) {
+                        return it
+                    }
+                }
+        }
+        return User()
+    }
+
+    fun updateUser(user: User): Long {
+        return box?.put(user) ?: 0
+    }
+
+    fun deleteAll() {
+        box?.removeAll()
+    }
 }
+
+

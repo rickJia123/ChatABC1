@@ -6,7 +6,7 @@ import river.chat.lib_core.net.retrofit.BaseApi
  * Created by beiyongChao on 2023/2/24
  * Description:
  */
-object CommonApi : BaseApi() {
+object CommonApi : BaseApi {
 
 
 

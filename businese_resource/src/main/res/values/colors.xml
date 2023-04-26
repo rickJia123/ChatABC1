@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="defaultBgColor">#999999</color>
+    //默认背景颜色
+    <color name="defaultBgColor">#1D1E2D</color>
 
+
+    //默认按钮颜色
+    <color name="defaultButtonColor">#d81e06</color>
+
+
+    //默认提示按钮颜色
+    <color name="tipButtonColor">#30FFFFFF</color>
+
+    //默认文字颜色
     <color name="defaultTextColor">#d81e06</color>
+
+    //默认图标可用颜色
+    <color name="iconColor">#d81e06</color>
+
+    //默认图标不可用颜色
+    <color name="iconDisableColor">#999999</color>
 
 </resources>

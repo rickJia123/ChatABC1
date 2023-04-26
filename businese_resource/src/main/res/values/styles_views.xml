@@ -1,0 +1,17 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="cornerButton" parent="TextAppearance.MaterialComponents.Button" >
+
+
+
+    </style>
+
+
+
+
+
+
+
+
+</resources>

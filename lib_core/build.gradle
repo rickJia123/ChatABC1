@@ -51,5 +51,7 @@ dependencies {
     kapt "com.alibaba:arouter-compiler:$arouter"
 
     api "io.coil-kt:coil-compose:$coil"
+
+    api "org.greenrobot:eventbus:$eventbus"
 }
 apply plugin: 'io.objectbox'

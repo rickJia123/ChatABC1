@@ -11,10 +11,10 @@ public class ApiConfig {
 
     private static final int HOST_TYPE_DEV = 0; //测试环境
     private static final int HOST_TYPE_ONLINE = 1;//生产环境
-    private static int mHostType = HOST_TYPE_ONLINE;
+    private static int mHostType = HOST_TYPE_DEV;
 
-    private static final String HOST_DEV = "https://devapi.imkela.com/";//测试环境
-    private static final String HOST_ONLINE = "https://api.imkela.com/";//生产环境
+    private static final String HOST_DEV = "http://124.222.175.43:8000/";//测试环境
+    private static final String HOST_ONLINE = "http://124.222.175.43:8000/";//生产环境
     private static String mHost = HOST_ONLINE;
 
     //图片
