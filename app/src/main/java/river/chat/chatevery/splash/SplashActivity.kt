@@ -15,7 +15,11 @@ class SplashActivity : BaseBindingViewModelActivity<ActivitySplashBinding, Splas
 
     override fun initDataBinding(binding: ActivitySplashBinding) {
         super.initDataBinding(binding)
-        jump2Main()
+        binding.tvSplash.postDelayed({
+            jump2Main()
+            finish()
+        }, 0)
+
     }
 
 

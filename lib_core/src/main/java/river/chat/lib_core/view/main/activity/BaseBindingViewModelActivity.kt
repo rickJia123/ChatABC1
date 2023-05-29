@@ -43,7 +43,7 @@ open abstract class BaseBindingViewModelActivity<BINDING : ViewDataBinding, VM :
     /**
      * 获取作用域为 activity 生命周期的viewModel
      */
-    protected fun <T : ViewModel> getActivityScopeViewModel(modelClass: Class<T>): T {
+    fun <T : ViewModel> getActivityScopeViewModel(modelClass: Class<T>): T {
         if (mActivityProvider == null) {
             mActivityProvider = ViewModelProvider(this)
         }

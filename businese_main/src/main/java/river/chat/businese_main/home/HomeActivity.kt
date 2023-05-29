@@ -4,8 +4,10 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import river.chat.businese_common.constants.CommonVmEvents
-import river.chat.businese_common.router.HomeRouterConstants
+import river.chat.businese_common.router.jump2Settings
+import river.chat.businese_main.message.MessageCenter
 import river.chat.business_main.databinding.ActivityHomeBinding
+import river.chat.lib_core.router.plugin.module.HomeRouterConstants
 import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 
 
@@ -17,13 +19,23 @@ import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewModel>() {
 
 
-
-
     override fun initDataBinding(binding: ActivityHomeBinding) {
         super.initDataBinding(binding)
         binding.toolBar.setTitle("ChatEvery")
+        binding.toolBar.rightClick={
+            jump2Settings()
+        }
+        binding.toolBar.leftClick={}
 
+        initOnHomeActivity()
 
+    }
+
+    /**
+     * 主Activity 初始化
+     */
+    private fun initOnHomeActivity() {
+        MessageCenter.registerMsgCenter(this)
     }
 
     override fun onEvent(eventId: Int) {

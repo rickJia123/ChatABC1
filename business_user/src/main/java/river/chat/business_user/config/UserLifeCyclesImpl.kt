@@ -12,11 +12,11 @@ class UserLifeCyclesImpl : AppLifeCycles {
     override fun onAppRequired(application: Application) {}
     override fun onCreate(application: Application) {
         if (application.isMainProcess()) {
-            "UserLifeCyclesImpl onCreate".toast()
+
         }
     }
 
     override fun onTerminate(application: Application) {
-        "UserLifeCyclesImpl onTerminate".toast()
+
     }
 }

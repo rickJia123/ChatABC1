@@ -29,6 +29,7 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import river.chat.lib_core.app.BaseApplication
+import river.chat.lib_core.view.common.ToastTipDialog
 
 fun Fragment.toast(message: CharSequence?): Toast =
     requireActivity().toast(message)
@@ -54,8 +55,9 @@ fun Context.longToast(message: CharSequence?): Toast =
 fun Context.longToast(@StringRes message: Int): Toast =
     Toast.makeText(this, message, Toast.LENGTH_LONG).fixBadTokenException().apply { show() }
 
-fun String.toast(): Toast =
-    BaseApplication.getInstance().toast(this)
+fun String.toast() =
+    ToastTipDialog.launch(topActivity, this)
+//    BaseApplication.getInstance().toast(this)
 
 fun Toast.fixBadTokenException(): Toast = apply {
     if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {

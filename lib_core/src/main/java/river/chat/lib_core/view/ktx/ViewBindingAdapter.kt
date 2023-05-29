@@ -3,6 +3,7 @@ package river.chat.lib_core.view.ktx
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import river.chat.lib_core.utils.exts.view.loadSimple
 
 /**
  *Author: chengminghui
@@ -18,5 +19,5 @@ fun setVisibility(view: View, isVisibility: Boolean) {
 
 @BindingAdapter("android:src")
 fun setImage(imageView: ImageView, imgRes: Int) {
-    imageView.setImageResource(imgRes)
+    imageView.loadSimple(imgRes)
 }

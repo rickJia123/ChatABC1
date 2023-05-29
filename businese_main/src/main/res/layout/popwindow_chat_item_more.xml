@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <river.chat.lib_core.view.roundview.EasyLinearLayout
+        android:id="@+id/llContent"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:background="#484957"
+        android:orientation="horizontal"
+        app:ev_radius="10dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvShare"
+            android:layout_width="@dimen/chat_pop_width"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="分享"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
+
+        <View
+            android:id="@+id/viewLineRecall"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:paddingTop="12dp"
+            android:paddingBottom="2dp"
+            android:background="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCopy"
+            android:layout_width="@dimen/chat_pop_width"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="复制"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
+
+    </river.chat.lib_core.view.roundview.EasyLinearLayout>
+
+    <ImageView
+        android:layout_width="20dp"
+        android:scaleType="fitXY"
+        android:layout_height="20dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/down_pop" />
+
+</LinearLayout>

@@ -3,11 +3,11 @@ package river.chat.lib_core.net.common;
 public class ApiConfig {
 
     //读超时长，单位：秒
-   public static final int READ_TIME_OUT = 15;
+   public static final int READ_TIME_OUT = 30;
     //连接时长，单位：秒
-    public  static final int CONNECT_TIME_OUT = 15;
+    public  static final int CONNECT_TIME_OUT = 30;
     //写超时长，单位：秒
-    public  static final int WRITE_TIME_OUT = 15;
+    public  static final int WRITE_TIME_OUT = 30;
 
     private static final int HOST_TYPE_DEV = 0; //测试环境
     private static final int HOST_TYPE_ONLINE = 1;//生产环境

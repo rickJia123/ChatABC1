@@ -20,16 +20,18 @@ package river.chat.lib_core.utils.longan
 
 import android.app.Application
 import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import androidx.startup.Initializer
 
 class AppInitializer : Initializer<Unit> {
   private var started = 0
 
   override fun create(context: Context) {
+    "AppInitializer create".log()
     application = context as Application
     application.doOnActivityLifecycle(
       onActivityCreated = { activity, _ ->
-        activityCache.add(activity)
+        activityCache.add(activity as AppCompatActivity)
       },
       onActivityStarted = { activity ->
         started++

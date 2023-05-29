@@ -85,7 +85,7 @@ enum class NetRespoonseEnum(val code: String) {
     /**
      * token 无效
      */
-    TOKEN_DATE_INVALID("0017"),
+    TOKEN_DATE_INVALID("0001"),
 
     /**
      * 该用户已经拥有该资源(购买的时候)

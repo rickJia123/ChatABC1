@@ -9,5 +9,7 @@
         <activity android:name="river.chat.businese_main.home.HomeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name="river.chat.businese_main.setting.SettingsActivity"
+            android:screenOrientation="portrait"  />
 
 </application></manifest>

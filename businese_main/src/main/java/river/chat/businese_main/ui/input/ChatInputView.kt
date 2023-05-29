@@ -7,24 +7,17 @@ import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import river.chat.businese_main.chat.hot.HotTipBean
+import river.chat.businese_main.chat.hot.HotTipViewModel
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.message.MessageHelper
+import river.chat.business_main.databinding.ViewInputBinding
 import river.chat.common.R
-import river.chat.common.databinding.ViewInputBinding
 import river.chat.lib_core.utils.exts.singleClick
-import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.utils.longan.log
-import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.view.base.LifecycleView
 
-/**
- * CreateDate: 2022/1/11
- * CreateTime: 2:51 PM
- *
- * Author : zang.peng
- * Email : zangp_hq@163.com
- * Version : 1.0
- */
+
 class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : LifecycleView(
     context,
     attr,
@@ -42,11 +35,12 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
 
     private val commentViewBinding: ViewInputBinding = DataBindingUtil.inflate(
         LayoutInflater.from(context),
-        R.layout.view_input,
+        river.chat.business_main.R.layout.view_input,
         this,
         true
     )
 
+    private var hotTipViewModel: HotTipViewModel? = null
 
     init {
         initListener()
@@ -58,7 +52,17 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
             keyboardChangeListener = KeyboardChangeListener(context as AppCompatActivity)
             keyboardChangeListener?.setKeyBoardListener(this)
         }
+        hotTipViewModel= HotTipViewModel()
+        createHot()
+    }
 
+    private fun createHot()
+    {
+        hotTipViewModel?.data?.addAll(mutableListOf<HotTipBean?>().apply {
+            add(HotTipBean("1"))
+            add(HotTipBean("2"))
+            add(HotTipBean("3"))
+        })
     }
 
     // 弹出软键盘
@@ -103,7 +107,6 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
 
         // 发送内容
         commentViewBinding.ivSend.singleClick {
-
             var content = commentViewBinding.etWriteReply.text.toString().trim()
             content.log()
             MessageCenter.postReceiveMsg(MessageHelper.buildSelfMsg(content))

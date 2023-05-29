@@ -2,23 +2,34 @@
 <resources>
 
     //默认背景颜色
-    <color name="defaultBgColor">#1D1E2D</color>
-
+    <color name="defaultBgColor">#f1f3e3</color>
 
     //默认按钮颜色
-    <color name="defaultButtonColor">#d81e06</color>
-
+    <color name="defaultButtonColor">#FAE284</color>
 
     //默认提示按钮颜色
     <color name="tipButtonColor">#30FFFFFF</color>
 
     //默认文字颜色
-    <color name="defaultTextColor">#d81e06</color>
+    <color name="defaultTextColor">#515151</color>
 
     //默认图标可用颜色
-    <color name="iconColor">#d81e06</color>
+    <color name="iconColor">#FAE284</color>
 
     //默认图标不可用颜色
     <color name="iconDisableColor">#999999</color>
+
+    <!--    聊天相关色值-->
+    //聊天问题框背景色
+    <color name="chatQBg">#f3f3f3</color>
+    //聊天问题tv背景色
+    <color name="chatQTv">#3A84BA</color>
+
+    //聊天回答tv背景色
+    <color name="chatATv">#1D1E2D</color>
+
+
+    <color name="test">#FAE284</color>
+
 
 </resources>

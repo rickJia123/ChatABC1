@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
     <data>
 
         <variable
             name="item"
-            type="river.chat.lib_resource.model.MessageBean" />
+            type="river.chat.lib_core.storage.database.model.MessageBean" />
+
+
 
         <variable
             name="handler"
             type="river.chat.businese_main.chat.ChatViewModel" />
 
     </data>
-    <LinearLayout xmlns:tool="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -20,12 +23,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/conversation_item_content_left">
 
-
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_avatar"
                 style="@style/conversation_item_head_left"
-                imageCircle="@{item.user.headImg}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,8 @@
                 style="@style/conversation_item_text"
                 android:layout_marginLeft="11dp"
                 android:background="@color/color_666666"
-                android:text="@{item.msg}"
+                android:onLongClick="@{(view)->handler.onItemLongClick(item)}"
+                android:text="@{item.content}"
                 android:textColor="@color/white"
                 app:cornerRadius="10dp"
                 app:layout_constraintLeft_toRightOf="@id/iv_avatar"

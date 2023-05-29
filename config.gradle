@@ -51,6 +51,9 @@ ext {
             //org.greenrobot:eventbus
             eventbus='3.3.1',
 
+
+            lottie='5.2.0',
+
     ]
 
 /**

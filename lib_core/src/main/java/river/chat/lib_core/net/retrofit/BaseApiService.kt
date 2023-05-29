@@ -7,6 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import river.chat.lib_core.R
+import river.chat.lib_core.net.interceptor.HeadInterceptor
 import river.chat.lib_core.net.common.ApiConfig
 import river.chat.lib_core.net.common.OperationException
 import river.chat.lib_core.net.request.TrusHttpClient
@@ -65,7 +66,6 @@ open class BaseApiService {
 //                            .addInterceptor(new Ipv6SwitchHostInterceptor(context))
 //                            .addInterceptor(new UBTIpv6SwitchHostInterceptor())//UBT埋点ivp6切换拦截器
                     if (ApiConfig.isDebug()) {
-//                        clientBuilder.addInterceptor(new OkHttpProfilerInterceptor());
                         val loggingInterceptor = HttpLoggingInterceptor { message: String ->
                             LogUtil.d(
                                 "river 网络日志： $message"

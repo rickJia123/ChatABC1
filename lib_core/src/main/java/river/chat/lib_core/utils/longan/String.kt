@@ -111,3 +111,6 @@ fun Double.toNumberString(fractionDigits: Int = 2, minIntDigits: Int = 1, isGrou
 
 fun String.log() =
   LogUtil.i("river :"+this)
+
+fun String.logConfig() =
+  LogUtil.i("river config:"+this)

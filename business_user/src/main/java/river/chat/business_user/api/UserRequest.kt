@@ -49,6 +49,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                 }
             },
             error = {
+                it.message?.toast()
                 loginResult.value = RequestResult(errorMsg = it.message ?: "")
             }
         )

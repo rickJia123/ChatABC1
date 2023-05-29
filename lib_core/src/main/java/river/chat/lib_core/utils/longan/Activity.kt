@@ -28,6 +28,7 @@ import android.view.ViewGroup
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.WindowCompat
@@ -35,7 +36,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import java.util.*
 
-internal val activityCache = LinkedList<Activity>()
+internal val activityCache = LinkedList<AppCompatActivity>()
 
 fun startActivity(intent: Intent) = topActivity.startActivity(intent)
 
@@ -58,7 +59,7 @@ fun Activity.finishWithResult(vararg pairs: Pair<String, *>) {
 
 val activityList: List<Activity> get() = activityCache.toList()
 
-val topActivity: Activity get() = activityCache.last()
+val topActivity: AppCompatActivity get() = activityCache.last()
 
 val topActivityOrNull: Activity? get() = activityCache.lastOrNull()
 

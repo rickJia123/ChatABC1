@@ -1,0 +1,31 @@
+package river.chat.lib_core.router.plugin.module
+
+import com.alibaba.android.arouter.facade.template.IProvider
+
+/**
+ * Created by beiyongChao on 2023/3/7
+ * Description:
+ */
+
+object HomeRouterConstants {
+    private const val GROUP_HOME = "/home"
+    const val HOME_PLUGIN = GROUP_HOME + "/plugin"
+
+    /**
+     * 首页
+     */
+    const val HOME_MAIN = GROUP_HOME + "/main"
+
+
+    /**
+     * 设置页
+     */
+    const val HOME_SETTINGS = GROUP_HOME + "/settings"
+}
+
+
+interface HomePlugin : IProvider {
+
+    fun test()
+
+}

@@ -2,6 +2,8 @@ package river.chat.business_user.user
 
 import river.chat.businese_common.dataBase.UserBox
 import river.chat.lib_core.storage.database.model.User
+import river.chat.lib_core.utils.longan.log
+import river.chat.lib_core.utils.longan.logConfig
 
 /**
  * Created by beiyongChao on 2023/3/15
@@ -13,9 +15,8 @@ object RiverUserManager {
      * 是否登录
      */
     fun isLogin(): Boolean {
-        //rick todo
-//        return true
-        return UserBox.getCurrentUser().id > 0
+        getCurrentUser().toString().logConfig()
+        return getCurrentUser().id > 0
     }
 
     /**

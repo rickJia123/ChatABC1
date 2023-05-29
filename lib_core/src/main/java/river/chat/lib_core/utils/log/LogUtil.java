@@ -14,6 +14,7 @@ import java.util.concurrent.Executors;
 
 import river.chat.lib_core.app.BaseApplication;
 import river.chat.lib_core.businese.BusineseDateUtils;
+import river.chat.lib_core.utils.longan.ApplicationKt;
 import river.chat.lib_core.utils.system.DeviceUtil;
 
 /**
@@ -213,7 +214,7 @@ public class LogUtil extends LogShow {
 
     public static String getLogFileName() {
         if (TextUtils.isEmpty(verionName)) {
-            verionName = DeviceUtil.getVersionName(BaseApplication.getInstance());
+            verionName = ApplicationKt.getAppVersionName();
         }
         return mUserId + "_android_" + verionName + "_" + BusineseDateUtils.INSTANCE.getYearDate(System.currentTimeMillis()) + ".log";
     }
