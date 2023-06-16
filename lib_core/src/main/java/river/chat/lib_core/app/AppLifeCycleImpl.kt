@@ -5,6 +5,7 @@ import android.content.Context
 import river.chat.lib_core.config.ConfigModule
 import river.chat.lib_core.config.ManifestParser
 import river.chat.lib_core.utils.exts.isMainProcess
+import river.chat.lib_core.utils.longan.log
 
 
 /**
@@ -33,6 +34,7 @@ class AppLifeCycleImpl(context: Context) : AppLifeCycles {
                 mAppLifeCycles.forEach { it.onCreate(BaseApplication.getInstance()) }
                 true
             } catch (e: Throwable) {
+                e
                 false
             }
         }
@@ -55,6 +57,7 @@ class AppLifeCycleImpl(context: Context) : AppLifeCycles {
     }
 
     override fun onCreate(application: Application) {
+
         //需要立即初始化的组件
         mAppLifeCycles.forEach { it.onAppRequired(application) }
 

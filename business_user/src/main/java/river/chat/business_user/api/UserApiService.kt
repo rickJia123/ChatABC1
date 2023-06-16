@@ -44,4 +44,15 @@ object UserApiService : BaseApiService() {
                     this["mobile"] = number
                 }
             )
+
+
+    /**
+     * 退出登录
+     */
+    suspend fun logout(): BaseRequestBean<Boolean> =
+        userApi
+            .logout(
+                getBasedBody()
+            )
+
 }

@@ -4,6 +4,7 @@ package river.chat.lib_core.view.main.activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.databinding.ViewDataBinding
+import com.alibaba.android.arouter.launcher.ARouter
 import river.chat.lib_core.utils.other.getBindingType
 
 /**
@@ -27,6 +28,7 @@ abstract class BaseBindingActivity<BINDING :ViewDataBinding>: BaseActivity() {
 
         // 初始化数据绑定
         initDataBinding(binding)
+
     }
 
     /**

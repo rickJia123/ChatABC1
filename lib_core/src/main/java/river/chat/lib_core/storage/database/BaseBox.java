@@ -81,3 +81,29 @@ public abstract class BaseBox<T> {
 
     protected abstract void exit();
 }
+
+
+//// query all notes, sorted a-z by their text
+//// (http://greenrobot.org/objectbox/documentation/queries/)
+//        notesQuery = notesBox.query().order(Note_.text).build();
+//
+//                // Reactive query (http://greenrobot.org/objectbox/documentation/data-observers-            reactive-extensions/)
+//                notesQuery.subscribe()
+//                .onError(new ErrorObserver() {
+//@Override
+//public void onError(Throwable th) {
+//
+//        }
+//        })
+//        // 官方推荐的做法是对 data observers 持有弱引用，防止忘记 cancel subscriptions，
+//        // 但是最好还是记得及时 cancel subscriptions(例如在 onPause、onStop 或者
+//        // onDestroy 方法中)
+//        .weak()
+//        .on(AndroidScheduler.mainThread())
+//        .observer(new DataObserver<List<Note>>() {
+//@Override
+//public void onData(List<Note> notes) {
+//        // 只要数据库里的数据发生了变化，这里的方法就会被回调执行，相当智能。。。
+//        // 业务代码
+//        }
+//        });

@@ -19,4 +19,17 @@ interface MainBusinessApi : BaseApi {
     @POST("/chat/prompt")
     suspend fun requestAi(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<MessageBean>
 
+
+    /**
+     *获取热门问题
+     */
+    @POST("/chat/hotQuestion")
+    suspend fun requestHotQuestion(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<MutableList<String>>
+
+   /**
+     *意见反馈
+     */
+    @POST("/feedback/createFeedback")
+    suspend fun confirmFeedback(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<String>
+
 }

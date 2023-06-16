@@ -23,12 +23,38 @@ object MainBusinessApiService : BaseApiService() {
      */
     suspend fun requestAi(
         content: String,
-        msgId:String
+        msgId: String
     ): BaseRequestBean<MessageBean> =
         mainBusinessApi.requestAi(
             getBasedBody().apply {
                 this["content"] = content
                 this["id"] = msgId
+            }
+        )
+
+    /**
+     * 获取热门问题
+     */
+    suspend fun requestHotQuestion(
+    ): BaseRequestBean<MutableList<String>> =
+        mainBusinessApi.requestHotQuestion(
+            getBasedBody().apply {
+            }
+        )
+
+    /**
+     * 意见反馈
+     */
+    suspend fun confirmFeedback(
+        content: String,
+        contact: String,
+        deviceInfo: String
+    ): BaseRequestBean<String> =
+        mainBusinessApi.confirmFeedback(
+            getBasedBody().apply {
+                this["contact"] = contact
+                this["content"] = content
+                this["deviceInfo"] = deviceInfo
             }
         )
 

@@ -3,6 +3,7 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 dependencyResolutionManagement {
@@ -12,6 +13,7 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url 'https://developer.huawei.com/repo/'}
         maven { url 'https://repo1.maven.org/maven2/' }
+        maven { url 'https://jitpack.io' }
     }
 }
 rootProject.name = "My Application"
@@ -20,3 +22,8 @@ apply from: "config.gradle"
 for (module in duShuModules) {
     include module
 }
+gradle.ext {
+    mProperties = new Properties()
+    mProperties.load(new File("${rootProject.projectDir.absolutePath}/local.properties").newDataInputStream())
+}
+include ':lib_umeng'

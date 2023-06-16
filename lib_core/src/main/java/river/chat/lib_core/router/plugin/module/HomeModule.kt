@@ -21,6 +21,11 @@ object HomeRouterConstants {
      * 设置页
      */
     const val HOME_SETTINGS = GROUP_HOME + "/settings"
+
+    /**
+     * 意见反馈页
+     */
+    const val HOME_FEEDBACK = GROUP_HOME + "/feedback"
 }
 
 

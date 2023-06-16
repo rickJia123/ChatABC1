@@ -2,6 +2,7 @@ package river.chat.businese_main.chat
 
 import androidx.lifecycle.MutableLiveData
 import river.chat.businese_main.api.MainBusinessApiService
+import river.chat.businese_main.chat.hot.HotTipItemBean
 import river.chat.businese_main.message.MessageHelper.CHAT_TIP_FAIL
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
@@ -18,6 +19,8 @@ import river.chat.lib_core.utils.longan.toast
 class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
 
     val chatRequestResult = MutableLiveData<RequestResult<MessageBean>>()
+
+    val hotQuestionResult = MutableLiveData<RequestResult<MutableList<HotTipItemBean>>>()
 
 
     /**
@@ -47,6 +50,35 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                         this.time = System.currentTimeMillis()
                         this.status = MessageStatus.FAIL
                     })
+            }
+        )
+    }
+
+
+
+    /**
+     * 获取热门问题
+     */
+    fun requestHotQuestion() {
+        launchFlow(
+            request = {
+                MainBusinessApiService.requestHotQuestion()
+            },
+            dataResp = {
+//                it.toString().toast()
+                hotQuestionResult.value =
+                    RequestResult(isSuccess = true, data = mutableListOf<HotTipItemBean>().apply {
+                        it?.forEach { item ->
+                            add(HotTipItemBean().apply {
+                                this.hotQuestion =item
+                            })
+                        }
+                    })
+            },
+            error = {
+                it.message?.toast()
+                hotQuestionResult.value =
+                    RequestResult(isSuccess = false, data = mutableListOf())
             }
         )
     }

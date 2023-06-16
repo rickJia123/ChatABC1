@@ -33,6 +33,14 @@ fun View.hide(gone: Boolean) {
     }
 }
 
+fun View.actionVisible(isVisible: Boolean) {
+    if (isVisible) {
+        show()
+    } else {
+        hide()
+    }
+}
+
 /**
  * 计算view的大小
  */
@@ -96,14 +104,15 @@ fun View.getViewBitmap(): Bitmap? {
     return bitmap
 }
 
-fun View.getDimensSize(@DimenRes res: Int): Int = BaseApplication.getInstance().resources.getDimensionPixelSize(res)
+fun View.getDimensSize(@DimenRes res: Int): Int =
+    BaseApplication.getInstance().resources.getDimensionPixelSize(res)
 
 fun ProgressBar.updateProgress(progress: Int, animate: Boolean) =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            this.setProgress(progress, animate)
-        } else {
-            this.progress = progress
-        }
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        this.setProgress(progress, animate)
+    } else {
+        this.progress = progress
+    }
 
 fun View.fitSampleBitmap(filePath: String, width: Int, height: Int): Bitmap {
     val options = BitmapFactory.Options()
@@ -216,7 +225,12 @@ fun View.widthAndHeight(width: Int, height: Int): View {
  * @param rightMargin 默认是0
  * @param bottomMargin 默认是0
  */
-fun View.margin(leftMargin: Int = 0, topMargin: Int = 0, rightMargin: Int = 0, bottomMargin: Int = 0): View {
+fun View.margin(
+    leftMargin: Int = 0,
+    topMargin: Int = 0,
+    rightMargin: Int = 0,
+    bottomMargin: Int = 0
+): View {
     val params = layoutParams as ViewGroup.MarginLayoutParams
     params.leftMargin = leftMargin
     params.topMargin = topMargin
@@ -256,7 +270,7 @@ fun View.permissionCheckClick(action: (view: View) -> Unit) {
 
 fun View.rotation(startValue: Float, endValue: Float) {
     val animator = ObjectAnimator.ofFloat(this, "rotation", startValue, endValue)
-            .setDuration(400L)
+        .setDuration(400L)
     animator.start()
 }
 

@@ -1,5 +1,6 @@
 package river.chat.businese_main.ui.chat
 
+import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -7,9 +8,11 @@ import androidx.databinding.DataBindingUtil
 import river.chat.businese_main.utils.logChat
 import river.chat.business_main.databinding.ViewChatCardBinding
 import river.chat.lib_core.storage.database.model.MessageBean
+import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.dp
 import river.chat.lib_core.utils.system.DisplayUtil.getScreenWidth
 import river.chat.lib_core.view.base.LifecycleView
+import river.chat.lib_umeng.ShareManager
 
 
 class ChatCardView @JvmOverloads constructor(
@@ -37,8 +40,10 @@ class ChatCardView @JvmOverloads constructor(
         initClick()
     }
 
-    fun initClick() {
-
+    private fun initClick() {
+        viewBinding.viewChatCard.singleClick {
+            ShareManager.launchShareBoard(context as Activity).shareText()
+        }
     }
 
     /**
@@ -49,9 +54,14 @@ class ChatCardView @JvmOverloads constructor(
         if (questionMsg != null) {
             viewBinding.tvQuestion.text = questionMsg.content
         }
-        if (answerMsg != null) {
+        if (answerMsg != null && questionMsg != null) {
             viewBinding.tvAnswer.text = answerMsg.content
-            viewBinding.viewChatStatus.refresh(answerMsg, viewBinding.tvAnswer,viewBinding.ivReLoad)
+            viewBinding.viewChatStatus.refresh(
+                questionMsg,
+                answerMsg,
+                viewBinding.tvAnswer,
+                viewBinding.ivReLoad
+            )
         }
     }
 

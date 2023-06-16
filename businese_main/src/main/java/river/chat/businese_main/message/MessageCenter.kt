@@ -1,8 +1,5 @@
 package river.chat.businese_main.message
 
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import river.chat.businese_common.dataBase.MessageBox
@@ -17,7 +14,6 @@ import river.chat.lib_core.storage.database.model.MessageReceiveBean
 import river.chat.lib_core.storage.database.model.MessageSource
 import river.chat.lib_core.storage.database.model.MessageStatus
 import river.chat.lib_core.utils.longan.log
-import river.chat.lib_core.utils.other.CutdownUtils
 
 /**
  * Created by beiyongChao on 2023/3/12
@@ -28,6 +24,10 @@ object MessageCenter {
     var mActivity: HomeActivity? = null
     var mMsgViewModel: MessageViewModel? = null
 
+    /**
+     * 消息超时时间，超时的loading状态改为失败
+     */
+    var mMessageVaildTime = 30 * 1000L
 
     init {
 
@@ -49,6 +49,23 @@ object MessageCenter {
         var msgList = MessageBox.getMsgList()
         msgList.add(0, MessageHelper.buildDefaultMsg())
         return msgList
+    }
+
+
+    /**
+     * 检查历史消息状态
+     */
+    fun checkMsgStatus() {
+        var historyList=MessageBox.getMsgList()
+        historyList.forEach {
+            var msg=it
+            if (msg.status==MessageStatus.LOADING) {
+                msg.status = MessageStatus.FAIL
+                MessageBox.saveMsg(it)
+            }
+        }
+
+
     }
 
     /**

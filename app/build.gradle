@@ -1,7 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+//    id 'privacy-sentry-plugin'
 }
+Properties mProperties = gradle.ext.mProperties
 
 android {
     namespace 'river.chat.chatevery'
@@ -31,6 +33,23 @@ android {
             incremental true//打开dex增量编译  这还是一个实验性的功能，但是还是推荐打开试试
             javaMaxHeapSize "4G"//设置允许分配的的最大堆内存
         }
+        manifestPlaceholders = [qqappid: "11111111111111111111"]
+    }
+
+
+    signingConfigs {
+        release {
+            storeFile file(mProperties.getProperty("storeFile"))
+            storePassword mProperties.getProperty("storePassword")
+            keyAlias mProperties.getProperty("keyAlias")
+            keyPassword mProperties.getProperty("keyPassword")
+        }
+        debug {
+//            storeFile file(mProperties.getProperty("storeFile"))
+//            storePassword mProperties.getProperty("storePassword")
+//            keyAlias mProperties.getProperty("keyAlias")
+//            keyPassword mProperties.getProperty("keyPassword")
+        }
     }
 
     buildTypes {
@@ -40,8 +59,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -63,15 +82,6 @@ boolean isRelease() {
 }
 
 dependencies {
-
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-
     for (module in appModules) {
         implementation project(":$module")
     }

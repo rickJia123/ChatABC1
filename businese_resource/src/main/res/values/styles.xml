@@ -1,23 +1,14 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppThemeBase" parent="Theme.MaterialComponents.Light.NoActionBar">
-
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <!--     提交类型按钮通用样式-->
+    <style name="ButtonConfirm">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:backgroundTint">@color/defaultButtonColor</item>
+        <item name="android:theme">@style/Theme.MaterialComponents.Light.NoActionBar</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/defaultTitleColor</item>
     </style>
-
-    <style name="AppTheme" parent="AppThemeBase">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <!--在无需多点触控的页面上，建议关闭多点触控-->
-        <item name="android:splitMotionEvents">false</item>
-    </style>
-
-
-
-
-
 
 </resources>

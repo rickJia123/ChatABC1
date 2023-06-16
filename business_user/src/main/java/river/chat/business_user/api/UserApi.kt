@@ -10,7 +10,7 @@ import river.chat.lib_core.storage.database.model.User
  * Created by beiyongChao on 2023/2/20
  * Description:
  */
-interface UserApi :BaseApi{
+interface UserApi : BaseApi {
 
     /**
      * 获取验证码
@@ -31,5 +31,13 @@ interface UserApi :BaseApi{
     suspend fun loginByPhone(
         @Body body: Map<String, @JvmSuppressWildcards Any?>
     ): BaseRequestBean<User>
+
+    /**
+     * 退出
+     */
+    @POST("/user/logout")
+    suspend fun logout(
+        @Body body: Map<String, @JvmSuppressWildcards Any?>
+    ): BaseRequestBean<Boolean>
 
 }

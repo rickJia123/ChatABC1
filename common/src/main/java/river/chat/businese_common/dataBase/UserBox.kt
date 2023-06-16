@@ -19,7 +19,7 @@ object UserBox : BaseBox<User>() {
         loop@ run {
             box?.all
                 ?.forEach {
-                    if ((it?.id ?: 0) > 0) {
+                    if (it?.token?.isNotEmpty() == true) {
                         return it
                     }
                 }

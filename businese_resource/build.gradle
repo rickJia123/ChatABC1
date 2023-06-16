@@ -5,6 +5,110 @@ ext {
 apply plugin: 'com.android.library'
 apply from: "../module_common.gradle"
 
+android {
+//    defaultConfig {
+//        kapt {
+//            arguments {
+//                arg("AROUTER_MODULE_NAME", project.getName())
+//            }
+//        }
+//    }
+    buildFeatures {
+        dataBinding true
+    }
+}
 dependencies {
-    implementation project(":lib_core")
+//    kapt "com.alibaba:arouter-compiler:$arouter"
+//    implementation project(":lib_core")
+
+    //基础系统引用
+    api "androidx.core:core-ktx:1.0.0"
+    api "androidx.appcompat:appcompat:$appcompat"
+    api "com.google.android.material:material:$material"
+    api "androidx.constraintlayout:constraintlayout:$constraintlayout"
+    api 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    api 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    api 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
+    //第三方引用
+    api "com.squareup.okio:okio:$okioVersion"
+
+    //网络相关
+    api "com.squareup.okhttp3:okhttp:$okhttpLogging"
+    api "com.squareup.okhttp3:logging-interceptor:$okhttpLogging"
+    api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit2_kotlin_coroutines_adapter"
+    api "com.squareup.retrofit2:adapter-rxjava2:$adapter_rxjava2"
+    api "com.squareup.retrofit2:converter-gson:$converter_gson"
+
+    //权限
+    api 'pub.devrel:easypermissions:3.0.0'
+
+
+    //效率提升
+    api "io.insert-koin:koin-core:$koin"
+    api "io.insert-koin:koin-android:$koin"
+
+    //数据库
+    api "io.objectbox:objectbox-android:$objectboxVersion"
+    api "io.objectbox:objectbox-kotlin:$objectboxVersion"
+
+    api "com.alibaba:arouter-api:$arouter"
+    kapt "com.alibaba:arouter-compiler:$arouter"
+
+    /**
+     * 图片加载库*/
+    api "io.coil-kt:coil-compose:$coil"
+
+    api "org.greenrobot:eventbus:$eventbus"
+
+    /**
+     * 动画-lottie*/
+    api "com.airbnb.android:lottie:$lottie"
+
+
+    //webview
+    api 'com.github.Justson.AgentWeb:agentweb-core:v5.0.6-androidx' // (必选)
+    api 'com.github.Justson.AgentWeb:agentweb-filechooser:v5.0.6-androidx' // (可选)
+    api 'com.github.Justson:Downloader:v5.0.4-androidx'
+
+    /**
+     * 状态栏
+     */
+    // 基础依赖包，必须要依赖
+    api 'com.geyifeng.immersionbar:immersionbar:3.2.2'
+    // kotlin扩展（可选）
+    api 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
+
+/**
+ * 合规 begin
+ */
+    def privacyVersion = "1.2.7"
+    api "com.github.allenymt.PrivacySentry:hook-sentry:$privacyVersion"
+    api "com.github.allenymt.PrivacySentry:privacy-annotation:$privacyVersion"
+    //如果不想使用库中本身的代理方法，可以不引入这个aar，自己实现
+    //也可以引入，个别方法在自己的类中重写即可
+    api "com.github.allenymt.PrivacySentry:privacy-proxy:$privacyVersion"
+    // 1.2.3 新增类替换，主要是为了hook构造函数的参数
+    api "com.github.allenymt.PrivacySentry:privacy-replace:$privacyVersion"
+    // 黑名单配置，可以设置这部分包名不会被修改字节码
+    // 项目里如果有引入高德地图，先加黑 blackList = ["com.loc","com.amap.api"], asm的版本有冲突
+    // 如果需要生成静态扫描文件， 默认名是replace.json
+//    privacy {
+//        blackList = []
+//        replaceFileName = "replace.json"
+//        // 开启hook反射
+//        hookReflex = true
+//        // debug编译默认开启，支持关闭，感谢run的pr
+//        debugEnable = true
+//        // 开启hook 替换类，目前支持file
+//        hookConstructor = true
+//        // 是否开启hook变量，默认为false
+//        hookField = true
+//    }
+    /**
+     * 合规 end
+     */
+
+
 }

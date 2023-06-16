@@ -75,7 +75,7 @@ open abstract class BaseBindingDialogFragment<BINDING : ViewDataBinding> : Dialo
         if (onShowDialogWindowAnimations()) {
             window.setWindowAnimations(R.style.DialogStyle_Common)
         }
-        window.setBackgroundDrawableResource(R.color.transparent)
+        window.setBackgroundDrawableResource(river.chat.lib_resource.R.color.transparent)
     }
 
     /**
@@ -83,7 +83,7 @@ open abstract class BaseBindingDialogFragment<BINDING : ViewDataBinding> : Dialo
      * 默认 MATCH_PARENT
      */
     protected open fun onSetDialogWidth(): Int {
-        return ViewGroup.LayoutParams.MATCH_PARENT
+        return ViewGroup.LayoutParams.WRAP_CONTENT
     }
 
     /**
@@ -91,7 +91,7 @@ open abstract class BaseBindingDialogFragment<BINDING : ViewDataBinding> : Dialo
      * 默认 MATCH_PARENT(考虑大部分弹框底部都带有分享面板)
      */
     protected open fun onSetDialogHeight(): Int {
-        return ViewGroup.LayoutParams.MATCH_PARENT
+        return ViewGroup.LayoutParams.WRAP_CONTENT
     }
 
     /**
@@ -99,7 +99,7 @@ open abstract class BaseBindingDialogFragment<BINDING : ViewDataBinding> : Dialo
      * 默认底部
      */
     protected open fun onSetDialogGravity(): Int {
-        return Gravity.BOTTOM
+        return Gravity.CENTER
     }
 
     /**

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    //自定义标题栏
+    <declare-styleable name="RiverTitle">
+        <attr name="tb_title" format="reference|string" />
+        <attr name="tb_titleTextColor" format="color" />
+        <attr name="tb_leftImage" format="reference" />
+        <attr name="tb_leftImageVisible" format="boolean" />
+        <attr name="tb_leftText" format="reference|string" />
+        <attr name="tb_leftTextColor" format="color" />
+        <attr name="tb_rightImage" format="reference|integer" />
+        <attr name="tb_rightText" format="reference|string" />
+        <attr name="tb_rightTextColor" format="color" />
+    </declare-styleable>
+</resources>

@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="river.chat.businese_main.chat.hot.HotTipBean" />
+            type="river.chat.businese_main.chat.hot.HotTipItemBean" />
 
         <variable
             name="vm"
@@ -14,20 +14,25 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <river.chat.lib_core.view.roundview.EasyConstraintLayout
         android:id="@+id/container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/yellow"
-        android:paddingLeft="5dp"
-        android:paddingTop="2dp"
-        android:paddingRight="5dp"
-        android:paddingBottom="2dp">
+        android:layout_marginLeft="10dp"
+        android:background="@color/defaultButtonColor"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+
+        app:ev_radius="10dp" >
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvTest"
+            android:id="@+id/tvHot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingTop="2dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="2dp"
             android:text="@{item.hotQuestion}"
             android:textColor="@color/color_999999"
             android:textSize="15sp"
@@ -38,5 +43,5 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="特朗普" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </river.chat.lib_core.view.roundview.EasyConstraintLayout>
 </layout>

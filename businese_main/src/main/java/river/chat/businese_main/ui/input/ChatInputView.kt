@@ -7,12 +7,13 @@ import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import river.chat.businese_main.chat.hot.HotTipBean
+import river.chat.businese_main.chat.hot.HotTipItemBean
 import river.chat.businese_main.chat.hot.HotTipViewModel
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.message.MessageHelper
 import river.chat.business_main.databinding.ViewInputBinding
-import river.chat.common.R
+import river.chat.lib_core.BR
+import river.chat.lib_core.storage.database.model.MessageBean
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.log
 import river.chat.lib_core.view.base.LifecycleView
@@ -33,7 +34,7 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
     private var inputMethodManager: InputMethodManager? = null
     var keyboardChangeListener: KeyboardChangeListener? = null
 
-    private val commentViewBinding: ViewInputBinding = DataBindingUtil.inflate(
+    private val viewBinding: ViewInputBinding = DataBindingUtil.inflate(
         LayoutInflater.from(context),
         river.chat.business_main.R.layout.view_input,
         this,
@@ -52,38 +53,56 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
             keyboardChangeListener = KeyboardChangeListener(context as AppCompatActivity)
             keyboardChangeListener?.setKeyBoardListener(this)
         }
-        hotTipViewModel= HotTipViewModel()
-        createHot()
+        hotTipViewModel = HotTipViewModel()
+        viewBinding.setVariable(BR.vm, hotTipViewModel)
+        loadHotQuestion()
+        observerMsg()
     }
 
-    private fun createHot()
-    {
-        hotTipViewModel?.data?.addAll(mutableListOf<HotTipBean?>().apply {
-            add(HotTipBean("1"))
-            add(HotTipBean("2"))
-            add(HotTipBean("3"))
-        })
+    private fun loadHotQuestion() {
+        hotTipViewModel?.request?.requestHotQuestion()
+//        hotTipViewModel?.data?.addAll(mutableListOf<HotTipItemBean?>().apply {
+//            add(HotTipItemBean("特朗皮"))
+//            add(HotTipItemBean("梅德韦杰夫"))
+//            add(HotTipItemBean("金牌值多少钱"))
+//        })
+    }
+
+
+    /**
+     * 监听接口消息请求
+     */
+    private fun observerMsg() {
+        (context as AppCompatActivity).let {
+            hotTipViewModel?.request?.hotQuestionResult?.observe(it) {
+                if (it.isSuccess) {
+                    ("ChatInputView observerMsg:" + it.data).log()
+                    hotTipViewModel?.data?.clear()
+                    it.data?.let { it1 -> hotTipViewModel?.data?.addAll(it1) }
+                }
+            }
+        }
     }
 
     // 弹出软键盘
     private fun showSoftInput() {
 
-        commentViewBinding.etWriteReply.requestFocus()
+        viewBinding.etWriteReply.requestFocus()
 
         inputMethodManager =
             context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         inputMethodManager?.showSoftInput(
-            commentViewBinding.etWriteReply,
+            viewBinding.etWriteReply,
             InputMethodManager.SHOW_FORCED
         )
     }
 
     fun hideSoftInput() {
-        inputMethodManager?.hideSoftInputFromWindow(commentViewBinding.etWriteReply.windowToken, 0)
+        inputMethodManager?.hideSoftInputFromWindow(viewBinding.etWriteReply.windowToken, 0)
     }
 
     private fun initListener() {
-        commentViewBinding.etWriteReply.addTextChangedListener(object : SimpleTextWatcher() {
+        viewBinding.etWriteReply.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
 
                 val remindNum = textTotalNum - s.toString().length
@@ -106,12 +125,11 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
         })
 
         // 发送内容
-        commentViewBinding.ivSend.singleClick {
-            var content = commentViewBinding.etWriteReply.text.toString().trim()
+        viewBinding.ivSend.singleClick {
+            var content = viewBinding.etWriteReply.text.toString().trim()
             content.log()
             MessageCenter.postReceiveMsg(MessageHelper.buildSelfMsg(content))
-            commentViewBinding.etWriteReply.setText("")
-
+            viewBinding.etWriteReply.setText("")
         }
 
 

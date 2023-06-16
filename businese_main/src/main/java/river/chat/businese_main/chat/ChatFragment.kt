@@ -4,11 +4,13 @@ import androidx.lifecycle.lifecycleScope
 import org.koin.android.ext.android.inject
 import river.chat.businese_main.home.HomeViewModel
 import river.chat.businese_main.message.MessageCenter
+import river.chat.businese_main.message.MessageCenter.checkMsgStatus
 import river.chat.businese_main.message.MessageHelper
 import river.chat.businese_main.message.MessageHelper.buildCardMsgList
 import river.chat.business_main.databinding.FragmentChatBinding
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.longan.log
+import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.view.main.fragment.BaseBindingViewModelFragment
 
 class ChatFragment :
@@ -21,6 +23,7 @@ class ChatFragment :
     override fun initDataBinding(binding: FragmentChatBinding) {
         super.initDataBinding(binding)
         initMsgService(binding)
+        "".toast()
     }
 
 
@@ -37,6 +40,7 @@ class ChatFragment :
             }
         }
         if (!hasDefaultMsg) {
+            checkMsgStatus()
             viewModel.data.addAll(buildCardMsgList(MessageCenter.getHistoryMsg()))
             scrollToBottom(binding)
         }

@@ -25,3 +25,13 @@ inline val sdkVersionCode: Int get() = Build.VERSION.SDK_INT
 inline val deviceManufacturer: String get() = Build.MANUFACTURER
 
 inline val deviceModel: String get() = Build.MODEL
+
+inline fun deviceInfos()=
+  """
+        手机型号:${Build.MODEL}
+        系统版本:${Build.VERSION.RELEASE}
+        版本显示:${Build.DISPLAY}
+        系统定制商:${Build.BRAND}】
+        ROM制造商:${Build.MANUFACTURER}
+        """.trimIndent() // 这行返回的是rom定制商的名称
+

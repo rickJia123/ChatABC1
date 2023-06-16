@@ -4,14 +4,15 @@
     //默认背景颜色
     <color name="defaultBgColor">#f1f3e3</color>
 
+    <!--    Button-->
     //默认按钮颜色
     <color name="defaultButtonColor">#FAE284</color>
 
     //默认提示按钮颜色
     <color name="tipButtonColor">#30FFFFFF</color>
 
-    //默认文字颜色
-    <color name="defaultTextColor">#515151</color>
+    //高亮按钮颜色
+    <color name="highButtonColor">#4A90E2</color>
 
     //默认图标可用颜色
     <color name="iconColor">#FAE284</color>
@@ -29,7 +30,27 @@
     <color name="chatATv">#1D1E2D</color>
 
 
-    <color name="test">#FAE284</color>
 
+    <!--    文本颜色-->
+
+    //默认标题颜色
+    <color name="defaultTitleColor">#030303</color>
+
+    //默认文字颜色
+    <color name="defaultTextColor">#999999</color>
+
+    //高亮文本颜色
+    <color name="highTextColor">#4A90E2</color>
+
+    <color name="recyclerview_divider_color">#DCDBDB</color>
+
+    <!--会话模块，昵称为nick-->
+    <color name="cv_back">#999999</color>//会话背景色
+    <color name="cv_system">#66686E</color>//系统消息字色
+    <color name="cv_time">#393B44</color>//时间字色
+    <color name="cv_self_back">#595B64</color>//我的会话背景色
+    <color name="cv_self_txt">#CCCCCC</color>//我的会话字色
+    <color name="cv_other_back">#30323B</color>//对方会话背景色
+    <color name="cv_other_txt">#CCCCCC</color>//对方会话字色
 
 </resources>

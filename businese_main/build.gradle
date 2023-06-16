@@ -6,15 +6,15 @@ ext {
 apply plugin: 'com.android.library'
 apply from: "../module_common.gradle"
 
-android {
-    defaultConfig {
-        kapt {
-            arguments {
-                arg("AROUTER_MODULE_NAME", project.getName())
-            }
-        }
-    }
-}
+//android {
+//    defaultConfig {
+//        kapt {
+//            arguments {
+//                arg("AROUTER_MODULE_NAME", project.getName())
+//            }
+//        }
+//    }
+//}
 
 dependencies {
     implementation project(":common")

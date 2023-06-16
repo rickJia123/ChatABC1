@@ -17,11 +17,13 @@ buildscript {
         google()
 
         maven { url 'https://developer.huawei.com/repo/'}
+
     }
 
     dependencies {
         classpath "io.objectbox:objectbox-gradle-plugin:$objectboxVersion"
         classpath 'com.huawei.agconnect:agcp:1.6.0.300'
+        classpath 'com.github.allenymt.PrivacySentry:plugin-sentry:1.2.7'
     }
 }
 

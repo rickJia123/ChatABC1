@@ -8,11 +8,11 @@ apply from: "../module_common.gradle"
 
 android {
     defaultConfig {
-        kapt {
-            arguments {
-                arg("AROUTER_MODULE_NAME", project.getName())
-            }
-        }
+//        kapt {
+//            arguments {
+//                arg("AROUTER_MODULE_NAME", project.getName())
+//            }
+//        }
     }
 }
 

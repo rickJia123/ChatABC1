@@ -18,6 +18,8 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
 
     val requestCode = MutableLiveData<RequestResult<Boolean>>()
 
+    val logoutResult = MutableLiveData<RequestResult<Boolean>>()
+
     /**
      * 获取验证码
      */
@@ -53,5 +55,24 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                 loginResult.value = RequestResult(errorMsg = it.message ?: "")
             }
         )
+    }
+
+    /**
+     * 退出登录
+     */
+    fun logout() {
+        launchFlow(
+            request = {
+                UserApiService.logout()
+            },
+            dataResp = {
+                logoutResult.value = RequestResult(isSuccess = it ?: false, data = true)
+            },
+            error = {
+                it.message?.toast()
+                logoutResult.value = RequestResult(errorMsg = it.message ?: "")
+            }
+        )
+
     }
 }

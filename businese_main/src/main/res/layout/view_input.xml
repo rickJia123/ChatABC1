@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+
         <variable
             name="vm"
             type="river.chat.businese_main.chat.hot.HotTipViewModel" />
@@ -31,34 +32,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="今日热词"
-            android:textColor="@color/color_999999"
+            android:textStyle="bold"
+            android:textColor="@color/defaultTextColor"
             android:textSize="15sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:orientation="horizontal"
             app:data="@{vm.data}"
-            app:itemEventHandler="@{vm}"
             app:itemLayout="@{@layout/item_hot}"
+            app:itemClick="@{(item,position)-> vm.onItemClick(item)}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBaseline_toBaselineOf="@id/tvHot"
             app:layout_constraintLeft_toRightOf="@id/tvHot"
             app:layout_constraintRight_toRightOf="parent" />
+
+        <View
+            android:id="@+id/viewLine"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/recyclerview_divider_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerView" />
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_write_reply"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
             android:background="@null"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:gravity="center_vertical"
             android:hint="输入关键词"
             android:imeOptions="actionSend"
+            android:cursorVisible="true"
             android:maxLines="7"
             android:textColorHint="@color/defaultTextColor"
             android:textCursorDrawable="@color/defaultTextColor"
@@ -66,7 +82,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/ivSend"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/viewLine"
             tools:text="asjhskhsjkjk" />
 
         <androidx.appcompat.widget.AppCompatImageView

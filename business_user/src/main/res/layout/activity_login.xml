@@ -5,13 +5,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <river.chat.lib_core.view.title.CommonTitleBar
+        <river.chat.lib_core.view.title.RiverTitle
             android:id="@+id/toolBar"
             android:layout_width="0dp"
-            android:layout_height="44dp"
+            android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="44dp"
             app:layout_constraintRight_toRightOf="parent"
-            app:leftIcon="@mipmap/back_common"
             app:layout_constraintTop_toTopOf="parent"
             />
 

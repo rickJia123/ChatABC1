@@ -1,9 +1,14 @@
 package river.chat.lib_core.view.main.activity
 
 import android.content.Intent
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.alibaba.android.arouter.launcher.ARouter
+import com.gyf.immersionbar.ktx.immersionBar
+import com.umeng.socialize.UMShareAPI
 import org.greenrobot.eventbus.EventBus
 import pub.devrel.easypermissions.EasyPermissions
+import river.chat.lib_core.R
 import river.chat.lib_core.utils.permission.permission.PermissionHelper
 
 /**
@@ -21,6 +26,12 @@ open class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCallbac
      */
     protected open fun registerEventBus(): Boolean {
         return false
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        ARouter.getInstance().inject(this)
+        super.onCreate(savedInstanceState)
+        immersionBar()
     }
 
     /**
@@ -80,6 +91,7 @@ open class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCallbac
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         PermissionHelper.onActivityResult(this, requestCode, resultCode, data)
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 
     /**
@@ -109,5 +121,7 @@ open class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCallbac
             EventBus.getDefault().unregister(this)
         }
     }
+
+
 
 }
