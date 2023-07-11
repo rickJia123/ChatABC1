@@ -40,4 +40,12 @@ interface UserApi : BaseApi {
         @Body body: Map<String, @JvmSuppressWildcards Any?>
     ): BaseRequestBean<Boolean>
 
+    /**
+     * 注销账户
+     */
+    @POST("/user/logoff")
+    suspend fun destroy(
+        @Body body: Map<String, @JvmSuppressWildcards Any?>
+    ): BaseRequestBean<Boolean>
+
 }

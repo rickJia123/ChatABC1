@@ -1,25 +1,33 @@
 package river.chat.businese_common.net
 
-import io.reactivex.Observable
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
 import river.chat.lib_core.net.bean.BaseRequestBean
-import river.chat.lib_core.net.retrofit.BaseApi
 import river.chat.lib_core.net.retrofit.BaseApiService
+import river.chat.lib_core.storage.database.model.MessageBean
 
 /**
  * Created by beiyongChao on 2023/2/24
  * Description:
  */
-interface CommonApiService : BaseApi {
+object CommonApiService  : BaseApiService() {
 
-   
     /**
-     * 上传文件，用户会员身份证、手持照、银行卡照片等隐私度比较高的照片上传接口
+     * 获取主业务网络仓库
      */
-    @Multipart
-    @POST(CommonHttpUrl.USER_SEND_CODE)
-    fun testQuery(@Part body: Part): Observable<BaseRequestBean<String>>
+    private val commonApi: CommonApi
+        get() = retrofit().create(CommonApi::class.java)
+
+
+
+    /**
+     * 获取配置信息
+     */
+    suspend fun requestConfig(
+        key: String
+    ): BaseRequestBean<String> =
+        commonApi.requestConfig(
+            ApiStorage.getBasedBody().apply {
+                this["key"] = key
+            }
+        )
 
 }

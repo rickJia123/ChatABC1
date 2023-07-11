@@ -21,38 +21,34 @@ object UserApiService : BaseApiService() {
      * 验证码登录
      */
     suspend fun loginByPhone(
-        inviteId: String,
-        mobile: String,
-        verifyCode: String
-    ): BaseRequestBean<User> =
-        userApi
-            .loginByPhone(
-                getBasedBody().apply {
-                    this["inviteId"] = inviteId
-                    this["verifyCode"] = verifyCode
-                    this["mobile"] = mobile
-                }
-            )
+        inviteId: String, mobile: String, verifyCode: String
+    ): BaseRequestBean<User> = userApi.loginByPhone(getBasedBody().apply {
+            this["inviteId"] = inviteId
+            this["verifyCode"] = verifyCode
+            this["mobile"] = mobile
+        })
 
     /**
      * 请求验证码
      */
     suspend fun requestPhoneCode(number: String): BaseRequestBean<Boolean> =
-        userApi
-            .requestPhoneCode(
-                getBasedBody().apply {
-                    this["mobile"] = number
-                }
-            )
+        userApi.requestPhoneCode(getBasedBody().apply {
+                this["mobile"] = number
+            })
 
 
     /**
      * 退出登录
      */
-    suspend fun logout(): BaseRequestBean<Boolean> =
-        userApi
-            .logout(
-                getBasedBody()
-            )
+    suspend fun logout(): BaseRequestBean<Boolean> = userApi.logout(
+            getBasedBody()
+        )
+
+    /**
+     * 注销账户
+     */
+    suspend fun destroy(): BaseRequestBean<Boolean> = userApi.destroy(
+            getBasedBody()
+        )
 
 }

@@ -1,5 +1,6 @@
 package river.chat.business_user.api
 
+import android.service.carrier.CarrierMessagingService.ResultCallback
 import androidx.lifecycle.MutableLiveData
 import river.chat.business_user.user.RiverUserManager
 import river.chat.lib_core.net.request.BaseRequest
@@ -71,6 +72,29 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             error = {
                 it.message?.toast()
                 logoutResult.value = RequestResult(errorMsg = it.message ?: "")
+            }
+        )
+
+    }
+
+    /**
+     * 注销账户
+     */
+    fun destroy(resultCallback: (result: RequestResult<Boolean>) -> Unit) {
+        launchFlow(
+            request = {
+                UserApiService.destroy()
+            },
+            dataResp = {
+                resultCallback.invoke(RequestResult(isSuccess = it ?: false, data = true))
+
+            },
+            error = {
+                it.message?.toast()
+                resultCallback.invoke(RequestResult<Boolean>().apply {
+                    errorMsg = it.message ?: ""
+                    isSuccess = false
+                })
             }
         )
 

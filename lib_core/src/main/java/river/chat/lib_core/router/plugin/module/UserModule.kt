@@ -32,8 +32,13 @@ interface UserPlugin : IProvider {
      */
     fun check2Login(isLogin: (Boolean) -> Unit = {})
 
-    fun getUser():User
+    fun getUser(): User
 
     fun updateUser(user: User)
+
+    /**
+     * 注销账户
+     */
+    fun destroyAccount()
 
 }

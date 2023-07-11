@@ -11,13 +11,14 @@ import river.chat.lib_core.view.main.dialog.BaseBindingDialogFragment
  * Created by beiyongChao on 2023/6/9
  * Description:
  */
-class SimpleDialog(var dialogActivity: BaseActivity) : BaseBindingDialogFragment<DialogSimpleTipBinding>() {
+class SimpleDialog(var dialogActivity: BaseActivity) :
+    BaseBindingDialogFragment<DialogSimpleTipBinding>() {
 
     private var mConfig: SimpleDialogConfig = SimpleDialogConfig(
-        title = null,
-        des = null,
-        leftButtonStr = null,
-        rightButtonStr = null,
+        title = "",
+        des = "",
+        leftButtonStr = "",
+        rightButtonStr = "",
         leftClick = {},
         rightClick = {}
     )

@@ -82,6 +82,7 @@
                 android:layout_height="wrap_content"
                 app:item_left_title="检查更新"
                 app:item_type="icon"
+                app:item_left_enable_arrow="false"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -159,9 +159,10 @@ open class BaseRequest(var viewModel: BaseViewModel) {
      * token失效通知
      */
     private fun notifyTokenExpired() {
+//        rick todo
         "登录过期".toast()
-        getPlugin(UserPlugin::class.java).updateUser(User())
-        jump2Login()
+//        getPlugin(UserPlugin::class.java).updateUser(User())
+//        jump2Login()
 //        FEvent.get<Boolean>(GlobalEvent.GLOBAL_TOKEN_EXPIRED.name).post(true)
     }
 

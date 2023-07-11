@@ -36,6 +36,9 @@
     //默认标题颜色
     <color name="defaultTitleColor">#030303</color>
 
+    //默认副标题颜色
+    <color name="defaultSubTitleColor">#999999</color>
+
     //默认文字颜色
     <color name="defaultTextColor">#999999</color>
 

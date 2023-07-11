@@ -60,9 +60,10 @@ class SettingItem @JvmOverloads constructor(
                 else -> {
                     View.inflate(context, R.layout.item_setting_simple, this)
                     findView()
-                    ivRight?.visibility = if (arrowEnable) View.VISIBLE else View.GONE
                 }
             }
+            ivRight?.visibility = if (arrowEnable) View.VISIBLE else View.GONE
+            tvSub ?. visibility = if (arrowEnable) View . GONE else View . VISIBLE
 
         }
         typedArray.recycle()
@@ -73,7 +74,7 @@ class SettingItem @JvmOverloads constructor(
 
     private fun findView() {
         tvName = findViewById(R.id.tvName)
-//        tvSub = findViewById(R.id.tv_sub)
+        tvSub = findViewById(R.id.tvSub)
 //        ivIcon = findViewById(R.id.iv_icon)
         ivRight = findViewById(R.id.ivRight)
     }

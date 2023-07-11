@@ -1,30 +1,22 @@
 package river.chat.businese_common.net
 
+import retrofit2.http.Body
+import retrofit2.http.POST
+import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApi
+import river.chat.lib_core.storage.database.model.MessageBean
 
 /**
  * Created by beiyongChao on 2023/2/24
  * Description:
  */
-object CommonApi : BaseApi {
+interface CommonApi : BaseApi {
 
+    /**
+     *获取配置信息
+     */
+    @POST(CommonHttpUrl.SYSTEM_CONFIG)
+    suspend fun requestConfig(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<String>
 
-
-//    @JvmStatic
-//    suspend fun getDetailInfo(
-//        bookId: Long,
-//        fragmentId: Long
-//    ): BaseRequestBean<TestBean> =
-//
-//        commonApi
-//            .getDetailInfo(
-//                getBasedBody().apply {
-//                    if (bookId > 0) {
-//                        put("bookId", bookId)
-//                    }
-//                    if (fragmentId > 0) {
-//                        put("fragmentId", fragmentId)
-//                    }
-//                })
 
 }

@@ -64,6 +64,11 @@ class ChatViewModel : BaseViewModel() {
         return false
     }
 
+    fun onCopyitem: MessageBean?) {
+    {
+
+    }
+
     private var morePopWindow: ChatItemMorePopWindow? = null
 
     /**

@@ -3,6 +3,7 @@ package river.chat.businese_main.home
 import com.alibaba.android.arouter.facade.annotation.Route
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import river.chat.businese_common.config.ServiceConfigManager
 import river.chat.businese_common.constants.CommonVmEvents
 import river.chat.businese_common.router.jump2Settings
 import river.chat.businese_main.message.MessageCenter
@@ -22,13 +23,15 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
     override fun initDataBinding(binding: ActivityHomeBinding) {
         super.initDataBinding(binding)
         binding.toolBar.setTitle("ChatEvery")
-        binding.toolBar.rightClick={
+        binding.toolBar.rightClick = {
             jump2Settings()
         }
-        binding.toolBar.leftClick={}
+        binding.toolBar.leftClick = {}
 
         initOnHomeActivity()
 
+        //请求配置信息
+        ServiceConfigManager.loadConfig()
     }
 
     /**

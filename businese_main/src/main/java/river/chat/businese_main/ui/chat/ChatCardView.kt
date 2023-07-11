@@ -44,6 +44,9 @@ class ChatCardView @JvmOverloads constructor(
         viewBinding.viewChatCard.singleClick {
             ShareManager.launchShareBoard(context as Activity).shareText()
         }
+        viewBinding.ivCopy.singleClick {
+
+        }
     }
 
     /**

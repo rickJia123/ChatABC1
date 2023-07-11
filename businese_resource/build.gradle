@@ -94,21 +94,9 @@ dependencies {
     // 黑名单配置，可以设置这部分包名不会被修改字节码
     // 项目里如果有引入高德地图，先加黑 blackList = ["com.loc","com.amap.api"], asm的版本有冲突
     // 如果需要生成静态扫描文件， 默认名是replace.json
-//    privacy {
-//        blackList = []
-//        replaceFileName = "replace.json"
-//        // 开启hook反射
-//        hookReflex = true
-//        // debug编译默认开启，支持关闭，感谢run的pr
-//        debugEnable = true
-//        // 开启hook 替换类，目前支持file
-//        hookConstructor = true
-//        // 是否开启hook变量，默认为false
-//        hookField = true
-//    }
+
     /**
      * 合规 end
      */
-
-
 }
+

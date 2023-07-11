@@ -6,6 +6,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import org.greenrobot.eventbus.EventBus
 import river.chat.businese_common.dataBase.UserBox
 import river.chat.businese_common.router.jump2Login
+import river.chat.businese_common.ui.view.dialog.SimpleDialog
+import river.chat.businese_common.ui.view.dialog.SimpleDialogConfig
 import river.chat.business_user.constant.LoginEventAction.ACTION_LOGOUT_SUCCESS
 import river.chat.business_user.constant.UserEvent
 import river.chat.business_user.login.LoginViewModel
@@ -15,6 +17,8 @@ import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.router.plugin.module.UserRouterConstants
 import river.chat.lib_core.storage.database.model.User
 import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.topActivity
+import river.chat.lib_core.view.main.activity.BaseActivity
 
 /**
  * Created by beiyongChao on 2023/3/8
@@ -51,6 +55,25 @@ class UserPluginIml : UserPlugin {
     override fun getUser() = RiverUserManager.getCurrentUser()
     override fun updateUser(user: User) {
         RiverUserManager.updateUser(user)
+    }
+
+    override fun destroyAccount() {
+        SimpleDialog.builder(topActivity as BaseActivity).config(SimpleDialogConfig()
+            .apply {
+                title = "注销账户"
+                des = "注销账户后，所有数据将被清除\n是否继续？"
+                leftButtonStr = "取消"
+                rightButtonStr = "确定"
+                rightClick = {
+                    LoginViewModel().request.destroy { result ->
+                        if (result.isSuccess) {
+                            logout()
+                            "注销成功".toast()
+                        }
+                    }
+                }
+            }).show()
+
     }
 
 
