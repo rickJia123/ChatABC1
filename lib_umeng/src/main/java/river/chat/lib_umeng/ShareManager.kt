@@ -26,6 +26,12 @@ object ShareManager {
     private var mActivityRef: WeakReference<Activity>? = null
 
 
+    fun update(shareContent: RiverShareContent, shareMedia: SHARE_MEDIA) :ShareManager{
+        mShareContent = shareContent
+        mShareMedia = shareMedia
+        return this
+    }
+
     fun shareText() {
         ShareAction(getActivity()).withText(mShareContent.mText)
             .beginShare()
@@ -49,7 +55,8 @@ object ShareManager {
     }
 
 
-    fun shareTextAndImage() {
+    fun shareTextAndImage(activity: Activity) {
+        mActivityRef = WeakReference(activity)
         val imageLocal = UMImage(getActivity(), mShareContent.mBitmap)
         imageLocal.setThumb(UMImage(getActivity(), R.mipmap.logo_trans))
         ShareAction(getActivity()).withText(mShareContent.mText)

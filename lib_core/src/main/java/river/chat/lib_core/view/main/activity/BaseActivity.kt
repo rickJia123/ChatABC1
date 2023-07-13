@@ -93,8 +93,7 @@ open class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCallbac
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         PermissionHelper.onActivityResult(this, requestCode, resultCode, data)
-        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data)
     }
 
     /**

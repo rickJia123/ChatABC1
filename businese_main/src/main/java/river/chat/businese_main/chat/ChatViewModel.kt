@@ -14,11 +14,7 @@ import river.chat.lib_core.view.recycleview.databingding.BaseBindingAdapter
 
 class ChatViewModel : BaseViewModel() {
 
-//    val request = UserRequest(this)
-
     val data = ObservableArrayList<CardMsgBean>()
-    val itemDecorations =
-        listOf<RecyclerView.ItemDecoration>(CustomItemDecoration(), CustomItemDecoration())
 
     // 定义多 item 布局类型的创建器
     val itemViewTypes = object : BaseBindingAdapter.ItemViewTypeCreator {
@@ -35,11 +31,7 @@ class ChatViewModel : BaseViewModel() {
 
         override fun getItemLayout(viewType: Int): Int {
             // 根据不同的布局类型返回不同的布局资源 id
-//            return if (viewType == 0) {
-//                R.layout.item_msg_ai
-//            } else {
-//                R.layout.item_msg_self
-//            }
+
             return R.layout.item_msg_card
         }
 
