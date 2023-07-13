@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="river.chat.common">
 
-
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
     <application >
 
         <meta-data android:name="river.chat.businese_common.config.CommonConfigurationImpl"

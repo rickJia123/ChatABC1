@@ -139,14 +139,14 @@
                     android:layout_gravity="right"
                     android:orientation="horizontal">
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@id/ivCopy"
+                        android:id="@+id/ivCopy"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginRight="10dp"
                         android:src="@drawable/copy" />
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@id/ivShare"
+                        android:id="@+id/ivShare"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/share" />

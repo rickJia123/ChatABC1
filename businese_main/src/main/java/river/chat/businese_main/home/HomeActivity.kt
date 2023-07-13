@@ -6,6 +6,7 @@ import org.greenrobot.eventbus.ThreadMode
 import river.chat.businese_common.config.ServiceConfigManager
 import river.chat.businese_common.constants.CommonVmEvents
 import river.chat.businese_common.router.jump2Settings
+import river.chat.businese_common.update.AppUpdateManager
 import river.chat.businese_main.message.MessageCenter
 import river.chat.business_main.databinding.ActivityHomeBinding
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
@@ -19,7 +20,6 @@ import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 @Route(path = HomeRouterConstants.HOME_MAIN)
 class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewModel>() {
 
-
     override fun initDataBinding(binding: ActivityHomeBinding) {
         super.initDataBinding(binding)
         binding.toolBar.setTitle("ChatEvery")
@@ -32,6 +32,8 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
 
         //请求配置信息
         ServiceConfigManager.loadConfig()
+
+        AppUpdateManager.showUpdateAppDialog(this)
     }
 
     /**

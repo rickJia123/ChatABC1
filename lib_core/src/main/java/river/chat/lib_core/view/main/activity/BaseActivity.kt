@@ -9,6 +9,8 @@ import com.umeng.socialize.UMShareAPI
 import org.greenrobot.eventbus.EventBus
 import pub.devrel.easypermissions.EasyPermissions
 import river.chat.lib_core.R
+import river.chat.lib_core.utils.longan.DownloadRequestBuilder
+import river.chat.lib_core.utils.longan.download
 import river.chat.lib_core.utils.permission.permission.PermissionHelper
 
 /**
@@ -92,6 +94,7 @@ open class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCallbac
         super.onActivityResult(requestCode, resultCode, data)
         PermissionHelper.onActivityResult(this, requestCode, resultCode, data)
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+
     }
 
     /**

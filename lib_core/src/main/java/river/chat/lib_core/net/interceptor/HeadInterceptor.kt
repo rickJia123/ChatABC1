@@ -3,7 +3,7 @@ package river.chat.lib_core.net.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Request
-import river.chat.lib_core.config.AppSystemConfigKey
+import river.chat.lib_core.config.AppLocalConfigKey
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.longan.appVersionName
@@ -23,7 +23,7 @@ class HeadInterceptor : Interceptor {
             .header("header_token", token)
             .header("header_lng", "")
             .header("header_lat", "")
-            .header("header_source", AppSystemConfigKey.PLATFORM + "")
+            .header("header_source", AppLocalConfigKey.PLATFORM + "")
             .header("header_version", appVersionName)
             .build()
 

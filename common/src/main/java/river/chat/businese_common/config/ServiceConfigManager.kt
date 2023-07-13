@@ -1,10 +1,10 @@
 package river.chat.businese_common.config
 
 import river.chat.businese_common.net.CommonRequestViewModel
-import river.chat.lib_core.config.AppSystemConfigKey
+import river.chat.businese_common.update.AppUpdateManager
+import river.chat.lib_core.config.AppLocalConfigKey
+import river.chat.lib_core.config.AppServerConfigKey
 import river.chat.lib_core.config.ConfigManager
-import river.chat.lib_core.config.ConfigManager.FLAG_FALSE
-import river.chat.lib_core.config.ConfigManager.FLAG_TRUE
 import river.chat.lib_core.utils.exts.safeToInt
 
 /**
@@ -13,29 +13,31 @@ import river.chat.lib_core.utils.exts.safeToInt
  */
 object ServiceConfigManager {
 
-    /**
-     * 隐私协议版本
-     */
-    const val KEY_PRIVACY_VERSION = "KEY_PRIVACY_VERSION"
 
 
     fun getPrivacyVersion(): Int {
-        return ConfigManager.getAppConfig(AppSystemConfigKey.PRIVACY_AGREE, 1)
+        return ConfigManager.getAppConfig(AppLocalConfigKey.PRIVACY_VERSION, 1)
     }
 
     fun updatePrivacyVersion(version: Int) {
-        ConfigManager.putAppConfig(AppSystemConfigKey.PRIVACY_AGREE, version)
+        ConfigManager.putAppConfig(AppLocalConfigKey.PRIVACY_VERSION, version)
     }
 
     /**
      * 加载配置信息
      */
     fun loadConfig() {
-        CommonRequestViewModel().requestConfig(KEY_PRIVACY_VERSION) {
+        CommonRequestViewModel().requestConfig(AppServerConfigKey.REQUEST_PRIVACY_VERSION) {
             if (it.isSuccess) {
                 updatePrivacyVersion(it.data.safeToInt())
+                onLoadConfig()
             }
         }
+    }
+
+    private fun onLoadConfig()
+    {
+
     }
 
 

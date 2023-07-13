@@ -108,7 +108,7 @@
     },
     {
       "id": "3:1713556421757208546",
-      "lastPropertyId": "3:4114099398499767600",
+      "lastPropertyId": "4:1262676997801318027",
       "name": "AppConfigBean",
       "properties": [
         {
@@ -126,6 +126,11 @@
           "id": "3:4114099398499767600",
           "name": "value",
           "type": 9
+        },
+        {
+          "id": "4:1262676997801318027",
+          "name": "updateTime",
+          "type": 6
         }
       ],
       "relations": []

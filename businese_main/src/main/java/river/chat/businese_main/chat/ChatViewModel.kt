@@ -64,8 +64,8 @@ class ChatViewModel : BaseViewModel() {
         return false
     }
 
-    fun onCopyitem: MessageBean?) {
-    {
+    fun onCopyitem(msg: MessageBean?) {
+
 
     }
 
@@ -78,7 +78,7 @@ class ChatViewModel : BaseViewModel() {
         dropView: View,
         contentView: View,
         msg: MessageBean,
-    ):Boolean {
+    ): Boolean {
         dismissPopWindow()
         morePopWindow = ChatItemMorePopWindow(
             topActivity,

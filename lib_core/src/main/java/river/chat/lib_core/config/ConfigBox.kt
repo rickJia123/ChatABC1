@@ -26,7 +26,7 @@ object ConfigBox : BaseBox<AppConfigBean>() {
     }
 
     fun putConfig(key: String, value: String): Long {
-        return box?.put(AppConfigBean(key = key, value = value)) ?: 0
+        return box?.put(AppConfigBean(key = key, value = value, updateTime = System.currentTimeMillis())) ?: 0
     }
 
 

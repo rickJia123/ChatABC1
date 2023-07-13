@@ -2,7 +2,7 @@ package river.chat.lib_core.privacy
 
 import androidx.appcompat.app.AppCompatActivity
 import com.yl.lib.sentry.hook.PrivacySentry
-import river.chat.lib_core.config.AppSystemConfigKey
+import river.chat.lib_core.config.AppLocalConfigKey
 import river.chat.lib_core.config.ConfigManager
 import river.chat.lib_core.config.ConfigManager.FLAG_FALSE
 import river.chat.lib_core.config.ConfigManager.FLAG_TRUE
@@ -17,11 +17,11 @@ object PrivacyManager {
      * 是否同意隐私协议
      */
     fun isPrivacyAgree(): Boolean {
-        return ConfigManager.getAppConfig(AppSystemConfigKey.PRIVACY_AGREE, FLAG_FALSE) == FLAG_TRUE
+        return ConfigManager.getAppConfig(AppLocalConfigKey.PRIVACY_AGREE, FLAG_FALSE) == FLAG_TRUE
     }
 
     fun updatePrivacyAgree(isAgree: Boolean) {
-        ConfigManager.putAppConfig(AppSystemConfigKey.PRIVACY_AGREE, isAgree)
+        ConfigManager.putAppConfig(AppLocalConfigKey.PRIVACY_AGREE, isAgree)
         if (isAgree) {
             PrivacySentry.Privacy.updatePrivacyShow()
         }

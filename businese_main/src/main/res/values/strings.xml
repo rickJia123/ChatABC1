@@ -1,6 +1,3 @@
 <resources>
-    <string name="app_name">GptEvery</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">聊天</string>
-    <string name="title_notifications">Notifications</string>
+
 </resources>
