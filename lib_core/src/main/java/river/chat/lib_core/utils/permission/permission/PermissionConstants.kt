@@ -8,6 +8,10 @@ import android.Manifest
  */
 object PermissionConstants {
 
+    /**
+     * 应用内安装其他ap
+     */
+    const val PERMISSION_INSTALL_APP= 600
 
     /**
      * 存储权限

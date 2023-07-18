@@ -22,38 +22,42 @@ import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.startup.Initializer
+import river.chat.chatevery.wxapi.WXEntryActivity
 
 class AppInitializer : Initializer<Unit> {
-  private var started = 0
+    private var started = 0
 
-  override fun create(context: Context) {
-    "AppInitializer create".log()
-    application = context as Application
-    application.doOnActivityLifecycle(
-      onActivityCreated = { activity, _ ->
-        activityCache.add(activity as AppCompatActivity)
-      },
-      onActivityStarted = { activity ->
-        started++
-        if (started == 1) {
-          onAppStatusChangedListener?.onForeground(activity)
-        }
-      },
-      onActivityStopped = { activity ->
-        started--
-        if (started == 0) {
-          onAppStatusChangedListener?.onBackground(activity)
-        }
-      },
-      onActivityDestroyed = { activity ->
-        activityCache.remove(activity)
-      }
-    )
-  }
+    override fun create(context: Context) {
+        "AppInitializer create".log()
+        application = context as Application
+        application.doOnActivityLifecycle(
+            onActivityCreated = { activity, _ ->
+                if (activity is WXEntryActivity) {
+                    return@doOnActivityLifecycle
+                }
+                activityCache.add(activity as AppCompatActivity)
+            },
+            onActivityStarted = { activity ->
+                started++
+                if (started == 1) {
+                    onAppStatusChangedListener?.onForeground(activity)
+                }
+            },
+            onActivityStopped = { activity ->
+                started--
+                if (started == 0) {
+                    onAppStatusChangedListener?.onBackground(activity)
+                }
+            },
+            onActivityDestroyed = { activity ->
+                activityCache.remove(activity)
+            }
+        )
+    }
 
-  override fun dependencies() = emptyList<Class<Initializer<*>>>()
+    override fun dependencies() = emptyList<Class<Initializer<*>>>()
 
-  companion object {
-    internal var onAppStatusChangedListener: OnAppStatusChangedListener? = null
-  }
+    companion object {
+        internal var onAppStatusChangedListener: OnAppStatusChangedListener? = null
+    }
 }

@@ -35,16 +35,16 @@ public class UmInitConfig {
     public  void  UMinit(Context context){
 
         //初始化组件化基础库, 统计SDK/推送SDK/分享SDK都必须调用此初始化接口
-        UMConfigure.init(context, "64788025a1a164591b28e5f3", "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
+        UMConfigure.init(context, "64a30595a1a164591b4154f2", "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
                 "");
 
-        String fileProvider = "com.umeng.soexample.fileprovider";
+        String fileProvider = "river.chat.lib_umeng.common.WeChatShareProvider";
 
         PlatformConfig.setFileProvider(fileProvider);
-        PlatformConfig.setBytedance("awd1cemo6d0l69zp","awd1cemo6d0l69zp","a2dce41fff214270dd4a7f60ac885491",fileProvider);
 
 
-        PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
+
+        PlatformConfig.setWeixin("wx3e388bc28ef77aae", "1cb88656052791001ce68a43cac81936");
         //企业微信设置
         PlatformConfig.setWXWork("wwac6ffb259ff6f66a", "EU1LRsWC5uWn6KUuYOiWUpkoH45eOA0yH-ngL8579zs", "1000002", "wwauthac6ffb259ff6f66a000002");
 

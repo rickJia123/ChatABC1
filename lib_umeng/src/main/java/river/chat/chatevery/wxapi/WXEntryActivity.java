@@ -1,5 +1,5 @@
 
-package river.chat.lib_umeng.wxapi;
+package river.chat.chatevery.wxapi;
 
 
 

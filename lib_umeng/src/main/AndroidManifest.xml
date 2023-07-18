@@ -37,7 +37,7 @@
         <!-- wechat callback-->
 
         <activity
-            android:name=".wxapi.WXEntryActivity"
+            android:name="river.chat.chatevery.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
 

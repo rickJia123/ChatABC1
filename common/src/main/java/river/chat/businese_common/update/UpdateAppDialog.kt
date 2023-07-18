@@ -1,12 +1,12 @@
 package river.chat.businese_common.update
 
 
+import android.app.Activity
 import android.app.DownloadManager
 import android.net.Uri
+import android.os.Build
 import android.text.method.LinkMovementMethod
 import androidx.appcompat.app.AppCompatActivity
-import river.chat.businese_common.ui.view.dialog.SimpleDialog
-import river.chat.businese_common.ui.view.dialog.SimpleDialogConfig
 import river.chat.common.R
 import river.chat.common.databinding.DialogUpdateBinding
 import river.chat.lib_core.utils.exts.getColor
@@ -16,6 +16,8 @@ import river.chat.lib_core.utils.longan.download
 import river.chat.lib_core.utils.longan.installAPK
 import river.chat.lib_core.utils.longan.log
 import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.permission.permission.PermissionConstants
+import river.chat.lib_core.utils.permission.permission.PermissionHelper
 import river.chat.lib_core.view.main.dialog.BaseBindingDialogFragment
 
 /**
@@ -40,8 +42,14 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
      * 下载完成的apk 存储uri
      */
     private var completeUri: Uri? = null
+    private var mProgress = 0f
 
     companion object {
+        //0未开始 1下载中 2已下完
+        const val STATUS_READY = 0
+        const val STATUS_DOWNLOADING = 1
+        const val STATUS_COMPLETE = 2
+
         @JvmStatic
         fun builder(activity: AppCompatActivity): UpdateAppDialog = UpdateAppDialog(activity)
     }
@@ -51,58 +59,90 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
         binding.viewProgress.post {
             mProgressWidth = binding.viewProgress.width
         }
-        binding.tvTips.movementMethod = LinkMovementMethod.getInstance() // 设置了才能点击
 
         binding.tvLButton.singleClick {
 
             closeDialog()
         }
+        changeBtStatus(binding, STATUS_READY)
         binding.tvRButton.singleClick {
-            download(apkLink) {
-                this.description = "下载测试哦"
-                this.notificationVisibility =
-                    DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
-                this.requiresCharging = true
-                this.title = "正在更新《GPTEvery》到最新版本"
-                this.onChange { downloadedSize, totalSize, status ->
-                    downloadStatus = 1
-                    var progress = downloadedSize / totalSize.toFloat()
-                    ("进度" + progress).log()
-                    binding.tvRButton.text = "下载中..." + (progress * 100).toInt() + "%"
-                    binding.viewProgress.width((progress * mProgressWidth).toInt())
-                }
-                this.onComplete {
-                    binding.tvRButton.setTextColor(R.color.highButtonColor.getColor())
-                    binding.tvRButton.text = "安装"
-                    binding.tvRButton.isEnabled = true
-                    downloadStatus = 2
-                    completeUri = it
-                }
-            }
-            when (downloadStatus) {
-                0 -> {
-                    binding.tvRButton.isEnabled = false
-                    binding.tvRButton.text = "下载中..."
-                    binding.tvRButton.setTextColor(R.color.defaultTextColor.getColor())
-                }
 
-                2 -> {
-                    completeUri?.let {
-                        installAPK(it)
+            when (downloadStatus) {
+                STATUS_READY -> {
+                    download(apkLink) {
+                        this.description = "下载测试哦"
+                        this.notificationVisibility =
+                            DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
+                        this.requiresCharging = true
+                        this.title = "正在更新《GPTEvery》到最新版本"
+                        this.allowedNetworkTypes =
+                            DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE
+                        this.onChange { downloadedSize, totalSize, status ->
+                            var progress = downloadedSize / totalSize.toFloat()
+                            ("进度$downloadedSize" + ":::" + totalSize + "::::" + progress).log()
+                            if (progress < 1) {
+                                mProgress = progress
+                                changeBtStatus(binding, STATUS_DOWNLOADING)
+                            } else {
+                                changeBtStatus(binding, STATUS_COMPLETE)
+                            }
+
+                        }
+                        this.onComplete {
+                            ("进度 下载完成").log()
+                            completeUri = it
+                            changeBtStatus(binding, STATUS_COMPLETE)
+                        }
                     }
                 }
 
+                STATUS_DOWNLOADING -> {
+                    "正在下载中".toast()
+                }
+
+                STATUS_COMPLETE -> {
+                    beginInstall()
+                }
             }
         }
         binding.viewRoot.singleClick {
             if (mIsForce) {
                 "需要先更新此次重要版本哦".toast()
             } else {
-                closeDialog()
+                if (downloadStatus == STATUS_READY) {
+                    closeDialog()
+                }
             }
         }
-
     }
+
+    private fun changeBtStatus(binding: DialogUpdateBinding, status: Int) {
+        downloadStatus = status
+        when (status) {
+            STATUS_READY -> {
+                binding.tvRButton.isEnabled = true
+                binding.tvRButton.setTextColor(R.color.highButtonColor.getColor())
+                binding.tvRButton.text = "开始更新"
+                binding.viewProgress.width(0)
+            }
+
+            STATUS_DOWNLOADING -> {
+                binding.tvRButton.isEnabled = false
+                binding.tvRButton.setTextColor(R.color.defaultTextColor.getColor())
+                binding.tvRButton.text = "下载中 " + (mProgress * 100).toInt() + "%"
+                binding.viewProgress.width(((mProgress * mProgressWidth).toInt()))
+            }
+
+            STATUS_COMPLETE -> {
+                mProgress = 1f
+                binding.tvRButton.setTextColor(R.color.highButtonColor.getColor())
+                binding.tvRButton.text = "安装"
+                binding.tvRButton.isEnabled = true
+                completeUri?.let { installAPK(it) }
+            }
+        }
+    }
+
 
     /**
      * 初始化
@@ -118,6 +158,26 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
 
     fun show() {
         dialogActivity.supportFragmentManager?.let { show(it, "DialogUpdateBinding") }
+    }
+
+    fun beginInstall()
+    {
+        completeUri?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val pm = context?.getPackageManager()
+                //pm.canRequestPackageInstalls() 返回用户是否授予了安装apk的权限
+                if (pm?.canRequestPackageInstalls() == true) {
+                    installAPK(it)
+                } else {
+                    PermissionHelper.jump2Setting(
+                        context as Activity,
+                        PermissionConstants.PERMISSION_INSTALL_APP,
+                        it
+                    )
+                }
+            }
+
+        }
     }
 
 }

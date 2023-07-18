@@ -29,7 +29,7 @@ object AppServerConfigKey {
 
 
     /**
-     * 隐私协议版本号：
+     * 隐私协议版本号
      */
     const val REQUEST_PRIVACY_VERSION = "REQUEST_PRIVACY_VERSION"
 
