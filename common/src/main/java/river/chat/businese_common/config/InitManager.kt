@@ -5,6 +5,7 @@ import com.tencent.tauth.Tencent
 import com.umeng.commonsdk.UMConfigure
 import com.yl.lib.sentry.hook.PrivacySentry
 import com.yl.lib.sentry.hook.PrivacySentryBuilder
+import river.chat.businese_common.wx.WxManager
 import river.chat.lib_core.utils.longan.application
 import river.chat.lib_core.utils.longan.isAppDebug
 import river.chat.lib_umeng.common.UmInitConfig
@@ -18,6 +19,7 @@ object InitManager {
     fun initSdk(application: Application) {
         initUmeng(application)
         initPrivacy()
+        WxManager.regToWx(application)
     }
 
     private fun initUmeng(application: Application) {

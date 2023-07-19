@@ -1,5 +1,6 @@
 package river.chat.businese_common.net
 
+import river.chat.businese_common.wx.WxAccessTokenBean
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApiService
 import river.chat.lib_core.storage.database.model.MessageBean
@@ -28,6 +29,21 @@ object CommonApiService  : BaseApiService() {
             ApiStorage.getBasedBody().apply {
                 this["key"] = key
             }
+        )
+
+
+    /**
+     * 获取微信登录信息
+     */
+    suspend fun requestWechatAccessToken(
+        appid: String,
+        secret: String,
+        code: String,
+    ): WxAccessTokenBean =
+        commonApi.requestWechatAccessToken(
+            appid,
+            secret,
+            code
         )
 
 }

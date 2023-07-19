@@ -33,7 +33,8 @@ dependencies {
     api 'com.umeng.umsdk:share-qq:7.3.2'
 
     //微信
-    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
+//    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
+    api 'com.tencent.mm.opensdk:wechat-sdk-android:+'
     api 'com.umeng.umsdk:share-wx:7.3.2'
 
     //新浪微博

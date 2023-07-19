@@ -39,23 +39,30 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(mProperties.getProperty("storeFile"))
+            storeFile file('/Users/rick/Desktop/rick/personal/program/chatEvery/chatEveryKey')
             storePassword mProperties.getProperty("storePassword")
             keyAlias mProperties.getProperty("keyAlias")
             keyPassword mProperties.getProperty("keyPassword")
         }
         debug {
-//            storeFile file(mProperties.getProperty("storeFile"))
-//            storePassword mProperties.getProperty("storePassword")
-//            keyAlias mProperties.getProperty("keyAlias")
-//            keyPassword mProperties.getProperty("keyPassword")
+            storeFile file('/Users/rick/Desktop/rick/personal/program/chatEvery/chatEveryKey')
+            storePassword mProperties.getProperty("storePassword")
+            keyAlias mProperties.getProperty("keyAlias")
+            keyPassword mProperties.getProperty("keyPassword")
         }
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {

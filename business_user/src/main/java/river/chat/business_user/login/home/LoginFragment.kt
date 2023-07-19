@@ -2,6 +2,7 @@ package river.chat.business_user.login.home
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
+import river.chat.businese_common.wx.WxManager
 import river.chat.business_user.databinding.FragmentLoginBinding
 import river.chat.business_user.login.LoginStatus
 import river.chat.business_user.login.LoginViewModel
@@ -63,6 +64,9 @@ class LoginFragment : BaseBindingDialogViewModelFragment<FragmentLoginBinding, L
         }
         binding.btAction.singleClick {
             start2HomeAnim()
+        }
+        binding.ivThirdWechat.singleClick {
+            WxManager.getLoginCode()
         }
     }
 

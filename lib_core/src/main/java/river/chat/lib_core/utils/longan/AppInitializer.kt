@@ -22,7 +22,6 @@ import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.startup.Initializer
-import river.chat.chatevery.wxapi.WXEntryActivity
 
 class AppInitializer : Initializer<Unit> {
     private var started = 0
@@ -32,7 +31,7 @@ class AppInitializer : Initializer<Unit> {
         application = context as Application
         application.doOnActivityLifecycle(
             onActivityCreated = { activity, _ ->
-                if (activity is WXEntryActivity) {
+                if (activity.javaClass.simpleName.contains("WXEntryActivity")) {
                     return@doOnActivityLifecycle
                 }
                 activityCache.add(activity as AppCompatActivity)

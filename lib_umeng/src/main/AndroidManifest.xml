@@ -36,12 +36,7 @@
             android:theme="@android:style/Theme.NoTitleBar" />
         <!-- wechat callback-->
 
-        <activity
-            android:name="river.chat.chatevery.wxapi.WXEntryActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
 
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!--dingding-->
 <!--        <activity-->
 <!--            android:name=".ddshare.DDShareActivity"-->

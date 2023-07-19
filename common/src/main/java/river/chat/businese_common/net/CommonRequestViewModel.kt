@@ -12,4 +12,11 @@ class CommonRequestViewModel : BaseViewModel() {
         commonRequest.requestConfig(key, resultCallBack)
     }
 
+    // 获取微信登录信息
+    fun requestWechatAccessToken(
+        code: String, resultCallBack: (RequestResult<String>) -> Unit
+    ) {
+        commonRequest.requestWechatAccessToken(code, resultCallBack)
+    }
+
 }
