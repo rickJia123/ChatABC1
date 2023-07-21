@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
 import org.greenrobot.eventbus.EventBus
 import river.chat.businese_common.dataBase.UserBox
+import river.chat.businese_common.net.CommonRequestViewModel
 import river.chat.businese_common.router.jump2Login
 import river.chat.businese_common.ui.view.dialog.SimpleDialog
 import river.chat.businese_common.ui.view.dialog.SimpleDialogConfig
@@ -26,6 +27,9 @@ import river.chat.lib_core.view.main.activity.BaseActivity
  */
 @Route(path = UserRouterConstants.USER_PLUGIN)
 class UserPluginIml : UserPlugin {
+    override fun loginByWechat(code: String) {
+        LoginViewModel().loginByWechat(code)
+    }
 
     override fun logout() {
         RiverUserManager.onLogoutSuccess()

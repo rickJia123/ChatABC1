@@ -21,7 +21,7 @@ interface UserApi : BaseApi {
     /**
      * 微信登录
      */
-    @POST("/smart-orch/program/card/spearea")
+    @POST("/user/wxLogin")
     suspend fun loginByWechat(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<User>
 
     /**

@@ -17,7 +17,7 @@ import river.chat.lib_umeng.common.UmInitConfig
 object InitManager {
 
     fun initSdk(application: Application) {
-        initUmeng(application)
+//        initUmeng(application)
         initPrivacy()
         WxManager.regToWx(application)
     }

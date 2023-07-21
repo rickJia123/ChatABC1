@@ -23,32 +23,41 @@ object UserApiService : BaseApiService() {
     suspend fun loginByPhone(
         inviteId: String, mobile: String, verifyCode: String
     ): BaseRequestBean<User> = userApi.loginByPhone(getBasedBody().apply {
-            this["inviteId"] = inviteId
-            this["verifyCode"] = verifyCode
-            this["mobile"] = mobile
-        })
+        this["inviteId"] = inviteId
+        this["verifyCode"] = verifyCode
+        this["mobile"] = mobile
+    })
+
+    /**
+     * 微信登录
+     */
+    suspend fun loginByWechat(
+        code: String
+    ): BaseRequestBean<User> = userApi.loginByWechat(getBasedBody().apply {
+        this["code"] = code
+    })
 
     /**
      * 请求验证码
      */
     suspend fun requestPhoneCode(number: String): BaseRequestBean<Boolean> =
         userApi.requestPhoneCode(getBasedBody().apply {
-                this["mobile"] = number
-            })
+            this["mobile"] = number
+        })
 
 
     /**
      * 退出登录
      */
     suspend fun logout(): BaseRequestBean<Boolean> = userApi.logout(
-            getBasedBody()
-        )
+        getBasedBody()
+    )
 
     /**
      * 注销账户
      */
     suspend fun destroy(): BaseRequestBean<Boolean> = userApi.destroy(
-            getBasedBody()
-        )
+        getBasedBody()
+    )
 
 }

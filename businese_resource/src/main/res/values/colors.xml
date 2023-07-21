@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    //主题色
+    <color name="themeColor">#FFE4B5</color>
+
     //默认背景颜色
     <color name="defaultBgColor">#f1f3e3</color>
 

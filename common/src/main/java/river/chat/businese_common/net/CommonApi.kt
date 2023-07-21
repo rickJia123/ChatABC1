@@ -25,7 +25,7 @@ interface CommonApi : BaseApi {
   /**
      *获取配置信息
      */
-    @GET("https://api.weixin.qq.com/sns/oauth2/access_token?appid={appid}&secret={secret}&code={code}&grant_type=authorization_code")
+    @GET("https://api.weixin.qq.com/sns/oauth2/access_token")
     suspend fun requestWechatAccessToken(@Query("appid") appid: String, @Query("secret") secret: String, @Query("code") code: String): WxAccessTokenBean
 
 

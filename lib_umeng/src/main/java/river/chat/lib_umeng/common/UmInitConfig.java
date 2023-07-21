@@ -64,6 +64,8 @@ public class UmInitConfig {
         //统计SDK是否支持采集在子进程中打点的自定义事件，默认不支持
         UMConfigure.setProcessEvent(true);//支持多进程打点
 
+        UMConfigure.lo
+
         // 页面数据采集模式
         // setPageCollectionMode接口参数说明：
         // 1. MobclickAgent.PageMode.AUTO: 建议大多数用户使用本采集模式，SDK在此模式下自动采集Activity

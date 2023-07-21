@@ -8,6 +8,7 @@ import com.tencent.mm.opensdk.constants.ConstantsAPI
 import com.tencent.mm.opensdk.modelmsg.SendAuth
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
+import kotlin.random.Random
 
 
 /**
@@ -16,8 +17,8 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory
  */
 object WxManager {
 
-      const val APP_ID = "wx3e388bc28ef77aae"
-      const val SECRET = "1cb88656052791001ce68a43cac81936"
+    const val APP_ID = "wx3e388bc28ef77aae"
+    const val SECRET = "1cb88656052791001ce68a43cac81936"
 
     /**
      * 用于保持请求和回调的状态，授权请求后原样带回给第三方。该参数可用于防止 csrf 攻击（跨站请求伪造攻击）
@@ -52,9 +53,9 @@ object WxManager {
     fun getLoginCode() {
         var req = SendAuth.Req()
         req.scope = "snsapi_userinfo";// 只能填 snsapi_userinfo
-        req.state = STATE
-        api?.sendReq(req)
-
+        req.state = STATE + Random(10000).nextInt(10000) + SECRET + Random(10000).nextInt(500000)
+        var result = api?.sendReq(req)
+        result
     }
 
 }

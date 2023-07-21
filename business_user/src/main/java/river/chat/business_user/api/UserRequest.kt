@@ -58,6 +58,27 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
         )
     }
 
+    //微信登录
+    fun loginByWechat(
+        code: String
+    ) {
+        launchFlow(
+            request = {
+                UserApiService.loginByWechat(code)
+            },
+            dataResp = {
+                it?.let {
+                    RiverUserManager.onLoginSuccess(it)
+                    loginResult.value = RequestResult(isSuccess = true, data = it)
+                }
+            },
+            error = {
+                it.message?.toast()
+                loginResult.value = RequestResult(errorMsg = it.message ?: "")
+            }
+        )
+    }
+
     /**
      * 退出登录
      */

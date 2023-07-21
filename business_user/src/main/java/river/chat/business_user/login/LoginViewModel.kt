@@ -7,6 +7,7 @@ import androidx.lifecycle.LifecycleOwner
 import okhttp3.internal.notify
 import river.chat.business_user.api.UserRequest
 import river.chat.business_user.login.LoginStatus.CODE_READY
+import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.utils.longan.log
 import river.chat.lib_core.view.main.BaseViewModel
 
@@ -30,6 +31,12 @@ class LoginViewModel : BaseViewModel() {
         lastStepVisible.set(if (status == CODE_READY) View.VISIBLE else View.GONE)
     }
 
+    // 微信登录
+    fun loginByWechat(
+        code: String
+    ) {
+        request.loginByWechat(code)
+    }
 
     fun needShowPre(): Int {
         ("needShowPre:" + loginStatus.get() + "").log()
