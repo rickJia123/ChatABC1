@@ -26,7 +26,7 @@ object ShareManager {
     private var mActivityRef: WeakReference<Activity>? = null
 
 
-    fun update(shareContent: RiverShareContent, shareMedia: SHARE_MEDIA) :ShareManager{
+    fun update(shareContent: RiverShareContent, shareMedia: SHARE_MEDIA): ShareManager {
         mShareContent = shareContent
         mShareMedia = shareMedia
         return this
@@ -38,7 +38,8 @@ object ShareManager {
     }
 
 
-    fun shareImageLocal() {
+    fun shareImageLocal(activity: Activity) {
+        mActivityRef = WeakReference(activity)
         val imageLocal = UMImage(getActivity(), mShareContent.mBitmap)
         imageLocal.setThumb(UMImage(getActivity(), R.mipmap.logo_trans))
         ShareAction(getActivity()).withMedia(imageLocal)
@@ -77,7 +78,7 @@ object ShareManager {
 
     fun ShareAction.beginShare() {
         this.setPlatform(mShareMedia)
-            .setCallback(mShareListener).share()
+            .setCallback(mShareListener ?: mActivityRef?.get()?.let { buildShareListener(it) }).share()
     }
 
 
@@ -89,7 +90,12 @@ object ShareManager {
             SHARE_MEDIA.FLICKR,
             SHARE_MEDIA.FOURSQUARE,
         )
-            .addButton("复制答案文本", "复制答案文本", "umeng_socialize_copy", "umeng_socialize_copy")
+            .addButton(
+                "复制答案文本",
+                "复制答案文本",
+                "umeng_socialize_copy",
+                "umeng_socialize_copy"
+            )
             .addButton("复制链接", "复制链接", "umeng_socialize_copyurl", "umeng_socialize_copyurl")
             .setShareboardclickCallback { snsPlatform, share_media ->
                 if (snsPlatform.mShowWord == "复制文本") {
@@ -117,7 +123,7 @@ object ShareManager {
             }
     }
 
-    fun buildShareListener(activity: Activity) {
+    fun buildShareListener(activity: Activity): UMShareListener {
         mShareListener = object : UMShareListener {
             override fun onResult(p0: SHARE_MEDIA?) {
                 Toast.makeText(activity, " 分享成功", Toast.LENGTH_SHORT).show()
@@ -135,6 +141,7 @@ object ShareManager {
                 Toast.makeText(activity, " 分享开始", Toast.LENGTH_SHORT).show()
             }
         }
+        return mShareListener!!
     }
 
     private fun getActivity() = mActivityRef?.get()

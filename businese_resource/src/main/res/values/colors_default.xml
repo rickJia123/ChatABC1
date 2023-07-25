@@ -18,8 +18,7 @@
     <color name="yellow">#FFFF00</color>
     <color name="cyan">#00FFFF</color>
     <color name="magenta">#FF00FF</color>
-    <!--颜色规范-->
-    <color name="default_text">#030303</color>
+
 
 
     <!--透明度-->

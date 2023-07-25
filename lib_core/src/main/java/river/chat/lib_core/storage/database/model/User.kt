@@ -9,18 +9,18 @@ data class User(
     var token: String = "",
 
     @Id(assignable = true)
-    var id: Long = 0,
-    var cityId: Int = 0,
-    var inviteUserId: Int = 0,
+    var id: Long ?= 0,
+    var cityId: Int ?= 0,
+    var inviteUserId: Int ?= 0,
 
 
-    var sex: Int = 0,
+    var sex: Int ?= 0,
     var headImg:  Any ?=null,
-    var realName: String = "",
-    var nickName: String = "",
-    var mobile: String = "",
+    var realName: String ?= "",
+    var nickName: String ?= "",
+    var mobile: String ?= "",
 
-    var isNew: Int = 0,
+    var isNew: Int ?= 0,
 
     ) : java.io.Serializable
 

@@ -22,27 +22,22 @@ class WXEntryActivity : WXCallbackActivity() {
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
     }
+
     override fun onReq(req: BaseReq?) {
-        super.onReq(req)
+//        super.onReq(req)
     }
 
     override fun onResp(resp: BaseResp?) {
-
-        super.onResp(resp)
-        var errorCode=resp?.errCode
-        when(errorCode)
-        {
-            BaseResp.ErrCode.ERR_OK->
-            {
+        var errorCode = resp?.errCode
+        when (errorCode) {
+            BaseResp.ErrCode.ERR_OK -> {
                 (resp as Resp).let {
                     ("微信 onResp: ${resp.errCode}" + "---${resp.code}").log()
                     get<UserPlugin>().loginByWechat(it.code)
-//            CommonRequestViewModel().requestWechatAccessToken(it.code.toString(), {
-//            })
                 }
             }
-            BaseResp.ErrCode.ERR_USER_CANCEL->
-            {
+
+            BaseResp.ErrCode.ERR_USER_CANCEL -> {
 
             }
         }

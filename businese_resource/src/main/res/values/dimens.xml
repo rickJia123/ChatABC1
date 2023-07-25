@@ -12,4 +12,7 @@
     <!--    一级标题-->
     <dimen name="titleSize_1">18sp</dimen>
     <dimen name="titleSize_2">16sp</dimen>
+
+
+    <dimen name="defaultTxtSize_1">14sp</dimen>
 </resources>

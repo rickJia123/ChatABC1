@@ -43,10 +43,10 @@ class LoginFragment : BaseBindingDialogViewModelFragment<FragmentLoginBinding, L
             }
         }
         viewModel.request.loginResult.observe(this) {
-            if (it.isSuccess) {
-                "登录成功".toast()
-                mActivity?.finish()
-            }
+//            if (it.isSuccess) {
+//                "登录成功".toast()
+//                mActivity?.finish()
+//            }
         }
     }
 

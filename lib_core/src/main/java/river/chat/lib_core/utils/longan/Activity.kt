@@ -65,6 +65,8 @@ val topActivityOrNull: Activity? get() = activityCache.lastOrNull()
 
 val topActivityOrApplication: Context get() = topActivityOrNull ?: application
 
+val mainActivity: AppCompatActivity? get() = activityList.findLast { it.javaClass.name.contains("HomeActivity") } as AppCompatActivity?
+
 inline fun <reified T : Activity> isActivityExistsInStack(): Boolean =
   isActivityExistsInStack(T::class.java)
 

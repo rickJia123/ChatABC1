@@ -45,6 +45,7 @@ object WxManager {
                 api?.registerApp(APP_ID)
             }
         }, IntentFilter(ConstantsAPI.ACTION_REFRESH_WXAPP))
+
     }
 
     /**
@@ -57,5 +58,7 @@ object WxManager {
         var result = api?.sendReq(req)
         result
     }
+
+
 
 }

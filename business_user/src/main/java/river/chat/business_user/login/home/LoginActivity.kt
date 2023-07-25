@@ -2,6 +2,7 @@ package river.chat.business_user.login.home
 
 import com.alibaba.android.arouter.facade.annotation.Route
 import org.koin.android.ext.android.inject
+import river.chat.businese_common.wx.WxManager
 import river.chat.business_user.databinding.ActivityLoginBinding
 import river.chat.business_user.login.LoginViewModel
 import river.chat.lib_core.router.plugin.module.HomePlugin
@@ -25,4 +26,7 @@ class LoginActivity : BaseBindingViewModelActivity<ActivityLoginBinding, LoginVi
 
     override fun createViewModel() = LoginViewModel()
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 }

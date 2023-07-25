@@ -12,7 +12,6 @@
             android:name="river.chat.chatevery.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 

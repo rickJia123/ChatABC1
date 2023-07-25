@@ -4,15 +4,19 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
+import com.umeng.socialize.bean.SHARE_MEDIA
 import river.chat.businese_main.share.ShareDialog
 import river.chat.businese_main.utils.logChat
 import river.chat.business_main.databinding.ViewChatCardBinding
 import river.chat.lib_core.storage.database.model.MessageBean
+import river.chat.lib_core.utils.exts.getViewBitmap
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.dp
 import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.utils.system.DisplayUtil.getScreenWidth
 import river.chat.lib_core.view.base.LifecycleView
+import river.chat.lib_umeng.ShareManager
+import river.chat.lib_umeng.common.RiverShareContent
 
 
 class ChatCardView @JvmOverloads constructor(
@@ -56,7 +60,7 @@ class ChatCardView @JvmOverloads constructor(
 //                mText = "hahahha1"
 //                mBitmap = viewBinding.clRoot.getViewBitmap()
 //
-//            },SHARE_MEDIA.WEIXIN).shareTextAndImage(topActivity)
+//            }, SHARE_MEDIA.WEIXIN).shareTextAndImage(topActivity)
 //            ShareManager.launchShareBoard(context as Activity).shareText()
         }
         viewBinding.ivCopy.singleClick {

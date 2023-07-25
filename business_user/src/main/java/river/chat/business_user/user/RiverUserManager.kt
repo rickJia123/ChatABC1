@@ -1,9 +1,15 @@
 package river.chat.business_user.user
 
 import river.chat.businese_common.dataBase.UserBox
+import river.chat.businese_common.router.jump2Main
+import river.chat.businese_common.wx.WxManager
+import river.chat.business_user.login.home.LoginActivity
 import river.chat.lib_core.storage.database.model.User
 import river.chat.lib_core.utils.longan.log
 import river.chat.lib_core.utils.longan.logConfig
+import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.toastSystem
+import river.chat.lib_core.utils.longan.topActivity
 
 /**
  * Created by beiyongChao on 2023/3/15
@@ -16,13 +22,16 @@ object RiverUserManager {
      */
     fun isLogin(): Boolean {
         getCurrentUser().toString().logConfig()
-        return getCurrentUser().id > 0
+        return (getCurrentUser().id ?: 0) > 0
     }
 
     /**
      * 登录成功
      */
     fun onLoginSuccess(user: User) {
+        "登录成功".toast()
+        jump2Main()
+
         updateUser(user)
     }
 

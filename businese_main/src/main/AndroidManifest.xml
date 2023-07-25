@@ -8,6 +8,7 @@
             android:value="ConfigModule" />
         <activity android:name="river.chat.businese_main.home.HomeActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name="river.chat.businese_main.setting.SettingsActivity"
             android:screenOrientation="portrait"  />

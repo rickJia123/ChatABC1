@@ -38,9 +38,10 @@ public class UmInitConfig {
         UMConfigure.init(context, "64a30595a1a164591b4154f2", "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
                 "");
 
-        String fileProvider = "river.chat.lib_umeng.common.WeChatShareProvider";
-
+        String fileProvider = "river.chat.lib_umeng.WeChatShareProvider";
+//
         PlatformConfig.setFileProvider(fileProvider);
+
 
 
 
@@ -59,12 +60,11 @@ public class UmInitConfig {
         //集成umeng-crash-vx.x.x.aar，则需要关闭原有统计SDK异常捕获功能
         MobclickAgent.setCatchUncaughtExceptions(false);
         //PushSDK初始化(如使用推送SDK，必须调用此方法)
-        initUpush(context);
+//        initUpush(context);
 
         //统计SDK是否支持采集在子进程中打点的自定义事件，默认不支持
         UMConfigure.setProcessEvent(true);//支持多进程打点
 
-        UMConfigure.lo
 
         // 页面数据采集模式
         // setPageCollectionMode接口参数说明：

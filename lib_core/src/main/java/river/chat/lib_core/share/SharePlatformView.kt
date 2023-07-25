@@ -5,9 +5,11 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.umeng.socialize.bean.SHARE_MEDIA
 import river.chat.lib_core.BR
 import river.chat.lib_core.R
 import river.chat.lib_core.databinding.ViewSharePlatformBinding
+import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.view.base.LifecycleView
 
 /**
@@ -21,6 +23,14 @@ class SharePlatformView @JvmOverloads constructor(
 ) : LifecycleView(context, attrs, defStyleAttr) {
 
     private var mViewModel: ShareViewModel? = null
+    var mOnPlatformClick: ((SharePlatformBean) -> Unit)? = null
+        set(value) {
+            field = value
+            mViewModel?.onPlatformClick = value
+        }
+
+    var mOnCancelClick: (() -> Unit)? = null
+
 
     private val viewBinding: ViewSharePlatformBinding = DataBindingUtil.inflate(
         LayoutInflater.from(context), R.layout.view_share_platform,
@@ -35,14 +45,29 @@ class SharePlatformView @JvmOverloads constructor(
         mViewModel = ShareViewModel()
         viewBinding.setVariable(BR.vm, mViewModel)
         initPlatforms()
+        viewBinding.tvCancel.singleClick {
+            mOnCancelClick?.invoke()
+        }
     }
 
     private fun initPlatforms() {
         var platforms = mutableListOf<SharePlatformBean>()
-        platforms.add(SharePlatformBean("微信", ""))
-        platforms.add(SharePlatformBean("朋友圈", ""))
-        platforms.add(SharePlatformBean("微博", ""))
-        platforms.add(SharePlatformBean("复制链接", ""))
+        platforms.add(
+            SharePlatformBean(
+                "微信",
+                R.drawable.umeng_socialize_wechat,
+                SHARE_MEDIA.WEIXIN
+            )
+        )
+        platforms.add(
+            SharePlatformBean(
+                "朋友圈",
+                R.drawable.umeng_socialize_wxcircle,
+                SHARE_MEDIA.WEIXIN
+            )
+        )
+        platforms.add(SharePlatformBean("微博", R.drawable.umeng_socialize_sina, SHARE_MEDIA.SINA))
+//        platforms.add(SharePlatformBean("复制链接", 0))
         mViewModel?.data?.addAll(platforms)
     }
 

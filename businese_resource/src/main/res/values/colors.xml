@@ -7,6 +7,9 @@
     //默认背景颜色
     <color name="defaultBgColor">#f1f3e3</color>
 
+    //默认文字颜色
+    <color name="defaultTxtColor">#666666</color>
+
     <!--    Button-->
     //默认按钮颜色
     <color name="defaultButtonColor">#FAE284</color>

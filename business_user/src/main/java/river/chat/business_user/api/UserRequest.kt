@@ -7,6 +7,7 @@ import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.storage.database.model.User
 import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.main.BaseViewModel
 
 /**
@@ -73,7 +74,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                 }
             },
             error = {
-                it.message?.toast()
+                it.message?.toastSystem()
                 loginResult.value = RequestResult(errorMsg = it.message ?: "")
             }
         )

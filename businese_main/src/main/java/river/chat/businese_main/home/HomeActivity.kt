@@ -1,5 +1,6 @@
 package river.chat.businese_main.home
 
+import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -20,6 +21,15 @@ import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 @Route(path = HomeRouterConstants.HOME_MAIN)
 class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewModel>() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initOnHomeActivity()
+        //请求配置信息
+        ServiceConfigManager.loadConfig()
+
+        AppUpdateManager.showUpdateAppDialog(this)
+    }
+
     override fun initDataBinding(binding: ActivityHomeBinding) {
         super.initDataBinding(binding)
         binding.toolBar.setTitle("ChatEvery")
@@ -28,12 +38,6 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
         }
         binding.toolBar.leftClick = {}
 
-        initOnHomeActivity()
-
-        //请求配置信息
-        ServiceConfigManager.loadConfig()
-
-        AppUpdateManager.showUpdateAppDialog(this)
     }
 
     /**
