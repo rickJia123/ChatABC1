@@ -40,10 +40,10 @@ public class UmInitConfig {
                          AccountsConstants.UMENG_KEY, "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
                          "");
 
-        String fileProvider = "river.chat.lib_umeng.WeChatShareProvider";
+//        String fileProvider = "river.chat.lib_umeng.WeChatShareProvider";
 //
-        PlatformConfig.setFileProvider(fileProvider);
-
+//        PlatformConfig.setFileProvider(fileProvider);
+        PlatformConfig.setWXFileProvider("river.chat.chatevery.fileprovider");
         PlatformConfig.setWeixin(AccountsConstants.WECHAT_KEY, AccountsConstants.WECHAT_SECRET);
         //企业微信设置
         PlatformConfig.setWXWork("", "", "", "");
