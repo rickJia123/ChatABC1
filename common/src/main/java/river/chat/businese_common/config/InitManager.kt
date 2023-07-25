@@ -8,6 +8,7 @@ import com.yl.lib.sentry.hook.PrivacySentryBuilder
 import river.chat.businese_common.wx.WxManager
 import river.chat.lib_core.utils.longan.application
 import river.chat.lib_core.utils.longan.isAppDebug
+import river.chat.lib_resource.AccountsConstants
 import river.chat.lib_umeng.common.UmInitConfig
 
 /**
@@ -28,7 +29,7 @@ object InitManager {
         UMConfigure.setLogEnabled(true)
 
         //友盟预初始化
-        UMConfigure.preInit(application, "59892f08310c9307b60023d0", "Umeng")
+        UMConfigure.preInit(application, AccountsConstants.UMENG_KEY, "Umeng")
 
 
         /**

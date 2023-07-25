@@ -9,6 +9,7 @@ import android.text.method.LinkMovementMethod
 import androidx.appcompat.app.AppCompatActivity
 import river.chat.common.R
 import river.chat.common.databinding.DialogUpdateBinding
+import river.chat.lib_core.utils.exts.dp2px
 import river.chat.lib_core.utils.exts.getColor
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.exts.width
@@ -57,7 +58,7 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
 
     override fun initDataBinding(binding: DialogUpdateBinding) {
         binding.viewProgress.post {
-            mProgressWidth = binding.viewProgress.width
+            mProgressWidth = binding.viewProgress.width - 15f.dp2px()
         }
 
         binding.tvLButton.singleClick {
@@ -160,8 +161,7 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
         dialogActivity.supportFragmentManager?.let { show(it, "DialogUpdateBinding") }
     }
 
-    fun beginInstall()
-    {
+    fun beginInstall() {
         completeUri?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val pm = context?.getPackageManager()

@@ -9,7 +9,14 @@
         <activity android:name="river.chat.businese_main.home.HomeActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="um.64a30595a1a164591b4154f2" />
+            </intent-filter>
+        </activity>
         <activity android:name="river.chat.businese_main.setting.SettingsActivity"
             android:screenOrientation="portrait"  />
 

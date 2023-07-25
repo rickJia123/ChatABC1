@@ -22,40 +22,35 @@ import com.umeng.message.common.UPushNotificationChannel;
 import com.umeng.message.entity.UMessage;
 import com.umeng.socialize.PlatformConfig;
 
+import river.chat.lib_resource.AccountsConstants;
 import river.chat.lib_umeng.R;
 
 import static android.os.Looper.getMainLooper;
 
 public class UmInitConfig {
 
-    private static final String TAG ="UmInitConfig" ;
+    private static final String TAG = "UmInitConfig";
     public static final String UPDATE_STATUS_ACTION = "com.umeng.message.example.action.UPDATE_STATUS";
     private Handler handler;
 
-    public  void  UMinit(Context context){
+    public void UMinit(Context context) {
 
         //初始化组件化基础库, 统计SDK/推送SDK/分享SDK都必须调用此初始化接口
-        UMConfigure.init(context, "64a30595a1a164591b4154f2", "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
-                "");
+        UMConfigure.init(context,
+                         AccountsConstants.UMENG_KEY, "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
+                         "");
 
         String fileProvider = "river.chat.lib_umeng.WeChatShareProvider";
 //
         PlatformConfig.setFileProvider(fileProvider);
 
-
-
-
-        PlatformConfig.setWeixin("wx3e388bc28ef77aae", "1cb88656052791001ce68a43cac81936");
+        PlatformConfig.setWeixin(AccountsConstants.WECHAT_KEY, AccountsConstants.WECHAT_SECRET);
         //企业微信设置
-        PlatformConfig.setWXWork("wwac6ffb259ff6f66a", "EU1LRsWC5uWn6KUuYOiWUpkoH45eOA0yH-ngL8579zs", "1000002", "wwauthac6ffb259ff6f66a000002");
+        PlatformConfig.setWXWork("", "", "", "");
 
-        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
+        PlatformConfig.setSinaWeibo("", "", "");
 
-        PlatformConfig.setQQZone("101830139", "5d63ae8858f1caab67715ccd6c18d7a5");
-
-        PlatformConfig.setVKontakte("5764965", "5My6SNliAaLxEm3Lyd9J");
-        PlatformConfig.setDropbox("oz8v5apet3arcdy", "h7p2pjbzkkxt02a");
-        PlatformConfig.setHonor("104408749", "fb1d1d0320a0f661cb1c22892622501f3affceeafb625a5646f299a04c1602ec");
+        PlatformConfig.setHonor("", "");
 
         //集成umeng-crash-vx.x.x.aar，则需要关闭原有统计SDK异常捕获功能
         MobclickAgent.setCatchUncaughtExceptions(false);
@@ -64,7 +59,6 @@ public class UmInitConfig {
 
         //统计SDK是否支持采集在子进程中打点的自定义事件，默认不支持
         UMConfigure.setProcessEvent(true);//支持多进程打点
-
 
         // 页面数据采集模式
         // setPageCollectionMode接口参数说明：
@@ -143,12 +137,15 @@ public class UmInitConfig {
                         boolean isClickOrDismissed = true;
                         if (isClickOrDismissed) {
                             //自定义消息的点击统计
-                            UTrack.getInstance().trackMsgClick(msg);
+                            UTrack.getInstance()
+                                    .trackMsgClick(msg);
                         } else {
                             //自定义消息的忽略统计
-                            UTrack.getInstance().trackMsgDismissed(msg);
+                            UTrack.getInstance()
+                                    .trackMsgDismissed(msg);
                         }
-                        Toast.makeText(context, msg.custom, Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, msg.custom, Toast.LENGTH_LONG)
+                                .show();
                     }
                 });
             }
@@ -162,16 +159,20 @@ public class UmInitConfig {
                     case 1:
                         Notification.Builder builder;
                         if (Build.VERSION.SDK_INT >= 26) {
-                            NotificationChannel channel = UPushNotificationChannel.getDefaultMode(context);
+                            NotificationChannel channel = UPushNotificationChannel.getDefaultMode(
+                                    context);
                             builder = new Notification.Builder(context, channel.getId());
                         } else {
                             builder = new Notification.Builder(context);
                         }
-                        RemoteViews myNotificationView = new RemoteViews(context.getPackageName(), R.layout.notification_view);
+                        RemoteViews myNotificationView = new RemoteViews(context.getPackageName(),
+                                                                         R.layout.notification_view);
                         myNotificationView.setTextViewText(R.id.notification_title, msg.title);
                         myNotificationView.setTextViewText(R.id.notification_text, msg.text);
-                        myNotificationView.setImageViewBitmap(R.id.notification_large_icon, getLargeIcon(context, msg));
-                        myNotificationView.setImageViewResource(R.id.notification_small_icon, getSmallIconId(context, msg));
+                        myNotificationView.setImageViewBitmap(R.id.notification_large_icon,
+                                                              getLargeIcon(context, msg));
+                        myNotificationView.setImageViewResource(R.id.notification_small_icon,
+                                                                getSmallIconId(context, msg));
                         builder.setContent(myNotificationView)
                                 .setSmallIcon(getSmallIconId(context, msg))
                                 .setTicker(msg.ticker)
@@ -209,7 +210,8 @@ public class UmInitConfig {
 
             @Override
             public void dealWithCustomAction(Context context, UMessage msg) {
-                Toast.makeText(context, msg.custom, Toast.LENGTH_LONG).show();
+                Toast.makeText(context, msg.custom, Toast.LENGTH_LONG)
+                        .show();
             }
         };
         //使用自定义的NotificationHandler
