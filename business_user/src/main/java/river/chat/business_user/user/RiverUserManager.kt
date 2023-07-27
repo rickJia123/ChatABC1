@@ -1,6 +1,7 @@
 package river.chat.business_user.user
 
 import river.chat.businese_common.dataBase.UserBox
+import river.chat.businese_common.report.ReportManager
 import river.chat.businese_common.router.jump2Main
 import river.chat.businese_common.wx.WxManager
 import river.chat.business_user.login.home.LoginActivity
@@ -28,11 +29,11 @@ object RiverUserManager {
     /**
      * 登录成功
      */
-    fun onLoginSuccess(user: User) {
+    fun onLoginSuccess(user: User,platFrom:String) {
         "登录成功".toast()
         jump2Main()
-
         updateUser(user)
+        ReportManager.reportLogin(true, user.id.toString(), platFrom)
     }
 
     /**

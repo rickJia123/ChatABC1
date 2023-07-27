@@ -5,6 +5,8 @@ import org.koin.android.ext.android.inject
 import river.chat.businese_common.router.jump2Feedback
 import river.chat.businese_common.ui.view.dialog.SimpleDialog
 import river.chat.businese_common.ui.view.dialog.SimpleDialogConfig
+import river.chat.businese_common.update.AppUpdateManager
+import river.chat.businese_common.update.UpdateAppDialog
 import river.chat.business_main.databinding.ActivitySettingsBinding
 import river.chat.lib_core.router.plugin.module.HomePlugin
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
@@ -58,6 +60,7 @@ class SettingsActivity :
         }
 
         binding.viewCheckUpdate.singleClick {
+            AppUpdateManager.showUpdateAppDialog()
             //rick todo
             "已是最新版本".toast()
             SimpleDialog.builder(topActivity as BaseActivity).config(

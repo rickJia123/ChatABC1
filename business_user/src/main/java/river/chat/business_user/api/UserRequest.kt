@@ -2,6 +2,8 @@ package river.chat.business_user.api
 
 import android.service.carrier.CarrierMessagingService.ResultCallback
 import androidx.lifecycle.MutableLiveData
+import river.chat.businese_common.report.ReportManager
+import river.chat.business_user.constant.UserConstants
 import river.chat.business_user.user.RiverUserManager
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
@@ -48,7 +50,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             },
             dataResp = {
                 it?.let {
-                    RiverUserManager.onLoginSuccess(it)
+                    RiverUserManager.onLoginSuccess(it,UserConstants.LOGIN_PLATFORM_PHONE)
                     loginResult.value = RequestResult(isSuccess = true, data = it)
                 }
             },
@@ -69,7 +71,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             },
             dataResp = {
                 it?.let {
-                    RiverUserManager.onLoginSuccess(it)
+                    RiverUserManager.onLoginSuccess(it,UserConstants.LOGIN_PLATFORM_WECHAT)
                     loginResult.value = RequestResult(isSuccess = true, data = it)
                 }
             },

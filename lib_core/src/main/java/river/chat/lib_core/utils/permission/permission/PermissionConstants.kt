@@ -1,12 +1,13 @@
 package river.chat.lib_core.utils.permission.permission
 
 import android.Manifest
+import river.chat.lib_core.constants.BaseConstants
 
 /**
  * Created by beiYongChao on 2022/8/25.
  * Description:
  */
-object PermissionConstants {
+object PermissionConstants :BaseConstants(){
 
     /**
      * 应用内安装其他ap
