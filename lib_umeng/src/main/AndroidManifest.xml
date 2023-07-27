@@ -74,15 +74,26 @@
             android:name="com.tencent.connect.common.AssistActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <provider android:name=".WeChatShareProvider"
-            android:authorities="${applicationId}.wechatShare"
+<!--        <provider android:name=".WeChatShareProvider"-->
+<!--            android:authorities="${applicationId}.wechatShare"-->
+<!--            android:exported="false"-->
+<!--            android:grantUriPermissions="true"-->
+<!--            tools:replace="name,authorities,exported,grantUriPermissions">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--                android:resource="@xml/file_path"-->
+<!--                tools:replace="android:name,android:resource" />-->
+<!--        </provider>-->
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true"
-            tools:replace="name,authorities,exported,grantUriPermissions">
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/wechat_share_provider_paths"
-                tools:replace="android:name,android:resource" />
+                android:resource="@xml/file_path"
+                tools:replace="android:resource"/>
         </provider>
 
 

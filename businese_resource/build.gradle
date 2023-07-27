@@ -1,3 +1,6 @@
+plugins {
+    id 'com.google.devtools.ksp'
+}
 ext {
     groupId = "river.chat"
     artifactId = "recource"
