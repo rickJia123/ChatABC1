@@ -8,8 +8,13 @@ class CommonRequestViewModel : BaseViewModel() {
     private val commonRequest = CommonRequest(this)
 
     //获取配置信息
-    fun requestConfig(key: String, resultCallBack: (RequestResult<String>) -> Unit) {
+    fun requestConfig(key: String, resultCallBack: (RequestResult<ConfigResBean>) -> Unit) {
         commonRequest.requestConfig(key, resultCallBack)
+    }
+
+    //获取配置信息
+    fun requestDefaultConfig( resultCallBack: (RequestResult<DefaultConfigResBean>) -> Unit) {
+        commonRequest.requestDefaultConfig( resultCallBack)
     }
 
     // 获取微信登录信息

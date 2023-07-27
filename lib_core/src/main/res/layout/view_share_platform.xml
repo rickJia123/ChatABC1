@@ -13,12 +13,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:tool="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:background="@color/white"
+        android:layout_height="wrap_content">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="80dp"
             app:data="@{vm.data}"
             app:itemClick="@{(item,position)-> vm.onItemClick(item)}"
             app:itemEventHandler="@{vm}"
@@ -26,6 +27,7 @@
             app:itemViewType="@{vm.itemViewTypes}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvCancel"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -38,6 +40,6 @@
             android:textSize="@dimen/titleSize_1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recycleView" />
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -7,10 +7,6 @@ package river.chat.lib_core.config
 object AppLocalConfigKey {
     const val PLATFORM="ANDROID"
 
-    /**
-     * 隐私协议版本号
-     */
-    const val  PRIVACY_VERSION = " PRIVACY_VERSION"
 
 
     /**
@@ -42,5 +38,10 @@ object AppServerConfigKey {
      * 用户版本更新下载链接
      */
     const val REQUEST_APP_UPDATE_URL = "REQUEST_APP_UPDATE_URL"
+
+    /**
+     * 用户版本更新下载内容
+     */
+    const val REQUEST_APP_UPDATE_CONTENT = "REQUEST_APP_UPDATE_CONTENT"
 
 }

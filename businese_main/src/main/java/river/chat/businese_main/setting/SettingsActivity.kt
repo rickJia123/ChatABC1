@@ -12,10 +12,7 @@ import river.chat.lib_core.router.plugin.module.HomePlugin
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.exts.singleClick
-import river.chat.lib_core.utils.longan.appVersionName
-import river.chat.lib_core.utils.longan.mainThread
-import river.chat.lib_core.utils.longan.toast
-import river.chat.lib_core.utils.longan.topActivity
+import river.chat.lib_core.utils.longan.*
 import river.chat.lib_core.view.main.activity.BaseActivity
 import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 import river.chat.lib_core.webview.WebViewHelper
@@ -60,20 +57,11 @@ class SettingsActivity :
         }
 
         binding.viewCheckUpdate.singleClick {
-            AppUpdateManager.showUpdateAppDialog()
-            //rick todo
-            "已是最新版本".toast()
-            SimpleDialog.builder(topActivity as BaseActivity).config(
-                SimpleDialogConfig()
-                .apply {
-                    title = "新版本"
-                    des = "更新内容\n 1:巴拉巴拉\n2:巴拉巴拉"
-                    leftButtonStr = "取消"
-                    rightButtonStr = "开始下载"
-                    rightClick = {
-                        "开始更新喽".toast()
-                    }
-                }).show()
+            if (!AppUpdateManager.isNeedUpdate()) {
+                "已是最新版本".toast()
+            } else {
+                AppUpdateManager.showUpdateAppDialog(this)
+            }
         }
         binding.viewCheckUpdate.sub = "V$appVersionName"
         binding.viewSettingDestory.singleClick {

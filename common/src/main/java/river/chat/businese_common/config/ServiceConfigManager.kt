@@ -14,14 +14,11 @@ import river.chat.lib_core.utils.exts.safeToInt
 object ServiceConfigManager {
 
 
-
-    fun getPrivacyVersion(): Int {
-        return ConfigManager.getAppConfig(AppLocalConfigKey.PRIVACY_VERSION, 1)
+    fun loadAllConfig() {
+        loadConfig()
+        loadConfigConfig()
     }
 
-    fun updatePrivacyVersion(version: Int) {
-        ConfigManager.putAppConfig(AppLocalConfigKey.PRIVACY_VERSION, version)
-    }
 
     /**
      * 加载配置信息
@@ -29,16 +26,48 @@ object ServiceConfigManager {
     fun loadConfig() {
         CommonRequestViewModel().requestConfig(AppServerConfigKey.REQUEST_PRIVACY_VERSION) {
             if (it.isSuccess) {
-                updatePrivacyVersion(it.data.safeToInt())
+//                updatePrivacyVersion(it.data.safeToInt())
                 onLoadConfig()
             }
         }
     }
 
-    private fun onLoadConfig()
-    {
+    /**
+     * 加载默认配置信息
+     */
+    fun loadConfigConfig() {
+        CommonRequestViewModel().requestDefaultConfig() {
+            if (it.isSuccess) {
+                it.data?.let {
+                    ConfigManager.putAppConfig(AppServerConfigKey.REQUEST_APP_UPDATE_URL, it.appUrl)
+                    ConfigManager.putAppConfig(
+                        AppServerConfigKey.REQUEST_APP_UPDATE_TYPE,
+                        it.isForce
+                    )
+                    ConfigManager.putAppConfig(
+                        AppServerConfigKey.REQUEST_APP_UPDATE_CONTENT,
+                        it.content
+                    )
+                }
+                onLoadConfig()
+            }
+        }
+    }
+
+    private fun onLoadConfig() {
 
     }
+
+
+    fun getPrivacyVersion(): Int {
+        return ConfigManager.getAppConfig(AppServerConfigKey.REQUEST_PRIVACY_VERSION, 1)
+    }
+
+    fun updatePrivacyVersion(version: Int) {
+        ConfigManager.putAppConfig(AppServerConfigKey.REQUEST_PRIVACY_VERSION, version)
+    }
+
+
 
 
 }

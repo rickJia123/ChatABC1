@@ -25,7 +25,7 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
         super.onCreate(savedInstanceState)
         initOnHomeActivity()
         //请求配置信息
-        ServiceConfigManager.loadConfig()
+        ServiceConfigManager.loadAllConfig()
 
         AppUpdateManager.showUpdateAppDialog(this)
     }

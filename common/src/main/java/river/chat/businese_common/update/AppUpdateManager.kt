@@ -17,18 +17,15 @@ object AppUpdateManager {
      * 是否需要更新app
      */
     fun isNeedUpdate(): Boolean {
-        //rick todo
-//        return ConfigManager.getAppConfig(AppServerConfigKey.REQUEST_APP_UPDATE_TYPE, 0) == 1
-        return true
+        getUpdateType()
+        return getUpdateType() == 1 || getUpdateType() == 2
     }
 
     /**
      * 是否需要强制更新app
      */
     fun isNeedForceUpdate(): Boolean {
-//        return ConfigManager.getAppConfig(AppServerConfigKey.REQUEST_APP_UPDATE_TYPE, 0) == 2
-        //rick todo
-        return true
+        return getUpdateType() == 2
     }
 
     /**
@@ -42,5 +39,26 @@ object AppUpdateManager {
         if (isNeedForceUpdate()) {
             UpdateAppDialog.builder(activity).config(true).show()
         }
+    }
+
+    /**
+     * 获取版本更新文案
+     */
+    fun getUpdateContent(): String {
+        return ConfigManager.getAppConfig(AppServerConfigKey.REQUEST_APP_UPDATE_CONTENT, "")
+    }
+
+    /**
+     * 获取版本更新类型
+     */
+    fun getUpdateType(): Int {
+        return ConfigManager.getAppConfig(AppServerConfigKey.REQUEST_APP_UPDATE_TYPE, 0)
+    }
+
+    /**
+     * 获取版本更新下载地址
+     */
+    fun getUpdateUrl(): String {
+        return ConfigManager.getAppConfig(AppServerConfigKey.REQUEST_APP_UPDATE_URL, "")
     }
 }

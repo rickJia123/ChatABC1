@@ -3,11 +3,13 @@ package river.chat.businese_main.share
 
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import coil.load
 import com.umeng.socialize.bean.SHARE_MEDIA
 import river.chat.businese_main.api.ChatAnswerBean
 import river.chat.business_main.databinding.DialogShareBinding
 import river.chat.lib_core.share.SharePlatformBean
 import river.chat.lib_core.storage.database.model.MessageBean
+import river.chat.lib_core.utils.common.QRCodeUtils
 import river.chat.lib_core.utils.exts.getViewBitmap
 import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.main.dialog.BaseBindingDialogFragment
@@ -25,6 +27,9 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
     private var answerMsg: MessageBean? = null
     private var mBinding: DialogShareBinding? = null
 
+    //测试地址
+    private var mTestUrl="https://www.baidu.com/"
+
     companion object {
         @JvmStatic
         fun builder(activity: AppCompatActivity): ShareDialog = ShareDialog(activity)
@@ -41,6 +46,8 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
         binding.viewPlatform.mOnCancelClick = {
             closeDialog()
         }
+        binding.ivCode.setImageBitmap(QRCodeUtils.createQRCode(mTestUrl))
+
     }
 
     private fun closeDialog() {
@@ -65,14 +72,16 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
     }
 
     private fun share(platformBean: SharePlatformBean) {
+
+
         ShareManager.update(
             RiverShareContent().apply {
                 mTitle = "快来提问吧"
                 mText = "快来提问吧"
-                mBitmap = mBinding?.clContent?.getViewBitmap()
+                mBitmap = mBinding?.viewRoot?.getViewBitmap()
 
             }, platformBean.platform ?: SHARE_MEDIA.WEIXIN
-        ).shareTextAndImage(topActivity)
+        ).shareImageLocal(topActivity)
     }
 
 }

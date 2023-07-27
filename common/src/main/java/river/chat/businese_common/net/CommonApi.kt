@@ -20,9 +20,15 @@ interface CommonApi : BaseApi {
      *获取配置信息
      */
     @POST(CommonHttpUrl.SYSTEM_CONFIG)
-    suspend fun requestConfig(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<String>
+    suspend fun requestConfig(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<ConfigResBean>
 
-  /**
+    /**
+     *获取配置信息
+     */
+    @POST(CommonHttpUrl.SYSTEM_DEFAULT_CONFIG)
+    suspend fun requestDefaultConfig(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<DefaultConfigResBean>
+
+    /**
      *获取配置信息
      */
     @GET("https://api.weixin.qq.com/sns/oauth2/access_token")

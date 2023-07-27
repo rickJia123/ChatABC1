@@ -22,20 +22,35 @@ class CommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
     val configRequest = MutableLiveData<RequestResult<String>>()
 
     /**
-     * 获取验证码
+     * 根据入参获取配置
      */
-    fun requestConfig(key: String, resultCallBack: (RequestResult<String>) -> Unit) {
+    fun requestConfig(key: String, resultCallBack: (RequestResult<ConfigResBean>) -> Unit) {
         launchFlow(
             request = {
                 CommonApiService.requestConfig(key)
             },
             dataResp = {
-                resultCallBack.invoke(RequestResult(isSuccess = true, data = it ?: ""))
-//                configRequest.value = RequestResult(isSuccess = true, data = it ?: "")
+                resultCallBack.invoke(RequestResult(isSuccess = true, data = it ?: ConfigResBean()))
             },
             error = {
                 resultCallBack.invoke(RequestResult(errorMsg = it.message ?: ""))
-//                configRequest.value = RequestResult(errorMsg = it.message ?: "")
+            }
+        )
+    }
+
+    /**
+     * 获取基本配置信息
+     */
+    fun requestDefaultConfig( resultCallBack: (RequestResult<DefaultConfigResBean>) -> Unit) {
+        launchFlow(
+            request = {
+                CommonApiService.requestDefaultConfig()
+            },
+            dataResp = {
+                resultCallBack.invoke(RequestResult(isSuccess = true, data = it ?: DefaultConfigResBean()))
+            },
+            error = {
+                resultCallBack.invoke(RequestResult(errorMsg = it.message ?: ""))
             }
         )
     }

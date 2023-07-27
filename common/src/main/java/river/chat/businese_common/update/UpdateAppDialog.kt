@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.text.method.LinkMovementMethod
 import androidx.appcompat.app.AppCompatActivity
+import river.chat.businese_common.config.ServiceConfigManager
 import river.chat.common.R
 import river.chat.common.databinding.DialogUpdateBinding
 import river.chat.lib_core.utils.exts.dp2px
@@ -57,12 +58,15 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
 
 
     override fun initDataBinding(binding: DialogUpdateBinding) {
+
+        apkLink = AppUpdateManager.getUpdateUrl()
+
         binding.viewProgress.post {
             mProgressWidth = binding.viewProgress.width - 15f.dp2px()
         }
 
+        binding.tvDes.text = AppUpdateManager.getUpdateContent()
         binding.tvLButton.singleClick {
-
             closeDialog()
         }
         changeBtStatus(binding, STATUS_READY)

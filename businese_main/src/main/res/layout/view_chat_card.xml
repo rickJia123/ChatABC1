@@ -137,6 +137,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
                     android:orientation="horizontal">
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ivCopy"

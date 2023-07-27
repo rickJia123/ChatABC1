@@ -24,11 +24,21 @@ object CommonApiService  : BaseApiService() {
      */
     suspend fun requestConfig(
         key: String
-    ): BaseRequestBean<String> =
+    ): BaseRequestBean<ConfigResBean> =
         commonApi.requestConfig(
             ApiStorage.getBasedBody().apply {
                 this["key"] = key
             }
+        )
+
+
+    /**
+     * 获取配置信息
+     */
+    suspend fun requestDefaultConfig(
+    ): BaseRequestBean<DefaultConfigResBean> =
+        commonApi.requestDefaultConfig(
+            ApiStorage.getBasedBody()
         )
 
 
