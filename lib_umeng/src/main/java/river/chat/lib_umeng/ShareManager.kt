@@ -41,7 +41,7 @@ object ShareManager {
     fun shareImageLocal(activity: Activity) {
         mActivityRef = WeakReference(activity)
         val imageLocal = UMImage(getActivity(), mShareContent.mBitmap)
-        imageLocal.setThumb(UMImage(getActivity(), R.mipmap.logo_trans))
+        imageLocal.setThumb(UMImage(getActivity(), mShareContent.mBitmap))
         ShareAction(getActivity()).withMedia(imageLocal)
             .beginShare()
     }
@@ -138,7 +138,7 @@ object ShareManager {
             }
 
             override fun onStart(p0: SHARE_MEDIA?) {
-                Toast.makeText(activity, " 分享开始", Toast.LENGTH_SHORT).show()
+
             }
         }
         return mShareListener!!

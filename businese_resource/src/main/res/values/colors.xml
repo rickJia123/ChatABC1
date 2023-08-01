@@ -53,6 +53,8 @@
 
     <color name="recyclerview_divider_color">#DCDBDB</color>
 
+    <color name="tipTxtColor">#FA601F</color>
+
     <!--会话模块，昵称为nick-->
     <color name="cv_back">#999999</color>//会话背景色
     <color name="cv_system">#66686E</color>//系统消息字色

@@ -5,13 +5,14 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         android:background="@color/defaultBgColor">
 
         <river.chat.lib_core.view.title.RiverTitle
             android:id="@+id/toolBar"
             android:layout_width="0dp"
             android:layout_height="44dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="0dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -19,6 +20,8 @@
             app:tb_rightImage="@drawable/setting"
             app:title="ChatEvery"
             app:titleSize="30sp" />
+
+
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentChat"
@@ -29,6 +32,15 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolBar" />
+
+        <river.chat.businese_main.ui.VipStatusView
+            android:id="@+id/viewVipStatus"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolBar"
+            app:layout_constraintBottom_toBottomOf="@id/toolBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

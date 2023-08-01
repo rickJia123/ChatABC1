@@ -11,7 +11,9 @@ import river.chat.business_main.databinding.ViewChatCardBinding
 import river.chat.lib_core.storage.database.model.MessageBean
 import river.chat.lib_core.utils.exts.getViewBitmap
 import river.chat.lib_core.utils.exts.singleClick
+import river.chat.lib_core.utils.longan.copyToClipboard
 import river.chat.lib_core.utils.longan.dp
+import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.utils.system.DisplayUtil.getScreenWidth
 import river.chat.lib_core.view.base.LifecycleView
@@ -46,25 +48,18 @@ class ChatCardView @JvmOverloads constructor(
     }
 
     private fun initClick() {
-        viewBinding.viewChatCard.singleClick {
-            ShareDialog.builder(topActivity).show(questionMsg, answerMsg)
+        viewBinding.clAnswer.singleClick {
+            "回答已复制".toast()
+            answerMsg?.content?.copyToClipboard()
 
-//            shareText(  "1233", "分享到")
-
-//            var bitmap=viewBinding.clRoot.getViewBitmap()
-//            shareTextAndImage("1212",  Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),bitmap , null,null));, "分享到")
-
-//            ShareManager.update(
-//                RiverShareContent().apply {
-//                mTitle = "123"
-//                mText = "hahahha1"
-//                mBitmap = viewBinding.clRoot.getViewBitmap()
-//
-//            }, SHARE_MEDIA.WEIXIN).shareTextAndImage(topActivity)
-//            ShareManager.launchShareBoard(context as Activity).shareText()
         }
-        viewBinding.ivCopy.singleClick {
+        viewBinding.clQuestion.singleClick {
+            "问题已复制".toast()
+            questionMsg?.content?.copyToClipboard()
+        }
 
+        viewBinding.ivShare.singleClick {
+            ShareDialog.builder(topActivity).show(questionMsg, answerMsg)
         }
     }
 

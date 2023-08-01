@@ -77,7 +77,7 @@
             android:cursorVisible="true"
             android:maxLines="7"
             android:textColorHint="@color/defaultTextColor"
-            android:textCursorDrawable="@color/defaultTextColor"
+            android:textCursorDrawable="@null"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

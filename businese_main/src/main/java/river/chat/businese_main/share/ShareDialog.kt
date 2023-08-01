@@ -72,13 +72,11 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
     }
 
     private fun share(platformBean: SharePlatformBean) {
-
-
         ShareManager.update(
             RiverShareContent().apply {
                 mTitle = "快来提问吧"
                 mText = "快来提问吧"
-                mBitmap = mBinding?.viewRoot?.getViewBitmap()
+                mBitmap = mBinding?.clContent?.getViewBitmap()
 
             }, platformBean.platform ?: SHARE_MEDIA.WEIXIN
         ).shareImageLocal(topActivity)
