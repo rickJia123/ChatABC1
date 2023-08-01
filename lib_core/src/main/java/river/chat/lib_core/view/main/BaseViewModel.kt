@@ -4,7 +4,7 @@ import androidx.databinding.Observable
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import river.chat.lib_core.constants.BaseVmEvent
+import river.chat.lib_core.event.BaseVmEvent
 
 /**
  * @Description: ViewModel 基类，定义数据加载状态（isLoading）、提示信息（hintText/hintTextRes）、

@@ -2,11 +2,15 @@ package river.chat.businese_main.message
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.dataBase.MessageBox
 import river.chat.businese_main.home.HomeActivity
 import river.chat.businese_main.message.MessageHelper.buildAiAnswerEmptyMsg
 import river.chat.businese_main.message.MessageHelper.buildAiAnswerMsg
 import river.chat.businese_main.utils.logChat
+import river.chat.businese_main.vip.VipManager
+import river.chat.lib_core.event.BaseActionEvent
+import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.storage.database.model.MessageBean
@@ -56,10 +60,10 @@ object MessageCenter {
      * 检查历史消息状态
      */
     fun checkMsgStatus() {
-        var historyList=MessageBox.getMsgList()
+        var historyList = MessageBox.getMsgList()
         historyList.forEach {
-            var msg=it
-            if (msg.status==MessageStatus.LOADING) {
+            var msg = it
+            if (msg.status == MessageStatus.LOADING) {
                 msg.status = MessageStatus.FAIL
                 MessageBox.saveMsg(it)
             }
@@ -78,6 +82,10 @@ object MessageCenter {
                 ("MessageCenter observerMsg:" + it.data).log()
                 distributeMsg(buildAiAnswerMsg(it.data ?: MessageBean()))
 //                }
+                //请求成功后，更新vip状态
+                if (it.isSuccess) {
+                    VipManager.onUseVipTimes()
+                }
             }
         }
     }

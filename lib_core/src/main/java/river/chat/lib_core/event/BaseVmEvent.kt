@@ -1,4 +1,4 @@
-package river.chat.lib_core.constants
+package river.chat.lib_core.event
 
 
 /**

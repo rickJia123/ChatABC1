@@ -1,4 +1,4 @@
-package river.chat.businese_main.ui
+package river.chat.businese_main.vip
 
 import android.content.Context
 import android.util.AttributeSet
@@ -10,9 +10,12 @@ import river.chat.businese_main.utils.logChat
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewChatCardBinding
 import river.chat.business_main.databinding.ViewVipStatusBinding
+import river.chat.lib_core.router.plugin.core.getPlugin
+import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.storage.database.model.MessageBean
 import river.chat.lib_core.utils.exts.getColor
 import river.chat.lib_core.utils.exts.getViewBitmap
+import river.chat.lib_core.utils.exts.safeToString
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.exts.view.buildSpannableString
 import river.chat.lib_core.utils.longan.copyToClipboard
@@ -41,10 +44,22 @@ class VipStatusView @JvmOverloads constructor(
 
 
     init {
+
+        updateStatus()
+
+    }
+
+
+    fun update() {
+        updateStatus()
+    }
+
+    private fun updateStatus() {
+        var remainTimes =
+            getPlugin<UserPlugin>().getUser().remainTryTimes
         viewBinding.tvTitle.buildSpannableString {
             addText("免费次数还剩")
-                  //rick todo
-            addText("3") {
+            addText(remainTimes.safeToString()) {
                 setColor("#FA601F")
             }
             addText("次")

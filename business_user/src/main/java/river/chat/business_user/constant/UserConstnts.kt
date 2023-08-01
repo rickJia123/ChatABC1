@@ -1,6 +1,7 @@
 package river.chat.business_user.constant
 
-import river.chat.lib_core.constants.BaseConstants
+import river.chat.lib_core.event.BaseConstants
+
 
 /**
  * Created by beiyongChao on 2023/6/2

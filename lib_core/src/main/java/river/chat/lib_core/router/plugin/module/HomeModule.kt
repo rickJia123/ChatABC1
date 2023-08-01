@@ -1,7 +1,7 @@
 package river.chat.lib_core.router.plugin.module
 
 import com.alibaba.android.arouter.facade.template.IProvider
-import river.chat.lib_core.constants.BaseConstants
+import river.chat.lib_core.event.BaseConstants
 
 /**
  * Created by beiyongChao on 2023/3/7
