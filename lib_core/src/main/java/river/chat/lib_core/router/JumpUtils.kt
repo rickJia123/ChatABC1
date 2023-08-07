@@ -28,7 +28,18 @@ fun jump2Settings() {
         .navigation()
 }
 
+/**
+ * 意见反馈页
+ */
 fun jump2Feedback() {
     ARouter.getInstance().build(HomeRouterConstants.HOME_FEEDBACK)
+        .navigation()
+}
+
+/**
+ * vip 开通页
+ */
+fun jump2VipOpen() {
+    ARouter.getInstance().build(HomeRouterConstants.VIP_OPEN)
         .navigation()
 }

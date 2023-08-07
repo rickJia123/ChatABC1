@@ -9,6 +9,7 @@ import river.chat.businese_common.config.ServiceConfigManager
 import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.constants.CommonVmEvents
 import river.chat.businese_common.router.jump2Settings
+import river.chat.businese_common.router.jump2VipOpen
 import river.chat.businese_common.update.AppUpdateManager
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.vip.VipManager
@@ -37,11 +38,13 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
 
     override fun initDataBinding(binding: ActivityHomeBinding) {
         super.initDataBinding(binding)
-        binding.toolBar.setTitle("ChatEvery")
+        binding.toolBar.setTitle("GPTEvery")
         binding.toolBar.rightClick = {
             jump2Settings()
         }
-        binding.toolBar.leftClick = {}
+        binding.toolBar.leftClick = {
+            jump2VipOpen()
+        }
         initEventListener(binding)
     }
 

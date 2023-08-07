@@ -32,9 +32,5 @@ data class User(
 
 ) : java.io.Serializable
 
-//会员状态
-data class VipInfo(
-    //免费/周会员
-    var type: Int = 0
-)
+
 

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+    <data>
+
+        <variable
+            name="vm"
+            type="river.chat.businese_main.vip.VipOpenViewModel" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:background="@color/defaultBgColor">
+        android:background="@color/defaultBgColor"
+        android:fitsSystemWindows="true">
 
         <river.chat.lib_core.view.title.RiverTitle
             android:id="@+id/toolBar"
@@ -16,30 +24,20 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tb_leftImage="@drawable/vip"
-            app:tb_rightImage="@drawable/setting"
-            app:title="GPTEvery"
+            app:title="开通会员"
             app:titleSize="30sp" />
 
-
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentChat"
-            android:name="river.chat.businese_main.chat.ChatFragment"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:data="@{vm.data}"
+            app:itemLayout="@{@layout/item_vip_rights}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolBar" />
 
-        <river.chat.businese_main.vip.VipStatusView
-            android:id="@+id/viewVipStatus"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

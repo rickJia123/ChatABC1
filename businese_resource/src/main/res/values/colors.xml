@@ -64,4 +64,10 @@
     <color name="cv_other_back">#30323B</color>//对方会话背景色
     <color name="cv_other_txt">#CCCCCC</color>//对方会话字色
 
+
+    <!--会期颜色-->
+    <color name="vipTrial">#4CD964</color>
+    <color name="vipMonth">#FFEA8D</color>
+    <color name="vipQuarter">#45b9bb</color>
+
 </resources>

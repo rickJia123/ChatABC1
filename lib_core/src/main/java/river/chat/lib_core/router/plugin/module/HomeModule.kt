@@ -27,6 +27,11 @@ object HomeRouterConstants : BaseConstants(){
      * 意见反馈页
      */
     const val HOME_FEEDBACK = GROUP_HOME + "/feedback"
+
+    /**
+     * vip 开通页
+     */
+    const val VIP_OPEN = GROUP_HOME + "/vipOpen"
 }
 
 

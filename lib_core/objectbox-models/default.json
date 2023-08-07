@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:4905679635175817883",
-      "lastPropertyId": "12:9022708040042814358",
+      "lastPropertyId": "15:2924922616425678440",
       "name": "User",
       "properties": [
         {
@@ -57,6 +57,21 @@
         {
           "id": "12:9022708040042814358",
           "name": "isNew",
+          "type": 5
+        },
+        {
+          "id": "13:7209690700509179962",
+          "name": "vipExpireTime",
+          "type": 6
+        },
+        {
+          "id": "14:8865927699093733285",
+          "name": "vipType",
+          "type": 5
+        },
+        {
+          "id": "15:2924922616425678440",
+          "name": "remainTryTimes",
           "type": 5
         }
       ],

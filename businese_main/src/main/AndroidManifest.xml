@@ -22,4 +22,6 @@
 
         <activity android:name="river.chat.businese_main.feedback.FeedBackActivity"
             android:screenOrientation="portrait"  />
+        <activity android:name="river.chat.businese_main.vip.VipOpenActivity"
+            android:screenOrientation="portrait"  />
 </application></manifest>
