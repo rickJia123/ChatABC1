@@ -12,6 +12,6 @@ enum class VipType(val type: Int) {
 }
 
 data class VipRightsBeans(
-    var title: String,
-    var vipTypes: MutableList<Int>,
+    //会员权益名称
+    var name: String,
 )

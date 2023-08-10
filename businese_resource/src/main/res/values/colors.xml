@@ -66,8 +66,12 @@
 
 
     <!--会期颜色-->
-    <color name="vipTrial">#4CD964</color>
+    <color name="vipTrial">#9ce0b8</color>
+    <color name="vipTrialHeavier">#49a86f</color>
+    <color name="vipTrialLighter">#f0fff6</color>
     <color name="vipMonth">#FFEA8D</color>
+    <color name="vipMonthHeaver">#f5cc19</color>
+    <color name="vipMonthLighter">#fffbe7</color>
     <color name="vipQuarter">#45b9bb</color>
 
 </resources>

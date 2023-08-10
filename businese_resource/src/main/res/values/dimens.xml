@@ -14,6 +14,7 @@
     <dimen name="titleSize_2">16sp</dimen>
 
 
+    <dimen name="defaultTxtSize_small">11sp</dimen>
     <dimen name="defaultTxtSize_1">14sp</dimen>
     <dimen name="defaultTxtSize_2">16sp</dimen>
 </resources>

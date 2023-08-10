@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="vm"
+            type="river.chat.businese_main.vip.VipViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingTop="0dp"
+        android:paddingRight="15dp"
+        tool:background="@color/color_999999">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clNormal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_trial_solid_rectangle_20"
+            android:padding="3dp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/clVip"
+            app:layout_constraintTop_toTopOf="parent">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNormalType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:textColor="@color/defaultTitleColor"
+                android:textSize="@dimen/defaultTxtSize_1"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tool:text="普通用户" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivNormalBg"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_white_solid_rectangle_20"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvNormalType" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNormalTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/defaultTitleColor"
+                android:textSize="@dimen/defaultTxtSize_1"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ivNormalBg"
+                tool:text="共有5项权益" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleViewNormal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                app:data="@{vm.normalRightList}"
+                app:itemLayout="@{@layout/item_vip_rights_normal}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="@id/ivNormalBg"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvNormalTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clVip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_vip_solid_rectangle_20"
+            android:padding="3dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toRightOf="@+id/clNormal"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvVipType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:textColor="@color/defaultTitleColor"
+                android:textSize="@dimen/defaultTxtSize_1"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tool:text="普通用户" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivVipBg"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_white_solid_rectangle_20"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvVipType" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvVipTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/defaultTitleColor"
+                android:textSize="@dimen/defaultTxtSize_1"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ivVipBg"
+                tool:text="共有5项权益" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleViewVip"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                app:data="@{vm.vipRightList}"
+                app:itemLayout="@{@layout/item_vip_rights_vip}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="@id/ivVipBg"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvVipTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

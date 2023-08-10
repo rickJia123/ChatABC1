@@ -25,7 +25,7 @@ import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
  * Description:vip 开通页
  */
 @Route(path = HomeRouterConstants.VIP_OPEN)
-class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, VipOpenViewModel>() {
+class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, VipViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +34,8 @@ class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, Vip
 
     override fun initDataBinding(binding: ActivityVipOpenBinding) {
         super.initDataBinding(binding)
-        binding.toolBar.setTitle("GPTEvery会员")
-        viewModel.initRightsList()
+        binding.toolBar.setTitle("会员中心")
+
     }
 
     override fun onEvent(eventId: Int) {
@@ -45,7 +45,7 @@ class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, Vip
     }
 
 
-    override fun createViewModel() = VipOpenViewModel()
+    override fun createViewModel() = VipViewModel()
 
 
 }
