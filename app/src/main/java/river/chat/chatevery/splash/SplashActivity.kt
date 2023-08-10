@@ -19,11 +19,10 @@ class SplashActivity : BaseBindingViewModelActivity<ActivitySplashBinding, Splas
         super.initDataBinding(binding)
         PrivacyManager.tryShowPrivacyDialog(this) {
             if (it) {
-
                 binding.tvSplash.postDelayed({
                     jump2Main()
                     finish()
-                }, 2000)
+                }, 0)
             } else {
                 finish()
             }

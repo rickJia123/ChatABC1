@@ -19,6 +19,7 @@ import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.main.activity.BaseActivity
 import river.chat.lib_core.view.main.dialog.BaseBindingDialogFragment
 import river.chat.lib_core.webview.WebViewHelper
+import river.chat.lib_resource.AppConstants
 
 /**
  * Created by beiyongChao on 2023/6/9
@@ -66,11 +67,11 @@ class PrivacyAgreeDialog(var dialogActivity: AppCompatActivity) :
     override fun initDataBinding(binding: DialogPrivacyAgreeBinding) {
         binding.tvDes.text = mPrivacy
         binding.tvTips.movementMethod = LinkMovementMethod.getInstance() // 设置了才能点击
-        var testUrl = "https://www.baidu.com"
+
         binding.tvTips.text = buildSpannedString {
             append("请您仔细阅读完整版")
             inSpans(ClickableSpan(R.color.highTextColor.getColor(), true) {
-                WebViewHelper.startWebViewActivity(testUrl)
+                WebViewHelper.startWebViewActivity(AppConstants.POLICY_URL)
             }) {
                 italic { // 设置斜体
                     append("服务协议")
@@ -78,7 +79,7 @@ class PrivacyAgreeDialog(var dialogActivity: AppCompatActivity) :
             }
             append("和")
             inSpans(ClickableSpan(R.color.highTextColor.getColor(), true) {
-                WebViewHelper.startWebViewActivity(testUrl)
+                WebViewHelper.startWebViewActivity(AppConstants.POLICY_URL)
             }) {
                 italic { // 设置斜体
                     append("隐私政策")

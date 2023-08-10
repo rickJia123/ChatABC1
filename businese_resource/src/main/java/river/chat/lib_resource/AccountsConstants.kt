@@ -2,7 +2,7 @@ package river.chat.lib_resource
 
 /**
  * Created by beiYongChao on 2023/8/25.
- * Description:
+ * Description: 账号相关常量
  */
 object AccountsConstants {
 

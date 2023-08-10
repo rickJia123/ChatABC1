@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<data>
+    <data>
 
-<variable
-    name="vm"
-    type="river.chat.business_user.login.LoginViewModel" />
+        <variable
+            name="vm"
+            type="river.chat.business_user.login.LoginViewModel" />
 
-</data>
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -40,14 +40,14 @@
             android:id="@+id/btAction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:backgroundTint="@color/tipButtonColor"
             android:text="上一步"
             android:textColor="@color/color_999999"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-            app:cornerRadius="10dp"
-            android:visibility="@{vm.lastStepVisible}"
             android:textSize="10sp"
-            android:layout_margin="10dp"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            android:visibility="@{vm.lastStepVisible}"
+            app:cornerRadius="10dp"
             app:layout_constraintLeft_toLeftOf="@id/ivLoginBg"
             app:layout_constraintTop_toTopOf="@id/ivLoginBg" />
 
@@ -138,6 +138,14 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivLoginBg" />
+
+        <river.chat.business_user.view.LoginPolicyView
+            android:id="@+id/viewLoginPolicy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="@id/btConfirm"
+            app:layout_constraintTop_toBottomOf="@id/btConfirm" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
