@@ -73,5 +73,8 @@
     <color name="vipMonthHeaver">#f5cc19</color>
     <color name="vipMonthLighter">#fffbe7</color>
     <color name="vipQuarter">#45b9bb</color>
+    <color name="vipTabSel">#fceee3</color>
+    <color name="vipTabSelStroke">#ffc859</color>
+    <color name="vipTabNoselStroke">#b4b3b2</color>
 
 </resources>

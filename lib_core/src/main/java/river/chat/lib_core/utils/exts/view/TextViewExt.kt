@@ -1,12 +1,12 @@
 package river.chat.lib_core.utils.exts.view
 
-
 import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
+import android.text.style.AbsoluteSizeSpan
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
@@ -18,24 +18,6 @@ import android.widget.TextView
  * @author BeiYongchao
  * @descripyion: span 工具
  */
-
-/**
- * 添加不同颜色/不同点击事件
- * tv.buildSpannableString {
- * addText("正常文本")
- * addText("《点击文本》"){
- * setColor("#颜色值")
- * onClick(false) {
- * //do some thing
- * }}}
- */
-fun TextView.buildSpannableString(init: FdSpannableStringBuilder.() -> Unit) {
-    val spanStringBuilderImpl = FdSpannableStringBuilderImpl()
-    spanStringBuilderImpl.init()
-    movementMethod = LinkMovementMethod.getInstance()
-    text = spanStringBuilderImpl.build()
-}
-
 
 /**
  * 接口
@@ -51,6 +33,9 @@ interface FdSpannableStringBuilder {
 interface FdSpanBuilder {
     //设置文字颜色
     fun setColor(color: String)
+
+    //设置文字大小
+    fun setSize(size: Int)
 
     //设置点击事件
     fun onClick(useUnderLine: Boolean = true, onClick: (View) -> Unit)
@@ -83,6 +68,9 @@ class FdSpannableStringBuilderImpl : FdSpannableStringBuilder {
             foregroundColorSpan?.let {
                 builder.setSpan(it, start, lastIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
+            absoluteSpan?.let {
+                builder.setSpan(it, start, lastIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
         }
     }
 
@@ -94,6 +82,7 @@ class FdSpannableStringBuilderImpl : FdSpannableStringBuilder {
 class FdSpanBuilderImpl : FdSpanBuilder {
     var foregroundColorSpan: ForegroundColorSpan? = null
     var onClickSpan: ClickableSpan? = null
+    var absoluteSpan: AbsoluteSizeSpan? = null
 
     /**
      * 是否使用下划线
@@ -102,6 +91,10 @@ class FdSpanBuilderImpl : FdSpanBuilder {
 
     override fun setColor(color: String) {
         foregroundColorSpan = ForegroundColorSpan(Color.parseColor(color))
+    }
+
+    override fun setSize(size: Int) {
+        absoluteSpan = AbsoluteSizeSpan(size,true)
     }
 
     override fun onClick(useUnderLine: Boolean, onClick: (View) -> Unit) {
@@ -119,4 +112,22 @@ class NoUnderlineSpan : UnderlineSpan() {
         ds.color = ds.linkColor
         ds.isUnderlineText = false
     }
+}
+
+
+/**
+ * 添加不同颜色/不同点击事件
+ * tv.buildSpannableString {
+ * addText("正常文本")
+ * addText("《点击文本》"){
+ * setColor("#颜色值")
+ * onClick(false) {
+ * //do some thing
+ * }}}
+ */
+fun TextView.buildSpannableString(init: FdSpannableStringBuilder.() -> Unit) {
+    val spanStringBuilderImpl = FdSpannableStringBuilderImpl()
+    spanStringBuilderImpl.init()
+    movementMethod = LinkMovementMethod.getInstance()
+    text = spanStringBuilderImpl.build()
 }
