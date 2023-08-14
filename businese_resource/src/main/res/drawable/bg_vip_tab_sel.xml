@@ -4,6 +4,6 @@
     android:shape="rectangle">
     <solid android:color="@color/vipTabSel" />
     <stroke android:color="@color/vipTabSelStroke" android:width="2dp"/>
-    <corners android:radius="10dp"  />
+    <corners android:radius="@dimen/corner_bg_common"  />
 
 </shape>

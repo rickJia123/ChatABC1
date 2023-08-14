@@ -4,42 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp" >
+        android:layout_height="50dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
 
         <river.chat.lib_core.view.roundview.EasyConstraintLayout
             android:id="@+id/clPrice"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:background="@color/vipMonthHeaver"
             app:ev_left_radius="@dimen/corner_button_common"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="5"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/clPay"
             app:layout_constraintTop_toTopOf="parent">
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/tipTxtColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="¥562/年" />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvTip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/defaultSubTitleColor"
+                android:textSize="@dimen/defaultTxtSize_small"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/tvPrice"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="每天约1元" />
         </river.chat.lib_core.view.roundview.EasyConstraintLayout>
 
-
         <river.chat.lib_core.view.roundview.EasyConstraintLayout
+            android:id="@+id/clPay"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:ev_left_radius="@dimen/corner_button_common"
+            android:layout_height="0dp"
+            android:background="@color/tipTxtColor"
+            app:ev_right_radius="@dimen/corner_button_common"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_weight="2"
             app:layout_constraintLeft_toRightOf="@+id/clPrice"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="立即开通"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/titleSize_2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </river.chat.lib_core.view.roundview.EasyConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

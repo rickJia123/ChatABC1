@@ -17,6 +17,7 @@ import river.chat.business_main.databinding.ActivityHomeBinding
 import river.chat.business_main.databinding.ActivityVipOpenBinding
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
+import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 
 
@@ -36,6 +37,10 @@ class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, Vip
         super.initDataBinding(binding)
         binding.toolBar.setTitle("会员中心")
 
+        binding.viewTabView.setTabClickListener { position, vipTabBean ->
+            binding.viewPay.update(vipTabBean)
+        }
+        binding.viewTabView.update()
     }
 
     override fun onEvent(eventId: Int) {

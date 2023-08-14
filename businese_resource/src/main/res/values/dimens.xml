@@ -8,6 +8,9 @@
     <!--    按钮通用圆角角度-->
     <dimen name="corner_button_common">1800dp</dimen>
 
+<!--    通用背景图圆角-->
+    <dimen name="corner_bg_common">10dp</dimen>
+
     <!--组件-->
     <dimen name="title_bar_height">44dp</dimen>
     <dimen name="title_bar_top">40dp</dimen>

@@ -87,11 +87,11 @@ class VipRightsView @JvmOverloads constructor(
     ) {
         tvType.text = type
         tvTitle.buildSpannableString {
-            addText("共有")
+            addText("共有 ")
             addText(rightsList?.size.safeToString()) {
                 setColor(highColor)
             }
-            addText("项权益")
+            addText(" 项权益")
         }
     }
 

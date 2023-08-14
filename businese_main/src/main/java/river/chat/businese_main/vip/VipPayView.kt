@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewVipPayBinding
+import river.chat.lib_core.utils.exts.autoIntOr1Str
+import river.chat.lib_core.utils.exts.view.buildSpannableString
 import river.chat.lib_core.view.base.LifecycleView
 
 /**
@@ -37,6 +39,21 @@ class VipPayView @JvmOverloads constructor(
         initClick()
     }
 
+    fun update(tabBean: VipTabBean) {
+        var priceColor = "#FA601F"
+        mBinding.tvPrice.buildSpannableString {
+            addText("￥", method = {
+                setColor(priceColor)
+                setSize(11)
+            })
+            addText(tabBean.price.toString(), method = {
+                setColor(priceColor)
+                setSize(21)
+            })
+        }
+        var dayPrice: Float = tabBean.price / (tabBean.duration * 31)
+        mBinding.tvTip.text = "每天约" + dayPrice.autoIntOr1Str() + "元"
+    }
 
     private fun initViews() {
 
