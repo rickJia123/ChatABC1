@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.TextView
 import river.chat.business_main.R
-import river.chat.lib_core.storage.database.model.MessageBean
+import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_core.utils.longan.dp
 import river.chat.lib_core.utils.longan.screenWidth
 

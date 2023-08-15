@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="river.chat.lib_core.beans.VipRightsBeans" />
+            type="river.chat.lib_resource.model.vip.VipRightsBeans" />
 
     </data>
 

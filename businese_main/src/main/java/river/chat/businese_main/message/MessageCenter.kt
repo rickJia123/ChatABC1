@@ -2,21 +2,18 @@ package river.chat.businese_main.message
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.dataBase.MessageBox
 import river.chat.businese_main.home.HomeActivity
 import river.chat.businese_main.message.MessageHelper.buildAiAnswerEmptyMsg
 import river.chat.businese_main.message.MessageHelper.buildAiAnswerMsg
 import river.chat.businese_main.utils.logChat
 import river.chat.businese_main.vip.VipManager
-import river.chat.lib_core.event.BaseActionEvent
-import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
-import river.chat.lib_core.storage.database.model.MessageBean
-import river.chat.lib_core.storage.database.model.MessageReceiveBean
-import river.chat.lib_core.storage.database.model.MessageSource
-import river.chat.lib_core.storage.database.model.MessageStatus
+import river.chat.lib_resource.model.MessageBean
+import river.chat.lib_resource.model.MessageReceiveBean
+import river.chat.lib_resource.model.MessageSource
+import river.chat.lib_resource.model.MessageStatus
 import river.chat.lib_core.utils.longan.log
 
 /**

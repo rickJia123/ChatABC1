@@ -3,14 +3,9 @@ package river.chat.business_user.user
 import river.chat.businese_common.dataBase.UserBox
 import river.chat.businese_common.report.ReportManager
 import river.chat.businese_common.router.jump2Main
-import river.chat.businese_common.wx.WxManager
-import river.chat.business_user.login.home.LoginActivity
-import river.chat.lib_core.storage.database.model.User
-import river.chat.lib_core.utils.longan.log
+import river.chat.lib_resource.model.User
 import river.chat.lib_core.utils.longan.logConfig
 import river.chat.lib_core.utils.longan.toast
-import river.chat.lib_core.utils.longan.toastSystem
-import river.chat.lib_core.utils.longan.topActivity
 
 /**
  * Created by beiyongChao on 2023/3/15
@@ -29,11 +24,12 @@ object RiverUserManager {
     /**
      * 登录成功
      */
-    fun onLoginSuccess(user: User,platFrom:String) {
+    fun onLoginSuccess(user: User, platFrom: String) {
         "登录成功".toast()
         jump2Main()
         //rick todo
-        user.remainTryTimes=5
+        user.remainTryTimes = 5
+        user.vipExpireTimeStr = "2024.10.11 过期"
         updateUser(user)
         ReportManager.reportLogin(true, user.id.toString(), platFrom)
     }

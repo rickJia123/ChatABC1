@@ -11,11 +11,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewVipTabBinding
-import river.chat.lib_core.utils.exts.autoIntOr2Str
 import river.chat.lib_core.utils.exts.getDrawable
+import river.chat.lib_core.utils.exts.safeToString
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.exts.view.buildSpannableString
 import river.chat.lib_core.view.base.LifecycleView
+import river.chat.lib_resource.model.vip.VipSkuBean
 
 /**
  * Created by beiyongChao on 2023/6/29
@@ -29,7 +30,7 @@ class VipTabView @JvmOverloads constructor(
     var mActivity: AppCompatActivity? = null
     var mCurrentPosition = -1
     var mTabList = mutableListOf<Pair<View, ConstraintLayout>>()
-    private var mOnTabClick: (Int, VipTabBean) -> Unit = { position, tabBean ->
+    private var mOnTabClick: (Int, VipSkuBean) -> Unit = { position, tabBean ->
 
     }
 
@@ -37,7 +38,7 @@ class VipTabView @JvmOverloads constructor(
      * 单月不打折的价格
      */
     private var mSingleMonthPrice = 0f
-    private var payList: MutableList<VipTabBean> = mutableListOf()
+    private var payList: MutableList<VipSkuBean> = mutableListOf()
     private var mDefaultTabPosition = 1
 
     companion object {
@@ -89,7 +90,7 @@ class VipTabView @JvmOverloads constructor(
         onTabClick(mDefaultTabPosition)
     }
 
-    fun setTabClickListener(onTabClick: (Int, VipTabBean) -> Unit) {
+    fun setTabClickListener(onTabClick: (Int, VipSkuBean) -> Unit) {
         mOnTabClick = onTabClick
     }
 
@@ -97,15 +98,15 @@ class VipTabView @JvmOverloads constructor(
     /**
      * 获取支付列表
      */
-    private fun getPayList(): MutableList<VipTabBean> {
-        return mutableListOf<VipTabBean>().apply {
-            add(VipTabBean(1, "1个月", 45f))
-            add(VipTabBean(3, "3个月", 99f))
-            add(VipTabBean(12, "1年", 324f))
+    private fun getPayList(): MutableList<VipSkuBean> {
+        return mutableListOf<VipSkuBean>().apply {
+            add(VipSkuBean(1, "1个月", 45f))
+            add(VipSkuBean(3, "3个月", 99f))
+            add(VipSkuBean(12, "1年", 324f))
         }
     }
 
-    private fun updateData(payList: MutableList<VipTabBean>) {
+    private fun updateData(payList: MutableList<VipSkuBean>) {
         //获取单月价格
         payList.forEach {
             if (it.duration == 1) {
@@ -129,7 +130,7 @@ class VipTabView @JvmOverloads constructor(
     @SuppressLint("SetTextI18n")
     private fun setData(
         index: Int,
-        bean: VipTabBean,
+        bean: VipSkuBean,
         tabView: Pair<View, ConstraintLayout>,
     ) {
         var tvPrice = tabView.second.findViewById<AppCompatTextView>(R.id.tvPrice)
@@ -144,7 +145,7 @@ class VipTabView @JvmOverloads constructor(
         tvMonthPrice.text = "¥" + monthPrice + "元/月"
 
         var disCount = monthPrice / mSingleMonthPrice
-        tvDiscount.text = disCount.autoIntOr2Str() + "折"
+        tvDiscount.text = (disCount * 100).toInt().safeToString() + "折"
         if (disCount >= 1) {
             tvDiscount.visibility = View.GONE
         } else {
@@ -154,7 +155,7 @@ class VipTabView @JvmOverloads constructor(
 
     }
 
-    private fun setPrice(tvPrice: AppCompatTextView, bean: VipTabBean, color: String) {
+    private fun setPrice(tvPrice: AppCompatTextView, bean: VipSkuBean, color: String) {
         tvPrice.buildSpannableString {
             addText("￥", method = {
                 setColor(color)
@@ -167,16 +168,3 @@ class VipTabView @JvmOverloads constructor(
         }
     }
 }
-
-
-data class VipTabBean(
-    var duration: Int = 0,
-    var durationStr: String = "",
-    var price: Float = 0.0f,
-
-
-    )
-
-
-
-

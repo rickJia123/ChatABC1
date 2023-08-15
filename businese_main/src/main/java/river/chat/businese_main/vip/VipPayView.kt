@@ -10,6 +10,7 @@ import river.chat.business_main.databinding.ViewVipPayBinding
 import river.chat.lib_core.utils.exts.autoIntOr1Str
 import river.chat.lib_core.utils.exts.view.buildSpannableString
 import river.chat.lib_core.view.base.LifecycleView
+import river.chat.lib_resource.model.vip.VipSkuBean
 
 /**
  * Created by beiyongChao on 2023/8/19
@@ -23,7 +24,7 @@ class VipPayView @JvmOverloads constructor(
     var mActivity: AppCompatActivity? = null
     private var mOnTabClick: (Int) -> Unit = {}
 
-    private var payList: MutableList<VipTabBean> = mutableListOf()
+    private var payList: MutableList<VipSkuBean> = mutableListOf()
 
     companion object {
     }
@@ -39,7 +40,7 @@ class VipPayView @JvmOverloads constructor(
         initClick()
     }
 
-    fun update(tabBean: VipTabBean) {
+    fun update(tabBean: VipSkuBean) {
         var priceColor = "#FA601F"
         mBinding.tvPrice.buildSpannableString {
             addText("￥", method = {
@@ -65,7 +66,7 @@ class VipPayView @JvmOverloads constructor(
     }
 
 
-    private fun updateData(payList: MutableList<VipTabBean>) {
+    private fun updateData(payList: MutableList<VipSkuBean>) {
         this.payList = payList
 
     }

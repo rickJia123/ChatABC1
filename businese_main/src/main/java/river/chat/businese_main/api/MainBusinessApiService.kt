@@ -3,8 +3,7 @@ package river.chat.businese_main.api
 import river.chat.businese_common.net.ApiStorage.getBasedBody
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApiService
-import river.chat.lib_core.storage.database.model.MessageBean
-import river.chat.lib_core.storage.database.model.User
+import river.chat.lib_resource.model.MessageBean
 
 /**
  * Created by beiyongChao on 2023/3/21
@@ -57,5 +56,4 @@ object MainBusinessApiService : BaseApiService() {
                 this["deviceInfo"] = deviceInfo
             }
         )
-
 }

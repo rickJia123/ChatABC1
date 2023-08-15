@@ -8,8 +8,8 @@ import river.chat.business_main.R
 import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.view.main.BaseViewModel
 import river.chat.lib_core.view.recycleview.databingding.BaseBindingAdapter
-import river.chat.lib_core.storage.database.model.MessageBean
-import river.chat.lib_core.storage.database.model.MessageSource
+import river.chat.lib_resource.model.MessageBean
+import river.chat.lib_resource.model.MessageSource
 
 class SettingsViewModel : BaseViewModel() {
     

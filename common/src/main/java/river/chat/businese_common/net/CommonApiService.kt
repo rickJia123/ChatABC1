@@ -3,7 +3,6 @@ package river.chat.businese_common.net
 import river.chat.businese_common.wx.WxAccessTokenBean
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApiService
-import river.chat.lib_core.storage.database.model.MessageBean
 
 /**
  * Created by beiyongChao on 2023/2/24

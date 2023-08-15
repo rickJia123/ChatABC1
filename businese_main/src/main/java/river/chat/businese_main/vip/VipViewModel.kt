@@ -2,11 +2,8 @@ package river.chat.businese_main.vip
 
 import androidx.databinding.ObservableArrayList
 import river.chat.businese_main.chat.ChatRequest
-import river.chat.businese_main.message.MessageCenter
-import river.chat.businese_main.message.MessageHelper
-import river.chat.lib_core.beans.VipRightsBeans
-import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.view.main.BaseViewModel
+import river.chat.lib_resource.model.vip.VipRightsBeans
 
 class VipViewModel : BaseViewModel() {
 

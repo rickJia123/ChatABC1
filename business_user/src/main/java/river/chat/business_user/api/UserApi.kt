@@ -4,7 +4,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApi
-import river.chat.lib_core.storage.database.model.User
+import river.chat.lib_resource.model.User
 
 /**
  * Created by beiyongChao on 2023/2/20

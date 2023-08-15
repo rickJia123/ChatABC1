@@ -1,9 +1,9 @@
 //package river.chat.businese_main.message
 //
 //
-//import river.chat.lib_core.storage.database.model.MessageBean
-//import river.chat.lib_core.storage.database.model.MessageSource
-//import river.chat.lib_core.storage.database.model.MessageStatus
+//import river.chat.lib_resource.model.MessageBean
+//import river.chat.lib_resource.model.MessageSource
+//import river.chat.lib_resource.model.MessageStatus
 //import java.util.*
 //
 ///**

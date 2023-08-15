@@ -3,7 +3,7 @@ package river.chat.business_user.api
 import river.chat.businese_common.net.ApiStorage.getBasedBody
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApiService
-import river.chat.lib_core.storage.database.model.User
+import river.chat.lib_resource.model.User
 
 /**
  * Created by beiyongChao on 2023/3/21

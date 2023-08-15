@@ -33,7 +33,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolBar" />
 
-        <river.chat.businese_main.vip.VipStatusView
+        <river.chat.businese_main.vip.VipSimpleStatusView
             android:id="@+id/viewVipStatus"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

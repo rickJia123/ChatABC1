@@ -7,9 +7,8 @@ import river.chat.businese_main.message.MessageHelper.CHAT_TIP_FAIL
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.view.main.BaseViewModel
-import river.chat.lib_core.storage.database.model.MessageBean
-import river.chat.lib_core.storage.database.model.MessageStatus
-import river.chat.lib_core.utils.exts.safeToInt
+import river.chat.lib_resource.model.MessageBean
+import river.chat.lib_resource.model.MessageStatus
 import river.chat.lib_core.utils.longan.toast
 
 /**
@@ -76,7 +75,6 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                     })
             },
             error = {
-                it.message?.toast()
                 hotQuestionResult.value =
                     RequestResult(isSuccess = false, data = mutableListOf())
             }

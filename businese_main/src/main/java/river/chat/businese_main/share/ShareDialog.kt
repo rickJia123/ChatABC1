@@ -3,12 +3,10 @@ package river.chat.businese_main.share
 
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import coil.load
 import com.umeng.socialize.bean.SHARE_MEDIA
-import river.chat.businese_main.api.ChatAnswerBean
 import river.chat.business_main.databinding.DialogShareBinding
 import river.chat.lib_core.share.SharePlatformBean
-import river.chat.lib_core.storage.database.model.MessageBean
+import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_core.utils.common.QRCodeUtils
 import river.chat.lib_core.utils.exts.getViewBitmap
 import river.chat.lib_core.utils.longan.topActivity

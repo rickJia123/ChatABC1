@@ -3,7 +3,7 @@ package river.chat.businese_main.ui.common
 
 import androidx.databinding.BindingAdapter
 import river.chat.businese_main.ui.chat.ChatCardView
-import river.chat.lib_core.storage.database.model.CardMsgBean
+import river.chat.lib_resource.model.CardMsgBean
 
 /**
  *Author: loongwind

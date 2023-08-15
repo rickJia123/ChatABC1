@@ -7,13 +7,11 @@ import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import river.chat.businese_main.chat.hot.HotTipItemBean
 import river.chat.businese_main.chat.hot.HotTipViewModel
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.message.MessageHelper
 import river.chat.business_main.databinding.ViewInputBinding
 import river.chat.lib_core.BR
-import river.chat.lib_core.storage.database.model.MessageBean
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.log
 import river.chat.lib_core.view.base.LifecycleView

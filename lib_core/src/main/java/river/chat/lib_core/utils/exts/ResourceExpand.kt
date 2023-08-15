@@ -29,6 +29,7 @@ fun Int.getDrawable(): Drawable? {
     } catch (ignore: Resources.NotFoundException) {
         ColorDrawable()
     }
+    "".safeToInt()
 }
 
 /**

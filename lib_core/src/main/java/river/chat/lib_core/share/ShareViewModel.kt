@@ -1,17 +1,9 @@
 package river.chat.lib_core.share
 
 import androidx.databinding.ObservableArrayList
-import com.umeng.socialize.bean.SHARE_MEDIA
-import river.chat.businese_common.router.jump2Login
 import river.chat.lib_core.R
-import river.chat.lib_core.storage.database.model.CardMsgBean
-import river.chat.lib_core.utils.exts.getViewBitmap
-import river.chat.lib_core.utils.longan.toast
-import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.main.BaseViewModel
 import river.chat.lib_core.view.recycleview.databingding.BaseBindingAdapter
-import river.chat.lib_umeng.ShareManager
-import river.chat.lib_umeng.common.RiverShareContent
 
 class ShareViewModel() : BaseViewModel() {
 

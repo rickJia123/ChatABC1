@@ -1,13 +1,11 @@
 package river.chat.business_user.api
 
-import android.service.carrier.CarrierMessagingService.ResultCallback
 import androidx.lifecycle.MutableLiveData
-import river.chat.businese_common.report.ReportManager
 import river.chat.business_user.constant.UserConstants
 import river.chat.business_user.user.RiverUserManager
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
-import river.chat.lib_core.storage.database.model.User
+import river.chat.lib_resource.model.User
 import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.main.BaseViewModel

@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
 import org.greenrobot.eventbus.EventBus
-import river.chat.businese_common.dataBase.UserBox
-import river.chat.businese_common.net.CommonRequestViewModel
 import river.chat.businese_common.router.jump2Login
 import river.chat.businese_common.ui.view.dialog.SimpleDialog
 import river.chat.businese_common.ui.view.dialog.SimpleDialogConfig
@@ -16,7 +14,7 @@ import river.chat.business_user.user.LoginCenter
 import river.chat.business_user.user.RiverUserManager
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.router.plugin.module.UserRouterConstants
-import river.chat.lib_core.storage.database.model.User
+import river.chat.lib_resource.model.User
 import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.main.activity.BaseActivity
