@@ -7,13 +7,9 @@ import androidx.databinding.DataBindingUtil
 import river.chat.businese_main.share.ShareDialog
 import river.chat.businese_main.utils.logChat
 import river.chat.business_main.databinding.ViewChatCardBinding
-import river.chat.lib_resource.model.MessageBean
+import river.chat.lib_core.storage.database.model.MessageBean
 import river.chat.lib_core.utils.exts.singleClick
-import river.chat.lib_core.utils.longan.copyToClipboard
-import river.chat.lib_core.utils.longan.dp
-import river.chat.lib_core.utils.longan.toast
-import river.chat.lib_core.utils.longan.topActivity
-import river.chat.lib_core.utils.system.DisplayUtil.getScreenWidth
+import river.chat.lib_core.utils.longan.*
 import river.chat.lib_core.view.base.LifecycleView
 
 
@@ -34,7 +30,7 @@ class ChatCardView @JvmOverloads constructor(
 
 
     init {
-        var chatWidth = getScreenWidth() - 40.dp
+        var chatWidth = screenWidth- 40.dp
         viewBinding.tvAnswer.maxWidth = chatWidth.toInt()
         viewBinding.tvQuestion.maxWidth = chatWidth.toInt()
 //        commentViewBinding.etWriteReply.postDelayed({
