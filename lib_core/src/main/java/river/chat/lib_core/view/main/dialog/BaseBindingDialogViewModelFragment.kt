@@ -13,6 +13,7 @@ open abstract class BaseBindingDialogViewModelFragment<BINDING : ViewDataBinding
     BaseBindingDialogFragment<BINDING>() {
 
     protected var mBinding :BINDING ?=null
+    private var mFragmentProvider: ViewModelProvider? = null
     private var mActivityProvider: ViewModelProvider? = null
 
     //创建 ViewModel 变量并延迟初始化
@@ -40,11 +41,26 @@ open abstract class BaseBindingDialogViewModelFragment<BINDING : ViewDataBinding
     /**
      * 获取作用域为 activity 生命周期的viewModel
      */
-    protected fun <T : ViewModel> getActivityScopeViewModel(modelClass: Class<T>): T {
+    protected open fun <T : ViewModel> getFragmentScopeViewModel(modelClass: Class<T>): T {
+        if (mFragmentProvider == null) {
+            mFragmentProvider = ViewModelProvider(this)
+        }
+        return mFragmentProvider!!.get(modelClass)
+    }
+
+
+
+    /**
+     * 获取作用域为 activity 生命周期的viewModel
+     */
+    protected open fun <T : ViewModel> getActivityScopeViewModel(modelClass: Class<T>): T {
         if (mActivityProvider == null) {
-            mActivityProvider = ViewModelProvider(this)
+            mActivity?.let {
+                mActivityProvider = ViewModelProvider(it)
+            }
         }
         return mActivityProvider!![modelClass]
+
     }
 
 

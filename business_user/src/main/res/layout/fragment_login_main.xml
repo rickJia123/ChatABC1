@@ -93,7 +93,7 @@
             android:layout_marginBottom="30dp"
             android:gravity="center"
             android:text="验证码登录"
-            android:textColor="@color/defaultSubTitleColor"
+            android:textColor="#546E7A"
             android:textSize="@dimen/defaultTxtSize_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

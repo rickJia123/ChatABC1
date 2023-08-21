@@ -12,8 +12,11 @@ object LoginStatus {
 
     //验证码输入结束,还没点击下一步
     const val CODE_READY = 2
+}
 
-    const val SUCCESS = '3'
+object LoginPage {
+    const val LOGIN_MAIN = 0
 
-    const val ERROR = '4'
+    const val LOGIN_PHONE = 1
+
 }

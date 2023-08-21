@@ -7,10 +7,10 @@ import androidx.databinding.DataBindingUtil
 import river.chat.businese_main.share.ShareDialog
 import river.chat.businese_main.utils.logChat
 import river.chat.business_main.databinding.ViewChatCardBinding
-import river.chat.lib_core.storage.database.model.MessageBean
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.*
 import river.chat.lib_core.view.base.LifecycleView
+import river.chat.lib_resource.model.MessageBean
 
 
 class ChatCardView @JvmOverloads constructor(

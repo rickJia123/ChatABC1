@@ -4,6 +4,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import org.koin.android.ext.android.inject
 import river.chat.businese_common.wx.WxManager
 import river.chat.business_user.databinding.ActivityLoginBinding
+import river.chat.business_user.login.LoginPage
+import river.chat.business_user.login.LoginStatus
 import river.chat.business_user.login.LoginViewModel
 import river.chat.lib_core.router.plugin.module.HomePlugin
 import river.chat.lib_core.router.plugin.module.UserRouterConstants
@@ -23,14 +25,36 @@ class LoginActivity : BaseBindingViewModelActivity<ActivityLoginBinding, LoginVi
     override fun initDataBinding(binding: ActivityLoginBinding) {
         super.initDataBinding(binding)
         mAnimDistance = screenWidth
-
-//        binding.fragmentMain.postDelayed({
-//            start2CodeAnim(binding)
-//        }, 2000)
+        viewModel.loginPage.value = LoginPage.LOGIN_MAIN
+        observeData(binding)
     }
 
 
-    override fun createViewModel() = LoginViewModel()
+    private fun observeData(binding: ActivityLoginBinding) {
+        viewModel.loginPage.observe(this) {
+            when (it) {
+                LoginPage.LOGIN_MAIN -> {
+                    start2HomeAnim(binding)
+                }
+                LoginPage.LOGIN_PHONE -> {
+                    start2CodeAnim(binding)
+                }
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        when (viewModel.loginPage.value) {
+            LoginPage.LOGIN_MAIN -> {
+                finish()
+            }
+            LoginPage.LOGIN_PHONE -> {
+                viewModel.loginPage.value = LoginPage.LOGIN_MAIN
+            }
+        }
+    }
+
+    override fun createViewModel() = getActivityScopeViewModel(LoginViewModel::class.java)
 
 
     private fun start2CodeAnim(mBinding: ActivityLoginBinding) {

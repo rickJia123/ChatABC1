@@ -10,16 +10,15 @@ import river.chat.lib_core.utils.longan.isPhone
 import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.view.main.dialog.BaseBindingDialogViewModelFragment
 
-class LoginPhoneFragment : BaseBindingDialogViewModelFragment<FragmentLoginPhoneBinding, LoginViewModel>() {
+class LoginPhoneFragment :
+    BaseBindingDialogViewModelFragment<FragmentLoginPhoneBinding, LoginViewModel>() {
 
 
-    private var loginStatus= LoginStatus.PHONE_READY
+    private var loginStatus = LoginStatus.PHONE_READY
 
     @SuppressLint("ClickableViewAccessibility")
     override fun initDataBinding(binding: FragmentLoginPhoneBinding) {
         super.initDataBinding(binding)
-
-
 
         initClick(binding)
 
@@ -30,37 +29,56 @@ class LoginPhoneFragment : BaseBindingDialogViewModelFragment<FragmentLoginPhone
     private fun observeRequest() {
         viewModel.request.requestCode.observe(this) {
             if (it.isSuccess) {
-                loginStatus= LoginStatus.CODE_READY
+                loginStatus = LoginStatus.CODE_READY
                 mBinding?.tvConfirm?.text = "登录"
 //                start2CodeAnim()
             }
         }
         viewModel.request.loginResult.observe(this) {
-//            if (it.isSuccess) {
-//                "登录成功".toast()
-//                mActivity?.finish()
-//            }
+            if (it.isSuccess) {
+                "登录成功".toast()
+                mActivity?.finish()
+            }
         }
     }
 
     private fun initClick(binding: FragmentLoginPhoneBinding) {
-        binding.tvConfirm.singleClick {
-            if (loginStatus<= LoginStatus.PHONE_READY) {
-                if (!getPhoneNum().isPhone()) {
-                    "请输入正确的手机号".toast()
-                    return@singleClick
-                }
+        binding.tvGetCOde.singleClick {
+            checkPhoneNum {
                 viewModel.request.requestPhoneCode(getPhoneNum())
-            } else {
+            }
+        }
+        binding.tvConfirm.singleClick {
+            checkCode {
                 viewModel.request.loginByPhone("0", getPhoneNum(), getCode())
             }
         }
+    }
 
+    override fun createViewModel() = getActivityScopeViewModel(LoginViewModel::class.java)
+
+    /**
+     * 检测手机号有效性
+     */
+    private fun checkPhoneNum(callback: () -> Unit) {
+        var isValidPhone = getPhoneNum().isPhone()
+        if (!isValidPhone) {
+            "请输入正确的手机号".toast()
+        }
+        callback.invoke()
 
     }
 
-    override fun createViewModel() = LoginViewModel()
-
+    /**
+     * 检测验证码是否唯恐
+     */
+    private fun checkCode(callback: () -> Unit) {
+        var isValidCode = getCode().isNullOrBlank()
+        if (!isValidCode) {
+            "请输入验证码".toast()
+        }
+        callback.invoke()
+    }
 //
 //    private fun start2CodeAnim() {
 //        mBinding?.inputLayoutPhone?.animate()
