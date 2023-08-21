@@ -16,14 +16,12 @@ import river.chat.lib_core.R
 fun ImageView.loadSimple(resource: Any?) {
     this.load(resource) {
         crossfade(true)
-        placeholder(R.mipmap.ic_placeholder)
     }
 }
 
 fun ImageView.loadCircle(resource: Any?,placeHolder:Int=R.mipmap.ic_placeholder) {
     this.load(resource) {
         crossfade(true)
-        placeholder(R.mipmap.ic_placeholder)
         transformations(CircleCropTransformation())
     }
 }

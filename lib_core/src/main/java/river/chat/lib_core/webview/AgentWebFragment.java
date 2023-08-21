@@ -55,6 +55,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import river.chat.lib_core.R;
+import river.chat.lib_core.utils.log.LogUtil;
 import river.chat.lib_core.view.title.RiverTitle;
 import river.chat.lib_core.webview.client.MiddlewareChromeClient;
 import river.chat.lib_core.webview.client.MiddlewareWebViewClient;
@@ -283,6 +284,7 @@ public class AgentWebFragment extends Fragment implements FileCompressor.FileCom
         if (TextUtils.isEmpty(target)) {
             target = "http://cw.gzyunjuchuang.com/";
         }
+        LogUtil.i( "AgentWebFragment getUrl");
         return target;
     }
 

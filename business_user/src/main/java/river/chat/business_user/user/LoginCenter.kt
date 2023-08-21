@@ -1,7 +1,8 @@
 package river.chat.business_user.user
 
 import androidx.appcompat.app.AppCompatActivity
-import river.chat.business_user.login.home.LoginFragment
+import river.chat.business_user.login.home.LoginMainFragment
+import river.chat.business_user.login.home.LoginPhoneFragment
 
 /**
  * Created by beiyongChao on 2023/3/15
@@ -10,6 +11,10 @@ import river.chat.business_user.login.home.LoginFragment
 object LoginCenter {
 
     fun launchLoginDialog(activity: AppCompatActivity) {
-        LoginFragment().showLogin(activity)
+        LoginMainFragment().showLogin(activity)
+    }
+
+    fun launchLoginPhoneDialog(activity: AppCompatActivity) {
+        LoginPhoneFragment().showLogin(activity)
     }
 }

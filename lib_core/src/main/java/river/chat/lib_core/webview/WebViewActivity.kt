@@ -5,6 +5,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import river.chat.lib_core.R
 import river.chat.lib_core.databinding.ActivityWebviewBinding
+import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.view.main.activity.BaseBindingActivity
 import river.chat.lib_core.webview.common.AgentWebGroup
 import river.chat.lib_core.webview.common.WebViewParams
@@ -29,6 +30,7 @@ class WebViewActivity : BaseBindingActivity<ActivityWebviewBinding>() {
     var mWebFragment: AgentWebFragment? = null
 
     override fun initDataBinding(binding: ActivityWebviewBinding) {
+        LogUtil.i("AgentWebFragment WebViewActivity:"+mWebParams?.url)
         mWebParams?.run {
             var obj = ARouter.getInstance().build(AgentWebGroup.FRAGMENT_AGENT_WEB)
                 .withSerializable(AgentWebGroup.PARAMS_WEB, this).navigation()

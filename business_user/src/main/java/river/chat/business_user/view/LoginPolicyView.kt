@@ -3,14 +3,12 @@ package river.chat.business_user.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.core.text.buildSpannedString
-import androidx.core.text.inSpans
-import androidx.core.text.italic
 import androidx.databinding.DataBindingUtil
 import river.chat.business_user.R
 import river.chat.business_user.databinding.ViewLoginPolicyBinding
-import river.chat.lib_core.utils.exts.getColor
-import river.chat.lib_core.utils.longan.ClickableSpan
+import river.chat.lib_core.utils.exts.view.buildSpannableString
+import river.chat.lib_core.utils.exts.view.loadSimple
+import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.view.base.LifecycleView
 import river.chat.lib_core.webview.WebViewHelper
 import river.chat.lib_resource.AppConstants
@@ -23,6 +21,7 @@ class LoginPolicyView @JvmOverloads constructor(
 ) : LifecycleView(context, attrs, defStyleAttr) {
 
 
+    private var mIsSelected = false
     private val viewBinding: ViewLoginPolicyBinding = DataBindingUtil.inflate(
         LayoutInflater.from(context),
         R.layout.view_login_policy,
@@ -32,29 +31,28 @@ class LoginPolicyView @JvmOverloads constructor(
 
 
     init {
-
+        initClick()
         update()
 
     }
 
 
     fun update() {
-        viewBinding.tvPolicy.text = buildSpannedString {
-            append("已阅读并同意")
-            inSpans(ClickableSpan(river.chat.lib_core.R.color.highTextColor.getColor(), true) {
-                WebViewHelper.startWebViewActivity(AppConstants.POLICY_URL)
-            }) {
-                italic { // 设置斜体
-                    append("服务协议")
+        viewBinding.tvPolicy.buildSpannableString {
+            addText("已阅读并同意")
+            addText("服务协议") {
+                setColor("#4A90E2")
+                onClick {
+                    LogUtil.i("AgentWebFragment policy")
+                    WebViewHelper.startWebViewActivity(AppConstants.POLICY_URL)
                 }
-
             }
-            append("和")
-            inSpans(ClickableSpan(river.chat.lib_core.R.color.highTextColor.getColor(), true) {
-                WebViewHelper.startWebViewActivity(AppConstants.POLICY_URL)
-            }) {
-                italic { // 设置斜体
-                    append("隐私政策")
+            addText("和")
+            addText("隐私政策")
+            {
+                setColor("#4A90E2")
+                onClick {
+                    WebViewHelper.startWebViewActivity(AppConstants.POLICY_URL)
                 }
             }
         }
@@ -63,7 +61,14 @@ class LoginPolicyView @JvmOverloads constructor(
     }
 
     private fun initClick() {
-
+        viewBinding.ivSelector.setOnClickListener {
+            mIsSelected = !mIsSelected
+            if (mIsSelected) {
+                viewBinding.ivSelector.loadSimple(R.mipmap.mark_sel)
+            } else {
+                viewBinding.ivSelector.loadSimple(R.mipmap.mark_nosel)
+            }
+        }
     }
 
 
