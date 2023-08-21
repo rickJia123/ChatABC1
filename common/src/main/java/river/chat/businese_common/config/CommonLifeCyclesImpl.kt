@@ -12,6 +12,7 @@ class CommonLifeCyclesImpl : AppLifeCycles {
     override fun onCreate(application: Application) {
         if (application.isMainProcess()) {
             InitManager.initSdk(application)
+            InitManager.initBusiness(application)
         }
     }
 

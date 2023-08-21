@@ -1,11 +1,16 @@
 package river.chat.businese_common.config
 
 import android.app.Application
+import com.alibaba.android.arouter.launcher.ARouter
 import com.tencent.tauth.Tencent
 import com.umeng.commonsdk.UMConfigure
 import com.yl.lib.sentry.hook.PrivacySentry
 import com.yl.lib.sentry.hook.PrivacySentryBuilder
+import river.chat.businese_common.reacker.track.UMTrackHandler
 import river.chat.businese_common.wx.WxManager
+import river.chat.lib_core.storage.file.StorageUtil
+import river.chat.lib_core.tracker.initTracker
+import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.utils.longan.application
 import river.chat.lib_core.utils.longan.isAppDebug
 import river.chat.lib_resource.AccountsConstants
@@ -18,9 +23,29 @@ import river.chat.lib_umeng.common.UmInitConfig
 object InitManager {
 
     fun initSdk(application: Application) {
+        initRouter()
         initUmeng(application)
         initPrivacy()
         WxManager.regToWx(application)
+    }
+
+    fun initBusiness(application: Application) {
+        initConfig(application)
+        application.initTracker(UMTrackHandler())
+    }
+
+
+    private fun initConfig(application: Application) {
+        LogUtil.init(isAppDebug)
+        StorageUtil.init(application)
+    }
+
+    private fun initRouter() {
+        if (isAppDebug) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
+            ARouter.openLog()     // 打印日志
+            ARouter.openDebug();  // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
+        }
+        ARouter.init(application) // 尽可能早，推荐在Application中初始化
     }
 
     private fun initUmeng(application: Application) {
