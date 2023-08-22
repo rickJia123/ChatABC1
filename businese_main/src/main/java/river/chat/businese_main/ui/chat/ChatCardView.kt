@@ -8,7 +8,11 @@ import river.chat.businese_main.share.ShareDialog
 import river.chat.businese_main.utils.logChat
 import river.chat.business_main.databinding.ViewChatCardBinding
 import river.chat.lib_core.utils.exts.singleClick
-import river.chat.lib_core.utils.longan.*
+import river.chat.lib_core.utils.longan.copyToClipboard
+import river.chat.lib_core.utils.longan.dp
+import river.chat.lib_core.utils.longan.screenWidth
+import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.base.LifecycleView
 import river.chat.lib_resource.model.MessageBean
 
