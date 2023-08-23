@@ -32,8 +32,10 @@ class LoginMainFragment :
 
     private fun initClick(binding: FragmentLoginMainBinding) {
 
-        binding.ivWechat.singleClick {
-            WxManager.getLoginCode()
+        binding.clLogin.singleClick {
+            binding.viewLoginPolicy.checkSelected {
+                WxManager.getLoginCode()
+            }
         }
         binding.tvPhone.singleClick {
             viewModel.loginPage.value = LoginPage.LOGIN_PHONE

@@ -9,6 +9,7 @@ import river.chat.business_user.login.LoginStatus
 import river.chat.business_user.login.LoginViewModel
 import river.chat.lib_core.router.plugin.module.HomePlugin
 import river.chat.lib_core.router.plugin.module.UserRouterConstants
+import river.chat.lib_core.utils.exts.width
 import river.chat.lib_core.utils.longan.screenWidth
 import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 
@@ -26,6 +27,11 @@ class LoginActivity : BaseBindingViewModelActivity<ActivityLoginBinding, LoginVi
         super.initDataBinding(binding)
         mAnimDistance = screenWidth
         viewModel.loginPage.value = LoginPage.LOGIN_MAIN
+        binding.fragmentMain.width(screenWidth)
+        binding.fragmentPhone.width(screenWidth)
+        binding.toolBar.leftClick= {
+            onBackPressed()
+        }
         observeData(binding)
     }
 
