@@ -73,14 +73,14 @@ class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
     ) {
         launchFlow(
             request = {
-                MainBusinessApiService.getPaySku()
+                MainBusinessApiService.getVipRights()
             },
             dataResp = {
-                paySkuResult.value =
+                vipRightResult.value =
                     RequestResult(isSuccess = true, data = it)
             },
             error = {
-                paySkuResult.value =
+                vipRightResult.value =
                     RequestResult(isSuccess = false)
             }
         )

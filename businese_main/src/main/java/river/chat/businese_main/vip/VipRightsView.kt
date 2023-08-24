@@ -33,12 +33,11 @@ class VipRightsView @JvmOverloads constructor(
     init {
         vipViewModel = VipViewModel()
         viewBinding.setVariable(BR.vm, vipViewModel)
-        vipViewModel?.initRightsList()
-        updateRights()
+//        vipViewModel?.initRightsList()
     }
 
 
-    private fun updateRights(rightsBean: VipRightsBean) {
+      fun updateRights(rightsBean: VipRightsBean) {
 //        var remainTimes =
 //            getPlugin<UserPlugin>().getUser().remainTryTimes
 //
@@ -47,15 +46,25 @@ class VipRightsView @JvmOverloads constructor(
             viewBinding.tvNormalType,
             viewBinding.tvNormalTitle,
             "#9ce0b8",
-            vipViewModel?.normalRightList
+            rightsBean.normal
         )
         updateVipMsg(
             "会员",
             viewBinding.tvVipType,
             viewBinding.tvVipTitle,
             "#f5cc19",
-            vipViewModel?.vipRightList
+            rightsBean.vip
         )
+          vipViewModel?.vipRightList?.addAll(mutableListOf<String>().apply {
+              rightsBean.vip.forEach {
+                  add(it)
+              }
+          })
+          vipViewModel?.normalRightList?.addAll(mutableListOf<String>().apply {
+              rightsBean.normal.forEach {
+                  add(it)
+              }
+          })
     }
 
     private fun updateVipMsg(

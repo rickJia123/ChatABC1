@@ -59,6 +59,13 @@ class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, Vip
                 }
             }
         }
+        viewModel.request.vipRightResult.observe(this) {
+            if (it.isSuccess) {
+                it.data?.let {
+                    mBinding.viewVipRights.updateRights(it)
+                }
+            }
+        }
     }
 
     override fun onEvent(eventId: Int) {
@@ -68,12 +75,11 @@ class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, Vip
     }
 
     private fun loadData() {
-        requestPaySku()
+        viewModel.request.getPaySku()
+        viewModel.request.getVipRights()
     }
 
-    private fun requestPaySku() {
-        viewModel.request.getPaySku()
-    }
+
 
 
     override fun createViewModel() = VipViewModel()

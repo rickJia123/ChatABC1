@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="river.chat.lib_resource.model.vip.VipRightsBeans" />
+            type="String" />
 
     </data>
 
@@ -22,7 +22,7 @@
             android:background="@drawable/bg_vip_light_solid_rectangle_20"
             android:padding="2dp"
             android:layout_marginRight="10dp"
-            android:text="@{item.name}"
+            android:text="@{item}"
             android:textColor="@color/vipMonthHeaver"
             android:textSize="@dimen/defaultTxtSize_small"
             app:layout_constraintBottom_toBottomOf="parent"

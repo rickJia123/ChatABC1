@@ -4,6 +4,7 @@ import river.chat.businese_common.net.ApiStorage.getBasedBody
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApiService
 import river.chat.lib_resource.model.MessageBean
+import river.chat.lib_resource.model.vip.VipRightsBean
 import river.chat.lib_resource.model.vip.VipSkuBean
 
 /**
@@ -64,6 +65,16 @@ object MainBusinessApiService : BaseApiService() {
     suspend fun getPaySku(
     ): BaseRequestBean<MutableList<VipSkuBean>> =
         mainBusinessApi.getPaySku(
+            getBasedBody().apply {
+            }
+        )
+
+    /**
+     * 获取权益列表
+     */
+    suspend fun getVipRights(
+    ): BaseRequestBean<VipRightsBean> =
+        mainBusinessApi.getVipRights(
             getBasedBody().apply {
             }
         )

@@ -5,6 +5,7 @@ import retrofit2.http.POST
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApi
 import river.chat.lib_resource.model.MessageBean
+import river.chat.lib_resource.model.vip.VipRightsBean
 import river.chat.lib_resource.model.vip.VipSkuBean
 
 /**
@@ -40,9 +41,9 @@ interface MainBusinessApi : BaseApi {
 
 
     /**
-     *获取充值Sku
+     *获取权益列表
      */
     @POST("/recharge/rightsDescr")
-    suspend fun getVipRights(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<String>
+    suspend fun getVipRights(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<VipRightsBean>
 
 }
