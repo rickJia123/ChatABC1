@@ -34,10 +34,7 @@ class VipTabView @JvmOverloads constructor(
 
     }
 
-    /**
-     * 单月不打折的价格
-     */
-    private var mSingleMonthPrice = 0f
+
     private var payList: MutableList<VipSkuBean> = mutableListOf()
     private var mDefaultTabPosition = 1
 
@@ -85,8 +82,8 @@ class VipTabView @JvmOverloads constructor(
         }
     }
 
-    fun update() {
-        updateData(getPayList())
+    fun update(payList: MutableList<VipSkuBean>) {
+        updateData(payList)
         onTabClick(mDefaultTabPosition)
     }
 
@@ -95,24 +92,7 @@ class VipTabView @JvmOverloads constructor(
     }
 
 
-    /**
-     * 获取支付列表
-     */
-    private fun getPayList(): MutableList<VipSkuBean> {
-        return mutableListOf<VipSkuBean>().apply {
-            add(VipSkuBean(1, "1个月", 45f))
-            add(VipSkuBean(3, "3个月", 99f))
-            add(VipSkuBean(12, "1年", 324f))
-        }
-    }
-
     private fun updateData(payList: MutableList<VipSkuBean>) {
-        //获取单月价格
-        payList.forEach {
-            if (it.duration == 1) {
-                mSingleMonthPrice = it.price
-            }
-        }
         this.payList = payList
         mTabList.forEachIndexed { index, tabView ->
             var vipTabBean = payList.get(index)
@@ -140,13 +120,12 @@ class VipTabView @JvmOverloads constructor(
 
 
 
-        tvDuration.text = bean.durationStr
-        var monthPrice = bean.price / bean.duration
-        tvMonthPrice.text = "¥" + monthPrice + "元/月"
+        tvDuration.text = bean.skuName
+        tvMonthPrice.text = bean.cheapText
 
-        var disCount = monthPrice / mSingleMonthPrice
-        tvDiscount.text = (disCount * 100).toInt().safeToString() + "折"
-        if (disCount >= 1) {
+
+        tvDiscount.text = bean.promoText
+        if (bean.promoText.isNullOrEmpty()) {
             tvDiscount.visibility = View.GONE
         } else {
             tvDiscount.visibility = View.VISIBLE

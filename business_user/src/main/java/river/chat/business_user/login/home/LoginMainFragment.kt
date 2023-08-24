@@ -36,7 +36,7 @@ class LoginMainFragment :
             WxManager.getLoginCode()
         }
         binding.tvPhone.singleClick {
-            viewModel.loginPage.value = LoginPage.LOGIN_PHONE
+//            viewModel.loginPage.value = LoginPage.LOGIN_PHONE
 //            LoginCenter.launchLoginPhoneDialog(mActivity as AppCompatActivity)
         }
     }

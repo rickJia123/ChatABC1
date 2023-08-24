@@ -15,19 +15,20 @@ import river.chat.lib_core.utils.other.getBindingType
  */
 abstract class BaseBindingActivity<BINDING :ViewDataBinding>: BaseActivity() {
 
+    lateinit var  mBinding: BINDING
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //创建 ViewDataBinding 实例
-        val binding = createDataBinding()
+        mBinding = createDataBinding()
         //绑定当前 Activity 生命周期
-        binding.lifecycleOwner = this
+        mBinding.lifecycleOwner = this
         //设置 View
-        setContentView(binding.root)
+        setContentView(mBinding.root)
 
         // 初始化数据绑定
-        initDataBinding(binding)
+        initDataBinding(mBinding)
 
     }
 

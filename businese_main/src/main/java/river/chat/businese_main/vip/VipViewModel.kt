@@ -1,6 +1,7 @@
 package river.chat.businese_main.vip
 
 import androidx.databinding.ObservableArrayList
+import river.chat.businese_main.api.MainCommonRequest
 import river.chat.businese_main.chat.ChatRequest
 import river.chat.lib_core.view.main.BaseViewModel
 import river.chat.lib_resource.model.vip.VipRightsBeans
@@ -8,10 +9,10 @@ import river.chat.lib_resource.model.vip.VipRightsBeans
 class VipViewModel : BaseViewModel() {
 
 
-    val request = ChatRequest(this)
+    val request = MainCommonRequest(this)
 
-    val normalRightList = ObservableArrayList<VipRightsBeans>()
-    val vipRightList = ObservableArrayList<VipRightsBeans>()
+    val normalRightList = ObservableArrayList<String>()
+    val vipRightList = ObservableArrayList<String>()
 
 
     /*
@@ -19,19 +20,20 @@ class VipViewModel : BaseViewModel() {
      */
     fun initRightsList() {
         normalRightList.clear()
-        normalRightList.addAll(mutableListOf<VipRightsBeans>().apply {
-            add(VipRightsBeans("ChatGPT专业回复"))
-            add(VipRightsBeans("每天5次"))
+
+        normalRightList.addAll(mutableListOf<String>().apply {
+            add("ChatGPT专业回复")
+            add("每天5次")
 
         })
 
         vipRightList.clear()
-        vipRightList.addAll(mutableListOf<VipRightsBeans>().apply {
+        vipRightList.addAll(mutableListOf<String>().apply {
             //rick todo
-            add(VipRightsBeans("ChatGpt专业回复"))
-            add(VipRightsBeans("不限次数"))
-            add(VipRightsBeans("可写论文"))
-            add(VipRightsBeans("季卡赠送一个ChatGPT账户"))
+            add("ChatGpt专业回复")
+            add("不限次数")
+            add("可写论文")
+            add("季卡赠送一个ChatGPT账户")
         })
     }
 

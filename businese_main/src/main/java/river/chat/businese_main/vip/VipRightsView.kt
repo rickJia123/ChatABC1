@@ -10,7 +10,7 @@ import river.chat.lib_core.BR
 import river.chat.lib_core.utils.exts.safeToString
 import river.chat.lib_core.utils.exts.view.buildSpannableString
 import river.chat.lib_core.view.base.LifecycleView
-import river.chat.lib_resource.model.vip.VipRightsBeans
+import river.chat.lib_resource.model.vip.VipRightsBean
 
 /**
  * vip 权益
@@ -38,7 +38,7 @@ class VipRightsView @JvmOverloads constructor(
     }
 
 
-    private fun updateRights() {
+    private fun updateRights(rightsBean: VipRightsBean) {
 //        var remainTimes =
 //            getPlugin<UserPlugin>().getUser().remainTryTimes
 //
@@ -63,12 +63,12 @@ class VipRightsView @JvmOverloads constructor(
         tvType: AppCompatTextView,
         tvTitle: AppCompatTextView,
         highColor:String,
-        rightsList: List<VipRightsBeans>?
+        rightsList: MutableList<String>
     ) {
         tvType.text = type
         tvTitle.buildSpannableString {
             addText("共有 ")
-            addText(rightsList?.size.safeToString()) {
+            addText(rightsList.size.safeToString()) {
                 setColor(highColor)
             }
             addText(" 项权益")

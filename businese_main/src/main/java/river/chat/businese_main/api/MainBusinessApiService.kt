@@ -4,6 +4,7 @@ import river.chat.businese_common.net.ApiStorage.getBasedBody
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApiService
 import river.chat.lib_resource.model.MessageBean
+import river.chat.lib_resource.model.vip.VipSkuBean
 
 /**
  * Created by beiyongChao on 2023/3/21
@@ -54,6 +55,16 @@ object MainBusinessApiService : BaseApiService() {
                 this["contact"] = contact
                 this["content"] = content
                 this["deviceInfo"] = deviceInfo
+            }
+        )
+
+    /**
+     * 获取充值Sku
+     */
+    suspend fun getPaySku(
+    ): BaseRequestBean<MutableList<VipSkuBean>> =
+        mainBusinessApi.getPaySku(
+            getBasedBody().apply {
             }
         )
 }

@@ -27,14 +27,17 @@
                 android:enabled="false"
                 android:focusable="false"
                 android:gravity="center"
+                android:maxLines="2"
+                android:layout_marginLeft="3dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="3dp"
                 android:textColor="@color/defaultTitleColor"
-                android:textSize="12dp"
+                android:textSize="@dimen/defaultTxtSize_small"
                 app:layout_constraintBottom_toTopOf="@id/tvPrice"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="spread"
-                tools:text="1个月" />
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="1个月1个月1个月1个月1个月" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvPrice"
@@ -46,11 +49,12 @@
                 android:gravity="center"
                 android:textColor="@color/defaultTitleColor"
                 android:textSize="16dp"
+                android:layout_marginTop="5dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/tvMonthPrice"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDuration"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="35" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -60,10 +64,10 @@
                 android:clickable="false"
                 android:enabled="false"
                 android:focusable="false"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:textColor="@color/defaultTitleColor"
                 android:textSize="11dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvPrice"
@@ -79,6 +83,8 @@
                 android:paddingTop="2dp"
                 android:paddingRight="3dp"
                 android:paddingBottom="2dp"
+                android:visibility="gone"
+                tools:visibility="visible"
                 app:ev_bottomLeft_radius="@dimen/corner_bg_common"
                 android:textColor="@color/white"
                 android:textSize="9sp"

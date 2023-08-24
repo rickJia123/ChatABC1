@@ -7,6 +7,8 @@ import river.chat.lib_core.utils.longan.deviceInfos
 import river.chat.lib_core.utils.longan.deviceModel
 import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.view.main.BaseViewModel
+import river.chat.lib_resource.model.vip.VipRightsBean
+import river.chat.lib_resource.model.vip.VipSkuBean
 
 /**
  * Created by beiyongChao on 2023/3/21
@@ -15,6 +17,8 @@ import river.chat.lib_core.view.main.BaseViewModel
 class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
 
     val feedBackResult = MutableLiveData<RequestResult<String>>()
+    val paySkuResult = MutableLiveData<RequestResult<MutableList<VipSkuBean>>>()
+    val vipRightResult = MutableLiveData<RequestResult<VipRightsBean>>()
 
 
     /**
@@ -37,6 +41,47 @@ class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                 it.message?.toast()
                 feedBackResult.value =
                     RequestResult(isSuccess = false, data = "")
+            }
+        )
+    }
+
+
+    /**
+     * 获取充值SkU列表
+     */
+    fun getPaySku(
+    ) {
+        launchFlow(
+            request = {
+                MainBusinessApiService.getPaySku()
+            },
+            dataResp = {
+                paySkuResult.value =
+                    RequestResult(isSuccess = true, data = it)
+            },
+            error = {
+                paySkuResult.value =
+                    RequestResult(isSuccess = false)
+            }
+        )
+    }
+
+    /**
+     * 获取权益对比
+     */
+    fun getVipRights(
+    ) {
+        launchFlow(
+            request = {
+                MainBusinessApiService.getPaySku()
+            },
+            dataResp = {
+                paySkuResult.value =
+                    RequestResult(isSuccess = true, data = it)
+            },
+            error = {
+                paySkuResult.value =
+                    RequestResult(isSuccess = false)
             }
         )
     }

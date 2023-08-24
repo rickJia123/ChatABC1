@@ -5,6 +5,7 @@ import retrofit2.http.POST
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApi
 import river.chat.lib_resource.model.MessageBean
+import river.chat.lib_resource.model.vip.VipSkuBean
 
 /**
  * Created by beiyongChao on 2023/2/20
@@ -30,5 +31,18 @@ interface MainBusinessApi : BaseApi {
      */
     @POST("/feedback/createFeedback")
     suspend fun confirmFeedback(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<String>
+
+    /**
+     *获取充值Sku
+     */
+    @POST("/recharge/energySkus")
+    suspend fun getPaySku(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<MutableList<VipSkuBean>>
+
+
+    /**
+     *获取充值Sku
+     */
+    @POST("/recharge/rightsDescr")
+    suspend fun getVipRights(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<String>
 
 }

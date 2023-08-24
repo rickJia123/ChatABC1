@@ -1,0 +1,165 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:539799601032331099",
+      "lastPropertyId": "4:3299279827164737762",
+      "name": "AppConfigBean",
+      "properties": [
+        {
+          "id": "1:223544001232350923",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7258472512051047643",
+          "name": "key",
+          "type": 9
+        },
+        {
+          "id": "3:1307476400940430586",
+          "name": "value",
+          "type": 9
+        },
+        {
+          "id": "4:3299279827164737762",
+          "name": "updateTime",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:1069039445943354056",
+      "lastPropertyId": "7:6687217608201026724",
+      "name": "MessageBean",
+      "properties": [
+        {
+          "id": "1:5758639708648024263",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:7683107321076086909",
+          "name": "parentId",
+          "type": 6
+        },
+        {
+          "id": "3:8096865667187015953",
+          "name": "content",
+          "type": 9
+        },
+        {
+          "id": "4:4885632200268447098",
+          "name": "time",
+          "type": 6
+        },
+        {
+          "id": "5:6594710080449457743",
+          "name": "status",
+          "type": 5
+        },
+        {
+          "id": "6:1671511414840295559",
+          "name": "source",
+          "type": 5
+        },
+        {
+          "id": "7:6687217608201026724",
+          "name": "avatar",
+          "type": 13
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:3304178247595158897",
+      "lastPropertyId": "13:947263676866663089",
+      "name": "User",
+      "properties": [
+        {
+          "id": "1:8913718433868874161",
+          "name": "token",
+          "type": 9
+        },
+        {
+          "id": "2:8638626642985697867",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "3:7401501980623931041",
+          "name": "cityId",
+          "type": 5
+        },
+        {
+          "id": "4:2885102859314555988",
+          "name": "inviteUserId",
+          "type": 5
+        },
+        {
+          "id": "5:805043673663595252",
+          "name": "sex",
+          "type": 5
+        },
+        {
+          "id": "6:9203999067026170904",
+          "name": "headImg",
+          "type": 13
+        },
+        {
+          "id": "7:4774423741912858509",
+          "name": "realName",
+          "type": 9
+        },
+        {
+          "id": "8:538447405974224951",
+          "name": "nickName",
+          "type": 9
+        },
+        {
+          "id": "9:2535929304971309486",
+          "name": "mobile",
+          "type": 9
+        },
+        {
+          "id": "10:944555066023254836",
+          "name": "isNew",
+          "type": 5
+        },
+        {
+          "id": "11:2519847796985928009",
+          "name": "vipExpireTimeStr",
+          "type": 9
+        },
+        {
+          "id": "12:2024869954982654919",
+          "name": "vipType",
+          "type": 5
+        },
+        {
+          "id": "13:947263676866663089",
+          "name": "remainTryTimes",
+          "type": 5
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:3304178247595158897",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

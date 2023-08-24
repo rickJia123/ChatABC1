@@ -37,7 +37,7 @@ class LoginActivity : BaseBindingViewModelActivity<ActivityLoginBinding, LoginVi
                     start2HomeAnim(binding)
                 }
                 LoginPage.LOGIN_PHONE -> {
-                    start2CodeAnim(binding)
+//                    start2CodeAnim(binding)
                 }
             }
         }
