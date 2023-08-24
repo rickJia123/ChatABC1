@@ -14,24 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/ivBg"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ImageContrastCheck"
-            tools:src="@mipmap/bg_login_phone" />
-
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/llInput"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="200dp"
             android:clipChildren="false"
             android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -40,16 +30,16 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputLayoutPhone"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:gravity="center_vertical"
+                app:boxBackgroundColor="@color/vipTrialLighter"
                 app:boxCornerRadiusBottomEnd="180dp"
                 app:boxCornerRadiusBottomStart="180dp"
                 app:boxCornerRadiusTopEnd="180dp"
                 app:boxCornerRadiusTopStart="180dp"
-                app:counterEnabled="true">
+                app:counterEnabled="true"
+                app:dividerColor="@color/vipMonthLighter">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inputPhone"
@@ -63,15 +53,17 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputLayoutCode"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
+                app:boxBackgroundColor="@color/vipTrialLighter"
                 app:boxCornerRadiusBottomEnd="180dp"
                 app:boxCornerRadiusBottomStart="180dp"
                 app:boxCornerRadiusTopEnd="180dp"
                 app:boxCornerRadiusTopStart="180dp"
-                app:counterEnabled="true">
+                app:counterEnabled="true"
+                app:dividerColor="@color/vipMonthLighter">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inputCode"
@@ -88,52 +80,33 @@
             android:id="@+id/tvGetCOde"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:gravity="center"
             android:text="获取验证码"
-            android:textColor="@color/defaultSubTitleColor"
-            android:textSize="@dimen/defaultTxtSize_1"
+            android:textStyle="bold"
+            android:textColor="@color/tipTxtColor"
+            android:textSize="@dimen/titleSize_1"
             app:layout_constraintLeft_toLeftOf="@+id/llInput"
             app:layout_constraintTop_toBottomOf="@+id/llInput" />
 
-        <river.chat.lib_core.view.roundview.EasyConstraintLayout
-            android:id="@+id/clLogin"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@color/defaultButtonColor"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:ev_radius="180dp"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btLogin"
+            style="@style/ButtonConfirm"
+            android:layout_marginBottom="150dp"
+            android:shadowRadius="180"
+            android:text="登录"
+            app:cornerRadius="@dimen/corner_button_common"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
-
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvConfirm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
-                android:text="登录"
-                android:textColor="@color/defaultTitleColor"
-                android:textSize="@dimen/titleSize_1"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </river.chat.lib_core.view.roundview.EasyConstraintLayout>
+            app:layout_constraintRight_toRightOf="parent" />
 
         <river.chat.business_user.view.LoginPolicyView
             android:id="@+id/viewLoginPolicy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            app:layout_constraintLeft_toLeftOf="@id/clLogin"
-            app:layout_constraintTop_toBottomOf="@id/clLogin" />
+            android:layout_marginTop="15dp"
+            app:layout_constraintLeft_toLeftOf="@id/btLogin"
+            app:layout_constraintTop_toBottomOf="@id/btLogin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

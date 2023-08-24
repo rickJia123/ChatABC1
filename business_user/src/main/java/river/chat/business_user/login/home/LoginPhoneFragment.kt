@@ -2,12 +2,17 @@ package river.chat.business_user.login.home
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import river.chat.businese_common.wx.WxManager
+import river.chat.business_user.R
 import river.chat.business_user.databinding.FragmentLoginPhoneBinding
 import river.chat.business_user.login.LoginStatus
 import river.chat.business_user.login.LoginViewModel
+import river.chat.lib_core.utils.exts.getColor
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.isPhone
 import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.other.CutdownUtils
 import river.chat.lib_core.view.main.dialog.BaseBindingDialogViewModelFragment
 
 class LoginPhoneFragment :
@@ -15,6 +20,13 @@ class LoginPhoneFragment :
 
 
     private var loginStatus = LoginStatus.PHONE_READY
+
+    //请求验证码间隔时间
+    private var mRequestCodeDuration = 60
+
+    private var mCurrentTotalTick = 0
+
+    private var mRequestDefaultStr = "获取验证码"
 
     @SuppressLint("ClickableViewAccessibility")
     override fun initDataBinding(binding: FragmentLoginPhoneBinding) {
@@ -30,8 +42,7 @@ class LoginPhoneFragment :
         viewModel.request.requestCode.observe(this) {
             if (it.isSuccess) {
                 loginStatus = LoginStatus.CODE_READY
-                mBinding?.tvConfirm?.text = "登录"
-//                start2CodeAnim()
+                onRequestCodeSuccess()
             }
         }
         viewModel.request.loginResult.observe(this) {
@@ -44,15 +55,36 @@ class LoginPhoneFragment :
 
     private fun initClick(binding: FragmentLoginPhoneBinding) {
         binding.tvGetCOde.singleClick {
-            checkPhoneNum {
-                viewModel.request.requestPhoneCode(getPhoneNum())
+            if (binding.tvGetCOde.text.toString() == mRequestDefaultStr) {
+                checkPhoneNum {
+                    viewModel.request.requestPhoneCode(getPhoneNum())
+                }
+            }
+
+        }
+        binding.btLogin.singleClick {
+            binding.viewLoginPolicy.checkSelected {
+                checkCode {
+                    viewModel.request.loginByPhone("0", getPhoneNum(), getCode())
+                }
             }
         }
-        binding.tvConfirm.singleClick {
-            checkCode {
-                viewModel.request.loginByPhone("0", getPhoneNum(), getCode())
-            }
-        }
+    }
+
+
+    @SuppressLint("SetTextI18n")
+    private fun onRequestCodeSuccess() {
+        mBinding?.tvGetCOde?.setTextColor(R.color.defaultSubTitleColor.getColor())
+        CutdownUtils.countDownCoroutines(((mRequestCodeDuration)),
+            scope = (context as AppCompatActivity).lifecycleScope,
+            onFinish = {
+                mBinding?.tvGetCOde?.text = mRequestDefaultStr
+                mBinding?.tvGetCOde?.setTextColor(R.color.defaultTitleColor.getColor())
+            },
+            onTick = {
+                mCurrentTotalTick += 1
+                mBinding?.tvGetCOde?.text = "剩余 " + (mRequestCodeDuration-mCurrentTotalTick) + "s"
+            })
     }
 
     override fun createViewModel() = getActivityScopeViewModel(LoginViewModel::class.java)
@@ -79,22 +111,7 @@ class LoginPhoneFragment :
         }
         callback.invoke()
     }
-//
-//    private fun start2CodeAnim() {
-//        mBinding?.inputLayoutPhone?.animate()
-//            ?.translationX(mAnimDistance * -1f)?.start()
-//        mBinding?.inputLayoutCode?.animate()
-//            ?.translationX(mAnimDistance * -1f)?.start()
-//        viewModel.updateLoginStatus(LoginStatus.CODE_READY)
-//        mBinding?.btConfirm?.text = "验证码登录"
-//    }
-//
-//    private fun start2HomeAnim() {
-//        mBinding?.inputLayoutPhone?.animate()?.translationX(0f)?.start()
-//        mBinding?.inputLayoutCode?.animate()?.translationX(0f)?.start()
-//        viewModel.updateLoginStatus(LoginStatus.PHONE_READY)
-//        mBinding?.btConfirm?.text = "获取验证码"
-//    }
+
 
     fun showLogin(activity: AppCompatActivity) {
         show(activity.supportFragmentManager, "LoginFragment")

@@ -10,6 +10,7 @@
         android:id="@+id/clRoot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clipChildren="false"
         android:paddingTop="0dp">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -18,7 +19,8 @@
             android:layout_height="16dp"
             android:src="@mipmap/mark_nosel"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvPolicy"
+            app:layout_constraintBottom_toBottomOf="@+id/tvPolicy"
           />
 
         <androidx.appcompat.widget.AppCompatTextView

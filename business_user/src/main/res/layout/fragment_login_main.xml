@@ -18,13 +18,13 @@
             android:id="@+id/ivBg"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            tools:src="@mipmap/bg_login"
+            android:layout_marginTop="200dp"
             android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ImageContrastCheck" />
+            tools:ignore="ImageContrastCheck"
+            tools:src="@mipmap/bg_login" />
         <ImageView
             android:id="@+id/ivLoginIcon"
             android:layout_width="200dp"
@@ -42,14 +42,14 @@
             android:layout_height="50dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+            android:layout_marginBottom="150dp"
             android:background="@color/defaultButtonColor"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             app:ev_radius="180dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivLoginIcon">
+            app:layout_constraintRight_toRightOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivWechat"
@@ -82,7 +82,7 @@
             android:id="@+id/viewLoginPolicy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             app:layout_constraintLeft_toLeftOf="@id/clLogin"
             app:layout_constraintTop_toBottomOf="@id/clLogin" />
 

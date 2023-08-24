@@ -105,7 +105,7 @@
             style="@style/ButtonConfirm"
             android:layout_marginBottom="20dp"
             android:text="提交"
-            app:cornerRadius="10dp"
+            app:cornerRadius="@dimen/corner_button_common"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
