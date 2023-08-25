@@ -48,4 +48,12 @@ interface UserApi : BaseApi {
         @Body body: Map<String, @JvmSuppressWildcards Any?>
     ): BaseRequestBean<Boolean>
 
+    /**
+     * 获取用户信息
+     */
+    @POST("/user/userInfo")
+    suspend fun refreshUserInfo(
+        @Body body: Map<String, @JvmSuppressWildcards Any?>
+    ): BaseRequestBean<User>
+
 }

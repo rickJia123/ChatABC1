@@ -21,14 +21,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:background="@drawable/bg_trial_light_solid_rectangle_20"
-            android:padding="2dp"
+            android:padding="3dp"
             android:text="@{item}"
             android:textColor="@color/vipTrialHeavier"
             android:textSize="@dimen/defaultTxtSize_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tool:text="都是多少" />
+            tool:text="都是多少都是多少都是多少都是多少都是多少都是多少都是多少都是多少都是多少都是多少都是多少都是多少都是多少都是多少都是多少都是多少" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

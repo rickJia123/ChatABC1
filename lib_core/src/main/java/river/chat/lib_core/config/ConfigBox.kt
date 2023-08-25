@@ -18,14 +18,29 @@ object ConfigBox : BaseBox<AppConfigBean>() {
     }
 
 
-    fun getConfig(key: String,default:String): String {
+    fun getConfigValue(key: String, default: String): String {
         return box.query {
             AppConfigBean_.key.equal(key)
         }.findFirst()?.value ?: default
     }
 
+    fun getConfig(key: String): AppConfigBean? {
+        return box.query {
+            AppConfigBean_.key.equal(key)
+        }.findFirst()
+    }
+
     fun putConfig(key: String, value: String): Long {
-        return box?.put(AppConfigBean(key = key, value = value, updateTime = System.currentTimeMillis())) ?: 0
+        box.query {
+            AppConfigBean_.key.equal(key)
+        }.findFirst()?.let { box.remove(it) }
+        return box?.put(
+            AppConfigBean(
+                key = key,
+                value = value,
+                updateTime = System.currentTimeMillis()
+            )
+        ) ?: 0
     }
 
 

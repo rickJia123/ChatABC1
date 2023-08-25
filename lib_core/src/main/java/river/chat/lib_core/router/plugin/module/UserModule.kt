@@ -47,4 +47,9 @@ interface UserPlugin : IProvider {
      */
     fun destroyAccount()
 
+    /**
+     * 刷新用户信息
+     */
+    fun refreshInfo()
+
 }

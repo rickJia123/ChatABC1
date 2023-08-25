@@ -75,7 +75,12 @@ class UserPluginIml : UserPlugin {
                     }
                 }
             }).show()
+    }
 
+    override fun refreshInfo() {
+        LoginViewModel().request.refreshUserInfo { result ->
+
+        }
     }
 
 

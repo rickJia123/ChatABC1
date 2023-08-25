@@ -66,15 +66,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <river.chat.businese_main.setting.SettingItem
-                android:id="@+id/viewSettingLogout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:item_left_title="退出账号"
-                app:item_type="icon"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
 
             <river.chat.businese_main.setting.SettingItem
                 android:id="@+id/viewCheckUpdate"
@@ -82,7 +74,6 @@
                 android:layout_height="wrap_content"
                 app:item_left_title="检查更新"
                 app:item_type="icon"
-                app:item_left_enable_arrow="false"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -93,7 +84,17 @@
                 android:layout_height="wrap_content"
                 app:item_left_title="注销账号"
                 app:item_type="icon"
-                app:item_left_color="@color/red"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <river.chat.businese_main.setting.SettingItem
+                android:id="@+id/viewSettingLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:item_left_title="退出账号"
+                app:item_type="icon"
+                app:item_left_color="@color/tipTxtColor"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

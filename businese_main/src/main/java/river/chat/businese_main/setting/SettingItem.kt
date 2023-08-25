@@ -32,12 +32,14 @@ class SettingItem @JvmOverloads constructor(
 
 
     private var tvName: AppCompatTextView? = null
+    private var tvTip: AppCompatTextView? = null
     private var tvSub: AppCompatTextView? = null
     private var ivRight: AppCompatImageView? = null
 
     private val DEFAULT_TITLE_COLOR = river.chat.lib_resource.R.color.defaultTitleColor.getColor()
     private var leftTitle: String? = null
     private var arrowEnable = true
+    private var subEnable = false
     private var leftTitleColor = DEFAULT_TITLE_COLOR
 
     init {
@@ -45,6 +47,7 @@ class SettingItem @JvmOverloads constructor(
         typedArray?.let {
             leftTitle = it.getString(R.styleable.SettingItem_item_left_title)
             arrowEnable = it.getBoolean(R.styleable.SettingItem_item_left_enable_arrow, true)
+            subEnable = it.getBoolean(R.styleable.SettingItem_item_left_enable_sub, false)
             leftTitleColor =
                 it.getColor(R.styleable.SettingItem_item_left_color, DEFAULT_TITLE_COLOR)
             when (it.getInt(R.styleable.SettingItem_item_type, TYPE_NONE)) {
@@ -52,18 +55,21 @@ class SettingItem @JvmOverloads constructor(
                     View.inflate(context, R.layout.item_setting_simple, this)
                     findView()
                 }
+
                 TYPE_SWITCH -> {
 //                    View.inflate(context, R.layout.layout_moreitem_3, this)
 //                    tvName = findViewById(R.id.tv_name)
 //                    scToggle = findViewById(R.id.sc_toggle)
                 }
+
                 else -> {
                     View.inflate(context, R.layout.item_setting_simple, this)
                     findView()
                 }
             }
             ivRight?.visibility = if (arrowEnable) View.VISIBLE else View.GONE
-            tvSub ?. visibility = if (arrowEnable) View . GONE else View . VISIBLE
+            tvSub?.visibility = if (subEnable) View.GONE else View.VISIBLE
+            tipVisible = false
 
         }
         typedArray.recycle()
@@ -77,6 +83,7 @@ class SettingItem @JvmOverloads constructor(
         tvSub = findViewById(R.id.tvSub)
 //        ivIcon = findViewById(R.id.iv_icon)
         ivRight = findViewById(R.id.ivRight)
+        tvTip = findViewById(R.id.tvTip)
     }
 
 
@@ -97,6 +104,13 @@ class SettingItem @JvmOverloads constructor(
             field = value
             value?.apply { ivRight?.loadSimple(value) }
         }
+
+    var tipVisible: Boolean? = false
+        set(value) {
+            field = value
+            value?.apply { tvTip?.visibility = if (value) View.VISIBLE else View.GONE }
+        }
+
 
     var click: () -> Unit = {}
         set(value) {

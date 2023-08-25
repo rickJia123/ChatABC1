@@ -6,10 +6,13 @@ import android.app.DownloadManager
 import android.net.Uri
 import android.os.Build
 import android.text.method.LinkMovementMethod
+import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import river.chat.businese_common.config.ServiceConfigManager
 import river.chat.common.R
 import river.chat.common.databinding.DialogUpdateBinding
+import river.chat.lib_core.config.AppLocalConfigKey
+import river.chat.lib_core.config.ConfigManager
 import river.chat.lib_core.utils.exts.dp2px
 import river.chat.lib_core.utils.exts.getColor
 import river.chat.lib_core.utils.exts.singleClick
@@ -58,6 +61,14 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
 
 
     override fun initDataBinding(binding: DialogUpdateBinding) {
+        dialog?.setOnKeyListener { dialog, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK && event.repeatCount == 0) {
+                closeDialog()
+                return@setOnKeyListener true
+            }
+            return@setOnKeyListener true
+
+        }
 
         apkLink = AppUpdateManager.getUpdateUrl()
 
@@ -111,13 +122,7 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
             }
         }
         binding.viewRoot.singleClick {
-            if (mIsForce) {
-                "需要先更新此次重要版本哦".toast()
-            } else {
-                if (downloadStatus == STATUS_READY) {
-                    closeDialog()
-                }
-            }
+            closeDialog()
         }
     }
 
@@ -158,11 +163,20 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
     }
 
     private fun closeDialog() {
-        dismiss()
+        if (mIsForce) {
+            "本次为重要更新，需要先更新此次版本才能进入哦".toast()
+        } else {
+            if (downloadStatus == STATUS_READY) {
+                dismissAllowingStateLoss()
+            }
+        }
     }
 
+
     fun show() {
-        dialogActivity.supportFragmentManager?.let { show(it, "DialogUpdateBinding") }
+        dialogActivity.supportFragmentManager.let {
+            ConfigManager.putAppConfig(AppLocalConfigKey.UPDATE_DIALOG_SHOW_TIME, true)
+            show(it, "DialogUpdateBinding") }
     }
 
     fun beginInstall() {

@@ -16,7 +16,9 @@ import river.chat.businese_main.vip.VipManager
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ActivityHomeBinding
 import river.chat.lib_core.event.EventCenter
+import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
+import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 
 
@@ -27,11 +29,13 @@ import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 @Route(path = HomeRouterConstants.HOME_MAIN)
 class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewModel>() {
 
+    var userPlugin = getPlugin<UserPlugin>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initOnHomeActivity()
         //请求配置信息
         ServiceConfigManager.loadAllConfig()
+        userPlugin.refreshInfo()
 
         AppUpdateManager.showUpdateAppDialog(this)
     }

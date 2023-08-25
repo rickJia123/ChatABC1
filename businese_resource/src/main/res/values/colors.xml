@@ -7,12 +7,15 @@
     //默认背景颜色
     <color name="defaultBgColor">#f1f3e3</color>
 
+    //弹窗背景色
+    <color name="dialogBgColor">#1A000000</color><!-- 10%透明度-->
+
     //默认文字颜色
     <color name="defaultTxtColor">#666666</color>
 
     <!--    Button-->
     //默认按钮颜色
-    <color name="defaultButtonColor">#FAE284</color>
+    <color name="defaultButtonColor">#fddfab</color>
 
     //默认提示按钮颜色
     <color name="tipButtonColor">#30FFFFFF</color>
@@ -65,10 +68,10 @@
 
     <!--会期颜色-->
     <color name="vipTrial">#e8e8e8</color>
-    <color name="vipTrialHeavier">#cfcece</color>
+    <color name="vipTrialHeavier">#505050</color>
     <color name="vipTrialLighter">#f7f7f7</color>
     <color name="vipMonth">#FFEA8D</color>
-    <color name="vipMonthHeaver">#f5cc19</color>
+    <color name="vipMonthHeaver">#f98c25</color>
     <color name="vipMonthLighter">#fffbe7</color>
     <color name="vipQuarter">#45b9bb</color>
     <color name="vipTabSel">#fceee3</color>

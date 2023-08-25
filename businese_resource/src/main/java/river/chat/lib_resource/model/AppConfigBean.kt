@@ -11,6 +11,7 @@ data class AppConfigBean(
     var id: Long = 0,
     var key: String = "",
     var value: String = "",
+    //更新时间
     var updateTime: Long
 ) : java.io.Serializable
 

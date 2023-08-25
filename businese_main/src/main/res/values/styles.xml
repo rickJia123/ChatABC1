@@ -96,6 +96,7 @@
         </attr>
         <attr name="item_left_title" format="string" />
         <attr name="item_left_enable_arrow" format="boolean" />
+        <attr name="item_left_enable_sub" format="boolean" />
         <attr name="item_left_color" format="reference" />
     </declare-styleable>
 

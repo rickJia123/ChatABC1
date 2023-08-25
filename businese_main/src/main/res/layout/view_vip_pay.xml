@@ -12,7 +12,7 @@
             android:id="@+id/clPrice"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/vipMonthHeaver"
+            android:background="@color/defaultButtonColor"
             app:ev_left_radius="@dimen/corner_button_common"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_weight="5"

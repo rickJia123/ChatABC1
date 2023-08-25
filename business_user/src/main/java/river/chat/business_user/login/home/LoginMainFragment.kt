@@ -15,7 +15,6 @@ import river.chat.lib_core.view.main.dialog.BaseBindingDialogViewModelFragment
 class LoginMainFragment :
     BaseBindingDialogViewModelFragment<FragmentLoginMainBinding, LoginViewModel>() {
 
-
     @SuppressLint("ClickableViewAccessibility")
     override fun initDataBinding(binding: FragmentLoginMainBinding) {
         super.initDataBinding(binding)
@@ -38,7 +37,7 @@ class LoginMainFragment :
             }
         }
         binding.tvPhone.singleClick {
-//            viewModel.loginPage.value = LoginPage.LOGIN_PHONE
+            viewModel.loginPage.value = LoginPage.LOGIN_PHONE
 //            LoginCenter.launchLoginPhoneDialog(mActivity as AppCompatActivity)
         }
     }

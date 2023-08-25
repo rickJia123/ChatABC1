@@ -45,14 +45,14 @@ class VipRightsView @JvmOverloads constructor(
             "普通用户",
             viewBinding.tvNormalType,
             viewBinding.tvNormalTitle,
-            "#9ce0b8",
+            "#505050",
             rightsBean.normal
         )
         updateVipMsg(
             "会员",
             viewBinding.tvVipType,
             viewBinding.tvVipTitle,
-            "#f5cc19",
+            "#f98c25",
             rightsBean.vip
         )
           vipViewModel?.vipRightList?.addAll(mutableListOf<String>().apply {

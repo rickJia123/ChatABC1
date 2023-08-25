@@ -18,6 +18,18 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <river.chat.lib_core.view.roundview.EasyTextView
+        android:id="@+id/tvTip"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:background="@color/tipTxtColor"
+        android:textSize="12dp"
+        android:layout_marginRight="2dp"
+        app:ev_radius="180dp"
+        app:layout_constraintRight_toLeftOf="@+id/tvSub"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSub"
+        app:layout_constraintTop_toTopOf="@+id/tvSub" />
+
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvSub"
@@ -26,8 +38,9 @@
         android:textColor="@color/defaultSubTitleColor"
         tool:text="v102"
         android:textSize="12dp"
+        android:layout_marginRight="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/ivRight"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -42,6 +55,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

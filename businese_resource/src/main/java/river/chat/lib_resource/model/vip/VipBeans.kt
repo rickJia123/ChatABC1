@@ -11,21 +11,22 @@ data class VipSkuBean(
     //vip 时长文案(三个月/一年)
     var skuName: String = "",
 
-    //vip 价格
-    var price: Float = 0.0f,
+    //仅1.1元/天
+    var promoText3: String ?= "",
+    var price: Float ?=0.0f,
 
     /**
      * 单位价格文案（7.6/天，25/月）
      */
-    var cheapText: String = "",
+    var promoText2: String ?= "",
 
     //折扣文案
-    var promoText: String = "",
+    var promoText1: String ?= "",
 
     var skuId: String = ""
 )
 
-///recharge/rightsDescr
+
 data class VipRightsBean(
     //会员权益名称
     var normal: MutableList<String> = mutableListOf(),

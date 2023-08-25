@@ -7,12 +7,15 @@ package river.chat.lib_core.config
 object AppLocalConfigKey {
     const val PLATFORM="ANDROID"
 
-
-
     /**
      * 是否同意隐私协议
      */
     const val PRIVACY_AGREE = "PRIVACY_AGREE"
+
+    /**
+     * 上次提示更新的时间
+     */
+    const val UPDATE_DIALOG_SHOW_TIME = "UPDATE_DIALOG_SHOW_TIME"
 
 }
 

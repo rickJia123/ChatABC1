@@ -54,6 +54,13 @@ object UserApiService : BaseApiService() {
     )
 
     /**
+     * 获取用户信息
+     */
+    suspend fun refreshUserInfo(): BaseRequestBean<User> = userApi.refreshUserInfo(
+        getBasedBody()
+    )
+
+    /**
      * 注销账户
      */
     suspend fun destroy(): BaseRequestBean<Boolean> = userApi.destroy(

@@ -56,14 +56,19 @@ class SettingsActivity :
             jump2Feedback()
         }
 
-        binding.viewCheckUpdate.singleClick {
-            if (!AppUpdateManager.isNeedUpdate()) {
-                "已是最新版本".toast()
-            } else {
-                AppUpdateManager.showUpdateAppDialog(this)
+        binding.viewCheckUpdate.apply {
+            singleClick {
+                if (!AppUpdateManager.isNeedUpdate()) {
+                    "已是最新版本".toast()
+                } else {
+                    AppUpdateManager.showUpdateAppDialog(this@SettingsActivity,true)
+                }
+
             }
+            sub = "V$appVersionName"
+            tipVisible = AppUpdateManager.isNeedUpdate()
         }
-        binding.viewCheckUpdate.sub = "V$appVersionName"
+
         binding.viewSettingDestory.singleClick {
             userPlugin.destroyAccount()
         }

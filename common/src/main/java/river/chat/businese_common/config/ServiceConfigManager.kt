@@ -39,7 +39,13 @@ object ServiceConfigManager {
         CommonRequestViewModel().requestDefaultConfig() {
             if (it.isSuccess) {
                 it.data?.let {
-                    ConfigManager.putAppConfig(AppServerConfigKey.REQUEST_APP_UPDATE_URL, it.appUrl)
+                    if (it.appUrl.isNotEmpty()) {
+                        ConfigManager.putAppConfig(
+                            AppServerConfigKey.REQUEST_APP_UPDATE_URL,
+                            it.appUrl
+                        )
+                    }
+
                     ConfigManager.putAppConfig(
                         AppServerConfigKey.REQUEST_APP_UPDATE_TYPE,
                         it.isForce
@@ -66,8 +72,6 @@ object ServiceConfigManager {
     fun updatePrivacyVersion(version: Int) {
         ConfigManager.putAppConfig(AppServerConfigKey.REQUEST_PRIVACY_VERSION, version)
     }
-
-
 
 
 }

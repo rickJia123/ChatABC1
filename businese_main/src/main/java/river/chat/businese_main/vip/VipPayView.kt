@@ -52,10 +52,8 @@ class VipPayView @JvmOverloads constructor(
                 setSize(21)
             })
         }
-//        var dayPrice: Float = tabBean.price / (tabBean.duration * 31)
-        //rick todo
-        var dayPrice=0f
-        mBinding.tvTip.text = "每天约" + dayPrice.autoIntOr1Str() + "元"
+
+        mBinding.tvTip.text = tabBean.promoText3
     }
 
     private fun initViews() {

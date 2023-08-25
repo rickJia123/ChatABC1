@@ -72,6 +72,7 @@ open abstract class BaseBindingDialogFragment<BINDING : ViewDataBinding> : Dialo
         lp.verticalMargin = onBottomMargin()
         lp.flags = lp.flags or onWindowsFlag()
         window.attributes = lp
+        dialog.setCanceledOnTouchOutside(false)
         if (onShowDialogWindowAnimations()) {
             window.setWindowAnimations(R.style.DialogStyle_Common)
         }
@@ -83,7 +84,7 @@ open abstract class BaseBindingDialogFragment<BINDING : ViewDataBinding> : Dialo
      * 默认 MATCH_PARENT
      */
     protected open fun onSetDialogWidth(): Int {
-        return ViewGroup.LayoutParams.WRAP_CONTENT
+        return ViewGroup.LayoutParams.MATCH_PARENT
     }
 
     /**
@@ -91,7 +92,7 @@ open abstract class BaseBindingDialogFragment<BINDING : ViewDataBinding> : Dialo
      * 默认 MATCH_PARENT(考虑大部分弹框底部都带有分享面板)
      */
     protected open fun onSetDialogHeight(): Int {
-        return ViewGroup.LayoutParams.WRAP_CONTENT
+        return ViewGroup.LayoutParams.MATCH_PARENT
     }
 
     /**

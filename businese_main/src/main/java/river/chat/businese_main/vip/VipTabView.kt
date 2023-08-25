@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewVipTabBinding
 import river.chat.lib_core.utils.exts.getDrawable
-import river.chat.lib_core.utils.exts.safeToString
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.exts.view.buildSpannableString
 import river.chat.lib_core.view.base.LifecycleView
@@ -121,11 +120,11 @@ class VipTabView @JvmOverloads constructor(
 
 
         tvDuration.text = bean.skuName
-        tvMonthPrice.text = bean.cheapText
+        tvMonthPrice.text = bean.promoText2
 
 
-        tvDiscount.text = bean.promoText
-        if (bean.promoText.isNullOrEmpty()) {
+        tvDiscount.text = bean.promoText1
+        if (bean.promoText1.isNullOrEmpty()) {
             tvDiscount.visibility = View.GONE
         } else {
             tvDiscount.visibility = View.VISIBLE
