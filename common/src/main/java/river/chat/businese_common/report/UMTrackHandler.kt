@@ -30,6 +30,7 @@ class UMTrackHandler : TrackHandler {
         return mutableMapOf<String, String>().apply {
             "appVersion" to appVersionName
             "userToken" to user.token
+            "userToken" to user.token
             //rick todo
 //            "userVipType" to user.vipType
             "deviceType" to deviceModel
