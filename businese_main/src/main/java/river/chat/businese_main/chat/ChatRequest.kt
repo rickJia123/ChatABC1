@@ -1,19 +1,19 @@
 package river.chat.businese_main.chat
 
 import androidx.lifecycle.MutableLiveData
-import river.chat.businese_common.report.CommonTrackerEventId.CHAT_REQUEST
-import river.chat.businese_common.report.CommonTrackerEventKeys.REQUEST_CONTENT
-import river.chat.businese_common.report.CommonTrackerEventKeys.REQUEST_TIME
+import river.chat.businese_common.constants.TrackerEventName
+import river.chat.businese_common.constants.TrackerKeys.REQUEST_CONTENT
+import river.chat.businese_common.constants.TrackerKeys.REQUEST_TIME
 import river.chat.businese_common.report.ReportManager
 import river.chat.businese_main.api.MainBusinessApiService
 import river.chat.businese_main.chat.hot.HotTipItemBean
 import river.chat.businese_main.message.MessageHelper.CHAT_TIP_FAIL
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
+import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.view.main.BaseViewModel
 import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_resource.model.MessageStatus
-import river.chat.lib_core.utils.longan.toast
 
 /**
  * Created by beiyongChao on 2023/3/21
@@ -38,7 +38,7 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             dataResp = {
                 var requestEndTime = System.currentTimeMillis()
                 ReportManager.reportEvent(
-                    CHAT_REQUEST,
+                    TrackerEventName.CHAT_REQUEST,
                     mapOf(
                         REQUEST_CONTENT to content,
                         REQUEST_TIME to (requestEndTime - requestBeginTime).toString()
@@ -55,7 +55,7 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             error = {
                 var requestEndTime = System.currentTimeMillis()
                 ReportManager.reportEvent(
-                    CHAT_REQUEST,
+                    TrackerEventName.CHAT_REQUEST,
                     mapOf(
                         REQUEST_CONTENT to "接口错误:${it.message}",
                         REQUEST_TIME to (requestEndTime - requestBeginTime).toString()

@@ -1,6 +1,9 @@
 package river.chat.business_user.api
 
 import androidx.lifecycle.MutableLiveData
+import river.chat.businese_common.constants.TrackerEventName
+import river.chat.businese_common.constants.TrackerKeys
+import river.chat.businese_common.utils.onClick
 import river.chat.business_user.constant.UserConstants
 import river.chat.business_user.user.RiverUserManager
 import river.chat.lib_core.net.request.BaseRequest
@@ -33,6 +36,10 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                 UserApiService.requestPhoneCode(number)
             },
             dataResp = {
+                onClick(
+                    TrackerEventName.PAGE_CLICK,
+                    TrackerKeys.CLICK_TYPE to "登录验证码页-点击查看条款"
+                )
                 requestCode.value = RequestResult(isSuccess = it ?: false, data = true)
             },
             error = {

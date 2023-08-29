@@ -11,7 +11,6 @@ import river.chat.businese_common.constants.CommonVmEvents
 import river.chat.businese_common.router.jump2Settings
 import river.chat.businese_common.router.jump2VipOpen
 import river.chat.businese_common.update.AppUpdateManager
-import river.chat.businese_common.utils.getOfficalName
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.vip.VipManager
 import river.chat.business_main.R
@@ -19,8 +18,6 @@ import river.chat.business_main.databinding.ActivityHomeBinding
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
-import river.chat.lib_core.tracker.TrackNode
-import river.chat.lib_core.tracker.trackNode
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 
@@ -34,9 +31,7 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
 
     var userPlugin = getPlugin<UserPlugin>()
     override fun onCreate(savedInstanceState: Bundle?) {
-        this.trackNode = TrackNode(
-           "home" to this.getOfficalName()
-        )
+
         super.onCreate(savedInstanceState)
         initOnHomeActivity()
         //请求配置信息

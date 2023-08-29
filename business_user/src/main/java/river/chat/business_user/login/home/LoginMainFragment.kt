@@ -2,6 +2,10 @@ package river.chat.business_user.login.home
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
+import river.chat.businese_common.constants.TrackerEventName
+import river.chat.businese_common.constants.TrackerKeys
+import river.chat.businese_common.utils.onClick
+import river.chat.businese_common.utils.onLoad
 import river.chat.businese_common.wx.WxManager
 import river.chat.business_user.databinding.FragmentLoginMainBinding
 import river.chat.business_user.login.LoginPage
@@ -17,8 +21,8 @@ class LoginMainFragment :
 
     @SuppressLint("ClickableViewAccessibility")
     override fun initDataBinding(binding: FragmentLoginMainBinding) {
+        onLoad()
         super.initDataBinding(binding)
-
         initClick(binding)
 
         observeRequest()
@@ -32,11 +36,23 @@ class LoginMainFragment :
     private fun initClick(binding: FragmentLoginMainBinding) {
 
         binding.clLogin.singleClick {
+            onClick(
+                TrackerEventName.PAGE_CLICK,
+                TrackerKeys.CLICK_TYPE to "登录首页-点击登录"
+            )
             binding.viewLoginPolicy.checkSelected {
+                onClick(
+                    TrackerEventName.PAGE_CLICK,
+                    TrackerKeys.CLICK_TYPE to "登录首页-点击查看条款"
+                )
                 WxManager.getLoginCode()
             }
         }
         binding.tvPhone.singleClick {
+            onClick(
+                TrackerEventName.PAGE_CLICK,
+                TrackerKeys.CLICK_TYPE to "登录首页-点击验证码登录"
+            )
             viewModel.loginPage.value = LoginPage.LOGIN_PHONE
 //            LoginCenter.launchLoginPhoneDialog(mActivity as AppCompatActivity)
         }

@@ -166,4 +166,11 @@ open class BaseRequest(var viewModel: BaseViewModel) {
     }
 
 
+    //埋点
+
+    protected fun beginRequest() {
+
+    }
+
+
 }

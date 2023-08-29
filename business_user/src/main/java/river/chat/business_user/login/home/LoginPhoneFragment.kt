@@ -3,6 +3,10 @@ package river.chat.business_user.login.home
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import river.chat.businese_common.constants.TrackerEventName
+import river.chat.businese_common.constants.TrackerKeys
+import river.chat.businese_common.utils.onClick
+import river.chat.businese_common.utils.onLoad
 import river.chat.businese_common.wx.WxManager
 import river.chat.business_user.R
 import river.chat.business_user.databinding.FragmentLoginPhoneBinding
@@ -30,6 +34,7 @@ class LoginPhoneFragment :
 
     @SuppressLint("ClickableViewAccessibility")
     override fun initDataBinding(binding: FragmentLoginPhoneBinding) {
+        onLoad()
         super.initDataBinding(binding)
 
         initClick(binding)
@@ -55,6 +60,10 @@ class LoginPhoneFragment :
 
     private fun initClick(binding: FragmentLoginPhoneBinding) {
         binding.tvGetCOde.singleClick {
+            onClick(
+                TrackerEventName.PAGE_CLICK,
+                TrackerKeys.CLICK_TYPE to "登录验证码页-点击获取验证码"
+            )
             if (binding.tvGetCOde.text.toString() == mRequestDefaultStr) {
                 checkPhoneNum {
                     viewModel.request.requestPhoneCode(getPhoneNum())
@@ -63,7 +72,15 @@ class LoginPhoneFragment :
 
         }
         binding.btLogin.singleClick {
+            onClick(
+                TrackerEventName.PAGE_CLICK,
+                TrackerKeys.CLICK_TYPE to "登录验证码页-点击登录"
+            )
             binding.viewLoginPolicy.checkSelected {
+                onClick(
+                    TrackerEventName.PAGE_CLICK,
+                    TrackerKeys.CLICK_TYPE to "登录验证码页-点击查看条款"
+                )
                 checkCode {
                     viewModel.request.loginByPhone("0", getPhoneNum(), getCode())
                 }
@@ -83,7 +100,7 @@ class LoginPhoneFragment :
             },
             onTick = {
                 mCurrentTotalTick += 1
-                mBinding?.tvGetCOde?.text = "剩余 " + (mRequestCodeDuration-mCurrentTotalTick) + "s"
+                mBinding?.tvGetCOde?.text = "剩余 " + (mRequestCodeDuration - mCurrentTotalTick) + "s"
             })
     }
 

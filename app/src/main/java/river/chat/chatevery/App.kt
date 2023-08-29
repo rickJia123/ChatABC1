@@ -7,14 +7,13 @@ import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.module
 import river.chat.businese_common.base.dataBaseModule
 import river.chat.businese_common.report.ReportManager
+import river.chat.businese_common.utils.getOfficalName
 import river.chat.lib_core.app.AppManager
 import river.chat.lib_core.app.BaseApplication
-import river.chat.lib_core.storage.file.StorageUtil
 import river.chat.lib_core.utils.log.LogUtil
-import river.chat.lib_core.utils.longan.AppInitializer
 import river.chat.lib_core.utils.longan.application
 import river.chat.lib_core.utils.longan.doOnActivityLifecycle
-import river.chat.lib_core.utils.longan.isAppDebug
+import river.chat.lib_core.view.main.activity.BaseActivity
 
 /**
  * Created by beiyongChao on 2023/3/1
@@ -41,14 +40,35 @@ class App : BaseApplication() {
 
         doOnActivityLifecycle(
             onActivityCreated = { activity, savedInstanceState ->
+
                 ARouter.getInstance().inject(activity)
-                //rick todo
-                ReportManager.reportPageStart(activity.javaClass.simpleName)
+
+
             },
             onActivityDestroyed = { activity ->
-                //rick todo
-                ReportManager.reportPageEnd(activity.javaClass.simpleName)
+
             },
+            onActivityResumed = { activity ->
+                try {
+                    activity as BaseActivity
+                    //rick todo
+                    ReportManager.reportPageStart(activity.getOfficalName())
+                } catch (e: Exception) {
+                    LogUtil.e("onActivityResumed", e)
+                }
+
+            },
+
+            onActivityPaused = { activity ->
+                try {
+                    activity as BaseActivity
+                    //rick todo
+                    ReportManager.reportPageEnd(activity.getOfficalName())
+                } catch (e: Exception) {
+                    LogUtil.e("onActivityResumed", e)
+                }
+
+            }
         )
 
     }

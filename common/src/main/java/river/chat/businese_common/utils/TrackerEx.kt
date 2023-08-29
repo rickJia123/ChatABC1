@@ -1,5 +1,7 @@
 package river.chat.businese_common.utils
 
+import android.view.View
+import androidx.fragment.app.DialogFragment
 import river.chat.businese_common.constants.TrackerEventName
 import river.chat.businese_common.constants.TrackerKeys
 import river.chat.lib_core.tracker.TrackNode
@@ -16,6 +18,7 @@ import river.chat.lib_core.view.main.fragment.BaseFragment
 /**
  *
  */
+
 fun <T : BaseActivity> T.getOfficalName(
 ): String {
     return (this::class.simpleName ?: "").let {
@@ -29,17 +32,30 @@ fun <T : BaseActivity> T.getOfficalName(
             "登录页"
         } else if (it.contains("ShareActivity")) {
             "分享弹窗"
+        } else {
+            it
         }
+    }
+}
+
+fun <T : BaseFragment> T.getOfficalName(
+): String {
+    return (this::class.simpleName ?: "").let {
+        if (it.contains("ChatFragment"))
+            "聊天页"
         else {
             it
         }
     }
 }
-fun <T : BaseFragment> T.getOfficalName(
+
+fun <T : DialogFragment> T.getOfficalName(
 ): String {
     return (this::class.simpleName ?: "").let {
-         if (it.contains("ChatFragment"))
-            "聊天页"
+        if (it.contains("LoginMainFragment"))
+            "登录首页"
+        else if (it.contains("LoginPhoneFragment"))
+            "登录验证码页"
         else {
             it
         }
@@ -52,7 +68,7 @@ fun <T : BaseFragment> T.getOfficalName(
 fun <T : BaseActivity> T.onLoad(
 ) {
     this.trackNode = TrackNode(
-        TrackerKeys.ACTIVITY_PAGE_NAME to this.getOfficalName()
+        TrackerKeys.LOAD_PAGE to this.getOfficalName()
     )
     this.postTrack(TrackerEventName.PAGE_LOAD)
 }
@@ -63,7 +79,42 @@ fun <T : BaseActivity> T.onLoad(
 fun <T : BaseFragment> T.onLoad(
 ) {
     this.trackNode = TrackNode(
-        TrackerKeys.FRAGMENT_PAGE_NAME to this.getOfficalName()
+        TrackerKeys.LOAD_PAGE to this.getOfficalName()
     )
     this.postTrack(TrackerEventName.PAGE_LOAD)
+}
+
+/**
+ * dialogFragment 曝光埋点
+ */
+fun <T : DialogFragment> T.onLoad(
+) {
+    this.trackNode = TrackNode(
+        TrackerKeys.LOAD_PAGE to this.getOfficalName()
+    )
+    this.postTrack(TrackerEventName.PAGE_LOAD)
+}
+
+
+
+/**
+ * dialogFragment 点击埋点
+ */
+fun <T : View> T.onClick(trackEvent: String, vararg params: Pair<String, String>) {
+    this.trackNode = TrackNode { nodeParams ->
+        nodeParams.putAll(mutableMapOf(*params))
+    }
+    this.postTrack(trackEvent)
+}
+
+
+/**
+ * dialogFragment 点击埋点
+ */
+fun <T : DialogFragment> T.onClick(trackEvent: String, vararg params: Pair<String, String>) {
+    this.trackNode = TrackNode { nodeParams ->
+        nodeParams.putAll(mutableMapOf(*params))
+        nodeParams.put(TrackerKeys.CLICK_PAGE, this.getOfficalName())
+    }
+    this.postTrack(trackEvent)
 }

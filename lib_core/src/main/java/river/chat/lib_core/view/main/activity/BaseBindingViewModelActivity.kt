@@ -4,6 +4,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import river.chat.lib_core.BR
+import river.chat.lib_core.tracker.TrackNode
+import river.chat.lib_core.tracker.trackNode
 import river.chat.lib_core.view.ktx.bind
 import river.chat.lib_core.view.main.BaseViewModel
 import river.chat.lib_core.view.main.OnEventListener
@@ -30,6 +32,8 @@ open abstract class BaseBindingViewModelActivity<BINDING : ViewDataBinding, VM :
         // 具体业务实现中在实际的布局 xml 文件中声明当前视图的 ViewModel 变量为 vm 即可自动进行绑定。
         viewModel.bind(this)
         binding.setVariable(BR.vm, viewModel)
+
+
     }
 
 

@@ -18,22 +18,25 @@ class UMTrackHandler : TrackHandler {
 
     override fun onEvent(context: Context, eventId: String, params: MutableMap<String, String>) {
 
+        var commonMap = getCommonTrackerMap()
         params.apply {
-            putAll(getCommonTrackerMap())
+            putAll(commonMap)
         }
         ReportManager.reportEvent(eventId, params)
     }
 
-    private fun getCommonTrackerMap(): Map<String, String> {
+    private fun getCommonTrackerMap(): MutableMap<String, String> {
         //rick todo
         var user = getPlugin<UserPlugin>().getUser()
-        return mutableMapOf<String, String>().apply {
-            "appVersion" to appVersionName
-            "userToken" to user.token
-            "userToken" to user.token
-            //rick todo
-//            "userVipType" to user.vipType
-            "deviceType" to deviceModel
-        }
+        var commonMap = mutableMapOf<String, String>()
+            .apply {
+                put("appVersion", appVersionName)
+                put(
+                    "userMsg",
+                    "昵称:" + user.nickName + "----vip类型:" + user.vipType + "----token:" + user.token
+                )
+                put("deviceType", deviceModel)
+            }
+        return commonMap
     }
 }

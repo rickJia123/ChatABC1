@@ -5,8 +5,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import river.chat.businese_common.report.CommonTrackerEventId
-import river.chat.businese_common.report.CommonTrackerEventKeys
+import river.chat.businese_common.constants.TrackerEventName
+import river.chat.businese_common.constants.TrackerKeys
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewVipPayBinding
 import river.chat.lib_core.tracker.TrackNode
@@ -72,8 +72,8 @@ class VipPayView @JvmOverloads constructor(
     private fun initClick() {
         mBinding.tvPrice.singleClick {
             postTrack(
-                CommonTrackerEventId.PAGE_CLICK,
-                TrackNode(CommonTrackerEventKeys.CLICK_TYPE to "支付按钮:" + mTabBean?.skuName)
+                TrackerEventName.PAGE_CLICK,
+                TrackNode(TrackerKeys.CLICK_TYPE to "支付按钮:" + mTabBean?.skuName)
             )
         }
     }

@@ -10,6 +10,7 @@ import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.constants.CommonVmEvents
 import river.chat.businese_common.router.jump2Settings
 import river.chat.businese_common.update.AppUpdateManager
+import river.chat.businese_common.utils.onLoad
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.message.MessageHelper
 import river.chat.businese_main.vip.VipManager
@@ -36,6 +37,7 @@ class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, Vip
     }
 
     override fun initDataBinding(binding: ActivityVipOpenBinding) {
+        onLoad()
         super.initDataBinding(binding)
         binding.toolBar.setTitle("会员中心")
 
