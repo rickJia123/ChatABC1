@@ -21,11 +21,11 @@ class TrackParams {
 
   fun put(key: String, value: Any?): TrackParams = apply { map[key] = value.toString()}
 
-  fun putAll(params: Map<String, String>): TrackParams = apply { map.putAll(params) }
+  fun putAll(params: MutableMap<String, String>): TrackParams = apply { map.putAll(params) }
 
   fun get(key: String): String? = map[key]
 
-  fun toMap(): Map<String, String> = map
+  fun toMap(): MutableMap<String, String> = map
 
   internal fun internalRemove(key: String) = apply { map.remove(key) }
 

@@ -1,12 +1,9 @@
 package river.chat.businese_common.report
 
-import androidx.appcompat.app.AppCompatActivity
+import android.util.Log
 import com.umeng.analytics.MobclickAgent
-import river.chat.lib_core.config.AppLocalConfigKey
-import river.chat.lib_core.config.AppServerConfigKey
-import river.chat.lib_core.config.ConfigManager
-import river.chat.lib_core.config.ConfigManager.FLAG_FALSE
-import river.chat.lib_core.config.ConfigManager.FLAG_TRUE
+import river.chat.common.BuildConfig
+import river.chat.lib_core.utils.longan.application
 
 /**
  * Created by beiyongChao on 2023/7/29
@@ -14,6 +11,15 @@ import river.chat.lib_core.config.ConfigManager.FLAG_TRUE
  */
 object ReportManager {
 
+    /**
+     * 上报自定义事件
+     */
+    fun reportEvent(eventId: String, params: Map<String, String>) {
+        if (BuildConfig.DEBUG) {
+            Log.d("Tracker", "onEvent: eventId = $eventId, params = $params")
+        }
+        MobclickAgent.onEvent(application, eventId, params)
+    }
 
     /**
      * 上报登录注册
@@ -32,6 +38,13 @@ object ReportManager {
             //登出
             MobclickAgent.onProfileSignOff()
         }
+    }
 
+    fun reportPageStart(viewName: String) {
+        MobclickAgent.onPageStart(viewName)
+    }
+
+    fun reportPageEnd(viewName: String) {
+        MobclickAgent.onPageEnd(viewName)
     }
 }

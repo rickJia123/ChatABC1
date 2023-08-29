@@ -1,5 +1,6 @@
 package river.chat.chatevery.splash
 
+import com.umeng.commonsdk.UMConfigure
 import river.chat.businese_common.router.jump2Main
 import river.chat.businese_main.home.HomeActivity
 import river.chat.chatevery.databinding.ActivitySplashBinding
@@ -18,6 +19,7 @@ class SplashActivity : BaseBindingViewModelActivity<ActivitySplashBinding, Splas
     override fun initDataBinding(binding: ActivitySplashBinding) {
         super.initDataBinding(binding)
         PrivacyManager.tryShowPrivacyDialog(this) {
+            UMConfigure.submitPolicyGrantResult(applicationContext, it)
             if (it) {
                 binding.tvSplash.postDelayed({
                     jump2Main()

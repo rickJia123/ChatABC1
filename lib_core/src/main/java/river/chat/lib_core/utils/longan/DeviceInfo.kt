@@ -26,6 +26,8 @@ inline val deviceManufacturer: String get() = Build.MANUFACTURER
 
 inline val deviceModel: String get() = Build.MODEL
 
+  var deviceOaid:String=""
+
 inline fun deviceInfos()=
   """
         手机型号:${Build.MODEL}

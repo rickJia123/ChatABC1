@@ -35,6 +35,6 @@ object VipManager {
         return (user.remainTryTimes > 0 && user.vipType == VipType.TRIAL.value) || user.vipType == VipType.VIP.value
     }
 
-      fun getVipType( ) =getPlugin<UserPlugin>().getUser().vipType
+    fun getVipType() = getPlugin<UserPlugin>().getUser().vipType
 
 }

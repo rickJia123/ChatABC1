@@ -94,7 +94,13 @@ fun Fragment.postTrack(eventName: String, vararg classes: Class<*>) =
 fun View.postTrack(eventId: String, vararg classes: Class<*>) =
     trackHandler?.onEvent(application, eventId, collectTrack(*classes))
 
-fun View.collectTrack(vararg classes: Class<*>): Map<String, String> {
+fun View.postTrack(eventId: String, node: TrackNode, vararg classes: Class<*>) {
+    this.trackNode = node
+    trackHandler?.onEvent(application, eventId, collectTrack(*classes))
+}
+
+
+fun View.collectTrack(vararg classes: Class<*>): MutableMap<String, String> {
     var view: View? = this
     val params = TrackParams()
     val nodeList = mutableListOf<TrackNode>()

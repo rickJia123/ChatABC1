@@ -12,10 +12,8 @@ import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import river.chat.lib_core.app.BaseApplication;
 import river.chat.lib_core.businese.BusineseDateUtils;
 import river.chat.lib_core.utils.longan.ApplicationKt;
-import river.chat.lib_core.utils.system.DeviceUtil;
 
 /**
  * Created by Circle on 2019-06-28

@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import androidx.core.content.ContextCompat
 import river.chat.lib_core.app.BaseApplication
+import river.chat.lib_core.utils.longan.pxToDp
 import river.chat.lib_core.utils.system.DisplayUtil
 
 
@@ -46,7 +47,7 @@ fun Int.getString(): String {
 /**
  * dp转px
  */
-fun Float.dp2px(): Int {
+fun Float.dp2px(): Int { 
     return DisplayUtil.dp2px(this)
 }
 

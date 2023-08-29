@@ -14,28 +14,25 @@
  * limitations under the License.
  */
 
-package river.chat.businese_common.reacker.track;
+package river.chat.businese_common.report;
 
-import android.content.Context;
-import android.util.Log;
 
-import java.util.Map;
 
 import androidx.annotation.NonNull;
-import river.chat.common.BuildConfig;
-import river.chat.lib_core.tracker.TrackHandler;
+import river.chat.lib_core.tracker.TrackNode;
+import river.chat.lib_core.tracker.TrackParams;
 
 /**
  * @author Dylan Cai
  */
-public class UMTrackHandler implements TrackHandler {
+public class ResultTrackNode implements TrackNode {
 
-    @Override
-    public void onEvent(@NonNull Context context,
-                        @NonNull String eventId,
-                        @NonNull Map<String, String> params) {
-        if (BuildConfig.DEBUG) {
-            Log.d("Tracker", "onEvent: eventId = " + eventId + ", params = " + params);
-        }
+  public String result = null;
+
+  @Override
+  public void fillTackParams(@NonNull TrackParams params) {
+    if (result != null) {
+      params.put("result", result);
     }
+  }
 }

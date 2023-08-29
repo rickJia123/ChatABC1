@@ -1,6 +1,10 @@
 package river.chat.businese_main.chat
 
 import androidx.lifecycle.MutableLiveData
+import river.chat.businese_common.report.CommonTrackerEventId.CHAT_REQUEST
+import river.chat.businese_common.report.CommonTrackerEventKeys.REQUEST_CONTENT
+import river.chat.businese_common.report.CommonTrackerEventKeys.REQUEST_TIME
+import river.chat.businese_common.report.ReportManager
 import river.chat.businese_main.api.MainBusinessApiService
 import river.chat.businese_main.chat.hot.HotTipItemBean
 import river.chat.businese_main.message.MessageHelper.CHAT_TIP_FAIL
@@ -26,12 +30,20 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
      * 获取GPT 答案
      */
     fun requestAi(content: String, msgId: String) {
+        var requestBeginTime = System.currentTimeMillis()
         launchFlow(
             request = {
                 MainBusinessApiService.requestAi(content, msgId)
             },
             dataResp = {
-//                it.toString().toast()
+                var requestEndTime = System.currentTimeMillis()
+                ReportManager.reportEvent(
+                    CHAT_REQUEST,
+                    mapOf(
+                        REQUEST_CONTENT to content,
+                        REQUEST_TIME to (requestEndTime - requestBeginTime).toString()
+                    )
+                )
                 chatRequestResult.value =
                     RequestResult(isSuccess = true, data = MessageBean().apply {
                         this.content = it?.content
@@ -41,6 +53,14 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                     })
             },
             error = {
+                var requestEndTime = System.currentTimeMillis()
+                ReportManager.reportEvent(
+                    CHAT_REQUEST,
+                    mapOf(
+                        REQUEST_CONTENT to "接口错误:${it.message}",
+                        REQUEST_TIME to (requestEndTime - requestBeginTime).toString()
+                    )
+                )
                 it.message?.toast()
                 chatRequestResult.value =
                     RequestResult(isSuccess = false, data = MessageBean().apply {
@@ -52,7 +72,6 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             }
         )
     }
-
 
 
     /**
@@ -69,7 +88,7 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                     RequestResult(isSuccess = true, data = mutableListOf<HotTipItemBean>().apply {
                         it?.forEach { item ->
                             add(HotTipItemBean().apply {
-                                this.hotQuestion =item
+                                this.hotQuestion = item
                             })
                         }
                     })

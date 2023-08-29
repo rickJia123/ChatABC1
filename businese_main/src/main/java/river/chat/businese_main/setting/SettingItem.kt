@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import river.chat.business_main.R
 import river.chat.lib_core.utils.exts.getColor
+import river.chat.lib_core.utils.exts.getDrawable
 import river.chat.lib_core.utils.exts.view.loadSimple
 
 
@@ -76,6 +77,7 @@ class SettingItem @JvmOverloads constructor(
 
         tvName?.text = leftTitle
         tvName?.setTextColor(leftTitleColor)
+        setBackgroundColor(R.color.white.getColor())
     }
 
     private fun findView() {

@@ -6,11 +6,14 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.module
 import river.chat.businese_common.base.dataBaseModule
+import river.chat.businese_common.report.ReportManager
 import river.chat.lib_core.app.AppManager
 import river.chat.lib_core.app.BaseApplication
 import river.chat.lib_core.storage.file.StorageUtil
 import river.chat.lib_core.utils.log.LogUtil
+import river.chat.lib_core.utils.longan.AppInitializer
 import river.chat.lib_core.utils.longan.application
+import river.chat.lib_core.utils.longan.doOnActivityLifecycle
 import river.chat.lib_core.utils.longan.isAppDebug
 
 /**
@@ -25,7 +28,7 @@ class App : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        application=this
+        application = this
 
 
         // 启动 koin
@@ -35,6 +38,18 @@ class App : BaseApplication() {
             // 添加 appModule
             modules(dataBaseModule, appModule)
         }
+
+        doOnActivityLifecycle(
+            onActivityCreated = { activity, savedInstanceState ->
+                ARouter.getInstance().inject(activity)
+                //rick todo
+                ReportManager.reportPageStart(activity.javaClass.simpleName)
+            },
+            onActivityDestroyed = { activity ->
+                //rick todo
+                ReportManager.reportPageEnd(activity.javaClass.simpleName)
+            },
+        )
 
     }
 

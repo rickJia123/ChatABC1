@@ -6,15 +6,18 @@ import com.tencent.tauth.Tencent
 import com.umeng.commonsdk.UMConfigure
 import com.yl.lib.sentry.hook.PrivacySentry
 import com.yl.lib.sentry.hook.PrivacySentryBuilder
-import river.chat.businese_common.reacker.track.UMTrackHandler
+import river.chat.businese_common.report.UMTrackHandler
 import river.chat.businese_common.wx.WxManager
 import river.chat.lib_core.storage.file.StorageUtil
 import river.chat.lib_core.tracker.initTracker
 import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.utils.longan.application
+import river.chat.lib_core.utils.longan.deviceOaid
 import river.chat.lib_core.utils.longan.isAppDebug
+import river.chat.lib_core.utils.longan.log
 import river.chat.lib_resource.AccountsConstants
 import river.chat.lib_umeng.common.UmInitConfig
+
 
 /**
  * Created by beiyongChao on 2023/6/7
@@ -66,6 +69,13 @@ object InitManager {
         umInitConfig.UMinit(application)
         //QQ官方sdk授权
         Tencent.setIsPermissionGranted(true)
+        UMConfigure.getOaid(
+            application
+        ) { oaid ->
+            deviceOaid = oaid ?: ""
+            "initUmeng oaid".log()
+        }
+
 
     }
 

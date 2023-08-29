@@ -91,7 +91,7 @@ public class UmInitConfig {
         // 自定义页面进行页面统计，直接调用MobclickAgent.onPageStart/MobclickAgent.onPageEnd
         // 手动埋点即可。开发者还需要在每一个Activity的onResume函数中手动调用MobclickAgent.onResume接口，
         // 在Activity的onPause函数中手动调用MobclickAgent.onPause接口。
-        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
+        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.MANUAL);
 
     }
 

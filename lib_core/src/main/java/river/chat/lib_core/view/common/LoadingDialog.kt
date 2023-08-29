@@ -10,7 +10,6 @@ import river.chat.lib_core.view.main.dialog.BaseBindingDialogFragment
  */
 class LoadingDialog : BaseBindingDialogFragment<FragmentLoadingBinding>() {
 
-
     companion object {
         private var dialog: LoadingDialog? = null
         fun launch(

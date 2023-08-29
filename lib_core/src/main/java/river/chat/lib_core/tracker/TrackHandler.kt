@@ -19,5 +19,5 @@ package river.chat.lib_core.tracker
 import android.content.Context
 
 fun interface TrackHandler {
-  fun onEvent(context: Context, eventId: String, params: Map<String, String>)
+  fun onEvent(context: Context, eventId: String, params: MutableMap<String, String>)
 }

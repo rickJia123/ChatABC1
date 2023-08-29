@@ -33,7 +33,6 @@ class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, Vip
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun initDataBinding(binding: ActivityVipOpenBinding) {

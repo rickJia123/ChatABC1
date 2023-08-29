@@ -25,13 +25,13 @@ fun interface TrackNode {
 }
 
 fun TrackNode(vararg params: Pair<String, String>): TrackNode =
-  TrackNode { it.putAll(mapOf(*params)) }
+  TrackNode { it.putAll(mutableMapOf(*params)) }
 
 fun Activity.PageTrackNode(vararg params: Pair<String, String>): TrackNode =
-  PageTrackNode(emptyMap()) { it.putAll(mapOf(*params)) }
+  PageTrackNode(emptyMap()) { it.putAll(mutableMapOf(*params)) }
 
-fun Activity.PageTrackNode(referrerKeyMap: Map<String, String>, vararg params: Pair<String, String>): TrackNode =
-  PageTrackNode( ) { it.putAll(mapOf(*params)) }
+fun Activity.PageTrackNode(referrerKeyMap: MutableMap<String, String>, vararg params: Pair<String, String>): TrackNode =
+  PageTrackNode( ) { it.putAll(mutableMapOf(*params)) }
 
 @Suppress("UNCHECKED_CAST")
 fun Activity.PageTrackNode(referrerKeyMap: Map<String, String> = emptyMap(), trackNode: TrackNode = TrackNode { }): TrackNode {
