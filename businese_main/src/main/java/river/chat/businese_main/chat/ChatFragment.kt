@@ -2,6 +2,7 @@ package river.chat.businese_main.chat
 
 import androidx.lifecycle.lifecycleScope
 import org.koin.android.ext.android.inject
+import river.chat.businese_common.utils.onLoad
 import river.chat.businese_main.home.HomeViewModel
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.message.MessageCenter.checkMsgStatus
@@ -21,6 +22,7 @@ class ChatFragment :
     private val userPlugin: UserPlugin by inject()
 
     override fun initDataBinding(binding: FragmentChatBinding) {
+        onLoad()
         super.initDataBinding(binding)
         initMsgService(binding)
         "".toast()

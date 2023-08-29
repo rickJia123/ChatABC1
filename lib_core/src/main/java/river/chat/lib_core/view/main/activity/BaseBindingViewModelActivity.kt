@@ -53,4 +53,6 @@ open abstract class BaseBindingViewModelActivity<BINDING : ViewDataBinding, VM :
     override fun onEvent(eventId: Int) {
 
     }
+
+
 }

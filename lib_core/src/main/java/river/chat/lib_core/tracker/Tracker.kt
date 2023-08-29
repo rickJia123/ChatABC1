@@ -25,6 +25,7 @@ import androidx.activity.ComponentActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import com.alibaba.android.arouter.facade.Postcard
 import river.chat.lib_core.R
 import java.io.Serializable
 
@@ -62,6 +63,12 @@ fun Intent.putReferrerTrackNode(activity: Activity): Intent =
     putReferrerTrackNode(activity.window.decorView)
 
 fun Intent.putReferrerTrackNode(fragment: Fragment): Intent = putReferrerTrackNode(fragment.view)
+
+fun Postcard.putReferrerTrackNode(activity: Activity): Postcard =
+    activity.window.decorView.let {
+        withBundle(KEY_TRACK_PARAMS, it.createTrackBundle())
+    }
+
 
 fun Intent.putReferrerTrackNode(view: View?): Intent = apply {
     view?.let { putExtras(it.createTrackBundle()) }

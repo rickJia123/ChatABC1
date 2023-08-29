@@ -3,17 +3,16 @@ package river.chat.businese_main.setting
 import com.alibaba.android.arouter.facade.annotation.Route
 import org.koin.android.ext.android.inject
 import river.chat.businese_common.router.jump2Feedback
-import river.chat.businese_common.ui.view.dialog.SimpleDialog
-import river.chat.businese_common.ui.view.dialog.SimpleDialogConfig
 import river.chat.businese_common.update.AppUpdateManager
-import river.chat.businese_common.update.UpdateAppDialog
+import river.chat.businese_common.utils.onLoad
 import river.chat.business_main.databinding.ActivitySettingsBinding
 import river.chat.lib_core.router.plugin.module.HomePlugin
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.exts.singleClick
-import river.chat.lib_core.utils.longan.*
-import river.chat.lib_core.view.main.activity.BaseActivity
+import river.chat.lib_core.utils.longan.appVersionName
+import river.chat.lib_core.utils.longan.mainThread
+import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 import river.chat.lib_core.webview.WebViewHelper
 
@@ -31,6 +30,7 @@ class SettingsActivity :
 
 
     override fun initDataBinding(binding: ActivitySettingsBinding) {
+        onLoad()
         super.initDataBinding(binding)
         mainThread { }
 

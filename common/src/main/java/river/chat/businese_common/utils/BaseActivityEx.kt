@@ -1,4 +1,4 @@
-package river.chat.lib_core.view.main
+package river.chat.businese_common.utils
 
 import river.chat.lib_core.utils.permission.permission.PermissionConstants
 import river.chat.lib_core.view.main.activity.BaseActivity
