@@ -2,8 +2,8 @@ package river.chat.lib_core.config
 
 import io.objectbox.kotlin.query
 import river.chat.lib_core.storage.database.BaseBox
-import river.chat.lib_resource.model.AppConfigBean
-import river.chat.lib_resource.model.AppConfigBean_
+import river.chat.lib_resource.model.database.AppConfigBean
+import river.chat.lib_resource.model.database.AppConfigBean_
 
 /**
  * Created by beiyongChao on 2023/5/6

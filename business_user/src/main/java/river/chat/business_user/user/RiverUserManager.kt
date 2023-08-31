@@ -3,7 +3,7 @@ package river.chat.business_user.user
 import river.chat.businese_common.dataBase.UserBox
 import river.chat.businese_common.report.ReportManager
 import river.chat.businese_common.router.jump2Main
-import river.chat.lib_resource.model.User
+import river.chat.lib_resource.model.database.User
 import river.chat.lib_core.utils.longan.logConfig
 import river.chat.lib_core.utils.longan.toast
 

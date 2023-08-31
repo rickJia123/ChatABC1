@@ -2,7 +2,7 @@ package river.chat.lib_core.router.plugin.module
 
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.template.IProvider
-import river.chat.lib_resource.model.User
+import river.chat.lib_resource.model.database.User
 
 /**
  * Created by beiyongChao on 2023/3/7

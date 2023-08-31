@@ -1,4 +1,4 @@
-package river.chat.lib_resource.model
+package river.chat.lib_resource.model.database
 
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id

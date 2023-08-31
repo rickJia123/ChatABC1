@@ -61,7 +61,7 @@ object MessageCenter {
         historyList.forEach {
             var msg = it
             if (msg.status == MessageStatus.LOADING) {
-                msg.status = MessageStatus.FAIL
+                msg.status = MessageStatus.FAIL_COMMON
                 MessageBox.saveMsg(it)
             }
         }
@@ -76,8 +76,11 @@ object MessageCenter {
         mActivity?.let {
             mMsgViewModel?.request?.chatRequestResult?.observe(it) {
 //                if (it.isSuccess) {
+                var msg = if (it.isSuccess) it.data ?: MessageBean() else MessageBean().apply {
+                    status = MessageStatus.FAIL_COMMON
+                }
                 ("MessageCenter observerMsg:" + it.data).log()
-                distributeMsg(buildAiAnswerMsg(it.data ?: MessageBean()))
+                distributeMsg(buildAiAnswerMsg(msg))
 //                }
                 //请求成功后，更新vip状态
                 if (it.isSuccess) {

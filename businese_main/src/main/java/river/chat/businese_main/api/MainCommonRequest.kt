@@ -4,11 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.utils.longan.deviceInfos
-import river.chat.lib_core.utils.longan.deviceModel
 import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.view.main.BaseViewModel
-import river.chat.lib_resource.model.vip.VipRightsBean
-import river.chat.lib_resource.model.vip.VipSkuBean
+import river.chat.lib_resource.model.VipRightsBean
+import river.chat.lib_resource.model.VipSkuBean
 
 /**
  * Created by beiyongChao on 2023/3/21
@@ -32,10 +31,10 @@ class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             request = {
                 MainBusinessApiService.confirmFeedback(content, contact, deviceInfos())
             },
-            dataResp = {
+            dataResp = { data, time ->
 //                it.toString().toast()
                 feedBackResult.value =
-                    RequestResult(isSuccess = true, data = it)
+                    RequestResult(isSuccess = true, data = data)
             },
             error = {
                 it.message?.toast()
@@ -55,9 +54,9 @@ class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             request = {
                 MainBusinessApiService.getPaySku()
             },
-            dataResp = {
+            dataResp = { data, time ->
                 paySkuResult.value =
-                    RequestResult(isSuccess = true, data = it)
+                    RequestResult(isSuccess = true, data = data)
             },
             error = {
                 paySkuResult.value =
@@ -75,9 +74,9 @@ class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             request = {
                 MainBusinessApiService.getVipRights()
             },
-            dataResp = {
+            dataResp = { data, time ->
                 vipRightResult.value =
-                    RequestResult(isSuccess = true, data = it)
+                    RequestResult(isSuccess = true, data = data)
             },
             error = {
                 vipRightResult.value =

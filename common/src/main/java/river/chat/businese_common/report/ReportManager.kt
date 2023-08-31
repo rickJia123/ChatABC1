@@ -47,4 +47,6 @@ object ReportManager {
     fun reportPageEnd(viewName: String) {
         MobclickAgent.onPageEnd(viewName)
     }
+
+
 }

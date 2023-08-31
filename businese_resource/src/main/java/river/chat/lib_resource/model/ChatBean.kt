@@ -37,7 +37,9 @@ data class MessageBean(
 object MessageStatus {
     const val LOADING = 0
     const val COMPLETE = 1
-    const val FAIL = 2
+    const val FAIL_COMMON = 2
+    //被禁止(超过限制/未登录)
+    const val FAIL_LIMIT = 3
 }
 
 //该条会话类型()

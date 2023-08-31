@@ -15,7 +15,7 @@ object TrackerEventName {
     /**
      * 聊天请求
      */
-    const val CHAT_REQUEST = "CHAT_REQUEST"
+    const val REQUEST = "REQUEST"
 }
 
 /**

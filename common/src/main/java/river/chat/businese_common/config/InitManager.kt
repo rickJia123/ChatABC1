@@ -7,7 +7,7 @@ import com.umeng.commonsdk.UMConfigure
 import com.yl.lib.sentry.hook.PrivacySentry
 import com.yl.lib.sentry.hook.PrivacySentryBuilder
 import river.chat.businese_common.report.UMTrackHandler
-import river.chat.businese_common.wx.WxManager
+import river.chat.wx.WxManager
 import river.chat.lib_core.storage.file.StorageUtil
 import river.chat.lib_core.tracker.initTracker
 import river.chat.lib_core.utils.log.LogUtil
@@ -54,7 +54,10 @@ object InitManager {
     private fun initUmeng(application: Application) {
 
         //设置LOG开关，默认为false
-        UMConfigure.setLogEnabled(true)
+        if (isAppDebug) {
+            UMConfigure.setLogEnabled(true)
+        }
+
 
         //友盟预初始化
         UMConfigure.preInit(application, AccountsConstants.UMENG_KEY, "Umeng")

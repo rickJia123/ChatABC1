@@ -4,8 +4,8 @@ import river.chat.businese_common.net.ApiStorage.getBasedBody
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApiService
 import river.chat.lib_resource.model.MessageBean
-import river.chat.lib_resource.model.vip.VipRightsBean
-import river.chat.lib_resource.model.vip.VipSkuBean
+import river.chat.lib_resource.model.VipRightsBean
+import river.chat.lib_resource.model.VipSkuBean
 
 /**
  * Created by beiyongChao on 2023/3/21

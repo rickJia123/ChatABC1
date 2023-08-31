@@ -3,9 +3,7 @@ package river.chat.business_user.login
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import river.chat.business_user.api.UserRequest
-import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.view.main.BaseViewModel
-import river.chat.lib_resource.model.User
 
 class LoginViewModel : BaseViewModel() {
 

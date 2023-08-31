@@ -76,18 +76,20 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.appcompat.widget.AppCompatTextView
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/tvGetCOde"
+            style="@style/ButtonConfirm"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:backgroundTint="@color/tipButtonColor"
             android:layout_marginLeft="15dp"
-            android:gravity="center"
+            android:textSize="12sp"
+            android:shadowRadius="180"
             android:text="获取验证码"
-            android:textStyle="bold"
-            android:textColor="@color/tipTxtColor"
-            android:textSize="@dimen/titleSize_1"
+            app:cornerRadius="@dimen/corner_button_common"
             app:layout_constraintLeft_toLeftOf="@+id/llInput"
             app:layout_constraintTop_toBottomOf="@+id/llInput" />
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btLogin"

@@ -15,8 +15,8 @@ object MessageHelper {
 
     const val mDefaultMsgId = 12345L
 
-    const val CHAT_TIP_LOADING="正在思考中哦。。。"
-    const val CHAT_TIP_FAIL="ChatGpt 服务异常，请稍后再试！"
+    const val CHAT_TIP_LOADING = "正在思考中哦。。。"
+    const val CHAT_TIP_FAIL = "ChatGpt 服务异常，请稍后再试！"
 
     /**
      * 生成消息id
@@ -37,7 +37,6 @@ object MessageHelper {
         content =
             "Hello ！我是您的 Al 智能小伙伴，我叫 ChatMe ，您可以询问我任何问题，我将知无不言。我还能【 AI 创作】，你输入关键词，我可以为你写作文、写诗歌、写大纲、写情诗、写祝福、写检讨、写文案、写总结概要、写社交动态，优化文章，智能翻译、作业解答哦～希望我们可以一起成长，祝您玩得开心！\n"
     }
-
 
 
     /**
@@ -72,7 +71,7 @@ object MessageHelper {
         this.content = answerMsg.content
         this.parentId = answerMsg.parentId
         this.avatar = river.chat.lib_resource.R.drawable.avatar_ai
-        this.status =answerMsg.status
+        this.status = answerMsg.status
         this.time = answerMsg.time
 //        user = buildAiUser()
     }
@@ -105,9 +104,11 @@ object MessageHelper {
             var matchAnswer =
                 answerSourceList.firstOrNull { it.parentId == question.id }
                     ?: MessageBean()
-            cardMsgList.add(CardMsgBean(question, matchAnswer))
-        }
+            if (matchAnswer.status != MessageStatus.FAIL_LIMIT) {
+                cardMsgList.add(CardMsgBean(question, matchAnswer))
+            }
 
+        }
         return cardMsgList
     }
 

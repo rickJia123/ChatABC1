@@ -2,7 +2,7 @@ package river.chat.lib_core.config
 
 import river.chat.lib_core.utils.exts.safeToInt
 import river.chat.lib_core.utils.exts.safeToString
-import river.chat.lib_resource.model.AppConfigBean
+import river.chat.lib_resource.model.database.AppConfigBean
 
 /**
  * Created by beiyongChao on 2023/3/6

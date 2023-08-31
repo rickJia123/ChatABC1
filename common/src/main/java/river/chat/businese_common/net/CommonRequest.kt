@@ -7,10 +7,14 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
-import river.chat.businese_common.wx.WxManager
+import river.chat.wx.WxManager
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.view.main.BaseViewModel
+import river.chat.lib_resource.model.CreateOrderRequestBean
+import river.chat.lib_resource.model.CreateOrderResBean
+import river.chat.lib_resource.model.QueryOrderRequestBean
+import river.chat.lib_resource.model.QueryOrderResBean
 
 /**
  * Created by beiyongChao on 2023/3/21
@@ -29,8 +33,13 @@ class CommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             request = {
                 CommonApiService.requestConfig(key)
             },
-            dataResp = {
-                resultCallBack.invoke(RequestResult(isSuccess = true, data = it ?: ConfigResBean()))
+            dataResp = { data, time ->
+                resultCallBack.invoke(
+                    RequestResult(
+                        isSuccess = true,
+                        data = data ?: ConfigResBean()
+                    )
+                )
             },
             error = {
                 resultCallBack.invoke(RequestResult(errorMsg = it.message ?: ""))
@@ -41,13 +50,18 @@ class CommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
     /**
      * 获取基本配置信息
      */
-    fun requestDefaultConfig( resultCallBack: (RequestResult<DefaultConfigResBean>) -> Unit) {
+    fun requestDefaultConfig(resultCallBack: (RequestResult<DefaultConfigResBean>) -> Unit) {
         launchFlow(
             request = {
                 CommonApiService.requestDefaultConfig()
             },
-            dataResp = {
-                resultCallBack.invoke(RequestResult(isSuccess = true, data = it ?: DefaultConfigResBean()))
+            dataResp = { data, time ->
+                resultCallBack.invoke(
+                    RequestResult(
+                        isSuccess = true,
+                        data = data ?: DefaultConfigResBean()
+                    )
+                )
             },
             error = {
                 resultCallBack.invoke(RequestResult(errorMsg = it.message ?: ""))
@@ -63,7 +77,14 @@ class CommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
         resultCallBack: (RequestResult<String>) -> Unit
     ) {
         viewModel.viewModelScope.launch {
-            flow { emit(CommonApiService.requestWechatAccessToken(WxManager.APP_ID,WxManager.SECRET,code)) }
+            flow {
+                emit(
+                    CommonApiService.requestWechatAccessToken(
+                        WxManager.APP_ID,
+                        WxManager.SECRET, code
+                    )
+                )
+            }
                 .flowOn(Dispatchers.IO)
                 .catch { t: Throwable ->
                     resultCallBack.invoke(RequestResult(errorMsg = t.message ?: ""))
@@ -82,17 +103,57 @@ class CommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
 
                 }
         }
-//        launchFlow(
-//            request = {
-//                CommonApiService.requestWechatAccessToken(code, resultCallBack)
-//            },
-//            dataResp = {
-//                resultCallBack.invoke(RequestResult(isSuccess = true, data = it ?: ""))
-//            },
-//            error = {
-//                resultCallBack.invoke(RequestResult(errorMsg = it.message ?: ""))
-//            }
-//        )
+
+    }
+
+    /**
+     * 创建订单
+     */
+    fun createPayOrder(
+        requestBean: CreateOrderRequestBean,
+        resultCallBack: (RequestResult<CreateOrderResBean>) -> Unit
+    ) {
+        launchFlow(
+            request = {
+                CommonApiService.createPayOrder(requestBean)
+            },
+            dataResp = { data, time ->
+                resultCallBack.invoke(
+                    RequestResult(
+                        isSuccess = true,
+                        data = data
+                    )
+                )
+            },
+            error = {
+                resultCallBack.invoke(RequestResult(errorMsg = it.message ?: ""))
+            }
+        )
+    }
+
+    /**
+     * 查询订单状态
+     */
+    fun queryOrder(
+        queryOrderRequestBean: QueryOrderRequestBean,
+        resultCallBack: (RequestResult<QueryOrderResBean>) -> Unit
+    ) {
+        launchFlow(
+            request = {
+                CommonApiService.queryOrder(queryOrderRequestBean)
+            },
+            dataResp = { data, time ->
+                resultCallBack.invoke(
+                    RequestResult(
+                        isSuccess = true,
+                        data = data
+                    )
+                )
+            },
+            error = {
+                resultCallBack.invoke(RequestResult(errorMsg = it.message ?: ""))
+            }
+        )
     }
 
 }

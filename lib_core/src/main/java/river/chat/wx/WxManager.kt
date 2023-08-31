@@ -1,4 +1,4 @@
-package river.chat.businese_common.wx
+package river.chat.wx
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import com.tencent.mm.opensdk.constants.ConstantsAPI
 import com.tencent.mm.opensdk.modelmsg.SendAuth
+import com.tencent.mm.opensdk.modelpay.PayReq
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import kotlin.random.Random
@@ -60,5 +61,27 @@ object WxManager {
     }
 
 
+    /**
+     * 微信支付
+     */
+    fun pay() {
+        var payRequest = PayReq()
+
+        payRequest.appId = "wxd930ea5d5a258f4f"
+
+        payRequest.partnerId = "1900000109"
+
+        payRequest.prepayId = "1101000000140415649af9fc314aa427"
+
+        payRequest.packageValue = "Sign=WXPay"
+
+        payRequest.nonceStr = "1101000000140429eb40476f8896f4c9"
+
+        payRequest.timeStamp = "1398746574"
+
+        payRequest.sign = "7FFECB600D7157C5AA49810D2D8F28BC2811827B"
+
+        api?.sendReq(payRequest);
+    }
 
 }

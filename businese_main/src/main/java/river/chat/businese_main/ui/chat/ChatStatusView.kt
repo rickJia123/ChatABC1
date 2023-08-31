@@ -56,7 +56,7 @@ class ChatStatusView @JvmOverloads constructor(
 //                viewBinding.loadingView.start()
                 reloadView.visibility = GONE
             }
-            MessageStatus.FAIL -> {
+            MessageStatus.FAIL_COMMON -> {
                 answerText.text = "加载失败"
                 answerText.setTextColor(river.chat.lib_core.R.color.red.getColor())
                 answerText.visibility = VISIBLE

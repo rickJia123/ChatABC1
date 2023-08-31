@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="item"
+            type="String" />
+
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/transparent"
+        android:clickable="false"
+        android:focusable="false">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivTag"
+            android:layout_width="15dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/exchange_gain"
+            android:paddingTop="3dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="荐语" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:lineSpacingMultiplier="1.4"
+            android:textColor="@color/color_333333"
+            android:textSize="16sp"
+            android:text="@{item}"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/ivTag"
+            app:layout_constraintTop_toTopOf="@id/ivTag"
+            tools:text="了解焦虑是什么，以及是什么让你焦虑以及是什么让你焦虑以及是什么让你焦虑了解焦虑是什么，以及是什么让你焦虑以及是什么让你焦虑以及是什么让你焦虑" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

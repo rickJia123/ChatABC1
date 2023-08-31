@@ -1,4 +1,4 @@
-package river.chat.lib_resource.model.vip
+package river.chat.lib_resource.model
 
 /**
  * Created by beiyongChao on 2023/8/15
@@ -12,18 +12,19 @@ data class VipSkuBean(
     var skuName: String = "",
 
     //仅1.1元/天
-    var promoText3: String ?= "",
-    var price: Float ?=0.0f,
+    var promoText3: String? = "",
+    var price: Float? = 0.0f,
 
     /**
      * 单位价格文案（7.6/天，25/月）
      */
-    var promoText2: String ?= "",
+    var promoText2: String? = "",
 
     //折扣文案
-    var promoText1: String ?= "",
+    var promoText1: String? = "",
 
     var skuId: String = ""
+
 )
 
 
@@ -33,7 +34,19 @@ data class VipRightsBean(
     var vip: MutableList<String> = mutableListOf(),
 )
 
-data class VipRightsBeans(
-    //会员权益名称
-    var name: String,
-)
+
+/**
+ * vip类型
+ */
+enum class VipType(val value: Int) {
+    /*
+         NORMAL : 普通用户
+         VIP : 正式vip
+         TRIAL : 试用
+
+     */
+
+    NORMAL(0),
+    TRIAL(1),
+    VIP(2)
+}

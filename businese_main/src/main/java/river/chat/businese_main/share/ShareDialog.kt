@@ -4,6 +4,7 @@ package river.chat.businese_main.share
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.umeng.socialize.bean.SHARE_MEDIA
+import river.chat.businese_common.utils.onLoad
 import river.chat.business_main.databinding.DialogShareBinding
 import river.chat.lib_core.share.SharePlatformBean
 import river.chat.lib_resource.model.MessageBean
@@ -35,6 +36,7 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
 
 
     override fun initDataBinding(binding: DialogShareBinding) {
+        onLoad()
         mBinding = binding
         binding.tvQuestion.text = questionMsg?.content ?: ""
         binding.tvAnswer.text = answerMsg?.content ?: ""

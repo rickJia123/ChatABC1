@@ -10,7 +10,7 @@ import river.chat.lib_core.BR
 import river.chat.lib_core.utils.exts.safeToString
 import river.chat.lib_core.utils.exts.view.buildSpannableString
 import river.chat.lib_core.view.base.LifecycleView
-import river.chat.lib_resource.model.vip.VipRightsBean
+import river.chat.lib_resource.model.VipRightsBean
 
 /**
  * vip 权益

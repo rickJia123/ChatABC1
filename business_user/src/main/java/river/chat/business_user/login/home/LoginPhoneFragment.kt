@@ -7,7 +7,7 @@ import river.chat.businese_common.constants.TrackerEventName
 import river.chat.businese_common.constants.TrackerKeys
 import river.chat.businese_common.utils.onClick
 import river.chat.businese_common.utils.onLoad
-import river.chat.businese_common.wx.WxManager
+import river.chat.wx.WxManager
 import river.chat.business_user.R
 import river.chat.business_user.databinding.FragmentLoginPhoneBinding
 import river.chat.business_user.login.LoginStatus

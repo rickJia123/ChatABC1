@@ -43,3 +43,11 @@ fun jump2VipOpen() {
     ARouter.getInstance().build(HomeRouterConstants.VIP_OPEN)
         .navigation()
 }
+
+/**
+ * vip 兑换页
+ */
+fun jump2VipExchange() {
+    ARouter.getInstance().build(HomeRouterConstants.VIP_EXCHANGE)
+        .navigation()
+}

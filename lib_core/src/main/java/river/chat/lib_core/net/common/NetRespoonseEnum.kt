@@ -12,10 +12,6 @@ enum class NetRespoonseEnum(val code: String) {
      */
     ERROR("9999"),
 
-    /**
-     * 错误的token
-     */
-    INCORRECT_TOKEN("0001"),
 
     /**
      * 错误的签名

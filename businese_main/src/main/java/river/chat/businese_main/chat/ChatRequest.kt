@@ -30,35 +30,32 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
      * 获取GPT 答案
      */
     fun requestAi(content: String, msgId: String) {
-        var requestBeginTime = System.currentTimeMillis()
         launchFlow(
             request = {
                 MainBusinessApiService.requestAi(content, msgId)
             },
-            dataResp = {
-                var requestEndTime = System.currentTimeMillis()
+            dataResp = { data, time ->
                 ReportManager.reportEvent(
-                    TrackerEventName.CHAT_REQUEST,
+                    TrackerEventName.REQUEST,
                     mapOf(
-                        REQUEST_CONTENT to content,
-                        REQUEST_TIME to (requestEndTime - requestBeginTime).toString()
+                        REQUEST_CONTENT to "GPT接口问题:" + content + "  \n回答：" + data?.content,
+                        REQUEST_TIME to "GPT接口耗时:${time}ms",
                     )
                 )
                 chatRequestResult.value =
                     RequestResult(isSuccess = true, data = MessageBean().apply {
-                        this.content = it?.content
-                        this.parentId = it?.id ?: 0
-                        this.time = it?.time ?: 0
+                        this.content = data?.content
+                        this.parentId = data?.id ?: 0
+                        this.time = data?.time ?: 0
                         this.status = MessageStatus.COMPLETE
                     })
             },
             error = {
-                var requestEndTime = System.currentTimeMillis()
+
                 ReportManager.reportEvent(
-                    TrackerEventName.CHAT_REQUEST,
+                    TrackerEventName.REQUEST,
                     mapOf(
-                        REQUEST_CONTENT to "接口错误:${it.message}",
-                        REQUEST_TIME to (requestEndTime - requestBeginTime).toString()
+                        REQUEST_TIME to "GPT接口错误:${it.message}"
                     )
                 )
                 it.message?.toast()
@@ -67,7 +64,7 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                         this.content = CHAT_TIP_FAIL
                         this.parentId = msgId.toLong() ?: 0
                         this.time = System.currentTimeMillis()
-                        this.status = MessageStatus.FAIL
+                        this.status = MessageStatus.FAIL_COMMON
                     })
             }
         )
@@ -82,11 +79,11 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             request = {
                 MainBusinessApiService.requestHotQuestion()
             },
-            dataResp = {
+            dataResp = { data, time ->
 //                it.toString().toast()
                 hotQuestionResult.value =
                     RequestResult(isSuccess = true, data = mutableListOf<HotTipItemBean>().apply {
-                        it?.forEach { item ->
+                        data?.forEach { item ->
                             add(HotTipItemBean().apply {
                                 this.hotQuestion = item
                             })

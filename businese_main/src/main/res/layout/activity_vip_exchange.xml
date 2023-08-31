@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+
+        <variable
+            name="vm"
+            type="river.chat.businese_main.vip.VipViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/defaultBgColor"
+        android:fitsSystemWindows="true">
+
+        <river.chat.lib_core.view.title.RiverTitle
+            android:id="@+id/toolBar"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="会员兑换"
+            app:titleSize="30sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:text="兑换码如何获取"
+            android:textColor="@color/defaultTitleColor"
+            android:textSize="@dimen/titleSize_1"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolBar" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            app:data="@{vm.vipExchangeTips}"
+            app:itemLayout="@{@layout/item_exchange_gain}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintLeft_toLeftOf="@+id/tvTip"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTip" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvExchangeTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="兑换码:"
+            android:textColor="@color/defaultSubTitleColor"
+            android:textSize="@dimen/titleSize_2"
+            app:layout_constraintLeft_toLeftOf="@id/tvTip"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutCode"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            app:boxCornerRadiusBottomEnd="180dp"
+            app:boxCornerRadiusBottomStart="180dp"
+            app:boxCornerRadiusTopEnd="180dp"
+            app:boxStrokeWidth="0dp"
+            app:boxCornerRadiusTopStart="180dp"
+            android:layout_marginLeft="10dp"
+            app:counterEnabled="true"
+            app:layout_constraintBottom_toBottomOf="@+id/tvExchangeTip"
+            app:layout_constraintLeft_toRightOf="@id/tvExchangeTip"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvExchangeTip">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="请输入兑换码"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btExchange"
+            style="@style/ButtonConfirm"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:shadowRadius="180"
+            android:layout_marginBottom="200dp"
+            android:text="立即兑换"
+            app:cornerRadius="@dimen/corner_button_common"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

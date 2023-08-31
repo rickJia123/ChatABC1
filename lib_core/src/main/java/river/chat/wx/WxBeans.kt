@@ -1,4 +1,4 @@
-package river.chat.businese_common.wx
+package river.chat.wx
 
 /**
  * Created by beiyongChao on 2023/7/19

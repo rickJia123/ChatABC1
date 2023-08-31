@@ -1,8 +1,12 @@
 package river.chat.businese_common.net
 
-import river.chat.businese_common.wx.WxAccessTokenBean
+import river.chat.wx.WxAccessTokenBean
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApiService
+import river.chat.lib_resource.model.CreateOrderRequestBean
+import river.chat.lib_resource.model.CreateOrderResBean
+import river.chat.lib_resource.model.QueryOrderRequestBean
+import river.chat.lib_resource.model.QueryOrderResBean
 
 /**
  * Created by beiyongChao on 2023/2/24
@@ -54,5 +58,28 @@ object CommonApiService  : BaseApiService() {
             secret,
             code
         )
+
+    /**
+     * 创建订单
+     */
+    suspend fun createPayOrder(payRequestBean: CreateOrderRequestBean): BaseRequestBean<CreateOrderResBean> =
+        commonApi.createPayOrder(
+            ApiStorage.getBasedBody().apply {
+                this["payType"] = payRequestBean.payType
+                this["price"] = payRequestBean.price
+                this["skuId"] = payRequestBean.skuId
+            }
+        )
+
+    /**
+     * 查询订单状态
+     */
+    suspend fun queryOrder(queryOrderRequestBean: QueryOrderRequestBean): BaseRequestBean<QueryOrderResBean> =
+        commonApi.queryOrder(
+            ApiStorage.getBasedBody().apply {
+                this["id"] = queryOrderRequestBean.id
+            }
+        )
+
 
 }

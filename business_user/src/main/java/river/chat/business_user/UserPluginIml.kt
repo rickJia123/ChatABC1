@@ -14,7 +14,7 @@ import river.chat.business_user.user.LoginCenter
 import river.chat.business_user.user.RiverUserManager
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.router.plugin.module.UserRouterConstants
-import river.chat.lib_resource.model.User
+import river.chat.lib_resource.model.database.User
 import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.main.activity.BaseActivity
@@ -78,8 +78,10 @@ class UserPluginIml : UserPlugin {
     }
 
     override fun refreshInfo() {
-        LoginViewModel().request.refreshUserInfo { result ->
+        if (isLogin()) {
+            LoginViewModel().request.refreshUserInfo { result ->
 
+            }
         }
     }
 

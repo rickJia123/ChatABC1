@@ -10,9 +10,6 @@ data class BaseRequestBean<T>
      * 请求是否成功
      *
      *
-     * code = 1006
-     * code = 5020 俱乐部通知已处理过的数据 点击忽略或者通过
-     *
      * @return
      */
     fun isSucc(): Boolean {

@@ -25,7 +25,6 @@ class ChatFragment :
         onLoad()
         super.initDataBinding(binding)
         initMsgService(binding)
-        "".toast()
     }
 
 

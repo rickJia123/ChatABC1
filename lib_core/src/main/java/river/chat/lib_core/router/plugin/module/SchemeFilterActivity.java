@@ -14,7 +14,7 @@ public class SchemeFilterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Uri uri = getIntent().getData();
-        ToastKt.toast(uri.toString());
+//        ToastKt.toast(uri.toString());
         ARouter.getInstance()
                 .build(uri)
                 .navigation();

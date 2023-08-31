@@ -1,6 +1,6 @@
 package river.chat.businese_common.dataBase
 
-import river.chat.lib_resource.model.User
+import river.chat.lib_resource.model.database.User
 import river.chat.lib_core.storage.database.BaseBox
 
 /**

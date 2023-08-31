@@ -3,14 +3,14 @@ package river.chat.business_user.api
 import androidx.lifecycle.MutableLiveData
 import river.chat.businese_common.constants.TrackerEventName
 import river.chat.businese_common.constants.TrackerKeys
-import river.chat.businese_common.utils.onClick
+import river.chat.businese_common.report.ReportManager
 import river.chat.business_user.constant.UserConstants
 import river.chat.business_user.user.RiverUserManager
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
-import river.chat.lib_resource.model.User
+import river.chat.lib_resource.model.database.User
 import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.main.BaseViewModel
@@ -35,14 +35,22 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             request = {
                 UserApiService.requestPhoneCode(number)
             },
-            dataResp = {
-                onClick(
-                    TrackerEventName.PAGE_CLICK,
-                    TrackerKeys.CLICK_TYPE to "登录验证码页-点击查看条款"
+            dataResp = { data, time ->
+                ReportManager.reportEvent(
+                    TrackerEventName.REQUEST,
+                    mapOf(
+                        TrackerKeys.REQUEST_TIME to "获取验证码接口耗时:${time}ms",
+                    )
                 )
-                requestCode.value = RequestResult(isSuccess = it ?: false, data = true)
+                requestCode.value = RequestResult(isSuccess = data ?: false, data = true)
             },
             error = {
+                ReportManager.reportEvent(
+                    TrackerEventName.REQUEST,
+                    mapOf(
+                        TrackerKeys.REQUEST_TIME to "获取验证码报错：" + (it.message ?: "")
+                    )
+                )
                 it.message?.toast()
                 loginResult.value = RequestResult(errorMsg = it.message ?: "")
             }
@@ -55,16 +63,29 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             request = {
                 UserApiService.loginByPhone(inviteId, number, verifyCode)
             },
-            dataResp = {
-                it?.let {
-                    RiverUserManager.onLoginSuccess(it,UserConstants.LOGIN_PLATFORM_PHONE)
+            dataResp = { data, time ->
+                ReportManager.reportEvent(
+                    TrackerEventName.REQUEST,
+                    mapOf(
+                        TrackerKeys.REQUEST_TIME to "手机号登录接口耗时:${time}ms",
+                    )
+                )
+                data?.let {
+                    RiverUserManager.onLoginSuccess(it, UserConstants.LOGIN_PLATFORM_PHONE)
                     loginResult.value = RequestResult(isSuccess = true, data = it)
                 }
             },
             error = {
+                ReportManager.reportEvent(
+                    TrackerEventName.REQUEST,
+                    mapOf(
+                        TrackerKeys.REQUEST_TIME to "手机号登录接口报错：" + (it.message ?: "")
+                    )
+                )
                 it.message?.toast()
                 loginResult.value = RequestResult(errorMsg = it.message ?: "")
             }
+
         )
     }
 
@@ -76,16 +97,29 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             request = {
                 UserApiService.loginByWechat(code)
             },
-            dataResp = {
-                it?.let {
-                    RiverUserManager.onLoginSuccess(it,UserConstants.LOGIN_PLATFORM_WECHAT)
+            dataResp = { data, time ->
+                ReportManager.reportEvent(
+                    TrackerEventName.REQUEST,
+                    mapOf(
+                        TrackerKeys.REQUEST_TIME to "微信登录接口耗时:${time}ms",
+                    )
+                )
+                data?.let {
+                    RiverUserManager.onLoginSuccess(it, UserConstants.LOGIN_PLATFORM_WECHAT)
                     loginResult.value = RequestResult(isSuccess = true, data = it)
                 }
             },
             error = {
+                ReportManager.reportEvent(
+                    TrackerEventName.REQUEST,
+                    mapOf(
+                        TrackerKeys.REQUEST_TIME to "微信登录接口报错：" + (it.message ?: "")
+                    )
+                )
                 it.message?.toastSystem()
                 loginResult.value = RequestResult(errorMsg = it.message ?: "")
             }
+
         )
     }
 
@@ -97,8 +131,8 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             request = {
                 UserApiService.logout()
             },
-            dataResp = {
-                logoutResult.value = RequestResult(isSuccess = it ?: false, data = true)
+            dataResp = { data, time ->
+                logoutResult.value = RequestResult(isSuccess = data ?: false, data = true)
             },
             error = {
                 it.message?.toast()
@@ -115,8 +149,8 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             request = {
                 UserApiService.destroy()
             },
-            dataResp = {
-                resultCallback.invoke(RequestResult(isSuccess = it ?: false, data = true))
+            dataResp = { data, time ->
+                resultCallback.invoke(RequestResult(isSuccess = data ?: false, data = true))
 
             },
             error = {
@@ -137,15 +171,27 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             request = {
                 UserApiService.refreshUserInfo()
             },
-            dataResp = {
-                if (it != null) {
-                    var user=it
-                    user.token=getPlugin<UserPlugin>().getUser().token
+            dataResp = { data, time ->
+                if (data != null) {
+                    var user = data
+                    user.token = getPlugin<UserPlugin>().getUser().token
                     RiverUserManager.updateUser(user)
                 }
-                resultCallback.invoke(RequestResult(isSuccess = true, data = it))
+                ReportManager.reportEvent(
+                    TrackerEventName.REQUEST,
+                    mapOf(
+                        TrackerKeys.REQUEST_TIME to "刷新用户信息耗时:${time}ms",
+                    )
+                )
+                resultCallback.invoke(RequestResult(isSuccess = true, data = data))
             },
             error = {
+                ReportManager.reportEvent(
+                    TrackerEventName.REQUEST,
+                    mapOf(
+                        TrackerKeys.REQUEST_TIME to "刷新用户信息报错：" + (it.message ?: "")
+                    )
+                )
                 it.message?.toast()
                 resultCallback.invoke(RequestResult<User>().apply {
                     errorMsg = it.message ?: ""

@@ -4,12 +4,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
-import coil.load
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewVipBinding
 import river.chat.lib_core.utils.exts.view.loadSimple
 import river.chat.lib_core.view.base.LifecycleView
-import river.chat.lib_resource.model.vip.VipType
+import river.chat.lib_resource.model.VipType
 
 /**
  * Created by beiyongChao on 2023/8/19

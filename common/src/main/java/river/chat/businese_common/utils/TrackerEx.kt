@@ -56,6 +56,12 @@ fun <T : DialogFragment> T.getOfficalName(
             "登录首页"
         else if (it.contains("LoginPhoneFragment"))
             "登录验证码页"
+        else if (it.contains("ShareDialog"))
+            "分享弹窗"
+        else if (it.contains("PrivacyAgreeDialog"))
+            "隐私弹窗"
+        else if (it.contains("UpdateAppDialog"))
+            "版本更新弹窗"
         else {
             it
         }
@@ -94,7 +100,6 @@ fun <T : DialogFragment> T.onLoad(
     )
     this.postTrack(TrackerEventName.PAGE_LOAD)
 }
-
 
 
 /**

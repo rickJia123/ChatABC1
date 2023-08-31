@@ -1,7 +1,6 @@
 package river.chat.businese_main.vip
 
 import android.content.Context
-import android.os.UserManager
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
@@ -13,9 +12,8 @@ import river.chat.lib_core.utils.exts.safeToString
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.exts.view.buildSpannableString
 import river.chat.lib_core.utils.exts.view.loadCircle
-import river.chat.lib_core.utils.exts.view.loadSimple
 import river.chat.lib_core.view.base.LifecycleView
-import river.chat.lib_resource.model.vip.VipType
+import river.chat.lib_resource.model.VipType
 
 
 class VipStatusView @JvmOverloads constructor(

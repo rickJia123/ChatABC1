@@ -17,7 +17,7 @@ import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.longan.isNetworkAvailable
 import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.view.main.BaseViewModel
-import river.chat.lib_resource.model.User
+import river.chat.lib_resource.model.database.User
 
 /**
  * Created on 2021/10/27
@@ -38,7 +38,7 @@ open class BaseRequest(var viewModel: BaseViewModel) {
      */
     fun <T> launchFlow(
         request: suspend CoroutineScope.() -> BaseRequestBean<T>,
-        dataResp: (T?) -> Unit,
+        dataResp: (T?,Long?) -> Unit,
         error: (Throwable) -> Unit = {},
         complete: () -> Unit = {},
         isShowDialog: Boolean = false,
@@ -50,12 +50,13 @@ open class BaseRequest(var viewModel: BaseViewModel) {
 
     private fun <T> onLaunchFlow(
         request: suspend CoroutineScope.() -> BaseRequestBean<T>,
-        dataResp: (T?) -> Unit,
+        dataResp: (T?,Long?) -> Unit,
         error: (Throwable) -> Unit = {},
         complete: () -> Unit = {},
         isShowDialog: Boolean = false,
         pageResp: (PageModel?) -> Unit = {},
     ) {
+        var requestBeginTime = System.currentTimeMillis()
         if (prepare(error, isShowDialog)) {
             end(isShowDialog, complete)
             return
@@ -69,7 +70,9 @@ open class BaseRequest(var viewModel: BaseViewModel) {
                 }
                 .collect {
                     try {
-                        handlerCode(it, dataResp, error, pageResp)
+                        var requestEndTime = System.currentTimeMillis()
+                        var loadTime=requestEndTime-requestBeginTime
+                        handlerCode(it, dataResp, error, pageResp,loadTime)
                         end(isShowDialog, complete)
                     } catch (t: Throwable) {
                         catch(error, t)
@@ -103,15 +106,16 @@ open class BaseRequest(var viewModel: BaseViewModel) {
      */
     private fun <T> handlerCode(
         responseModel: BaseRequestBean<T>,
-        resp: (T?) -> Unit,
+        resp: (T?,Long?) -> Unit,
         error: (Throwable) -> Unit,
         pageRes: (PageModel?) -> Unit = {},
+        loadTime:Long?=0
     ) {
         val status: String = responseModel.status
         if (NetRespoonseEnum.SUCCESS.code == status) {
             onStatusChanged(ViewStatus.SUCCESS)
             pageRes(responseModel.page)
-            resp(responseModel.data)
+            resp(responseModel.data,loadTime)
         } else {
             if (NetRespoonseEnum.TOKEN_DATE_INVALID.code == status) {
                 notifyTokenExpired()

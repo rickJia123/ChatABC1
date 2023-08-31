@@ -14,7 +14,7 @@ import river.chat.lib_core.tracker.postTrack
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.exts.view.buildSpannableString
 import river.chat.lib_core.view.base.LifecycleView
-import river.chat.lib_resource.model.vip.VipSkuBean
+import river.chat.lib_resource.model.VipSkuBean
 
 /**
  * Created by beiyongChao on 2023/8/19

@@ -5,7 +5,7 @@ import river.chat.lib_core.event.BaseActionEvent
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
-import river.chat.lib_resource.model.vip.VipType
+import river.chat.lib_resource.model.VipType
 
 /**
  * Created by beiyongChao on 2023/8/2
