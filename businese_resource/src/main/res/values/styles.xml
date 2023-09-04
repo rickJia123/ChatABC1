@@ -11,4 +11,20 @@
         <item name="android:textColor">@color/defaultTitleColor</item>
     </style>
 
+    <!--     通用editText 样式-->
+    <style name="CommonInput">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@drawable/back_input_corner</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColorHint">@color/defaultTextColor</item>
+        <item name="android:textCursorDrawable">@color/defaultTextColor</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/defaultTitleColor</item>
+    </style>
+
 </resources>

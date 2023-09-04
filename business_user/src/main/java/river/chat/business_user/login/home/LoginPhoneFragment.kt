@@ -135,11 +135,11 @@ class LoginPhoneFragment :
     }
 
     private fun getPhoneNum(): String {
-        return mBinding?.inputPhone?.text?.toString() ?: ""
+        return mBinding?.inputViewPhone?.text?.toString() ?: ""
     }
 
     private fun getCode(): String {
-        return mBinding?.inputCode?.text?.toString() ?: ""
+        return mBinding?.inputViewCode?.text?.toString() ?: ""
     }
 
 }

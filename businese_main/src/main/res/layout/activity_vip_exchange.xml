@@ -60,47 +60,35 @@
             android:text="兑换码:"
             android:textColor="@color/defaultSubTitleColor"
             android:textSize="@dimen/titleSize_2"
-            app:layout_constraintLeft_toLeftOf="@id/tvTip"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputLayoutCode"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            app:boxCornerRadiusBottomEnd="180dp"
-            app:boxCornerRadiusBottomStart="180dp"
-            app:boxCornerRadiusTopEnd="180dp"
-            app:boxStrokeWidth="0dp"
-            app:boxCornerRadiusTopStart="180dp"
-            android:layout_marginLeft="10dp"
-            app:counterEnabled="true"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+            app:layout_constraintLeft_toLeftOf="@id/tvTip" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/inputView"
+            style="@style/CommonInput"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:hint="请输入兑换码"
+            android:inputType="number"
+            android:maxLines="2"
             app:layout_constraintBottom_toBottomOf="@+id/tvExchangeTip"
             app:layout_constraintLeft_toRightOf="@id/tvExchangeTip"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvExchangeTip">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputCode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:hint="请输入兑换码"
-                android:inputType="number" />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toTopOf="@+id/tvExchangeTip" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btExchange"
             style="@style/ButtonConfirm"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:shadowRadius="180"
             android:layout_marginBottom="200dp"
+            android:shadowRadius="180"
             android:text="立即兑换"
             app:cornerRadius="@dimen/corner_button_common"
+            app:layout_constraintTop_toBottomOf="@+id/tvExchangeTip"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintRight_toRightOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

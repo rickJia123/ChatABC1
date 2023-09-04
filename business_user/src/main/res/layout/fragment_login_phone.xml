@@ -14,82 +14,47 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/llInput"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:clipChildren="false"
-            android:orientation="vertical"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/inputViewPhone"
+            style="@style/CommonInput"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:hint="请输入手机号"
+            android:imeOptions="actionSend"
+            android:inputType="phone"
+            android:maxLines="2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputLayoutPhone"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                app:boxBackgroundColor="@color/vipTrialLighter"
-                app:boxCornerRadiusBottomEnd="180dp"
-                app:boxCornerRadiusBottomStart="180dp"
-                app:boxCornerRadiusTopEnd="180dp"
-                app:boxCornerRadiusTopStart="180dp"
-                app:counterEnabled="true"
-                app:dividerColor="@color/vipMonthLighter">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="请输入手机号"
-                    android:inputType="phone"
-                    android:maxLength="11" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputLayoutCode"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical"
-                app:boxBackgroundColor="@color/vipTrialLighter"
-                app:boxCornerRadiusBottomEnd="180dp"
-                app:boxCornerRadiusBottomStart="180dp"
-                app:boxCornerRadiusTopEnd="180dp"
-                app:boxCornerRadiusTopStart="180dp"
-                app:counterEnabled="true"
-                app:dividerColor="@color/vipMonthLighter">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputCode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="请输入验证码"
-                    android:inputType="phone"
-                    android:maxLength="6" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/inputViewCode"
+            style="@style/CommonInput"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:hint="请输入验证码"
+            android:imeOptions="actionSend"
+            android:inputType="phone"
+            android:maxLines="2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputViewPhone" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/tvGetCOde"
             style="@style/ButtonConfirm"
             android:layout_width="wrap_content"
+
             android:backgroundTint="@color/tipButtonColor"
-            android:layout_marginLeft="15dp"
-            android:textSize="12sp"
             android:shadowRadius="180"
             android:text="获取验证码"
+            android:textSize="12sp"
             app:cornerRadius="@dimen/corner_button_common"
-            app:layout_constraintLeft_toLeftOf="@+id/llInput"
-            app:layout_constraintTop_toBottomOf="@+id/llInput" />
-
+            app:layout_constraintLeft_toLeftOf="@+id/inputViewCode"
+            app:layout_constraintTop_toBottomOf="@+id/inputViewCode" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btLogin"
