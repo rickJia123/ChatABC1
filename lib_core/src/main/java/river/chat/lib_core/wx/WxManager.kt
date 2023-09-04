@@ -1,4 +1,4 @@
-package river.chat.wx
+package river.chat.lib_core.wx
 
 import android.content.BroadcastReceiver
 import android.content.Context

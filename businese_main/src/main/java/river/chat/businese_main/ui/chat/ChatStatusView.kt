@@ -46,6 +46,7 @@ class ChatStatusView @JvmOverloads constructor(
             MessageStatus.COMPLETE -> {
                 answerText.setTextColor(river.chat.lib_resource.R.color.chatATv.getColor())
                 answerText.visibility = VISIBLE
+                viewBinding.loadingView.visibility = GONE
                 visibility = GONE
                 reloadView.visibility = GONE
             }

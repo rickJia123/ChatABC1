@@ -3,7 +3,7 @@ package river.chat.business_user.login.home
 import com.alibaba.android.arouter.facade.annotation.Route
 import org.koin.android.ext.android.inject
 import river.chat.businese_common.utils.onLoad
-import river.chat.wx.WxManager
+import river.chat.lib_core.wx.WxManager
 import river.chat.business_user.databinding.ActivityLoginBinding
 import river.chat.business_user.login.LoginPage
 import river.chat.business_user.login.LoginStatus

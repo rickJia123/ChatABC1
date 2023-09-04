@@ -65,7 +65,7 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                         this.parentId = msgId.toLong() ?: 0
                         this.time = System.currentTimeMillis()
                         this.status = MessageStatus.FAIL_COMMON
-                    })
+                    },errorMsg= it.message?:"")
             }
         )
     }

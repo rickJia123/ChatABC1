@@ -65,7 +65,7 @@ class App : BaseApplication() {
                     //rick todo
                     ReportManager.reportPageEnd(activity.getOfficalName())
                 } catch (e: Exception) {
-                    LogUtil.e("onActivityResumed", e)
+                    LogUtil.e("onActivityPaused", e)
                 }
 
             }

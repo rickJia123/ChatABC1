@@ -63,10 +63,10 @@ class SharePlatformView @JvmOverloads constructor(
             SharePlatformBean(
                 "朋友圈",
                 R.drawable.umeng_socialize_wxcircle,
-                SHARE_MEDIA.WEIXIN
+                SHARE_MEDIA.WEIXIN_CIRCLE
             )
         )
-        platforms.add(SharePlatformBean("微博", R.drawable.umeng_socialize_sina, SHARE_MEDIA.SINA))
+//        platforms.add(SharePlatformBean("微博", R.drawable.umeng_socialize_sina, SHARE_MEDIA.SINA))
 //        platforms.add(SharePlatformBean("复制链接", 0))
         mViewModel?.data?.addAll(platforms)
     }

@@ -9,7 +9,7 @@
         <meta-data android:name="river.chat.businese_common.config.CommonConfigurationImpl"
             android:value="ConfigModule" />
         <activity
-            android:name="river.chat.wxapi.WXEntryActivity"
+            android:name="river.chat.chatevery.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />

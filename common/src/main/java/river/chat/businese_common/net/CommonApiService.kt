@@ -1,6 +1,6 @@
 package river.chat.businese_common.net
 
-import river.chat.wx.WxAccessTokenBean
+import river.chat.lib_core.wx.WxAccessTokenBean
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApiService
 import river.chat.lib_resource.model.CreateOrderRequestBean

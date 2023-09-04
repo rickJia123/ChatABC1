@@ -1,4 +1,4 @@
-package river.chat.wxapi
+package river.chat.chatevery.wxapi
 
 import android.os.Bundle
 import android.os.PersistableBundle

@@ -1,4 +1,4 @@
-package river.chat.wx
+package river.chat.lib_core.wx
 
 /**
  * Created by beiyongChao on 2023/7/19

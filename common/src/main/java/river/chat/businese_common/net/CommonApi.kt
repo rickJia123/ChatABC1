@@ -4,7 +4,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
-import river.chat.wx.WxAccessTokenBean
+import river.chat.lib_core.wx.WxAccessTokenBean
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApi
 import river.chat.lib_resource.model.CreateOrderResBean
@@ -42,7 +42,7 @@ interface CommonApi : BaseApi {
     /**
      * 创建订单
      */
-    @GET("/order/createEnergyOrder")
+    @POST("/order/createEnergyOrder")
     suspend fun createPayOrder(
         @Body body: Map<String, @JvmSuppressWildcards Any?>
     ): BaseRequestBean<CreateOrderResBean>
@@ -50,7 +50,7 @@ interface CommonApi : BaseApi {
     /**
      * 查询订单状态
      */
-    @GET("/order/queryOrderPayInfo")
+    @POST("/order/queryOrderPayInfo")
     suspend fun queryOrder(
         @Body body: Map<String, @JvmSuppressWildcards Any?>
     ): BaseRequestBean<QueryOrderResBean>

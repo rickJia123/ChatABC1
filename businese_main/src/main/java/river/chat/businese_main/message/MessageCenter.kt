@@ -78,6 +78,7 @@ object MessageCenter {
 //                if (it.isSuccess) {
                 var msg = if (it.isSuccess) it.data ?: MessageBean() else MessageBean().apply {
                     status = MessageStatus.FAIL_COMMON
+                    content=it.errorMsg
                 }
                 ("MessageCenter observerMsg:" + it.data).log()
                 distributeMsg(buildAiAnswerMsg(msg))

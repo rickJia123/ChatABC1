@@ -15,6 +15,7 @@ import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.base.LifecycleView
 import river.chat.lib_resource.model.MessageBean
+import river.chat.lib_resource.model.MessageStatus
 
 
 class ChatCardView @JvmOverloads constructor(
@@ -34,7 +35,7 @@ class ChatCardView @JvmOverloads constructor(
 
 
     init {
-        var chatWidth = screenWidth- 40.dp
+        var chatWidth = screenWidth - 40.dp
         viewBinding.tvAnswer.maxWidth = chatWidth.toInt()
         viewBinding.tvQuestion.maxWidth = chatWidth.toInt()
 //        commentViewBinding.etWriteReply.postDelayed({
@@ -45,8 +46,15 @@ class ChatCardView @JvmOverloads constructor(
 
     private fun initClick() {
         viewBinding.clAnswer.singleClick {
-            "回答已复制".toast()
-            answerMsg?.content?.copyToClipboard()
+            answerMsg?.let {
+                if (it.status == MessageStatus.COMPLETE) {
+                    "回答已复制".toast()
+                    answerMsg?.content?.copyToClipboard()
+                } else {
+                    "该回答状态异常哦".toast()
+                }
+            }
+
 
         }
         viewBinding.clQuestion.singleClick {

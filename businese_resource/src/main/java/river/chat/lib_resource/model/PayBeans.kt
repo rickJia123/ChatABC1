@@ -1,5 +1,7 @@
 package river.chat.lib_resource.model
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Created by beiyongChao on 2023/8/31
  * Description:
@@ -42,3 +44,20 @@ data class QueryOrderResBean(
 object PayType {
     const val WECHAT_PAY = "WALLET"
 }
+
+//data class WePayPrepayResponseModel (
+//    var orderNumber: String? = "",
+//    var appId: String? = "",
+//    var partnerId: String? = "",
+//    var prepayId: String? = "",
+//    var nonceStr: String? = "",
+//    var timestamp: String? = "",
+//
+//    @SerializedName("package")
+//    var packageValue: String? = "",
+//    var sign: String? = "",
+//
+//    //跨sku返回参数
+//    var payData: String? = "",
+//)
+

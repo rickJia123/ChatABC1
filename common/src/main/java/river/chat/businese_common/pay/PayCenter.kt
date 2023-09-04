@@ -7,7 +7,7 @@ import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_resource.model.CreateOrderRequestBean
 import river.chat.lib_resource.model.CreateOrderResBean
 import river.chat.lib_resource.model.PayType
-import river.chat.wx.WxManager
+import river.chat.lib_core.wx.WxManager
 
 /**
  * Created by beiyongChao on 2023/8/31
