@@ -40,8 +40,8 @@ object VipManager {
     fun isVip(): Boolean {
         var userPlugin = getPlugin<UserPlugin>()
         var user = userPlugin.getUser()
-        //试用期或者vip 都算vip
-        return (user.remainTryTimes > 0 && user.vipType == VipType.TRIAL.value) || user.vipType == VipType.VIP.value
+
+        return   user.vipType == VipType.VIP.value
     }
 
     fun getVipType() = getPlugin<UserPlugin>().getUser().vipType

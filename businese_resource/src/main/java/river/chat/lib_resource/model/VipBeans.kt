@@ -47,6 +47,5 @@ enum class VipType(val value: Int) {
      */
 
     NORMAL(0),
-    TRIAL(1),
     VIP(2)
 }

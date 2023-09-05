@@ -43,7 +43,7 @@ class VipView @JvmOverloads constructor(
     private fun updateViews() {
         var vipType = VipManager.getVipType()
         var vipIcon = when (vipType) {
-            VipType.TRIAL.value, VipType.VIP.value -> {
+            VipType.VIP.value -> {
                 R.drawable.vip
             }
 

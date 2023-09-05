@@ -8,100 +8,120 @@
             name="vm"
             type="river.chat.businese_main.setting.SettingsViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/defaultBgColor">
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/defaultBgColor">
 
-        <river.chat.lib_core.view.title.RiverTitle
-            android:id="@+id/toolBar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="设置"
-            app:titleSize="30sp" />
-
-        <river.chat.lib_core.view.roundview.EasyLinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            android:orientation="vertical"
-            app:ev_radius="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolBar">
-
-            <river.chat.businese_main.setting.SettingItem
-                android:id="@+id/viewSettingFeedback"
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivStatusBg"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:item_left_title="意见反馈"
-                app:item_type="icon"
+                android:src="@mipmap/bg_vipclub_bg"
+                app:layout_constraintBottom_toBottomOf="@+id/viewUser"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <river.chat.businese_main.setting.SettingItem
-                android:id="@+id/viewCheckUpdate"
-                android:layout_width="match_parent"
+            <river.chat.lib_core.view.title.RiverTitle
+                android:id="@+id/toolBar"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:item_left_title="检查更新"
-                app:item_type="icon"
+                android:layout_marginTop="44dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="设置"
+                app:titleSize="30sp" />
 
-
-            <river.chat.businese_main.setting.SettingItem
-                android:id="@+id/viewSettingPrivacy"
-                android:layout_width="match_parent"
+            <river.chat.businese_main.ui.common.UserStatusView
+                android:id="@+id/viewUser"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:item_left_title="隐私政策"
-                android:layout_marginTop="20dp"
-                app:item_type="icon"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/toolBar" />
 
-            <river.chat.businese_main.setting.SettingItem
-                android:id="@+id/viewSettingProtocol"
-                android:layout_width="match_parent"
+
+            <river.chat.lib_core.view.roundview.EasyLinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:item_left_title="用户协议"
-                app:item_type="icon"
+                android:orientation="vertical"
+                app:ev_radius="10dp"
+                android:layout_marginTop="60dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/viewUser">
 
+                <river.chat.businese_main.setting.SettingItem
+                    android:id="@+id/viewSettingFeedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:item_left_title="意见反馈"
+                    app:item_type="icon"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <river.chat.businese_main.setting.SettingItem
+                    android:id="@+id/viewCheckUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:item_left_title="检查更新"
+                    app:item_type="icon"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <river.chat.businese_main.setting.SettingItem
+                    android:id="@+id/viewSettingPrivacy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:item_left_title="隐私政策"
+                    app:item_type="icon"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <river.chat.businese_main.setting.SettingItem
-                android:id="@+id/viewSettingDestory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:item_left_title="注销账号"
-                app:item_type="icon"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <river.chat.businese_main.setting.SettingItem
+                    android:id="@+id/viewSettingProtocol"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:item_left_title="用户协议"
+                    app:item_type="icon"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <river.chat.businese_main.setting.SettingItem
-                android:id="@+id/viewSettingLogout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:item_left_title="退出账号"
-                app:item_type="icon"
-                android:layout_marginTop="40dp"
-                app:item_left_color="@color/tipTxtColor"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </river.chat.lib_core.view.roundview.EasyLinearLayout>
+                <river.chat.businese_main.setting.SettingItem
+                    android:id="@+id/viewSettingDestory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:item_left_title="注销账号"
+                    app:item_type="icon"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <river.chat.businese_main.setting.SettingItem
+                    android:id="@+id/viewSettingLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:item_left_color="@color/tipTxtColor"
+                    app:item_left_title="退出账号"
+                    app:item_type="icon"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </river.chat.lib_core.view.roundview.EasyLinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
 </layout>

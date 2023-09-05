@@ -21,11 +21,13 @@ data class User(
 
     var isNew: Int? = 0,
 
+    //rick todo
     //会员过期时间文案
     var vipExpireTimeStr: String = "",
-    //会员类型(普通用户/会员/试用)：VipType
+    //会员类型(日卡/月卡/季卡)：VipType
     var vipType: Int? = 0,
-
+    //vip名称：日卡/月卡/季卡
+    var vipName: String = "",
     //剩余试用次数
     var remainTryTimes: Int = 0
 

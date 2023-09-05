@@ -1,10 +1,13 @@
-package river.chat.businese_main.vip
+package river.chat.businese_main.ui.common
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
+import river.chat.businese_common.router.jump2VipOpen
+import river.chat.businese_main.vip.VipManager
 import river.chat.business_main.R
+import river.chat.business_main.databinding.ViewUserStatusBinding
 import river.chat.business_main.databinding.ViewVipStatusBinding
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
@@ -16,16 +19,16 @@ import river.chat.lib_core.view.base.LifecycleView
 import river.chat.lib_resource.model.VipType
 
 
-class VipStatusView @JvmOverloads constructor(
+class UserStatusView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : LifecycleView(context, attrs, defStyleAttr) {
 
 
-    private val viewBinding: ViewVipStatusBinding = DataBindingUtil.inflate(
+    private val viewBinding: ViewUserStatusBinding = DataBindingUtil.inflate(
         LayoutInflater.from(context),
-        river.chat.business_main.R.layout.view_vip_status,
+        R.layout.view_user_status,
         this,
         true
     )
@@ -41,29 +44,30 @@ class VipStatusView @JvmOverloads constructor(
         var user = userPlugin.getUser()
         var remainTimes =
             user.remainTryTimes
-        var vipExpireTimeStr = user.vipExpireTimeStr
         var type = user.vipType
         when (type) {
+
             VipType.VIP.value -> {
-                viewBinding.tvRemainTimes.text = vipExpireTimeStr
+                viewBinding.tvVipTitle.text = user.vipName
+                viewBinding.tvVipExpire.text = user.vipExpireTimeStr
             }
 
             else -> {
-                viewBinding.tvRemainTimes.text = "您还不是超级会员"
+                viewBinding.tvVipTitle.text = "您还不是超级会员"
             }
         }
         if (!userPlugin.isLogin()) {
             viewBinding.tvName.text = "登录/注册"
-        }
-        else
-        {
-            viewBinding.tvName.text=user.nickName
+        } else {
+            viewBinding.tvName.text = user.nickName
         }
 
         viewBinding.ivAvatar.loadCircle(if (user.headImg == null) R.drawable.avator_default else user.headImg)
         viewBinding.viewClick.singleClick {
-            userPlugin.check2Login {
-            }
+            VipManager.jump2VipPage()
+        }
+        viewBinding.tvName.singleClick {
+            userPlugin.check2Login { }
         }
 
     }

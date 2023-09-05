@@ -65,6 +65,8 @@
                         app:layout_constraintTop_toTopOf="parent" />
                 </river.chat.lib_core.view.roundview.EasyConstraintLayout>
 
+
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -123,9 +125,9 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ivReLoad"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginLeft="20dp"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginLeft="10dp"
                         android:src="@drawable/chat_reload_usful"
                         app:layout_constraintBottom_toBottomOf="@id/clAnswer"
                         app:layout_constraintLeft_toRightOf="@id/clAnswer"
@@ -154,6 +156,7 @@
                         android:layout_height="18dp"
                         android:src="@drawable/share" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
+
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.cardview.widget.CardView>

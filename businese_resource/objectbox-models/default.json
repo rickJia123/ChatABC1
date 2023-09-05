@@ -78,7 +78,7 @@
     },
     {
       "id": "3:3304178247595158897",
-      "lastPropertyId": "13:947263676866663089",
+      "lastPropertyId": "14:44228003430968031",
       "name": "User",
       "properties": [
         {
@@ -146,6 +146,11 @@
           "id": "13:947263676866663089",
           "name": "remainTryTimes",
           "type": 5
+        },
+        {
+          "id": "14:44228003430968031",
+          "name": "vipName",
+          "type": 9
         }
       ],
       "relations": []
