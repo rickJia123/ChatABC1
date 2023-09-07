@@ -1,9 +1,7 @@
-package river.chat.businese_common.utils
+package river.chat.businese_common.report
 
 import android.view.View
 import androidx.fragment.app.DialogFragment
-import river.chat.businese_common.report.TrackerEventName
-import river.chat.businese_common.report.TrackerKeys
 import river.chat.lib_core.tracker.TrackNode
 import river.chat.lib_core.tracker.postTrack
 import river.chat.lib_core.tracker.trackNode

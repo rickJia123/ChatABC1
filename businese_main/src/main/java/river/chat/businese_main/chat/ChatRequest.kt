@@ -1,9 +1,9 @@
 package river.chat.businese_main.chat
 
 import androidx.lifecycle.MutableLiveData
-import river.chat.businese_common.constants.TrackerEventName
-import river.chat.businese_common.constants.TrackerKeys.REQUEST_CONTENT
-import river.chat.businese_common.constants.TrackerKeys.REQUEST_TIME
+import river.chat.businese_common.report.TrackerEventName
+import river.chat.businese_common.report.TrackerKeys.REQUEST_CONTENT
+import river.chat.businese_common.report.TrackerKeys.REQUEST_TIME
 import river.chat.businese_common.report.ReportManager
 import river.chat.businese_main.api.MainBusinessApiService
 import river.chat.businese_main.chat.hot.HotTipItemBean
@@ -37,7 +37,7 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             dataResp = { data, time ->
                 ReportManager.reportEvent(
                     TrackerEventName.REQUEST,
-                    mapOf(
+                    mutableMapOf(
                         REQUEST_CONTENT to "GPT接口问题:" + content + "  \n回答：" + data?.content,
                         REQUEST_TIME to "GPT接口耗时:${time}ms",
                     )
@@ -54,7 +54,8 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
 
                 ReportManager.reportEvent(
                     TrackerEventName.REQUEST,
-                    mapOf(
+                    mutableMapOf(
+                        REQUEST_CONTENT to "GPT接口问题:" + content,
                         REQUEST_TIME to "GPT接口错误:${it.message}"
                     )
                 )
@@ -65,7 +66,7 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                         this.parentId = msgId.toLong() ?: 0
                         this.time = System.currentTimeMillis()
                         this.status = MessageStatus.FAIL_COMMON
-                    },errorMsg= it.message?:"")
+                    }, errorMsg = it.message ?: "")
             }
         )
     }

@@ -4,9 +4,18 @@ package river.chat.businese_main.share
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.umeng.socialize.bean.SHARE_MEDIA
+import river.chat.businese_common.report.ShareTracker
+import river.chat.businese_common.report.TrackerEventName
+import river.chat.businese_common.report.TrackerKeys
+import river.chat.businese_common.report.VIPTracker
+import river.chat.businese_common.report.getOfficalName
+import river.chat.businese_common.report.onLoad
 import river.chat.businese_common.utils.onLoad
 import river.chat.business_main.databinding.DialogShareBinding
 import river.chat.lib_core.share.SharePlatformBean
+import river.chat.lib_core.tracker.TrackNode
+import river.chat.lib_core.tracker.postTrack
+import river.chat.lib_core.tracker.trackNode
 import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_core.utils.common.QRCodeUtils
 import river.chat.lib_core.utils.exts.getViewBitmap
@@ -36,11 +45,23 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
 
 
     override fun initDataBinding(binding: DialogShareBinding) {
-        onLoad()
+        this.trackNode=TrackNode(
+            ShareTracker.KEY_QUESTION to (questionMsg?.content ?: ""),
+            ShareTracker.KEY_ANSWER to ( answerMsg?.content  ?: ""),
+        )
+        postTrack(
+            TrackerEventName.LOAD_SHARE,
+        )
         mBinding = binding
         binding.tvQuestion.text = questionMsg?.content ?: ""
         binding.tvAnswer.text = answerMsg?.content ?: ""
         binding.viewPlatform.mOnPlatformClick = {
+            binding.viewPlatform.trackNode=TrackNode(
+                ShareTracker.KEY_PLATFORM to (it.platform?.name?:"")
+            )
+            binding.viewPlatform.postTrack(
+                TrackerEventName.CLICK_SHARE,
+            )
             share(it)
         }
         binding.viewPlatform.mOnCancelClick = {

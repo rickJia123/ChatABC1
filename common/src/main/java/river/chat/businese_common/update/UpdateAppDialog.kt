@@ -9,6 +9,7 @@ import android.text.method.LinkMovementMethod
 import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import river.chat.businese_common.config.ServiceConfigManager
+import river.chat.businese_common.utils.onLoad
 import river.chat.common.R
 import river.chat.common.databinding.DialogUpdateBinding
 import river.chat.lib_core.config.AppLocalConfigKey
@@ -61,6 +62,7 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
 
 
     override fun initDataBinding(binding: DialogUpdateBinding) {
+        onLoad()
         dialog?.setOnKeyListener { dialog, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_BACK && event.repeatCount == 0) {
                 closeDialog()

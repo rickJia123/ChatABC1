@@ -9,8 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
-import river.chat.businese_common.constants.TrackerEventName
-import river.chat.businese_common.constants.TrackerKeys
+import river.chat.businese_common.report.TrackerEventName
+import river.chat.businese_common.report.TrackerKeys
+import river.chat.businese_common.report.VIPTracker
 import river.chat.businese_common.utils.onClick
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewVipTabBinding
@@ -69,8 +70,8 @@ class VipTabView @JvmOverloads constructor(
             tv.first.singleClick {
                 var vipTabBean = payList[index]
                 onClick(
-                    TrackerEventName.PAGE_CLICK,
-             TrackerKeys.CLICK_TYPE to "支付SKU tab 切换:" + vipTabBean.skuName
+                    TrackerEventName.CLICK_VIP,
+                    VIPTracker.KEY_SKU_CHOOSE to vipTabBean.skuName
                 )
                 onTabClick(index)
             }

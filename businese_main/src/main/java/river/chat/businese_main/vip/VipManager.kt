@@ -19,8 +19,8 @@ object VipManager {
      * 跳转开通/兑换页
      */
     fun jump2VipPage() {
-//        jump2VipExchange()
-        jump2VipOpen()
+        jump2VipExchange()
+//        jump2VipOpen()
     }
 
     /**

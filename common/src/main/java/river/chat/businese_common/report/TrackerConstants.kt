@@ -1,4 +1,4 @@
-package river.chat.businese_common.constants
+package river.chat.businese_common.report
 
 
 /**
@@ -16,13 +16,54 @@ object TrackerEventName {
      * 聊天请求
      */
     const val REQUEST = "REQUEST"
+
+
+    //登录页面点击
+    const val CLICK_LOGIN = "CLICK_LOGIN"
+
+    //支付页面点击
+    const val CLICK_VIP = "CLICK_VIP"
+    const val REQUEST_VIP = "REQUEST_VIP"
+
+    //设置页面点击
+    const val CLICK_SETTING = "CLICK_SETTING"
+
+    //分享
+    const val LOAD_SHARE = "LOAD_SHARE"
+    const val CLICK_SHARE = "CLICK_SHARE"
+}
+
+
+/**
+ * vip开通页/兑换页面
+ */
+object VIPTracker {
+    const val KEY_EXCHANGE_RESULT = "兑换结果"
+    const val KEY_PAY_RESULT = "支付结果"
+
+    const val KEY_EXCHANGE_CONTENT = "兑换码"
+    const val KEY_SKU_CHOOSE = "支付sku选择"
+
+}
+
+
+/**
+ *  分享页
+ */
+object ShareTracker {
+    const val KEY_QUESTION = "分享的问题"
+    const val KEY_ANSWER = "分享的答案"
+    const val KEY_PLATFORM = "分享的平台"
+
+
+
 }
 
 /**
  * 参数key
  */
 object TrackerKeys {
-    const val LOAD_PAGE= "加载页面："
+    const val LOAD_PAGE = "加载页面："
 
     /**
      * 点击事件名称
@@ -43,6 +84,12 @@ object TrackerKeys {
      * 询问接口返回时间
      */
     const val REQUEST_TIME = "询问接口时间："
+
+    /**
+     * 支付成功
+     */
+    const val PAY_ACTION = "PAY_ACTION"
+
 
 }
 

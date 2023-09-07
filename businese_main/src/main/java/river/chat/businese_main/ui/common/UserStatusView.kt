@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
+import river.chat.businese_common.report.TrackerEventName
+import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.router.jump2VipOpen
 import river.chat.businese_main.vip.VipManager
 import river.chat.business_main.R
@@ -11,6 +13,8 @@ import river.chat.business_main.databinding.ViewUserStatusBinding
 import river.chat.business_main.databinding.ViewVipStatusBinding
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
+import river.chat.lib_core.tracker.TrackNode
+import river.chat.lib_core.tracker.postTrack
 import river.chat.lib_core.utils.exts.safeToString
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.exts.view.buildSpannableString
@@ -32,7 +36,6 @@ class UserStatusView @JvmOverloads constructor(
         this,
         true
     )
-
 
     init {
         update()
@@ -64,10 +67,22 @@ class UserStatusView @JvmOverloads constructor(
 
         viewBinding.ivAvatar.loadCircle(if (user.headImg == null) R.drawable.avator_default else user.headImg)
         viewBinding.viewClick.singleClick {
-            VipManager.jump2VipPage()
+            viewBinding.viewClick.postTrack(
+                TrackerEventName.CLICK_SETTING,
+                TrackNode(TrackerKeys.CLICK_TYPE to "个人区域-查看权益")
+            )
+//            VipManager.jump2VipPage()
+            jump2VipOpen()
         }
         viewBinding.tvName.singleClick {
-            userPlugin.check2Login { }
+            userPlugin.check2Login {
+                if (!it) {
+                    viewBinding.viewClick.postTrack(
+                        TrackerEventName.CLICK_SETTING,
+                        TrackNode(TrackerKeys.CLICK_TYPE to "个人区域-跳转登录")
+                    )
+                }
+            }
         }
 
     }

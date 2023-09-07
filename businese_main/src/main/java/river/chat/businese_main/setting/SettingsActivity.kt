@@ -2,6 +2,9 @@ package river.chat.businese_main.setting
 
 import com.alibaba.android.arouter.facade.annotation.Route
 import org.koin.android.ext.android.inject
+import river.chat.businese_common.report.TrackerEventName
+import river.chat.businese_common.report.TrackerKeys
+import river.chat.businese_common.report.VIPTracker
 import river.chat.businese_common.router.jump2Feedback
 import river.chat.businese_common.update.AppUpdateManager
 import river.chat.businese_common.utils.onLoad
@@ -9,6 +12,8 @@ import river.chat.business_main.databinding.ActivitySettingsBinding
 import river.chat.lib_core.router.plugin.module.HomePlugin
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
 import river.chat.lib_core.router.plugin.module.UserPlugin
+import river.chat.lib_core.tracker.TrackNode
+import river.chat.lib_core.tracker.postTrack
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.appVersionName
 import river.chat.lib_core.utils.longan.mainThread
@@ -45,23 +50,27 @@ class SettingsActivity :
     private fun initSettings(binding: ActivitySettingsBinding) {
         binding.viewSettingPrivacy.click =
             {
+                onSettingClick(binding.viewSettingPrivacy)
                 WebViewHelper.startWebViewActivity("https://baike.baidu.com/item/%E5%A5%BD%E4%BC%BC/4084695")
                 "隐私协议".toast()
             }
         binding.viewSettingLogout.singleClick {
+            onSettingClick(binding.viewSettingLogout)
             userPlugin.logout()
         }
         //意见反馈
         binding.viewSettingFeedback.singleClick {
+            onSettingClick(binding.viewSettingFeedback)
             jump2Feedback()
         }
 
         binding.viewCheckUpdate.apply {
             singleClick {
+                onSettingClick(binding.viewCheckUpdate)
                 if (!AppUpdateManager.isNeedUpdate()) {
                     "已是最新版本".toast()
                 } else {
-                    AppUpdateManager.showUpdateAppDialog(this@SettingsActivity,true)
+                    AppUpdateManager.showUpdateAppDialog(this@SettingsActivity, true)
                 }
 
             }
@@ -70,8 +79,16 @@ class SettingsActivity :
         }
 
         binding.viewSettingDestory.singleClick {
+            onSettingClick(binding.viewSettingDestory)
             userPlugin.destroyAccount()
         }
+    }
+
+    private fun onSettingClick(settingItem: SettingItem) {
+        settingItem.postTrack(
+            TrackerEventName.CLICK_SETTING,
+            TrackNode(TrackerKeys.CLICK_TYPE to (settingItem.name ?: ""))
+        )
     }
 
 

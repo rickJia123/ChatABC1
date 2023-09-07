@@ -32,7 +32,6 @@ class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                 MainBusinessApiService.confirmFeedback(content, contact, deviceInfos())
             },
             dataResp = { data, time ->
-//                it.toString().toast()
                 feedBackResult.value =
                     RequestResult(isSuccess = true, data = data)
             },

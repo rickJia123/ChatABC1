@@ -5,8 +5,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import river.chat.businese_common.constants.TrackerEventName
-import river.chat.businese_common.constants.TrackerKeys
+import river.chat.businese_common.report.TrackerEventName
+import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.pay.PayCenter
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewVipPayBinding
@@ -74,7 +74,7 @@ class VipPayView @JvmOverloads constructor(
     private fun initClick() {
         mBinding.clPay.singleClick {
             postTrack(
-                TrackerEventName.PAGE_CLICK,
+                TrackerEventName.CLICK_VIP,
                 TrackNode(TrackerKeys.CLICK_TYPE to "支付按钮:" + mTabBean?.skuName)
             )
             PayCenter.pay(CreateOrderRequestBean().apply {

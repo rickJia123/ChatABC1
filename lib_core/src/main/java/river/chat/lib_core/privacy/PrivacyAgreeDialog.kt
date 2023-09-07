@@ -2,21 +2,19 @@ package river.chat.lib_core.privacy
 
 
 import android.text.method.LinkMovementMethod
-import android.text.style.URLSpan
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.buildSpannedString
 import androidx.core.text.inSpans
 import androidx.core.text.italic
 import river.chat.lib_core.R
 import river.chat.lib_core.databinding.DialogPrivacyAgreeBinding
-import river.chat.lib_core.databinding.DialogSimpleTipBinding
+import river.chat.lib_core.tracker.TrackNode
+import river.chat.lib_core.tracker.postTrack
+import river.chat.lib_core.tracker.trackNode
 import river.chat.lib_core.utils.exts.getColor
 import river.chat.lib_core.utils.exts.getString
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.ClickableSpan
-import river.chat.lib_core.utils.longan.pressBackTwiceToExitApp
-import river.chat.lib_core.utils.longan.topActivity
-import river.chat.lib_core.view.main.activity.BaseActivity
 import river.chat.lib_core.view.main.dialog.BaseBindingDialogFragment
 import river.chat.lib_core.webview.WebViewHelper
 import river.chat.lib_resource.AppConstants
@@ -65,6 +63,11 @@ class PrivacyAgreeDialog(var dialogActivity: AppCompatActivity) :
 
 
     override fun initDataBinding(binding: DialogPrivacyAgreeBinding) {
+
+        this.trackNode = TrackNode(
+            "PAGE_LOAD" to "隐私协议弹窗",
+        )
+        this.postTrack("加载页面：")
         binding.tvDes.text = mPrivacy
         binding.tvTips.movementMethod = LinkMovementMethod.getInstance() // 设置了才能点击
 

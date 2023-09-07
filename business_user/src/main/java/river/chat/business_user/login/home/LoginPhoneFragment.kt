@@ -3,8 +3,8 @@ package river.chat.business_user.login.home
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import river.chat.businese_common.constants.TrackerEventName
-import river.chat.businese_common.constants.TrackerKeys
+import river.chat.businese_common.report.TrackerEventName
+import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.utils.onClick
 import river.chat.businese_common.utils.onLoad
 import river.chat.lib_core.wx.WxManager
@@ -61,7 +61,7 @@ class LoginPhoneFragment :
     private fun initClick(binding: FragmentLoginPhoneBinding) {
         binding.tvGetCOde.singleClick {
             onClick(
-                TrackerEventName.PAGE_CLICK,
+                TrackerEventName.CLICK_LOGIN,
                 TrackerKeys.CLICK_TYPE to "登录验证码页-点击获取验证码"
             )
             if (binding.tvGetCOde.text.toString() == mRequestDefaultStr) {
@@ -73,12 +73,12 @@ class LoginPhoneFragment :
         }
         binding.btLogin.singleClick {
             onClick(
-                TrackerEventName.PAGE_CLICK,
+                TrackerEventName.CLICK_LOGIN,
                 TrackerKeys.CLICK_TYPE to "登录验证码页-点击登录"
             )
             binding.viewLoginPolicy.checkSelected {
                 onClick(
-                    TrackerEventName.PAGE_CLICK,
+                    TrackerEventName.CLICK_LOGIN,
                     TrackerKeys.CLICK_TYPE to "登录验证码页-点击查看条款"
                 )
                 checkCode {
