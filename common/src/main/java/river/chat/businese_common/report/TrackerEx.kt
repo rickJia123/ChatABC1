@@ -88,16 +88,6 @@ fun <T : BaseFragment> T.onLoad(
     this.postTrack(TrackerEventName.PAGE_LOAD)
 }
 
-/**
- * dialogFragment 曝光埋点
- */
-fun <T : DialogFragment> T.onLoad(
-) {
-    this.trackNode = TrackNode(
-        TrackerKeys.LOAD_PAGE to this.getOfficalName()
-    )
-    this.postTrack(TrackerEventName.PAGE_LOAD)
-}
 
 
 /**

@@ -10,8 +10,11 @@ import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.report.VIPTracker
 import river.chat.businese_common.report.getOfficalName
 import river.chat.businese_common.report.onLoad
+import river.chat.businese_common.utils.loadAvatar
 import river.chat.businese_common.utils.onLoad
 import river.chat.business_main.databinding.DialogShareBinding
+import river.chat.lib_core.router.plugin.core.getPlugin
+import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.share.SharePlatformBean
 import river.chat.lib_core.tracker.TrackNode
 import river.chat.lib_core.tracker.postTrack
@@ -19,6 +22,7 @@ import river.chat.lib_core.tracker.trackNode
 import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_core.utils.common.QRCodeUtils
 import river.chat.lib_core.utils.exts.getViewBitmap
+import river.chat.lib_core.utils.exts.ifEmptyOrBlank
 import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.main.dialog.BaseBindingDialogFragment
 import river.chat.lib_umeng.ShareManager
@@ -43,8 +47,8 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
         fun builder(activity: AppCompatActivity): ShareDialog = ShareDialog(activity)
     }
 
-
-    override fun initDataBinding(binding: DialogShareBinding) {
+    override fun onStart() {
+        super.onStart()
         this.trackNode=TrackNode(
             ShareTracker.KEY_QUESTION to (questionMsg?.content ?: ""),
             ShareTracker.KEY_ANSWER to ( answerMsg?.content  ?: ""),
@@ -52,6 +56,12 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
         postTrack(
             TrackerEventName.LOAD_SHARE,
         )
+    }
+
+    override fun initDataBinding(binding: DialogShareBinding) {
+
+        var userPlugin = getPlugin<UserPlugin>()
+        var user = userPlugin.getUser()
         mBinding = binding
         binding.tvQuestion.text = questionMsg?.content ?: ""
         binding.tvAnswer.text = answerMsg?.content ?: ""
@@ -68,7 +78,8 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
             closeDialog()
         }
         binding.ivCode.setImageBitmap(QRCodeUtils.createQRCode(mTestUrl))
-
+        binding.ivAvatar.loadAvatar(user.headImg )
+        binding.tvName.text=user.nickName.ifEmptyOrBlank("GptEvery用户")
     }
 
     private fun closeDialog() {

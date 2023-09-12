@@ -105,6 +105,7 @@ fun Activity.postTrack(eventName: String, vararg classes: Class<*>) =
 fun Fragment.postTrack(eventName: String, vararg classes: Class<*>) =
     view?.postTrack(eventName, *classes)
 
+
 fun View.postTrack(eventId: String, vararg classes: Class<*>) =
     trackHandler?.onEvent(application, eventId, collectTrack(*classes))
 

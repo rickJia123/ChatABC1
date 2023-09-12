@@ -14,7 +14,7 @@ import river.chat.lib_resource.model.VipType
  * Created by beiyongChao on 2023/8/19
  * Description:
  */
-class VipView @JvmOverloads constructor(
+class VipIconView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LifecycleView(context, attrs, defStyleAttr) {
 

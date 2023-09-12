@@ -9,7 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clRoot"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="100dp"
+
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
@@ -26,7 +27,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvName"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
@@ -38,7 +39,6 @@
             app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toRightOf="@+id/ivAvatar"
-            app:layout_constraintRight_toLeftOf="@+id/clVipStatus"
             app:layout_constraintTop_toTopOf="@+id/ivAvatar"
             tool:text="rick" />
 
@@ -49,11 +49,10 @@
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-
             android:src="@drawable/right_arrow"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/parent"
+            app:layout_constraintLeft_toRightOf="@+id/tvName"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,7 +60,6 @@
             android:layout_width="150dp"
             android:layout_height="80dp"
             android:background="@drawable/gradient_e3eaff_ffffff_10"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -91,9 +89,8 @@
                 android:id="@+id/tvVipExpire"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/defaultTextColor"
-                android:textSize="@dimen/defaultTxtSize_1"
-                android:visibility="gone"
+                android:textColor="@color/tipTxtColor"
+                android:textSize="@dimen/defaultTxtSize_small"
                 app:layout_constraintBottom_toTopOf="@+id/tvDetail"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

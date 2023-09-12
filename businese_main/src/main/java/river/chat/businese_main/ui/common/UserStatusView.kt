@@ -3,10 +3,12 @@ package river.chat.businese_main.ui.common
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.router.jump2VipOpen
+import river.chat.businese_common.utils.loadAvatar
 import river.chat.businese_main.vip.VipManager
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewUserStatusBinding
@@ -15,6 +17,7 @@ import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.tracker.TrackNode
 import river.chat.lib_core.tracker.postTrack
+import river.chat.lib_core.utils.exts.getString
 import river.chat.lib_core.utils.exts.safeToString
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.exts.view.buildSpannableString
@@ -52,20 +55,22 @@ class UserStatusView @JvmOverloads constructor(
 
             VipType.VIP.value -> {
                 viewBinding.tvVipTitle.text = user.vipName
-                viewBinding.tvVipExpire.text = user.vipExpireTimeStr
             }
 
             else -> {
-                viewBinding.tvVipTitle.text = "您还不是超级会员"
+                viewBinding.tvVipTitle.text = R.string.vip_no.getString()
             }
         }
+        viewBinding.tvVipExpire.text = VipManager.getRemainTimeStr()
+        viewBinding.ivRight.visibility = if (userPlugin.isLogin()) GONE else View.VISIBLE
         if (!userPlugin.isLogin()) {
             viewBinding.tvName.text = "登录/注册"
+
         } else {
             viewBinding.tvName.text = user.nickName
         }
 
-        viewBinding.ivAvatar.loadCircle(if (user.headImg == null) R.drawable.avator_default else user.headImg)
+        viewBinding.ivAvatar.loadAvatar(user.headImg)
         viewBinding.viewClick.singleClick {
             viewBinding.viewClick.postTrack(
                 TrackerEventName.CLICK_SETTING,

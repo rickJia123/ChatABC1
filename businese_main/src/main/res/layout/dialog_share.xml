@@ -29,89 +29,125 @@
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/scrollView"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/bg_eeeeee_solid_rectangle_top_20"
                 android:orientation="vertical"
+                android:paddingBottom="30dp"
+                app:layout_constraintBottom_toTopOf="@+id/clQRCode"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed">
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/clChat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/ivLogo"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:adjustViewBounds="true"
-                        android:layout_marginTop="10dp"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/logo_trans"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                       app:layout_constraintLeft_toLeftOf="parent" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/ivQuestion"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/chat_question"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvQuestion"
-                        android:layout_width="0dp"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clChat"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:textColor="@color/chatQTv"
-                        android:textSize="15sp"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintLeft_toRightOf="@+id/ivQuestion"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/ivQuestion"
-                        app:layout_constraintWidth_default="wrap"
-                        tools:text=" 个题个题个题个题个题个题个题个题个个题个题个题个题个题个题个题个题个题个题个题个题个题个题个题个题个题个题题个题个题" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/ivAnswer"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="30dp"
-                        android:src="@drawable/avatar_ai"
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvQuestion" />
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvAnswer"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:textColor="@color/chatATv"
-                        android:textSize="15sp"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintLeft_toRightOf="@+id/ivAnswer"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/ivAnswer"
-                        app:layout_constraintWidth_default="wrap"
-                        tools:text="  " />
+                        app:layout_constraintTop_toTopOf="parent">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivAvatar"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/shape_white_circle"
+                            android:padding="3dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:src="@drawable/vip" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:ellipsize="end"
+                            android:maxLines="10"
+                            android:textColor="@color/defaultTitleColor"
+                            android:textSize="@dimen/defaultTxtSize_1"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@id/tvUserTip"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintLeft_toRightOf="@+id/ivAvatar"
+                            app:layout_constraintTop_toTopOf="@+id/ivAvatar"
+                            tools:text="rick" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvUserTip"
+                            android:layout_width="0dp"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:ellipsize="end"
+                            android:maxLines="10"
+                            android:text="我发现了一个强大的ChatGpt工具,你也来试试吧"
+                            android:textColor="@color/defaultSubTitleColor"
+                            android:textSize="@dimen/defaultTxtSize_small"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintLeft_toRightOf="@+id/ivAvatar"
+                            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivQuestion"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/chat_question"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ivAvatar" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvQuestion"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/chatQTv"
+                            android:textSize="15sp"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintLeft_toRightOf="@+id/ivQuestion"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/ivQuestion"
+                            app:layout_constraintWidth_default="wrap"
+                            tools:text=" 个题个题个题个题个题个题个题个题个个题个题个题个题个题个题个题个题个题个题个题个题个题个题个题个题个题个题题个题个题" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivAnswer"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="30dp"
+                            android:src="@drawable/avatar_ai"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvQuestion" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvAnswer"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/chatATv"
+                            android:textSize="15sp"
+                            tools:text=" 个题个题个题个题个题个题个"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintLeft_toRightOf="@+id/ivAnswer"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/ivAnswer"
+                            app:layout_constraintWidth_default="wrap"
+                      />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -120,13 +156,21 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_white_solid_rectangle_bottom_20"
                 android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="10dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/scrollView">
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivLogo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/logo_trans"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvTipTitle"
                     android:layout_width="wrap_content"
@@ -136,8 +180,9 @@
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold"
+                    android:layout_marginLeft="5dp"
                     app:layout_constraintBottom_toTopOf="@id/tvTipSubTitle"
-                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/ivLogo"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_chainStyle="packed" />
 
@@ -146,13 +191,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="最好的生活助手"
+                    android:text="本内容由ChatGpt提供"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="@+id/tvTipTitle"
                     app:layout_constraintTop_toBottomOf="@+id/tvTipTitle" />
-
 
                 <RelativeLayout
                     android:id="@+id/rlCode"

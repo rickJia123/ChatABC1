@@ -42,22 +42,16 @@ data class QueryOrderResBean(
 )
 
 object PayType {
-    const val WECHAT_PAY = "WALLET"
+    const val WECHAT_PAY = "WXPAY"
 }
 
-//data class WePayPrepayResponseModel (
-//    var orderNumber: String? = "",
-//    var appId: String? = "",
-//    var partnerId: String? = "",
-//    var prepayId: String? = "",
-//    var nonceStr: String? = "",
-//    var timestamp: String? = "",
-//
-//    @SerializedName("package")
-//    var packageValue: String? = "",
-//    var sign: String? = "",
-//
-//    //跨sku返回参数
-//    var payData: String? = "",
-//)
+
+
+data class WechatPayModel (
+    var orderId: String? = "",
+    var orderCode: String? = "",
+    var payPrice: String? = "",
+    var payData: String? = "",
+
+)
 

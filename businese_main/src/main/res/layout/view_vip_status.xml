@@ -40,7 +40,7 @@
             app:layout_constraintTop_toTopOf="@+id/ivAvatar"
             tool:text="rick" />
 
-        <river.chat.businese_main.vip.VipView
+        <river.chat.businese_main.vip.VipIconView
             android:id="@+id/viewVip"
             android:layout_width="20dp"
             android:layout_height="20dp"

@@ -61,13 +61,16 @@ class PrivacyAgreeDialog(var dialogActivity: AppCompatActivity) :
         fun builder(activity: AppCompatActivity): PrivacyAgreeDialog = PrivacyAgreeDialog(activity)
     }
 
-
-    override fun initDataBinding(binding: DialogPrivacyAgreeBinding) {
+    override fun onStart() {
+        super.onStart()
 
         this.trackNode = TrackNode(
-            "PAGE_LOAD" to "隐私协议弹窗",
+            "LOAD_PAGE" to "隐私协议弹窗",
         )
-        this.postTrack("加载页面：")
+        this.postTrack("PAGE_LOAD")
+    }
+    override fun initDataBinding(binding: DialogPrivacyAgreeBinding) {
+
         binding.tvDes.text = mPrivacy
         binding.tvTips.movementMethod = LinkMovementMethod.getInstance() // 设置了才能点击
 

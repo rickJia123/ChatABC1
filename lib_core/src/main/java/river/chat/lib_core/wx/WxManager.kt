@@ -9,6 +9,7 @@ import com.tencent.mm.opensdk.modelmsg.SendAuth
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
+import river.chat.lib_resource.model.WechatPayModel
 import kotlin.random.Random
 
 
@@ -64,7 +65,7 @@ object WxManager {
     /**
      * 微信支付
      */
-    fun pay() {
+    fun pay( ) {
         var payRequest = PayReq()
 
         payRequest.appId = "wxd930ea5d5a258f4f"

@@ -38,11 +38,17 @@ object TrackerEventName {
  * vip开通页/兑换页面
  */
 object VIPTracker {
-    const val KEY_EXCHANGE_RESULT = "兑换结果"
-    const val KEY_PAY_RESULT = "支付结果"
+    //兑换结果
+    const val KEY_EXCHANGE_RESULT = "KEY_EXCHANGE_RESULT"
 
-    const val KEY_EXCHANGE_CONTENT = "兑换码"
-    const val KEY_SKU_CHOOSE = "支付sku选择"
+    //支付结果
+    const val KEY_PAY_RESULT = "KEY_PAY_RESULT"
+
+    //兑换码
+    const val KEY_EXCHANGE_CONTENT = "KEY_EXCHANGE_CONTENT"
+
+    //支付点击/选择的sku
+    const val KEY_SKU_CHOOSE = "KEY_SKU_CHOOSE"
 
 }
 
@@ -51,39 +57,41 @@ object VIPTracker {
  *  分享页
  */
 object ShareTracker {
-    const val KEY_QUESTION = "分享的问题"
-    const val KEY_ANSWER = "分享的答案"
-    const val KEY_PLATFORM = "分享的平台"
+    //分享的问题
+    const val KEY_QUESTION = "KEY_QUESTION"
 
+    //分享的答案
+    const val KEY_ANSWER = "KEY_ANSWER"
 
-
+    //分享平台
+    const val KEY_PLATFORM = "KEY_PLATFORM"
 }
 
 /**
  * 参数key
  */
 object TrackerKeys {
-    const val LOAD_PAGE = "加载页面："
+    const val LOAD_PAGE = "LOAD_PAGE"
 
     /**
      * 点击事件名称
      */
-    const val CLICK_TYPE = "点击事件："
+    const val CLICK_TYPE = "CLICK_TYPE"
 
     /**
      * 点击事件名称
      */
-    const val CLICK_PAGE = "点击所在页面："
+    const val CLICK_PAGE = "CLICK_PAGE"
 
     /**
      * 询问内容
      */
-    const val REQUEST_CONTENT = "询问内容："
+    const val REQUEST_CONTENT = "REQUEST_CONTENT"
 
     /**
      * 询问接口返回时间
      */
-    const val REQUEST_TIME = "询问接口时间："
+    const val REQUEST_TIME = "REQUEST_TIME"
 
     /**
      * 支付成功

@@ -20,7 +20,8 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivStatusBg"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
                 android:src="@mipmap/bg_vipclub_bg"
                 app:layout_constraintBottom_toBottomOf="@+id/viewUser"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -41,6 +42,7 @@
             <river.chat.businese_main.ui.common.UserStatusView
                 android:id="@+id/viewUser"
                 android:layout_width="0dp"
+                tools:layout_height="100dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
