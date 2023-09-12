@@ -6,12 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.umeng.socialize.bean.SHARE_MEDIA
 import river.chat.businese_common.report.ShareTracker
 import river.chat.businese_common.report.TrackerEventName
-import river.chat.businese_common.report.TrackerKeys
-import river.chat.businese_common.report.VIPTracker
-import river.chat.businese_common.report.getOfficalName
-import river.chat.businese_common.report.onLoad
 import river.chat.businese_common.utils.loadAvatar
-import river.chat.businese_common.utils.onLoad
 import river.chat.business_main.databinding.DialogShareBinding
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
@@ -19,12 +14,12 @@ import river.chat.lib_core.share.SharePlatformBean
 import river.chat.lib_core.tracker.TrackNode
 import river.chat.lib_core.tracker.postTrack
 import river.chat.lib_core.tracker.trackNode
-import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_core.utils.common.QRCodeUtils
-import river.chat.lib_core.utils.exts.getViewBitmap
 import river.chat.lib_core.utils.exts.ifEmptyOrBlank
+import river.chat.lib_core.utils.exts.view.toBitmap
 import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.main.dialog.BaseBindingDialogFragment
+import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_umeng.ShareManager
 import river.chat.lib_umeng.common.RiverShareContent
 
@@ -108,7 +103,7 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
             RiverShareContent().apply {
                 mTitle = "快来提问吧"
                 mText = "快来提问吧"
-                mBitmap = mBinding?.clContent?.getViewBitmap()
+                mBitmap = mBinding?.scrollView?.toBitmap()
 
             }, platformBean.platform ?: SHARE_MEDIA.WEIXIN
         ).shareImageLocal(topActivity)

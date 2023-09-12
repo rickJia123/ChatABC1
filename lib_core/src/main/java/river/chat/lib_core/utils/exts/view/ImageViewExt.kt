@@ -6,7 +6,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
-import androidx.compose.ui.draw.BlurredEdgeTreatment
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
@@ -19,15 +19,12 @@ fun ImageView.loadSimple(resource: Any?) {
     }
 }
 
-fun ImageView.loadCircle(resource: Any?,placeHolder:Int=R.mipmap.ic_placeholder) {
+fun ImageView.loadCircle(resource: Any?, placeHolder: Int = R.mipmap.ic_placeholder) {
     this.load(resource) {
         crossfade(true)
         transformations(CircleCropTransformation())
     }
 }
-
-
-
 
 
 fun getFitInSampleSize(reqWidth: Int, reqHeight: Int, options: BitmapFactory.Options): Int {
@@ -107,6 +104,32 @@ fun View.toBitmap(): Bitmap {
         }
     }
 }
+
+/**
+ * 截取scrollview布局图片
+ */
+fun NestedScrollView.toBitmap(): Bitmap {
+    var h = 0
+    var bitmap: Bitmap? = null
+    for (i in 0 until childCount) {
+        h += getChildAt(i)
+            .height
+        //设置背景色，否则屏幕外部分布景是黑色的
+        getChildAt(i)
+            .setBackgroundColor(getResources().getColor(R.color.color_FFF3D6))
+    }
+    // 创建对应大小的bitmap
+    bitmap = Bitmap.createBitmap(
+        width,
+        h,
+        Bitmap.Config.ARGB_8888
+    )
+    val canvas = Canvas(bitmap)
+    draw(canvas)
+    return bitmap
+}
+
+
 
 
 
