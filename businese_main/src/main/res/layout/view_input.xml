@@ -76,6 +76,7 @@
             android:imeOptions="actionSend"
             android:cursorVisible="true"
             android:maxLines="7"
+            android:maxLength="100"
             android:textColorHint="@color/defaultTextColor"
             android:textCursorDrawable="@null"
             android:textSize="12sp"
