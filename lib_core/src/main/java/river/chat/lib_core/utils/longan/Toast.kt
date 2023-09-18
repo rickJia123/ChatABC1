@@ -56,7 +56,7 @@ fun Context.longToast(@StringRes message: Int): Toast =
     Toast.makeText(this, message, Toast.LENGTH_LONG).fixBadTokenException().apply { show() }
 
 fun String.toast() =
-    ToastTipDialog.launch(topActivity, this)
+    toastSystem()
 
 fun String.toastSystem() =
     BaseApplication.getInstance().toast(this)

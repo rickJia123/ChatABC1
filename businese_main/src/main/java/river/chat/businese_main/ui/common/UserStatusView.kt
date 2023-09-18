@@ -12,16 +12,12 @@ import river.chat.businese_common.utils.loadAvatar
 import river.chat.businese_main.vip.VipManager
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewUserStatusBinding
-import river.chat.business_main.databinding.ViewVipStatusBinding
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.tracker.TrackNode
 import river.chat.lib_core.tracker.postTrack
 import river.chat.lib_core.utils.exts.getString
-import river.chat.lib_core.utils.exts.safeToString
 import river.chat.lib_core.utils.exts.singleClick
-import river.chat.lib_core.utils.exts.view.buildSpannableString
-import river.chat.lib_core.utils.exts.view.loadCircle
 import river.chat.lib_core.view.base.LifecycleView
 import river.chat.lib_resource.model.VipType
 

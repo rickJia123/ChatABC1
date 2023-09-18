@@ -12,7 +12,7 @@ data class ConfigResBean(
  * 接口获取的默认配置信息
  */
 data class  DefaultConfigResBean(
-    var appUrl: String = "",
+    var appDownUrl: String = "",
     var appVersion: String = "",
     var content: String = "",
     var isForce: String = "",

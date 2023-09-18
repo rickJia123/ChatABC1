@@ -4,6 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
+import river.chat.businese_common.report.ChatTracker
+import river.chat.businese_common.report.TrackerEventName
+import river.chat.businese_common.report.TrackerKeys
+import river.chat.businese_common.utils.onReport
 import river.chat.businese_main.share.ShareDialog
 import river.chat.businese_main.utils.logChat
 import river.chat.business_main.databinding.ViewChatCardBinding
@@ -47,12 +51,17 @@ class ChatCardView @JvmOverloads constructor(
     private fun initClick() {
         viewBinding.clAnswer.singleClick {
             answerMsg?.let {
+                var toastMsg=  "回答已复制"
                 if (it.status == MessageStatus.COMPLETE) {
-                    "回答已复制".toast()
                     answerMsg?.content?.copyToClipboard()
                 } else {
-                    "该回答状态异常哦".toast()
+                    toastMsg= "该回答状态异常哦"
                 }
+                toastMsg.toast()
+                onReport(
+                    TrackerEventName.CLICK_CHAT,
+                    ChatTracker.CLICK_ACTION to "复制回答："+ answerMsg?.content,
+                )
             }
 
 
@@ -60,6 +69,10 @@ class ChatCardView @JvmOverloads constructor(
         viewBinding.clQuestion.singleClick {
             "问题已复制".toast()
             questionMsg?.content?.copyToClipboard()
+            onReport(
+                TrackerEventName.CLICK_CHAT,
+                ChatTracker.CLICK_ACTION to "复制问题："+ questionMsg?.content,
+            )
         }
 
         viewBinding.ivShare.singleClick {

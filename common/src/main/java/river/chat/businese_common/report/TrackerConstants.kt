@@ -8,18 +8,17 @@ object TrackerEventName {
     //页面加载
     const val PAGE_LOAD = "PAGE_LOAD"
 
-    //页面点击
-    const val PAGE_CLICK = "PAGE_CLICK"
-
 
     /**
-     * 聊天请求
+     * 聊天页面
      */
-    const val REQUEST = "REQUEST"
+    const val REQUEST_CHAT = "REQUEST_CHAT"
+    const val CLICK_CHAT = "CLICK_CHAT"
 
 
     //登录页面点击
     const val CLICK_LOGIN = "CLICK_LOGIN"
+    const val REQUEST_LOGIN = "REQUEST_LOGIN"
 
     //支付页面点击
     const val CLICK_VIP = "CLICK_VIP"
@@ -31,6 +30,8 @@ object TrackerEventName {
     //分享
     const val LOAD_SHARE = "LOAD_SHARE"
     const val CLICK_SHARE = "CLICK_SHARE"
+
+
 }
 
 
@@ -65,6 +66,15 @@ object ShareTracker {
 
     //分享平台
     const val KEY_PLATFORM = "KEY_PLATFORM"
+}
+
+
+/**
+ *  聊天页
+ */
+object ChatTracker {
+    //操作动作
+    const val CLICK_ACTION = "CLICK_ACTION"
 }
 
 /**

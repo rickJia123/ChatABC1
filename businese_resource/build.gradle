@@ -83,9 +83,9 @@ dependencies {
     // kotlin扩展（可选）
     api 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
 
-/**
- * 合规 begin
- */
+    /**
+     * 合规 begin
+     */
     def privacyVersion = "1.2.7"
     api "com.github.allenymt.PrivacySentry:hook-sentry:$privacyVersion"
     api "com.github.allenymt.PrivacySentry:privacy-annotation:$privacyVersion"
@@ -102,7 +102,7 @@ dependencies {
      * 合规 end
      */
 
-     //二维码
+    //二维码
     api 'com.journeyapps:zxing-android-embedded:4.3.0'
 
 }

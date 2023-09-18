@@ -37,7 +37,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             },
             dataResp = { data, time ->
                 ReportManager.reportEvent(
-                    TrackerEventName.REQUEST,
+                    TrackerEventName.REQUEST_LOGIN,
                     mutableMapOf(
                         TrackerKeys.REQUEST_TIME to "获取验证码接口耗时:${time}ms",
                     )
@@ -46,7 +46,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             },
             error = {
                 ReportManager.reportEvent(
-                    TrackerEventName.REQUEST,
+                    TrackerEventName.REQUEST_LOGIN,
                     mutableMapOf(
                         TrackerKeys.REQUEST_TIME to "获取验证码报错：" + (it.message ?: "")
                     )
@@ -65,7 +65,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             },
             dataResp = { data, time ->
                 ReportManager.reportEvent(
-                    TrackerEventName.REQUEST,
+                    TrackerEventName.REQUEST_LOGIN,
                     mutableMapOf(
                         TrackerKeys.REQUEST_TIME to "手机号登录接口耗时:${time}ms",
                     )
@@ -77,7 +77,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             },
             error = {
                 ReportManager.reportEvent(
-                    TrackerEventName.REQUEST,
+                    TrackerEventName.REQUEST_LOGIN,
                     mutableMapOf(
                         TrackerKeys.REQUEST_TIME to "手机号登录接口报错：" + (it.message ?: "")
                     )
@@ -99,7 +99,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             },
             dataResp = { data, time ->
                 ReportManager.reportEvent(
-                    TrackerEventName.REQUEST,
+                    TrackerEventName.REQUEST_LOGIN,
                     mutableMapOf(
                         TrackerKeys.REQUEST_TIME to "微信登录接口耗时:${time}ms",
                     )
@@ -111,7 +111,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             },
             error = {
                 ReportManager.reportEvent(
-                    TrackerEventName.REQUEST,
+                    TrackerEventName.REQUEST_LOGIN,
                     mutableMapOf(
                         TrackerKeys.REQUEST_TIME to "微信登录接口报错：" + (it.message ?: "")
                     )
@@ -178,7 +178,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                     RiverUserManager.updateUser(user)
                 }
                 ReportManager.reportEvent(
-                    TrackerEventName.REQUEST,
+                    TrackerEventName.REQUEST_LOGIN,
                     mutableMapOf(
                         TrackerKeys.REQUEST_TIME to "刷新用户信息耗时:${time}ms",
                     )
@@ -187,7 +187,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             },
             error = {
                 ReportManager.reportEvent(
-                    TrackerEventName.REQUEST,
+                    TrackerEventName.REQUEST_LOGIN,
                     mutableMapOf(
                         TrackerKeys.REQUEST_TIME to "刷新用户信息报错：" + (it.message ?: "")
                     )

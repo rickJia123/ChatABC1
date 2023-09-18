@@ -36,7 +36,7 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             },
             dataResp = { data, time ->
                 ReportManager.reportEvent(
-                    TrackerEventName.REQUEST,
+                    TrackerEventName.REQUEST_CHAT,
                     mutableMapOf(
                         REQUEST_CONTENT to "GPT接口问题:" + content + "  \n回答：" + data?.content,
                         REQUEST_TIME to "GPT接口耗时:${time}ms",
@@ -51,9 +51,8 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                     })
             },
             error = {
-
                 ReportManager.reportEvent(
-                    TrackerEventName.REQUEST,
+                    TrackerEventName.REQUEST_CHAT,
                     mutableMapOf(
                         REQUEST_CONTENT to "GPT接口问题:" + content,
                         REQUEST_TIME to "GPT接口错误:${it.message}"

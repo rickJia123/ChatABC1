@@ -10,9 +10,8 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import river.chat.businese_common.report.TrackerEventName
-import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.report.VIPTracker
-import river.chat.businese_common.utils.onClick
+import river.chat.businese_common.utils.onReport
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewVipTabBinding
 import river.chat.lib_core.utils.exts.getDrawable
@@ -69,7 +68,7 @@ class VipTabView @JvmOverloads constructor(
         mTabList.forEachIndexed { index, tv ->
             tv.first.singleClick {
                 var vipTabBean = payList[index]
-                onClick(
+                onReport(
                     TrackerEventName.CLICK_VIP,
                     VIPTracker.KEY_SKU_CHOOSE to vipTabBean.skuName
                 )

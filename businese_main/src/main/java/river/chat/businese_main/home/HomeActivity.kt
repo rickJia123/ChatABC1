@@ -1,6 +1,11 @@
 package river.chat.businese_main.home
 
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.telephony.TelephonyManager
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.facade.annotation.Route
 import org.greenrobot.eventbus.Subscribe
@@ -18,6 +23,7 @@ import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
 import river.chat.lib_core.router.plugin.module.UserPlugin
+import river.chat.lib_core.utils.longan.activity
 import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 
 
@@ -50,6 +56,40 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
             VipManager.jump2VipPage()
         }
         initEventListener(binding)
+        //rick todo
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            getIMEI(activity)
+        }
+    }
+
+    /**
+     * imei
+     */
+    //rick todo
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getIMEI(context: Context?): String {
+        if (context == null) {
+            return ""
+        }
+//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+//            return ""
+//        }
+        var imei = ""
+        // 在某些平板上可能会抛出异常
+        try {
+//            if (checkPermissions(
+//                    context,
+//                    Manifest.permission.READ_PHONE_STATE
+//                )
+//            ) {
+            val mTelephonyMgr = context
+                .getSystemService(AppCompatActivity.TELEPHONY_SERVICE) as TelephonyManager
+            imei = mTelephonyMgr.imei
+//            }
+        } catch (e: Throwable) {
+            e.printStackTrace()
+        }
+        return imei ?: ""
     }
 
     /**

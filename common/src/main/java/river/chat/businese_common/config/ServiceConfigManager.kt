@@ -1,11 +1,8 @@
 package river.chat.businese_common.config
 
 import river.chat.businese_common.net.CommonRequestViewModel
-import river.chat.businese_common.update.AppUpdateManager
-import river.chat.lib_core.config.AppLocalConfigKey
 import river.chat.lib_core.config.AppServerConfigKey
 import river.chat.lib_core.config.ConfigManager
-import river.chat.lib_core.utils.exts.safeToInt
 
 /**
  * Created by beiyongChao on 2023/6/9
@@ -39,10 +36,10 @@ object ServiceConfigManager {
         CommonRequestViewModel().requestDefaultConfig() {
             if (it.isSuccess) {
                 it.data?.let {
-                    if (it.appUrl.isNotEmpty()) {
+                    if (it.appDownUrl.isNotEmpty()) {
                         ConfigManager.putAppConfig(
                             AppServerConfigKey.REQUEST_APP_UPDATE_URL,
-                            it.appUrl
+                            it.appDownUrl
                         )
                     }
 

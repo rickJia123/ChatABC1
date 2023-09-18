@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-//    id 'privacy-sentry-plugin'
+    id 'privacy-sentry-plugin'
     id 'com.google.devtools.ksp'
 }
 Properties mProperties = gradle.ext.mProperties
@@ -97,18 +97,18 @@ dependencies {
 /**
  * 合规 begin
  */
-//privacy {
-//    blackList = []
-//    replaceFileName = "replace.json"
-//    // 开启hook反射
-//    hookReflex = false
-//    // false，支持关闭，感谢run的pr
-//    debugEnable = false
-//    // 开启hook 替换类，目前支持file
-//    hookConstructor = false
-//    // 是否开启hook变量，默认为false
-//    hookField = false
-//}
+privacy {
+    blackList = []
+    replaceFileName = "replace.json"
+    // 开启hook反射
+    hookReflex = false
+    // false，支持关闭，感谢run的pr
+    debugEnable = false
+    // 开启hook 替换类，目前支持file
+    hookConstructor = false
+    // 是否开启hook变量，默认为false
+    hookField = false
+}
 /**
  * 合规 end
  */

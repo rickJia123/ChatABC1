@@ -105,7 +105,7 @@ fun <T : DialogFragment> T.onLoad(
 /**
  * dialogFragment 点击埋点
  */
-fun <T : View> T.onClick(trackEvent: String, vararg params: Pair<String, String>) {
+fun <T : View> T.onReport(trackEvent: String, vararg params: Pair<String, String>) {
     this.trackNode = TrackNode { nodeParams ->
         nodeParams.putAll(mutableMapOf(*params))
     }
@@ -116,7 +116,7 @@ fun <T : View> T.onClick(trackEvent: String, vararg params: Pair<String, String>
 /**
  * dialogFragment 点击埋点
  */
-fun <T : DialogFragment> T.onClick(trackEvent: String, vararg params: Pair<String, String>) {
+fun <T : DialogFragment> T.onReport(trackEvent: String, vararg params: Pair<String, String>) {
     this.trackNode = TrackNode { nodeParams ->
         nodeParams.putAll(mutableMapOf(*params))
         nodeParams.put(TrackerKeys.CLICK_PAGE, this.getOfficalName())

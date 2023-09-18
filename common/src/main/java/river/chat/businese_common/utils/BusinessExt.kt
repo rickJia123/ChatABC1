@@ -16,5 +16,6 @@ fun ImageView.loadAvatar(resource: Any?) {
         crossfade(true)
         transformations(CircleCropTransformation())
         placeholder(R.drawable.avator_default)
+        error(R.drawable.avator_default)
     }
 }
