@@ -1,8 +1,6 @@
 package river.chat.businese_main.vip
 
-import android.text.format.DateUtils
 import river.chat.businese_common.constants.CommonEvent
-import river.chat.businese_common.router.jump2VipExchange
 import river.chat.businese_common.router.jump2VipOpen
 import river.chat.lib_core.event.BaseActionEvent
 import river.chat.lib_core.event.EventCenter

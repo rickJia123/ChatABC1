@@ -12,6 +12,8 @@
             android:name="river.chat.chatevery.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
+            android:launchMode="singleTask"
+            android:taskAffinity="river.chat.chatevery"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 

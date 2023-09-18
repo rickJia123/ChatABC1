@@ -22,7 +22,7 @@ interface UserPlugin : IProvider {
     /**
      * 微信登录
      */
-    fun loginByWechat(code:String)
+    fun loginByWechat(code: String)
 
     /**
      * 退出登录

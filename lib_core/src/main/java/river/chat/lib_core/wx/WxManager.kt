@@ -30,7 +30,7 @@ object WxManager {
     private const val STATE = "RiverState"
 
     // IWXAPI 是第三方app和微信通信的openApi接口
-    private var api: IWXAPI? = null
+      var api: IWXAPI? = null
 
     fun regToWx(context: Context) {
         // 通过WXAPIFactory工厂，获取IWXAPI的实例
@@ -65,22 +65,23 @@ object WxManager {
     /**
      * 微信支付
      */
-    fun pay( ) {
+    fun pay(requestBean: WechatPayModel) {
         var payRequest = PayReq()
 
-        payRequest.appId = "wxd930ea5d5a258f4f"
+        payRequest.appId = requestBean.appid
 
-        payRequest.partnerId = "1900000109"
+        payRequest.partnerId = requestBean.partnerId
 
-        payRequest.prepayId = "1101000000140415649af9fc314aa427"
+        payRequest.prepayId = requestBean.prepayId
 
-        payRequest.packageValue = "Sign=WXPay"
+        payRequest.packageValue = "river.chat.chatevery"
+//        payRequest.packageValue = requestBean.packageVal
 
-        payRequest.nonceStr = "1101000000140429eb40476f8896f4c9"
+        payRequest.nonceStr = requestBean.nonceStr
 
-        payRequest.timeStamp = "1398746574"
+        payRequest.timeStamp = requestBean.timestamp
 
-        payRequest.sign = "7FFECB600D7157C5AA49810D2D8F28BC2811827B"
+        payRequest.sign = requestBean.sign
 
         api?.sendReq(payRequest);
     }

@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
 import org.greenrobot.eventbus.EventBus
+import river.chat.businese_common.constants.CommonEvent
+import river.chat.businese_common.pay.PayCenter
 import river.chat.businese_common.router.jump2Login
 import river.chat.businese_common.ui.view.dialog.SimpleDialog
 import river.chat.businese_common.ui.view.dialog.SimpleDialogConfig
@@ -12,6 +14,8 @@ import river.chat.business_user.constant.UserEvent
 import river.chat.business_user.login.LoginViewModel
 import river.chat.business_user.user.LoginCenter
 import river.chat.business_user.user.RiverUserManager
+import river.chat.lib_core.event.BaseActionEvent
+import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.router.plugin.module.UserRouterConstants
 import river.chat.lib_resource.model.database.User
@@ -80,7 +84,9 @@ class UserPluginIml : UserPlugin {
     override fun refreshInfo() {
         if (isLogin()) {
             LoginViewModel().request.refreshUserInfo { result ->
-
+                if (result.isSuccess) {
+                  PayCenter.postRefreshVipStatus()
+                }
             }
         }
     }

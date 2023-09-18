@@ -48,10 +48,13 @@ object PayType {
 
 
 data class WechatPayModel (
-    var orderId: String? = "",
-    var orderCode: String? = "",
-    var payPrice: String? = "",
-    var payData: String? = "",
+    var appid: String? = "",
+    var nonceStr: String? = "",
+    var packageVal: String? = "",
+    var partnerId: String? = "",
+    var prepayId: String? = "",
+    var sign: String? = "",
+    var timestamp: String? = ""
 
 )
 

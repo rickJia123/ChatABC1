@@ -1,13 +1,24 @@
 package river.chat.businese_common.pay
 
-import com.umeng.socialize.utils.UmengText.WX
+import org.greenrobot.eventbus.EventBus
+import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.net.CommonRequestViewModel
-import river.chat.lib_core.net.request.RequestResult
+import river.chat.businese_common.router.jump2Main
+import river.chat.businese_common.ui.view.dialog.SimpleDialog
+import river.chat.businese_common.ui.view.dialog.SimpleDialogConfig
+import river.chat.lib_core.event.BaseActionEvent
+import river.chat.lib_core.event.EventCenter
+import river.chat.lib_core.router.plugin.core.getPlugin
+import river.chat.lib_core.router.plugin.module.UserPlugin
+import river.chat.lib_core.utils.common.GsonKits
 import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.topActivity
+import river.chat.lib_core.view.main.activity.BaseActivity
+import river.chat.lib_core.wx.WxManager
 import river.chat.lib_resource.model.CreateOrderRequestBean
 import river.chat.lib_resource.model.CreateOrderResBean
 import river.chat.lib_resource.model.PayType
-import river.chat.lib_core.wx.WxManager
+import river.chat.lib_resource.model.WechatPayModel
 
 /**
  * Created by beiyongChao on 2023/8/31
@@ -21,11 +32,11 @@ object PayCenter {
             return
         }
         //创建订单成功后下一步
-        createOrder(requestBean) {
+        createOrder(requestBean) { resBean ->
             when (requestBean.payType) {
                 PayType.WECHAT_PAY -> {
                     //微信支付
-                    WxManager.pay()
+                    GsonKits.fromJson<WechatPayModel>(resBean.payData)?.let { WxManager.pay(it) }
                 }
             }
         }
@@ -44,6 +55,35 @@ object PayCenter {
                 it.errorMsg.toast()
             }
         }
+    }
+
+
+    /**
+     * 支付成功(刷新用户信息，刷新vip开通页，聊天页，设置页)
+     */
+    fun onPaySuccess() {
+        getPlugin<UserPlugin>().refreshInfo()
+        showSuccessDialog()
+    }
+
+    fun postRefreshVipStatus() {
+        EventCenter.postEvent(BaseActionEvent().apply {
+            action = CommonEvent.UPDATE_VIP
+        })
+    }
+
+    fun showSuccessDialog() {
+        SimpleDialog.builder(topActivity as BaseActivity).config(
+            SimpleDialogConfig()
+                .apply {
+                    title = "购买成功"
+                    des = "恭喜您，已经为您开通了VIP会员\n快去体验ChatGpt吧！"
+                    leftButtonStr = "取消"
+                    rightButtonStr = "去体验"
+                    rightClick = {
+                        jump2Main()
+                    }
+                }).show()
     }
 }
 
