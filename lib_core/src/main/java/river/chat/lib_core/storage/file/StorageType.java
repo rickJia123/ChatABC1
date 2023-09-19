@@ -9,13 +9,9 @@ package river.chat.lib_core.storage.file;
 
 public enum StorageType {
     TYPE_LOG(DirectoryName.LOG_DIRECTORY_NAME),
-    TYPE_SKIN(DirectoryName.SKIN_DIRECTORY_NAME),
     TYPE_TEMP(DirectoryName.TEMP_DIRECTORY_NAME),
-    TYPE_MSG_IMAGE_THUMB(DirectoryName.MSG_MSG_IMAGE_THUMB_DIRECTORY_NAME),
-    TYPE_MSG_AUDIO(DirectoryName.MSG_MSG_AUDIO_DIRECTORY_NAME),
-    TYPE_MSG_VIDEO(DirectoryName.MSG_MSG_VIDEO_DIRECTORY_NAME),
-    TYPE_VERSION(DirectoryName.MSG_VERSION),
-    TYPE_FACE(DirectoryName.MSG_FACE);
+    TYPE_NET(DirectoryName.TEMP_DIRECTORY_NET),
+    TYPE_MSG_IMAGE_THUMB(DirectoryName.MSG_MSG_IMAGE_THUMB_DIRECTORY_NAME);
 
 
     private DirectoryName storageDirectoryName;
@@ -40,13 +36,9 @@ public enum StorageType {
 
     enum DirectoryName {
         LOG_DIRECTORY_NAME("log/"),
-        SKIN_DIRECTORY_NAME(".skin/"),
         TEMP_DIRECTORY_NAME("temp/"),
-        MSG_MSG_IMAGE_THUMB_DIRECTORY_NAME("temp/chat/image/thumb/"),
-        MSG_MSG_AUDIO_DIRECTORY_NAME(".temp/chat/audio/"),
-        MSG_MSG_VIDEO_DIRECTORY_NAME(".temp/chat/video/"),
-        MSG_VERSION(".temp/version/"),
-        MSG_FACE(".temp/face/");
+        TEMP_DIRECTORY_NET("net/"),
+        MSG_MSG_IMAGE_THUMB_DIRECTORY_NAME("temp/chat/image/thumb/");
 
         private String path;
 

@@ -7,9 +7,11 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import river.chat.lib_core.R
-import river.chat.lib_core.net.interceptor.HeadInterceptor
+import river.chat.lib_core.net.cache.DynamicCacheInterceptor
+import river.chat.lib_core.net.cache.DynamicCacheManager
 import river.chat.lib_core.net.common.ApiConfig
 import river.chat.lib_core.net.common.OperationException
+import river.chat.lib_core.net.interceptor.HeadInterceptor
 import river.chat.lib_core.net.request.TrusHttpClient
 import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.utils.longan.encryptMD5
@@ -60,6 +62,7 @@ open class BaseApiService {
                             TimeUnit.SECONDS
                         )
                         .addInterceptor(HeadInterceptor())
+                        .addInterceptor(DynamicCacheInterceptor(DynamicCacheManager()))
                         .followRedirects(false)
                         .followSslRedirects(false)
                     //                            //ipv6域名切换

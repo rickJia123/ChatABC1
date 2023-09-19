@@ -1,8 +1,11 @@
 package river.chat.businese_main.api
 
 import retrofit2.http.Body
+import retrofit2.http.Headers
 import retrofit2.http.POST
 import river.chat.lib_core.net.bean.BaseRequestBean
+import river.chat.lib_core.net.cache.NetCacheKey
+import river.chat.lib_core.net.cache.NetCacheType
 import river.chat.lib_core.net.retrofit.BaseApi
 import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_resource.model.VipRightsBean
@@ -24,6 +27,7 @@ interface MainBusinessApi : BaseApi {
     /**
      *获取热门问题
      */
+    @Headers(NetCacheKey.Key_Cache_Type , NetCacheType.CACHE_NORMAL)
     @POST("/chat/hotQuestion")
     suspend fun requestHotQuestion(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<MutableList<String>>
 
