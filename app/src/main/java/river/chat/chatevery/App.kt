@@ -48,7 +48,6 @@ class App : BaseApplication() {
             onActivityResumed = { activity ->
                 try {
                     activity as BaseActivity
-                    //rick todo
                     ReportManager.reportPageStart(activity.getOfficalName())
                 } catch (e: Exception) {
                     LogUtil.e("onActivityResumed", e)
@@ -59,7 +58,6 @@ class App : BaseApplication() {
             onActivityPaused = { activity ->
                 try {
                     activity as BaseActivity
-                    //rick todo
                     ReportManager.reportPageEnd(activity.getOfficalName())
                 } catch (e: Exception) {
                     LogUtil.e("onActivityPaused", e)

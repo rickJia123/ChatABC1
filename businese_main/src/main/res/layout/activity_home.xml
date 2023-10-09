@@ -17,7 +17,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tb_leftImage="@drawable/vip"
-            app:tb_rightImage="@drawable/setting"
+            app:tb_rightImage="@drawable/mine"
             app:title="GPTEvery"
             app:titleSize="30sp" />
 

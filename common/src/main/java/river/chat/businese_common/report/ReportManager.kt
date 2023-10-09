@@ -65,7 +65,7 @@ object ReportManager {
                 put("appVersion", appVersionName)
                 put(
                     "userMsg",
-                    "昵称:" + user.nickName + "----vip类型:" + user.vipType + "----token:" + user.token
+                    "昵称:" + user.nickName + "----vip类型:" + user.getVipType() + "----token:" + user.token
                 )
                 put("deviceType", deviceModel)
             }

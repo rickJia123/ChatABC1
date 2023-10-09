@@ -13,14 +13,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <FrameLayout
-            android:id="@+id/flShareOutput"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <include
-                android:id="@+id/includeContentOutput"
-                layout="@layout/include_share_content_output"/>
-        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/flParent"

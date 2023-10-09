@@ -27,10 +27,7 @@ interface MainBusinessApi : BaseApi {
     /**
      *获取热门问题
      */
-//    @Headers(
-//      "${NetCacheKey.Key_Cache_Type}: ${NetCacheType.CACHE_NORMAL}",
-//      "Key_Cache_Type2: ${NetCacheType.CACHE_NORMAL}"
-//    )
+    @Headers(NetCacheKey.Key_Cache_Type, NetCacheType.CACHE_NORMAL)
     @POST("/chat/hotQuestion")
     suspend fun requestHotQuestion(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<MutableList<String>>
 
@@ -52,5 +49,11 @@ interface MainBusinessApi : BaseApi {
      */
     @POST("/recharge/rightsDescr")
     suspend fun getVipRights(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<VipRightsBean>
+
+    /**
+     *兑换码兑换vip
+     */
+    @POST("/redeemCode/useCode")
+    suspend fun exchangeVip(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<Boolean>
 
 }

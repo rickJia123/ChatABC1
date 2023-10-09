@@ -14,6 +14,7 @@ import river.chat.business_main.databinding.ViewInputBinding
 import river.chat.lib_core.BR
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.log
+import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.view.base.LifecycleView
 
 
@@ -125,12 +126,22 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
         // 发送内容
         viewBinding.ivSend.singleClick {
             var content = viewBinding.etWriteReply.text.toString().trim()
-            content.log()
-            MessageCenter.postReceiveMsg(MessageHelper.buildSelfMsg(content))
-            viewBinding.etWriteReply.setText("")
+            if (checkCanSend(content)) {
+                content.log()
+                MessageCenter.postReceiveMsg(MessageHelper.buildSelfMsg(content))
+                viewBinding.etWriteReply.setText("")
+            }
+
         }
 
 
+    }
+
+    private fun checkCanSend(content: String): Boolean {
+        if (content.isEmpty()) {
+            "内容不能为空".toast()
+        }
+        return content.isNotEmpty()
     }
 
     private fun dismissView() {

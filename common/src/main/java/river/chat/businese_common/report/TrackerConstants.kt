@@ -23,6 +23,7 @@ object TrackerEventName {
     //支付页面点击
     const val CLICK_VIP = "CLICK_VIP"
     const val REQUEST_VIP = "REQUEST_VIP"
+    const val REQUEST_EXCHANGE = "REQUEST_EXCHANGE"
 
     //设置页面点击
     const val CLICK_SETTING = "CLICK_SETTING"
@@ -62,10 +63,7 @@ object VIPTracker {
  */
 object ShareTracker {
     //分享的问题
-    const val KEY_QUESTION = "KEY_QUESTION"
-
-    //分享的答案
-    const val KEY_ANSWER = "KEY_ANSWER"
+    const val KEY_CONTENT = "KEY_CONTENT"
 
     //分享平台
     const val KEY_PLATFORM = "KEY_PLATFORM"

@@ -39,7 +39,7 @@ class SettingsActivity :
         super.initDataBinding(binding)
         mainThread { }
 
-        binding.toolBar.setTitle("设置")
+        binding.toolBar.setTitle("我的")
         var test = ""
 //        MessageBox.getMsgList().forEach {
 //            test += it.toString() + "\n"

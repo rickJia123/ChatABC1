@@ -70,8 +70,6 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:hint="请输入兑换码"
-            android:inputType="number"
-            android:maxLines="2"
             app:layout_constraintBottom_toBottomOf="@+id/tvExchangeTip"
             app:layout_constraintLeft_toRightOf="@id/tvExchangeTip"
             app:layout_constraintRight_toRightOf="parent"

@@ -46,11 +46,11 @@ class UserStatusView @JvmOverloads constructor(
         var user = userPlugin.getUser()
         var remainTimes =
             user.remainTryTimes
-        var type = user.vipType
+        var type = user.getVipType()
         when (type) {
 
             VipType.VIP.value -> {
-                viewBinding.tvVipTitle.text = user.vipName
+                viewBinding.tvVipTitle.text = user.rightsName
             }
 
             else -> {

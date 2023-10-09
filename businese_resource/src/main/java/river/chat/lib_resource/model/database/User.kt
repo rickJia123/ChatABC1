@@ -2,6 +2,7 @@ package river.chat.lib_resource.model.database
 
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
+import river.chat.lib_resource.model.VipType
 
 
 @Entity
@@ -21,17 +22,28 @@ data class User(
 
     var isNew: Int? = 0,
 
-    //rick todo
-    //会员过期时间文案
-    var vipExpireTimeStr: String = "",
+    //会员过期时间
+    var rightsExpireTime: String = "",
+
+    @Transient
     //会员类型(日卡/月卡/季卡)：VipType
-    var vipType: Int? = 0,
+   private var vipType: Int? = 0,
     //vip名称：日卡/月卡/季卡
-    var vipName: String = "",
+    var rightsName: String = "",
     //剩余试用次数
     var remainTryTimes: Int = 0
 
-) : java.io.Serializable
+) : java.io.Serializable {
+    fun getVipType(): Int {
+        //rick todo
+//        return expireTime.isNotEmpty() && expireTime.toLong() > TimeUtils.getTimeStamp()
+        if (rightsExpireTime.isNotEmpty()) {
+            return VipType.VIP.value
+        } else {
+            return VipType.NORMAL.value
+        }
+    }
+}
 
 
 

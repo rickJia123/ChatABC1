@@ -8,6 +8,7 @@ import com.tencent.mm.opensdk.modelbase.BaseResp
 import com.tencent.mm.opensdk.modelmsg.SendAuth.Resp
 import com.umeng.socialize.weixin.view.WXCallbackActivity
 import org.koin.android.ext.android.get
+import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.longan.log
 import river.chat.lib_core.wx.WxManager
@@ -24,33 +25,41 @@ class WXEntryActivity : WXCallbackActivity() {
 
     override fun onNewIntent(paramIntent: Intent?) {
         super.onNewIntent(paramIntent)
+        intent = paramIntent
         WxManager.api?.handleIntent(intent, this)
     }
 
     override fun onReq(req: BaseReq?) {
+
         req?.let { ("微信 onReq: ${req.openId}").log() }
-//        super.onReq(req)
+
     }
 
     override fun onResp(resp: BaseResp?) {
         resp?.let {
             ("微信 onResp: ${resp.errCode}").log()
             var errorCode = resp?.errCode
-            when (errorCode) {
-                BaseResp.ErrCode.ERR_OK -> {
-                    (resp as Resp).let {
-                        ("微信 onResp: ${resp.errCode}" + "---${resp.code}").log()
-                        get<UserPlugin>().loginByWechat(it.code)
+            try {
+                when (errorCode) {
+                    BaseResp.ErrCode.ERR_OK -> {
+                        if (!getPlugin<UserPlugin>().isLogin()) {
+                            (resp as Resp).let {
+                                ("微信 onResp: ${resp.errCode}" + "---${resp.code}").log()
+                                get<UserPlugin>().loginByWechat(it.code)
+                            }
+                        }
+                    }
+
+                    BaseResp.ErrCode.ERR_USER_CANCEL -> {
+
                     }
                 }
-
-                BaseResp.ErrCode.ERR_USER_CANCEL -> {
-
-                }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
 
-
         }
+        this.finish()
     }
 }
 

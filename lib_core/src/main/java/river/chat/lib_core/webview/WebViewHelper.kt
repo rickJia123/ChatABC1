@@ -12,8 +12,11 @@ object WebViewHelper {
 
     //启动webViewActivity
     fun startWebViewActivity(url: String) {
+        //rick todo
+        var testUrl="file:///android_asset/test.html"
+
         ARouter.getInstance().build(AgentWebGroup.ACTIVITY_AGENT_WEB_COMMON)
-            .withSerializable(AgentWebGroup.PARAMS_WEB, WebViewParams(url))
+            .withSerializable(AgentWebGroup.PARAMS_WEB, WebViewParams(testUrl))
             .navigation()
     }
 }

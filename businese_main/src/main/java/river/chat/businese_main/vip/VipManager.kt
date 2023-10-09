@@ -1,6 +1,7 @@
 package river.chat.businese_main.vip
 
 import river.chat.businese_common.constants.CommonEvent
+import river.chat.businese_common.router.jump2VipExchange
 import river.chat.businese_common.router.jump2VipOpen
 import river.chat.lib_core.event.BaseActionEvent
 import river.chat.lib_core.event.EventCenter
@@ -19,8 +20,8 @@ object VipManager {
      * 跳转开通/兑换页
      */
     fun jump2VipPage() {
-//        jump2VipExchange()
-        jump2VipOpen()
+        jump2VipExchange()
+//        jump2VipOpen()
     }
 
     /**
@@ -41,10 +42,10 @@ object VipManager {
         var userPlugin = getPlugin<UserPlugin>()
         var user = userPlugin.getUser()
 
-        return user.vipType == VipType.VIP.value
+        return user.getVipType() == VipType.VIP.value
     }
 
-    fun getVipType() = getPlugin<UserPlugin>().getUser().vipType
+    fun getVipType() = getPlugin<UserPlugin>().getUser().getVipType()
 
 
     /**

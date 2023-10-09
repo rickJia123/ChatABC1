@@ -40,26 +40,24 @@ class VipStatusView @JvmOverloads constructor(
         var user = userPlugin.getUser()
         var remainTimes =
             user.remainTryTimes
-        var vipExpireTimeStr = user.vipExpireTimeStr
-        var type = user.vipType
+        var vipExpireTimeStr = user.rightsExpireTime + "到期"
+        var type = user.getVipType()
         when (type) {
             VipType.VIP.value -> {
                 viewBinding.tvRemainTimes.text = vipExpireTimeStr
             }
 
             else -> {
-                viewBinding.tvRemainTimes.text =R.string.vip_no.getString()
+                viewBinding.tvRemainTimes.text = R.string.vip_no.getString()
             }
         }
         if (!userPlugin.isLogin()) {
             viewBinding.tvName.text = "登录/注册"
-        }
-        else
-        {
-            viewBinding.tvName.text=user.nickName
+        } else {
+            viewBinding.tvName.text = user.nickName
         }
 
-        viewBinding.ivAvatar.loadAvatar(user.headImg )
+        viewBinding.ivAvatar.loadAvatar(user.headImg)
         viewBinding.viewClick.singleClick {
             userPlugin.check2Login {
             }

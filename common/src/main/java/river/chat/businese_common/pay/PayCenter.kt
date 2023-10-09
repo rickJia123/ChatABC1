@@ -2,6 +2,9 @@ package river.chat.businese_common.pay
 
 import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.net.CommonRequestViewModel
+import river.chat.businese_common.report.ReportManager
+import river.chat.businese_common.report.TrackerEventName
+import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.router.jump2Main
 import river.chat.businese_common.ui.view.dialog.SimpleDialog
 import river.chat.businese_common.ui.view.dialog.SimpleDialogConfig
@@ -31,6 +34,12 @@ object PayCenter {
         }
         //创建订单成功后下一步
         createOrder(requestBean) { resBean ->
+            ReportManager.reportEvent(
+                TrackerEventName.REQUEST_VIP,
+                mutableMapOf(
+                    TrackerKeys.REQUEST_CONTENT to "创建订单成功:  价格：" + resBean.payPrice + "  ："
+                )
+            )
             when (requestBean.payType) {
                 PayType.WECHAT_PAY -> {
                     //微信支付
