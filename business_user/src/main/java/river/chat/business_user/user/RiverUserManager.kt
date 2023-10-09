@@ -27,9 +27,6 @@ object RiverUserManager {
     fun onLoginSuccess(user: User, platFrom: String) {
         "登录成功".toast()
         jump2Main()
-        //rick todo
-        user.remainTryTimes = 5
-        user.vipExpireTimeStr = "2024.10.11 过期"
         updateUser(user)
         ReportManager.reportLogin(true, user.id.toString(), platFrom)
     }

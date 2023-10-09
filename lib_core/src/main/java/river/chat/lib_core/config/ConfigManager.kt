@@ -17,11 +17,11 @@ object ConfigManager {
         return ConfigBox.getConfigValue(key, default)
     }
 
-    fun getAppConfig(key: String, default: Boolean): Boolean {
+    fun getAppConfigBoolean(key: String, default: Boolean): Boolean {
         return ConfigBox.getConfigValue(key, if (default) FLAG_TRUE else FLAG_FALSE) == FLAG_TRUE
     }
 
-    fun getAppConfig(key: String, default: Int): Int {
+    fun getAppConfigInt(key: String, default: Int): Int {
         return ConfigBox.getConfigValue(key, default.safeToString()).safeToInt()
     }
 

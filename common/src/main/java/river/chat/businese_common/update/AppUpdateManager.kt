@@ -71,7 +71,7 @@ object AppUpdateManager {
      * 获取版本更新类型
      */
     fun getUpdateType(): Int {
-        return ConfigManager.getAppConfig(AppServerConfigKey.REQUEST_APP_UPDATE_TYPE, UPDATE_NO)
+        return ConfigManager.getAppConfigInt(AppServerConfigKey.REQUEST_APP_UPDATE_TYPE, UPDATE_NO)
     }
 
     /**

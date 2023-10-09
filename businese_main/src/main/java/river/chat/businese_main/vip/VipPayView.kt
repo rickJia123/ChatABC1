@@ -64,6 +64,7 @@ class VipPayView @JvmOverloads constructor(
         }
 
         mBinding.tvTip.text = tabBean.promoText3
+        mBinding.tvPay.text=if (VipManager.isVip()) "立即续费" else "立即开通"
     }
 
     private fun initViews() {

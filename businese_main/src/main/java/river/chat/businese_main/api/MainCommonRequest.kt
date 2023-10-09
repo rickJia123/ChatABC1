@@ -1,6 +1,10 @@
 package river.chat.businese_main.api
 
 import androidx.lifecycle.MutableLiveData
+import retrofit2.http.Body
+import river.chat.businese_common.report.ReportManager
+import river.chat.businese_common.report.TrackerEventName
+import river.chat.businese_common.report.TrackerKeys
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.utils.longan.deviceInfos
@@ -18,6 +22,7 @@ class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
     val feedBackResult = MutableLiveData<RequestResult<String>>()
     val paySkuResult = MutableLiveData<RequestResult<MutableList<VipSkuBean>>>()
     val vipRightResult = MutableLiveData<RequestResult<VipRightsBean>>()
+    val exChangeResult = MutableLiveData<RequestResult<Boolean>>()
 
 
     /**
@@ -79,6 +84,34 @@ class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             },
             error = {
                 vipRightResult.value =
+                    RequestResult(isSuccess = false)
+            }
+        )
+    }
+
+    /**
+     * 兑换码兑换vip
+     */
+    fun exchangeVip(
+        code: String
+    ) {
+        launchFlow(
+            request = {
+                MainBusinessApiService.exchangeVip(code)
+            },
+            dataResp = { data, time ->
+                ReportManager.reportEvent(
+                    TrackerEventName.REQUEST_EXCHANGE,
+                    mutableMapOf(
+                        TrackerKeys.REQUEST_CONTENT to "兑换成功:",
+                    )
+                )
+                exChangeResult.value =
+                    RequestResult(isSuccess = true, data = data)
+            },
+            error = {
+                ("兑换失败：" + it.message ?: "").toast()
+                exChangeResult.value =
                     RequestResult(isSuccess = false)
             }
         )

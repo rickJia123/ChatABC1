@@ -26,7 +26,6 @@ class WebViewActivity : BaseBindingActivity<ActivityWebviewBinding>() {
     var mWebParams: WebViewParams? = null
 
 
-
     var mWebFragment: AgentWebFragment? = null
 
     override fun initDataBinding(binding: ActivityWebviewBinding) {

@@ -63,7 +63,7 @@ object ServiceConfigManager {
 
 
     fun getPrivacyVersion(): Int {
-        return ConfigManager.getAppConfig(AppServerConfigKey.REQUEST_PRIVACY_VERSION, 1)
+        return ConfigManager.getAppConfigInt(AppServerConfigKey.REQUEST_PRIVACY_VERSION, 1)
     }
 
     fun updatePrivacyVersion(version: Int) {

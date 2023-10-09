@@ -78,7 +78,7 @@
     },
     {
       "id": "3:3304178247595158897",
-      "lastPropertyId": "14:44228003430968031",
+      "lastPropertyId": "16:7187602779047667227",
       "name": "User",
       "properties": [
         {
@@ -133,23 +133,18 @@
           "type": 5
         },
         {
-          "id": "11:2519847796985928009",
-          "name": "vipExpireTimeStr",
-          "type": 9
-        },
-        {
-          "id": "12:2024869954982654919",
-          "name": "vipType",
-          "type": 5
-        },
-        {
           "id": "13:947263676866663089",
           "name": "remainTryTimes",
           "type": 5
         },
         {
-          "id": "14:44228003430968031",
-          "name": "vipName",
+          "id": "15:3145697196039785372",
+          "name": "rightsExpireTime",
+          "type": 9
+        },
+        {
+          "id": "16:7187602779047667227",
+          "name": "rightsName",
           "type": 9
         }
       ],
@@ -164,7 +159,11 @@
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    2519847796985928009,
+    44228003430968031,
+    2024869954982654919
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

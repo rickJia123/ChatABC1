@@ -1,5 +1,6 @@
 package river.chat.lib_core.config
 
+import io.objectbox.kotlin.equal
 import io.objectbox.kotlin.query
 import river.chat.lib_core.storage.database.BaseBox
 import river.chat.lib_resource.model.database.AppConfigBean
@@ -19,28 +20,29 @@ object ConfigBox : BaseBox<AppConfigBean>() {
 
 
     fun getConfigValue(key: String, default: String): String {
-        return box.query {
-            AppConfigBean_.key.equal(key)
-        }.findFirst()?.value ?: default
+        return  box.all.firstOrNull() { it.key == key }?.value ?: default
     }
 
     fun getConfig(key: String): AppConfigBean? {
-        return box.query {
-            AppConfigBean_.key.equal(key)
-        }.findFirst()
+        return  box.all.firstOrNull() { it.key == key }
     }
 
     fun putConfig(key: String, value: String): Long {
-        box.query {
-            AppConfigBean_.key.equal(key)
-        }.findFirst()?.let { box.remove(it) }
-        return box?.put(
-            AppConfigBean(
-                key = key,
-                value = value,
-                updateTime = System.currentTimeMillis()
-            )
-        ) ?: 0
+
+        var config: AppConfigBean? = box.all.firstOrNull() { it.key == key }?: AppConfigBean(
+            key = key,
+            value = value,
+            updateTime = System.currentTimeMillis()
+        )
+
+        config?.let {
+            it.value = value
+            it.updateTime = System.currentTimeMillis()
+            return box?.put(
+                it
+            )?:0
+        }
+        return 0
     }
 
 

@@ -3,12 +3,9 @@ package river.chat.businese_main.share
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.NestedScrollView
 import com.umeng.socialize.bean.SHARE_MEDIA
 import river.chat.businese_common.report.ShareTracker
@@ -28,7 +25,6 @@ import river.chat.lib_core.view.main.dialog.BaseBindingDialogFragment
 import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_umeng.ShareManager
 import river.chat.lib_umeng.common.RiverShareContent
-import river.chat.business_main.R
 import river.chat.lib_core.utils.exts.height
 import river.chat.lib_core.utils.exts.view.toBitmap
 import river.chat.lib_core.utils.longan.screenHeight
@@ -55,12 +51,17 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
     override fun onStart() {
         super.onStart()
         this.trackNode = TrackNode(
-            ShareTracker.KEY_QUESTION to (questionMsg?.content ?: ""),
-            ShareTracker.KEY_ANSWER to (answerMsg?.content ?: ""),
+            ShareTracker.KEY_CONTENT to (("问题：" + questionMsg?.content
+                ?: "") + "\n-----" + ("回答：" + answerMsg?.content ?: ""))
         )
         postTrack(
             TrackerEventName.LOAD_SHARE,
         )
+    }
+
+    override fun onResume() {
+        super.onResume()
+
     }
 
     override fun initDataBinding(binding: DialogShareBinding) {
@@ -113,69 +114,21 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
     }
 
     private fun share(platformBean: SharePlatformBean) {
-        shareScroll()
         ShareManager.update(
             RiverShareContent().apply {
                 mTitle = "快来提问吧"
                 mText = "快来提问吧"
-                mBitmap = mBinding?.includeContentOutput?.scrollView?.toBitmap()
-//                mBitmap = getScrollScreenShot(mBinding?.includeContent?.scrollView)
-//                mBitmap = shareScroll()
+
+                mBitmap = mBinding?.includeContent?.clContent?.toBitmap()
+
 
             }, platformBean.platform ?: SHARE_MEDIA.WEIXIN
         ).shareImageLocal(topActivity)
     }
 
 
-    fun shareScroll(): Bitmap? {
-        mBinding?.flParent?.visibility = View.GONE
-        var mScrollScreenShot: Bitmap? = null
-
-
-
-//        val scrollView: NestedScrollView = inflate.findViewById(R.id.scrollView)
-//        inflate.post(Runnable {
-//            mScrollScreenShot = getScrollScreenShot(scrollView)
-//        })
-        mScrollScreenShot = mBinding?.includeContentOutput?.llRoot?.toBitmap()
-        return mScrollScreenShot
-    }
-
     private fun updateView() {
         var userPlugin = getPlugin<UserPlugin>()
         var user = userPlugin.getUser()
-        mBinding?.let {
-            it.includeContentOutput.tvQuestion.text = questionMsg?.content ?: ""
-            it.includeContentOutput.tvAnswer.text = answerMsg?.content ?: ""
-            it.includeContentOutput.ivCode
-                .setImageBitmap(QRCodeUtils.createQRCode(mTestUrl))
-            it.includeContentOutput.ivAnswer.loadAvatar(user.headImg)
-            it.includeContentOutput.tvName.text =
-                user.nickName.ifEmptyOrBlank("GptEvery用户")
-            it.includeContentOutput.ivOutputBg.height(screenHeight)
-        }
-
-    }
-
-
-    private fun getScrollScreenShot(view: NestedScrollView?): Bitmap? {
-        var bitmap: Bitmap? = null
-        if (null != view) {
-            var height = 0
-            //正确获取ScrollView
-            for (i in 0 until view.childCount) {
-                height += view.getChildAt(i).height
-            }
-            if (height > 0) {
-                //创建保存缓存的bitmap
-                bitmap = Bitmap.createBitmap(view.width, height, Bitmap.Config.ARGB_8888)
-                //可以简单的把Canvas理解为一个画板 而bitmap就是块画布
-                val canvas = Canvas(bitmap)
-                //把view的内容都画到指定的画板Canvas上
-                view.draw(canvas)
-
-            }
-        }
-        return bitmap
     }
 }

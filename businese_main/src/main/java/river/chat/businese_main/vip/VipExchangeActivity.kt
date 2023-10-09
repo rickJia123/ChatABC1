@@ -5,12 +5,17 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.report.VIPTracker
+import river.chat.businese_common.router.jump2Main
+import river.chat.businese_common.ui.view.dialog.SimpleDialog
+import river.chat.businese_common.ui.view.dialog.SimpleDialogConfig
 import river.chat.businese_common.utils.onLoad
 import river.chat.business_main.databinding.ActivityVipExchangeBinding
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
 import river.chat.lib_core.tracker.TrackNode
 import river.chat.lib_core.tracker.postTrack
 import river.chat.lib_core.utils.exts.singleClick
+import river.chat.lib_core.utils.longan.topActivity
+import river.chat.lib_core.view.main.activity.BaseActivity
 import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 
 
@@ -35,8 +40,9 @@ class VipExchangeActivity :
                 TrackerEventName.CLICK_VIP,
                 TrackNode(VIPTracker.KEY_EXCHANGE_CONTENT to "兑换码: ${mBinding.inputView.text}")
             )
+            viewModel.request.exchangeVip(mBinding.inputView.text.toString())
         }
-        loadData()
+        loadDesData()
         observerMsg()
     }
 
@@ -44,13 +50,21 @@ class VipExchangeActivity :
      * 监听接口消息请求
      */
     private fun observerMsg() {
-//        viewModel.request.paySkuResult.observe(this) {
-//            if (it.isSuccess) {
-//                it.data?.let {
-//                    mBinding.viewTabView.update(it)
-//                }
-//            }
-//        }
+        viewModel.request.exChangeResult.observe(this) {
+            if (it.isSuccess) {
+                SimpleDialog.builder(topActivity as BaseActivity).config(
+                    SimpleDialogConfig()
+                        .apply {
+                            title = "兑换成功"
+                            des = "恭喜您，已经为您兑换了VIP会员\n快去体验ChatGpt吧！"
+                            leftButtonStr = "取消"
+                            rightButtonStr = "去体验"
+                            rightClick = {
+                                jump2Main()
+                            }
+                        }).show()
+            }
+        }
 
     }
 
@@ -60,7 +74,7 @@ class VipExchangeActivity :
         }
     }
 
-    private fun loadData() {
+    private fun loadDesData() {
         //rick todo
         viewModel.vipExchangeTips.addAll(mutableListOf<String>().apply {
             "直接联系管理员(企业微信)支付获取".also { add(it) }

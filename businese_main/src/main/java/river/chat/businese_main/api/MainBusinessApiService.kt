@@ -78,4 +78,15 @@ object MainBusinessApiService : BaseApiService() {
             getBasedBody().apply {
             }
         )
+
+    /**
+     * 兑换码兑换vip
+     */
+    suspend fun exchangeVip(code:String
+    ): BaseRequestBean<Boolean> =
+        mainBusinessApi.exchangeVip(
+            getBasedBody().apply {
+                this["code"] = code
+            }
+        )
 }

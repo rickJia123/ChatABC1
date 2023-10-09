@@ -30,7 +30,7 @@ object WxManager {
     private const val STATE = "RiverState"
 
     // IWXAPI 是第三方app和微信通信的openApi接口
-      var api: IWXAPI? = null
+    var api: IWXAPI? = null
 
     fun regToWx(context: Context) {
         // 通过WXAPIFactory工厂，获取IWXAPI的实例
@@ -83,7 +83,7 @@ object WxManager {
 
         payRequest.sign = requestBean.sign
 
-        api?.sendReq(payRequest);
+        api?.sendReq(payRequest)
     }
 
 }
