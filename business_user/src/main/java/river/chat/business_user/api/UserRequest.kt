@@ -11,7 +11,6 @@ import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_resource.model.database.User
-import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.main.BaseViewModel
 
@@ -51,7 +50,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                         TrackerKeys.REQUEST_TIME to "获取验证码报错：" + (it.message ?: "")
                     )
                 )
-                it.message?.toast()
+                it.message?.toastSystem()
                 loginResult.value = RequestResult(errorMsg = it.message ?: "")
             }
         )
@@ -82,7 +81,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                         TrackerKeys.REQUEST_TIME to "手机号登录接口报错：" + (it.message ?: "")
                     )
                 )
-                it.message?.toast()
+                it.message?.toastSystem()
                 loginResult.value = RequestResult(errorMsg = it.message ?: "")
             }
 
@@ -135,7 +134,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                 logoutResult.value = RequestResult(isSuccess = data ?: false, data = true)
             },
             error = {
-                it.message?.toast()
+                it.message?.toastSystem()
                 logoutResult.value = RequestResult(errorMsg = it.message ?: "")
             }
         )
@@ -154,7 +153,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
 
             },
             error = {
-                it.message?.toast()
+                it.message?.toastSystem()
                 resultCallback.invoke(RequestResult<Boolean>().apply {
                     errorMsg = it.message ?: ""
                     isSuccess = false
@@ -192,7 +191,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                         TrackerKeys.REQUEST_TIME to "刷新用户信息报错：" + (it.message ?: "")
                     )
                 )
-                it.message?.toast()
+                it.message?.toastSystem()
                 resultCallback.invoke(RequestResult<User>().apply {
                     errorMsg = it.message ?: ""
                     isSuccess = false

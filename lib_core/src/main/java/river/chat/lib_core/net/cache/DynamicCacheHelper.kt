@@ -172,4 +172,14 @@ object DynamicCacheHelper {
         }
     }
 
+
+    /**
+     * 判断对应策略是否需要保存
+     */
+    fun checkNeedStrategySave(cacheMode: String): Boolean {
+        return cacheMode == NetCacheType.CACHE_NORMAL
+    }
+
+
+
 }

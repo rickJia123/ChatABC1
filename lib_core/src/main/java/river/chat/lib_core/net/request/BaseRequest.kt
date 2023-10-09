@@ -15,7 +15,7 @@ import river.chat.lib_core.net.common.OperationException
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.longan.isNetworkAvailable
-import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.main.BaseViewModel
 import river.chat.lib_resource.model.database.User
 
@@ -163,7 +163,7 @@ open class BaseRequest(var viewModel: BaseViewModel) {
      * token失效通知
      */
     private fun notifyTokenExpired() {
-        "登录过期".toast()
+        "登录过期".toastSystem()
         getPlugin(UserPlugin::class.java).updateUser(User())
         jump2Login()
 //        FEvent.get<Boolean>(GlobalEvent.GLOBAL_TOKEN_EXPIRED.name).post(true)

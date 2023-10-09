@@ -18,16 +18,17 @@ class SplashActivity : BaseBindingViewModelActivity<ActivitySplashBinding, Splas
 
     override fun initDataBinding(binding: ActivitySplashBinding) {
         super.initDataBinding(binding)
+        //rick todo
         PrivacyManager.tryShowPrivacyDialog(this) {
             UMConfigure.submitPolicyGrantResult(applicationContext, it)
-            if (it) {
+//            if (it) {
                 binding.tvSplash.postDelayed({
                     jump2Main()
                     finish()
                 }, 0)
-            } else {
-                finish()
-            }
+//            } else {
+//                finish()
+//            }
         }
 
 

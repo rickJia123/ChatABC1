@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import river.chat.lib_core.app.AppLifeCycles
 import river.chat.lib_core.utils.exts.isMainProcess
-import river.chat.lib_core.utils.longan.toast
 
 class CommonLifeCyclesImpl : AppLifeCycles {
     override fun attachBaseContext(application: Application, base: Context) {}

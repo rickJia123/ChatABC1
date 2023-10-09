@@ -5,10 +5,9 @@ import android.app.Activity
 import android.app.DownloadManager
 import android.net.Uri
 import android.os.Build
-import android.text.method.LinkMovementMethod
 import android.view.KeyEvent
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import river.chat.businese_common.config.ServiceConfigManager
 import river.chat.businese_common.utils.onLoad
 import river.chat.common.R
 import river.chat.common.databinding.DialogUpdateBinding
@@ -21,7 +20,7 @@ import river.chat.lib_core.utils.exts.width
 import river.chat.lib_core.utils.longan.download
 import river.chat.lib_core.utils.longan.installAPK
 import river.chat.lib_core.utils.longan.log
-import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.utils.permission.permission.PermissionConstants
 import river.chat.lib_core.utils.permission.permission.PermissionHelper
 import river.chat.lib_core.view.main.dialog.BaseBindingDialogFragment
@@ -34,8 +33,8 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
     BaseBindingDialogFragment<DialogUpdateBinding>() {
 
     private var mIsForce = false
-    private var apkLink =
-        "https://cdn-ali.dushu365.com/app/v5.65.1/fandengdushuhui_5.65.1_release.apk"
+    private var apkLink = ""
+//        "https://cdn-ali.dushu365.com/app/v5.65.1/fandengdushuhui_5.65.1_release.apk"
 
     private var mProgressWidth = 0
 
@@ -69,14 +68,13 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
                 return@setOnKeyListener true
             }
             return@setOnKeyListener true
-
         }
 
+        binding.viewRoot.post {
+            mProgressWidth = binding.viewProgress.width
+        }
         apkLink = AppUpdateManager.getUpdateUrl()
 
-        binding.viewProgress.post {
-            mProgressWidth = binding.viewProgress.width - 15f.dp2px()
-        }
 
         binding.tvDes.text = AppUpdateManager.getUpdateContent()
         binding.tvLButton.singleClick {
@@ -108,6 +106,7 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
                         }
                         this.onComplete {
                             ("进度 下载完成").log()
+                            mProgress = 1f
                             completeUri = it
                             changeBtStatus(binding, STATUS_COMPLETE)
                         }
@@ -115,7 +114,7 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
                 }
 
                 STATUS_DOWNLOADING -> {
-                    "正在下载中".toast()
+                    "正在下载中".toastSystem()
                 }
 
                 STATUS_COMPLETE -> {
@@ -135,14 +134,13 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
                 binding.tvRButton.isEnabled = true
                 binding.tvRButton.setTextColor(R.color.highButtonColor.getColor())
                 binding.tvRButton.text = "开始更新"
-                binding.viewProgress.width(0)
             }
 
             STATUS_DOWNLOADING -> {
                 binding.tvRButton.isEnabled = false
                 binding.tvRButton.setTextColor(R.color.defaultTextColor.getColor())
                 binding.tvRButton.text = "下载中 " + (mProgress * 100).toInt() + "%"
-                binding.viewProgress.width(((mProgress * mProgressWidth).toInt()))
+                binding.viewProgressMask.width(((1-mProgress) * mProgressWidth).toInt())
             }
 
             STATUS_COMPLETE -> {
@@ -150,6 +148,7 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
                 binding.tvRButton.setTextColor(R.color.highButtonColor.getColor())
                 binding.tvRButton.text = "安装"
                 binding.tvRButton.isEnabled = true
+                binding.viewProgressMask.visibility= View.GONE
                 completeUri?.let { installAPK(it) }
             }
         }
@@ -166,11 +165,11 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
 
     private fun closeDialog() {
         if (mIsForce) {
-            "本次为重要更新，需要先更新此次版本才能进入哦".toast()
+            "本次为重要更新，需要先更新此次版本才能进入哦".toastSystem()
         } else {
-            if (downloadStatus == STATUS_READY) {
-                dismissAllowingStateLoss()
-            }
+//            if (downloadStatus == STATUS_READY) {
+            dismissAllowingStateLoss()
+//            }
         }
     }
 
@@ -178,7 +177,8 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
     fun show() {
         dialogActivity.supportFragmentManager.let {
             ConfigManager.putAppConfig(AppLocalConfigKey.UPDATE_DIALOG_SHOW_TIME, true)
-            show(it, "DialogUpdateBinding") }
+            show(it, "DialogUpdateBinding")
+        }
     }
 
     fun beginInstall() {

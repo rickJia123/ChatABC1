@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
 import org.greenrobot.eventbus.EventBus
-import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.pay.PayCenter
 import river.chat.businese_common.router.jump2Login
 import river.chat.businese_common.ui.view.dialog.SimpleDialog
@@ -14,12 +13,10 @@ import river.chat.business_user.constant.UserEvent
 import river.chat.business_user.login.LoginViewModel
 import river.chat.business_user.user.LoginCenter
 import river.chat.business_user.user.RiverUserManager
-import river.chat.lib_core.event.BaseActionEvent
-import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.router.plugin.module.UserRouterConstants
 import river.chat.lib_resource.model.database.User
-import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.main.activity.BaseActivity
 
@@ -39,7 +36,7 @@ class UserPluginIml : UserPlugin {
         EventBus.getDefault().post(UserEvent().apply {
             action = ACTION_LOGOUT_SUCCESS
         })
-        "退出成功".toast()
+        "退出成功".toastSystem()
     }
 
     override fun launchLoginDialog(activity: AppCompatActivity) {
@@ -74,7 +71,7 @@ class UserPluginIml : UserPlugin {
                     LoginViewModel().request.destroy { result ->
                         if (result.isSuccess) {
                             logout()
-                            "注销成功".toast()
+                            "注销成功".toastSystem()
                         }
                     }
                 }

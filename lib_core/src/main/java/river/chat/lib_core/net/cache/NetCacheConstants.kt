@@ -6,7 +6,12 @@ package river.chat.lib_core.net.cache
  */
 object NetCacheType {
     const val NO_CACHE = "NO_CACHE"
+
+    //有效期内只使用缓存
     const val CACHE_NORMAL = "CACHE_NORMAL"
+
+    //失败后使用缓存
+    const val CACHE_ON_FAIL = "CACHE_ON_FAIL"
 }
 
 object NetCacheKey {

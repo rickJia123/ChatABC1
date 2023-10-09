@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.router.jump2VipOpen
-import river.chat.businese_common.utils.loadAvatar
+import river.chat.businese_common.utils.exts.loadAvatar
 import river.chat.businese_main.vip.VipManager
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewUserStatusBinding

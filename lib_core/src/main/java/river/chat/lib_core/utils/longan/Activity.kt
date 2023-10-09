@@ -112,10 +112,10 @@ fun finishAllActivitiesExceptNewest(): Boolean =
   finishAllActivitiesExcept(topActivity.javaClass)
 
 fun ComponentActivity.pressBackTwiceToExitApp(toastText: String, delayMillis: Long = 2000, owner: LifecycleOwner = this) =
-  pressBackTwiceToExitApp(delayMillis, owner) { toast(toastText) }
+  pressBackTwiceToExitApp(delayMillis, owner) { toastSystem(toastText) }
 
 fun ComponentActivity.pressBackTwiceToExitApp(@StringRes toastText: Int, delayMillis: Long = 2000, owner: LifecycleOwner = this) =
-  pressBackTwiceToExitApp(delayMillis, owner) { toast(toastText) }
+  pressBackTwiceToExitApp(delayMillis, owner) { toastSystem(toastText) }
 
 fun ComponentActivity.pressBackTwiceToExitApp(
   delayMillis: Long = 2000,

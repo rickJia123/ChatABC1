@@ -10,7 +10,7 @@ import river.chat.businese_main.chat.hot.HotTipItemBean
 import river.chat.businese_main.message.MessageHelper.CHAT_TIP_FAIL
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
-import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.main.BaseViewModel
 import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_resource.model.MessageStatus
@@ -38,8 +38,8 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                 ReportManager.reportEvent(
                     TrackerEventName.REQUEST_CHAT,
                     mutableMapOf(
-                        REQUEST_CONTENT to "GPT接口问题:" + content + "  \n回答：" + data?.content,
-                        REQUEST_TIME to "GPT接口耗时:${time}ms",
+                        REQUEST_CONTENT to "GPT接口成功--问题:" + content + "     回答：" + data?.content,
+                        REQUEST_TIME to "GPT接口成功--耗时:${time}ms",
                     )
                 )
                 chatRequestResult.value =
@@ -54,11 +54,11 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                 ReportManager.reportEvent(
                     TrackerEventName.REQUEST_CHAT,
                     mutableMapOf(
-                        REQUEST_CONTENT to "GPT接口问题:" + content,
-                        REQUEST_TIME to "GPT接口错误:${it.message}"
+                        REQUEST_CONTENT to "GPT接口错误---问题:" + content,
+                        REQUEST_TIME to "GPT接口错误--错误信息:${it.message}"
                     )
                 )
-                it.message?.toast()
+                it.message?.toastSystem()
                 chatRequestResult.value =
                     RequestResult(isSuccess = false, data = MessageBean().apply {
                         this.content = CHAT_TIP_FAIL

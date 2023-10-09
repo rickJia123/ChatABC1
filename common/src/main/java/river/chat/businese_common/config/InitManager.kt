@@ -7,6 +7,7 @@ import com.umeng.commonsdk.UMConfigure
 import com.yl.lib.sentry.hook.PrivacySentry
 import com.yl.lib.sentry.hook.PrivacySentryBuilder
 import river.chat.businese_common.report.UMTrackHandler
+import river.chat.businese_common.utils.CrashHandler
 import river.chat.lib_core.wx.WxManager
 import river.chat.lib_core.storage.file.StorageUtil
 import river.chat.lib_core.tracker.initTracker
@@ -35,6 +36,7 @@ object InitManager {
     fun initBusiness(application: Application) {
         initConfig(application)
         application.initTracker(UMTrackHandler())
+        CrashHandler.getInstance().init(application)
     }
 
 

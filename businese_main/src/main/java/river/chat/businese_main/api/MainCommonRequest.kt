@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.utils.longan.deviceInfos
-import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.main.BaseViewModel
 import river.chat.lib_resource.model.VipRightsBean
 import river.chat.lib_resource.model.VipSkuBean
@@ -36,7 +36,7 @@ class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                     RequestResult(isSuccess = true, data = data)
             },
             error = {
-                it.message?.toast()
+                it.message?.toastSystem()
                 feedBackResult.value =
                     RequestResult(isSuccess = false, data = "")
             }

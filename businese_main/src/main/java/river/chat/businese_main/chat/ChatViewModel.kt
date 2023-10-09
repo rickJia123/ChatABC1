@@ -37,7 +37,7 @@ class ChatViewModel : BaseViewModel() {
 
     fun onItemClick(item: Any?) {
         if (item is String) {
-            item.toast()
+            item.toastSystem()
             jump2Login()
         }
     }
@@ -45,7 +45,7 @@ class ChatViewModel : BaseViewModel() {
     fun onItemLongClick(item: MessageBean?): Boolean {
         item?.let {
             if (it.isSelf()) {
-                "复制成功".toast()
+                "复制成功".toastSystem()
             } else {
                 shareText(it.content ?: "", "分享到")
 //                shareText(it.content ?: "", "分享到")
@@ -75,7 +75,7 @@ class ChatViewModel : BaseViewModel() {
             msg,
             object : OnChatItemMoreClickListener {
                 override fun onCopyClick() {
-                    "已复制".toast()
+                    "已复制".toastSystem()
                     msg.content?.copyToClipboard()
                 }
 

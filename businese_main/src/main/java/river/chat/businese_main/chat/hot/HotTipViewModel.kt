@@ -4,11 +4,10 @@ import androidx.databinding.ObservableArrayList
 import river.chat.businese_common.report.ChatTracker
 import river.chat.businese_common.report.ReportManager
 import river.chat.businese_common.report.TrackerEventName
-import river.chat.businese_common.utils.onReport
 import river.chat.businese_main.chat.ChatRequest
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.message.MessageHelper
-import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.main.BaseViewModel
 
 class HotTipViewModel : BaseViewModel() {
@@ -28,7 +27,7 @@ class HotTipViewModel : BaseViewModel() {
                     ChatTracker.CLICK_ACTION to "热门问题点击：" + it.hotQuestion,
                 )
             )
-            "".toast()
+            "".toastSystem()
             MessageCenter.postReceiveMsg(MessageHelper.buildSelfMsg(it.hotQuestion ?: ""))
         }
 
@@ -36,7 +35,7 @@ class HotTipViewModel : BaseViewModel() {
 
     fun onItemLongClick(item: HotTipItemBean): Boolean {
         item?.let {
-            "复制成功".toast()
+            "复制成功".toastSystem()
         }
         return false
     }

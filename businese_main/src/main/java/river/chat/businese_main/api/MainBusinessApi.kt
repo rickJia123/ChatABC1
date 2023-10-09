@@ -27,11 +27,14 @@ interface MainBusinessApi : BaseApi {
     /**
      *获取热门问题
      */
-    @Headers(NetCacheKey.Key_Cache_Type , NetCacheType.CACHE_NORMAL)
+//    @Headers(
+//      "${NetCacheKey.Key_Cache_Type}: ${NetCacheType.CACHE_NORMAL}",
+//      "Key_Cache_Type2: ${NetCacheType.CACHE_NORMAL}"
+//    )
     @POST("/chat/hotQuestion")
     suspend fun requestHotQuestion(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<MutableList<String>>
 
-   /**
+    /**
      *意见反馈
      */
     @POST("/feedback/createFeedback")

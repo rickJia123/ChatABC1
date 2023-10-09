@@ -11,7 +11,6 @@ import river.chat.businese_main.message.MessageHelper.buildCardMsgList
 import river.chat.business_main.databinding.FragmentChatBinding
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.longan.log
-import river.chat.lib_core.utils.longan.toast
 import river.chat.lib_core.view.main.fragment.BaseBindingViewModelFragment
 
 class ChatFragment :

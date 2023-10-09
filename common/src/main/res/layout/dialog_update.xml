@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:ellipsize="end"
-                android:gravity="center"
+                android:gravity="left"
                 android:maxEms="14"
                 android:textColor="@color/color_999999"
                 android:textSize="14dp"
@@ -57,7 +57,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvTitle"
                 app:layout_goneMarginTop="20dp"
-                tools:text="说明文字说明文字说明文字说明文字说明文字说明说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字文字说明文字说明文字说明文字说明文字说明文字说明文字"
+                tools:text="说明文字说明文字说明文字\n说明文字说明文字说明说明文字说明文字说明文字说明文字说明文字说明\n文字说明文字\n说明文字说明文字说明文字说明文字\n说明文字文字说\n文字说明文字说明文字说明文字说明文字说明文字"
                 tools:visibility="visible" />
 
             <TextView
@@ -67,7 +67,7 @@
                 android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
-                android:text="本次更新预计5秒"
+                android:text="本次更新预计3秒"
                 android:textColor="@color/color_999999"
                 android:textSize="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -81,11 +81,22 @@
                 android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginRight="15dp"
                 android:background="@color/defaultButtonColor"
-                android:ellipsize="end"
-                android:gravity="center"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvTips"
+                app:layout_goneMarginTop="20dp" />
+
+            <View
+                android:id="@+id/viewProgressMask"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/viewProgress"
+                app:layout_constraintRight_toRightOf="@+id/viewProgress"
+                app:layout_constraintTop_toBottomOf="@id/tvTips"
+                app:layout_constraintTop_toTopOf="@id/viewProgress"
                 app:layout_goneMarginTop="20dp" />
 
             <View

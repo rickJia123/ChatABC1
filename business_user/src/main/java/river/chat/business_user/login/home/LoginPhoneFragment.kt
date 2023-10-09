@@ -14,7 +14,7 @@ import river.chat.business_user.login.LoginViewModel
 import river.chat.lib_core.utils.exts.getColor
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.isPhone
-import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.utils.other.CutdownUtils
 import river.chat.lib_core.view.main.dialog.BaseBindingDialogViewModelFragment
 
@@ -51,7 +51,7 @@ class LoginPhoneFragment :
         }
         viewModel.request.loginResult.observe(this) {
             if (it.isSuccess) {
-                "登录成功".toast()
+                "登录成功".toastSystem()
                 mActivity?.finish()
             }
         }
@@ -111,7 +111,7 @@ class LoginPhoneFragment :
     private fun checkPhoneNum(callback: () -> Unit) {
         var isValidPhone = getPhoneNum().isPhone()
         if (!isValidPhone) {
-            "请输入正确的手机号".toast()
+            "请输入正确的手机号".toastSystem()
         }
         callback.invoke()
 
@@ -123,7 +123,7 @@ class LoginPhoneFragment :
     private fun checkCode(callback: () -> Unit) {
         var isValidCode = getCode().isNullOrBlank()
         if (!isValidCode) {
-            "请输入验证码".toast()
+            "请输入验证码".toastSystem()
         }
         callback.invoke()
     }

@@ -7,14 +7,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.dynamicanimation.animation.SpringForce
 import androidx.dynamicanimation.animation.SpringForce.DAMPING_RATIO_HIGH_BOUNCY
-import androidx.dynamicanimation.animation.SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY
 import river.chat.business_user.R
 import river.chat.business_user.databinding.ViewLoginPolicyBinding
 import river.chat.lib_core.utils.exts.view.buildSpannableString
 import river.chat.lib_core.utils.exts.view.loadSimple
 import river.chat.lib_core.utils.exts.view.startSpringAnima
 import river.chat.lib_core.utils.log.LogUtil
-import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.base.LifecycleView
 import river.chat.lib_core.webview.WebViewHelper
 import river.chat.lib_resource.AppConstants
@@ -68,7 +67,7 @@ class LoginPolicyView @JvmOverloads constructor(
         if (mIsSelected) {
             callback()
         } else {
-            ("请先同意服务协议和隐私政策").toast()
+            ("请先同意服务协议和隐私政策").toastSystem()
             viewBinding.ivSelector.startSpringAnima(DynamicAnimation.X, -20f,20f, SpringForce.STIFFNESS_LOW,DAMPING_RATIO_HIGH_BOUNCY)
         }
     }

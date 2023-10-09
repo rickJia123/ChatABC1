@@ -40,10 +40,7 @@ class App : BaseApplication() {
 
         doOnActivityLifecycle(
             onActivityCreated = { activity, savedInstanceState ->
-
                 ARouter.getInstance().inject(activity)
-
-
             },
             onActivityDestroyed = { activity ->
 

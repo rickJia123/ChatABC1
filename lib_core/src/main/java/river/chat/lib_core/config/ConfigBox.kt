@@ -19,27 +19,27 @@ object ConfigBox : BaseBox<AppConfigBean>() {
 
 
     fun getConfigValue(key: String, default: String): String {
-        return box.query {
-            AppConfigBean_.key.equal(key)
-        }.findFirst()?.value ?: default
+        var list = box.all
+        var item = list.find { it.key == key }
+        return item?.value ?: default
     }
 
     fun getConfig(key: String): AppConfigBean? {
-        return box.query {
-            AppConfigBean_.key.equal(key)
-        }.findFirst()
+        var list = box.all
+        var item = list.find { it.key == key }
+        return item
     }
 
     fun putConfig(key: String, value: String): Long {
-        box.query {
-            AppConfigBean_.key.equal(key)
-        }.findFirst()?.let { box.remove(it) }
+        var list = box.all
+        var item = list.find { it.key == key } ?: AppConfigBean(
+            key = key,
+            value = value,
+            updateTime = System.currentTimeMillis()
+        )
+        item.value = value
         return box?.put(
-            AppConfigBean(
-                key = key,
-                value = value,
-                updateTime = System.currentTimeMillis()
-            )
+            item
         ) ?: 0
     }
 

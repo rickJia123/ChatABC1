@@ -3,17 +3,14 @@ package river.chat.businese_main.share
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.NestedScrollView
 import com.umeng.socialize.bean.SHARE_MEDIA
 import river.chat.businese_common.report.ShareTracker
 import river.chat.businese_common.report.TrackerEventName
-import river.chat.businese_common.utils.loadAvatar
+import river.chat.businese_common.utils.exts.loadAvatar
 import river.chat.business_main.databinding.DialogShareBinding
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
@@ -28,7 +25,6 @@ import river.chat.lib_core.view.main.dialog.BaseBindingDialogFragment
 import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_umeng.ShareManager
 import river.chat.lib_umeng.common.RiverShareContent
-import river.chat.business_main.R
 import river.chat.lib_core.utils.exts.height
 import river.chat.lib_core.utils.exts.view.toBitmap
 import river.chat.lib_core.utils.longan.screenHeight

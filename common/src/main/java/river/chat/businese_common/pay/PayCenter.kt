@@ -1,6 +1,5 @@
 package river.chat.businese_common.pay
 
-import org.greenrobot.eventbus.EventBus
 import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.net.CommonRequestViewModel
 import river.chat.businese_common.router.jump2Main
@@ -11,7 +10,7 @@ import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.common.GsonKits
-import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.main.activity.BaseActivity
 import river.chat.lib_core.wx.WxManager
@@ -25,7 +24,6 @@ import river.chat.lib_resource.model.WechatPayModel
  * Description:
  */
 object PayCenter {
-
 
     fun pay(requestBean: CreateOrderRequestBean?) {
         if (requestBean == null || requestBean.skuId.isNullOrEmpty()) {
@@ -52,7 +50,7 @@ object PayCenter {
             if (it.isSuccess) {
                 onCreateOrderSuccess.invoke(it.data ?: CreateOrderResBean())
             } else {
-                it.errorMsg.toast()
+                it.errorMsg.toastSystem()
             }
         }
     }

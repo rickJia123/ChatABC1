@@ -29,18 +29,17 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import river.chat.lib_core.app.BaseApplication
-import river.chat.lib_core.view.common.ToastTipDialog
 
-fun Fragment.toast(message: CharSequence?): Toast =
-    requireActivity().toast(message)
+fun Fragment.toastSystem(message: CharSequence?): Toast =
+    requireActivity().toastSystem(message)
 
-fun Fragment.toast(@StringRes message: Int): Toast =
-    requireActivity().toast(message)
+fun Fragment.toastSystem(@StringRes message: Int): Toast =
+    requireActivity().toastSystem(message)
 
-fun Context.toast(message: CharSequence?): Toast =
+fun Context.toastSystem(message: CharSequence?): Toast =
     Toast.makeText(this, message, Toast.LENGTH_SHORT).fixBadTokenException().apply { show() }
 
-fun Context.toast(@StringRes message: Int): Toast =
+fun Context.toastSystem(@StringRes message: Int): Toast =
     Toast.makeText(this, message, Toast.LENGTH_SHORT).fixBadTokenException().apply { show() }
 
 fun Fragment.longToast(message: CharSequence?): Toast =
@@ -55,11 +54,9 @@ fun Context.longToast(message: CharSequence?): Toast =
 fun Context.longToast(@StringRes message: Int): Toast =
     Toast.makeText(this, message, Toast.LENGTH_LONG).fixBadTokenException().apply { show() }
 
-fun String.toast() =
-    toastSystem()
 
 fun String.toastSystem() =
-    BaseApplication.getInstance().toast(this)
+    BaseApplication.getInstance().toastSystem(this)
 
 fun Toast.fixBadTokenException(): Toast = apply {
     if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {

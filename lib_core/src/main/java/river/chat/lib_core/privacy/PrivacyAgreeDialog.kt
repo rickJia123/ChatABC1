@@ -79,7 +79,6 @@ class PrivacyAgreeDialog(var dialogActivity: AppCompatActivity) :
         binding.tvLButton.singleClick {
             mPrivacyAgreeCallback?.invoke(false)
             closeDialog()
-            System.exit(0)
         }
         binding.tvRButton.singleClick {
             mPrivacyAgreeCallback?.invoke(true)

@@ -7,7 +7,7 @@ import river.chat.lib_core.router.plugin.module.HomePlugin
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.exts.singleClick
-import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 
 /**
@@ -33,7 +33,7 @@ class FeedBackActivity :
     private fun observeRequest() {
         viewModel.request.feedBackResult.observe(this) {
             if (it.isSuccess) {
-                toast("反馈成功")
+                toastSystem("反馈成功")
                 finish()
             }
         }
@@ -43,7 +43,7 @@ class FeedBackActivity :
     private fun initClick(binding: ActivityFeedbackBinding) {
         binding.btConfirm.singleClick {
             if (binding.etFeedback.text.toString().isEmpty()) {
-                toast("请输入反馈内容")
+                toastSystem("请输入反馈内容")
                 return@singleClick
             }
             viewModel.request.confirmFeedback(binding.etFeedback.text.toString(), binding.etPhone.text.toString())

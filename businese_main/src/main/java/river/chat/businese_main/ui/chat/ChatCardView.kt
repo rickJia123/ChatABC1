@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
 import river.chat.businese_common.report.ChatTracker
 import river.chat.businese_common.report.TrackerEventName
-import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.utils.onReport
 import river.chat.businese_main.share.ShareDialog
 import river.chat.businese_main.utils.logChat
@@ -15,7 +14,7 @@ import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.copyToClipboard
 import river.chat.lib_core.utils.longan.dp
 import river.chat.lib_core.utils.longan.screenWidth
-import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.base.LifecycleView
 import river.chat.lib_resource.model.MessageBean
@@ -57,7 +56,7 @@ class ChatCardView @JvmOverloads constructor(
                 } else {
                     toastMsg= "该回答状态异常哦"
                 }
-                toastMsg.toast()
+                toastMsg.toastSystem()
                 onReport(
                     TrackerEventName.CLICK_CHAT,
                     ChatTracker.CLICK_ACTION to "复制回答："+ answerMsg?.content,
@@ -67,7 +66,7 @@ class ChatCardView @JvmOverloads constructor(
 
         }
         viewBinding.clQuestion.singleClick {
-            "问题已复制".toast()
+            "问题已复制".toastSystem()
             questionMsg?.content?.copyToClipboard()
             onReport(
                 TrackerEventName.CLICK_CHAT,

@@ -8,6 +8,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.facade.annotation.Route
+import io.dushu.app.privacy.common.PrivacyTestMethod
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import river.chat.businese_common.config.ServiceConfigManager
@@ -44,6 +45,10 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
         userPlugin.refreshInfo()
 
         AppUpdateManager.showUpdateAppDialog(this)
+
+        //rick todo
+        PrivacyTestMethod.getAndroidId(activity)
+        PrivacyTestMethod.getDeviceId(activity)
     }
 
     override fun initDataBinding(binding: ActivityHomeBinding) {

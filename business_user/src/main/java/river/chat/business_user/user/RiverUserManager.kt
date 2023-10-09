@@ -5,7 +5,7 @@ import river.chat.businese_common.report.ReportManager
 import river.chat.businese_common.router.jump2Main
 import river.chat.lib_resource.model.database.User
 import river.chat.lib_core.utils.longan.logConfig
-import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.toastSystem
 
 /**
  * Created by beiyongChao on 2023/3/15
@@ -25,11 +25,8 @@ object RiverUserManager {
      * 登录成功
      */
     fun onLoginSuccess(user: User, platFrom: String) {
-        "登录成功".toast()
+        "登录成功".toastSystem()
         jump2Main()
-        //rick todo
-        user.remainTryTimes = 5
-        user.vipExpireTimeStr = "2024.10.11 过期"
         updateUser(user)
         ReportManager.reportLogin(true, user.id.toString(), platFrom)
     }

@@ -30,7 +30,10 @@ object TrackerEventName {
     //分享
     const val LOAD_SHARE = "LOAD_SHARE"
     const val CLICK_SHARE = "CLICK_SHARE"
-
+    /**
+     * crash 上报
+     */
+    const val CRASH = "CRASH"
 
 }
 
@@ -108,6 +111,11 @@ object TrackerKeys {
      */
     const val PAY_ACTION = "PAY_ACTION"
 
+    /**
+     * crash
+     */
+    const val CRASH_MSG = "CRASH_MSG"
+    const val CRASH_DEVICE = "CRASH_DEVICE"
 
 }
 

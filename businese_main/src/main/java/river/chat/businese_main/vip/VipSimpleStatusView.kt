@@ -13,6 +13,9 @@ import river.chat.lib_core.utils.exts.view.buildSpannableString
 import river.chat.lib_core.view.base.LifecycleView
 
 
+/**
+ * 聊天界面的权益提示
+ */
 class VipSimpleStatusView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
