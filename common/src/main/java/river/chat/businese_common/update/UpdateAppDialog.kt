@@ -86,7 +86,7 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
             when (downloadStatus) {
                 STATUS_READY -> {
                     download(apkLink) {
-                        this.description = "下载测试哦"
+                        this.description = "正在更新"
                         this.notificationVisibility =
                             DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
                         this.requiresCharging = true

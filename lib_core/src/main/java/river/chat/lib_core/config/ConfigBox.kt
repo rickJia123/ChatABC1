@@ -20,16 +20,16 @@ object ConfigBox : BaseBox<AppConfigBean>() {
 
 
     fun getConfigValue(key: String, default: String): String {
-        return  box.all.firstOrNull() { it.key == key }?.value ?: default
+        return all.firstOrNull() { it.key == key }?.value ?: default
     }
 
     fun getConfig(key: String): AppConfigBean? {
-        return  box.all.firstOrNull() { it.key == key }
+        return  all.firstOrNull() { it.key == key }
     }
 
     fun putConfig(key: String, value: String): Long {
 
-        var config: AppConfigBean? = box.all.firstOrNull() { it.key == key }?: AppConfigBean(
+        var config: AppConfigBean? = all.firstOrNull() { it.key == key }?: AppConfigBean(
             key = key,
             value = value,
             updateTime = System.currentTimeMillis()
@@ -38,7 +38,7 @@ object ConfigBox : BaseBox<AppConfigBean>() {
         config?.let {
             it.value = value
             it.updateTime = System.currentTimeMillis()
-            return box?.put(
+            return add(
                 it
             )?:0
         }

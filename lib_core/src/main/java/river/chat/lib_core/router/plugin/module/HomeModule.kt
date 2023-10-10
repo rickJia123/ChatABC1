@@ -24,6 +24,11 @@ object HomeRouterConstants : BaseConstants() {
     const val HOME_SETTINGS = GROUP_HOME + "/settings"
 
     /**
+     * app分享页
+     */
+    const val SHARE_APP = GROUP_HOME + "/shareApp"
+
+    /**
      * 意见反馈页
      */
     const val HOME_FEEDBACK = GROUP_HOME + "/feedback"

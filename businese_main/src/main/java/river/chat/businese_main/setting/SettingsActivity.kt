@@ -5,6 +5,7 @@ import org.koin.android.ext.android.inject
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.router.jump2Feedback
+import river.chat.businese_common.router.jump2ShareApp
 import river.chat.businese_common.update.AppUpdateManager
 import river.chat.businese_common.utils.exts.hideWithoutLogin
 import river.chat.businese_common.utils.onLoad
@@ -78,9 +79,15 @@ class SettingsActivity :
             tipVisible = AppUpdateManager.isNeedUpdate()
         }
 
+        //注销账号
         binding.viewSettingDestory.singleClick {
             onSettingClick(binding.viewSettingDestory)
             userPlugin.destroyAccount()
+        }
+
+        //分享app
+        binding.viewSettingShareApp.singleClick {
+            jump2ShareApp()
         }
 
         binding.viewSettingLogout.hideWithoutLogin()

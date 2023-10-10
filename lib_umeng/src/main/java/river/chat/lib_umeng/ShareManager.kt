@@ -46,7 +46,8 @@ object ShareManager {
             .beginShare()
     }
 
-    fun shareUrl() {
+    fun shareUrl(activity: Activity) {
+        mActivityRef = WeakReference(activity)
         val web = UMWeb(mShareContent.mUrl)
         web.title = mShareContent.mTitle
         web.setThumb(UMImage(getActivity(), R.mipmap.logo_trans))

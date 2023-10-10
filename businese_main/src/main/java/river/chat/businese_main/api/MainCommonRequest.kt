@@ -110,7 +110,7 @@ class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                     RequestResult(isSuccess = true, data = data)
             },
             error = {
-                ("兑换失败：" + it.message ?: "").toast()
+                ("兑换失败：" + it.message ?: "").toastSystem()
                 exChangeResult.value =
                     RequestResult(isSuccess = false)
             }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/defaultBgColor"
+        android:fitsSystemWindows="true">
+
+        <river.chat.lib_core.view.title.RiverTitle
+            android:id="@+id/toolBar"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="GPTEvery"
+            app:titleSize="30sp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivShare"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/toolBar"
+            app:layout_constraintBottom_toBottomOf="@id/toolBar"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/share"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+
+        <com.just.agentweb.AgentWebView
+            android:id="@+id/webView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolBar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -16,16 +16,20 @@
           href="https://static-card.dushu365.com/@web/hybrid.eula/dist/manifest.json">
     <style>
         @supports (bottom:constant(safe-area-inset-bottom)) or (bottom:env(safe-area-inset-bottom)){.safe-area-inset-top{padding-top:env(safe-area-inset-top)}.safe-area-inset-bottom{padding-bottom:env(safe-area-inset-bottom)}}
+
     </style>
 
     <script>
         window.FILES={publicPath:"https://static-card.dushu365.com/@web/hybrid.eula/dist/",js:["https://static-card.dushu365.com/@web/hybrid.eula/dist/main.18de12c6.js"],css:["https://static-card.dushu365.com/@web/hybrid.eula/dist/main.8c30c155.css"]},"object"==typeof window.GLOBAL_LIBS&&(window.FILES.js.unshift("https://static-card.dushu365.com/@soybean/common.main/dist/main@"+window.GLOBAL_LIBS["@soybean/common.main"]+".js"),window.FILES.css.unshift("https://static-card.dushu365.com/@soybean/common.main/dist/main@"+window.GLOBAL_LIBS["@soybean/common.main"]+".css")),window.FILES.js.unshift("https://static-card.dushu365.com/@npm/react.v1802/react+dom.js"),/micromessenger/i.test(navigator.userAgent)&&window.FILES.js.unshift("https://res.wx.qq.com/open/js/jweixin-1.6.0.js"),window.FILES.js.unshift("https://static-card.dushu365.com/@npm/sensors.sdk/dist/v1.15.20/sensorsdata.min.js")
+
     </script>
     <script>
         !function(s){var t=s.name;window.sensorsDataAnalytic201505=t,window[t]={_q:[],para:s}}({sdk_url:"https://static-card.dushu365.com/@npm/sensors.sdk/dist/v1.15.20/sensorsdata.min.js",heatmap_url:"https://static-card.dushu365.com/@npm/sensors.sdk/dist/v1.15.20/heatmap.min.js",name:"sensors",server_url:"https://sensors-data.dushu365.com/sa?project=production",is_track_single_page:!0,app_js_bridge:{white_list:["https://sensors-data.dushu365.com/sa?project=production","https://sensors-data-ipv6.dushu365.com/sa?project=production"]}})
+
     </script>
     <script>
         for(var polyfills=[{value:Object.values,polyfill:function(){Object.values=function(e){if(e!==Object(e))throw new TypeError("Object.values called on a non-object");var l,o=[];for(l in e)Object.prototype.hasOwnProperty.call(e,l)&&o.push(e[l]);return o}}},{value:Object.entries,polyfill:function(){Object.entries=function(e){for(var l=Object.keys(e),o=l.length,i=new Array(o);o--;)i[o]=[l[o],e[l[o]]];return i}}},{value:window.setToken,polyfill:function(){window.setToken=function(e){try{window.token!==e&&window.location.reload(),window.token=String(e).replace("'","")}catch(e){}}}},{value:window.generalPurpose_setGlobalData,polyfill:function(){window.GLOBAL_DATA={},window.generalPurpose_setGlobalData=function(){try{var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};Object.keys(e).map((function(l){window.GLOBAL_DATA[l]=e[l]}))}catch(e){}}}},{value:window.URLSearchParams,version:"v0.2.2",polyfill:"url-search-params"},{value:window.Promise&&window.Promise.prototype.finally,version:"v8.2.2",polyfill:"promise"},{value:window.fetch,version:"v3.6.2",polyfill:"fetch"},{value:window.ResizeObserver,version:"v1.5.1",polyfill:"resize-observer"}],i=0;i<polyfills.length;i++){var p=polyfills[i];if(!p.value)if("string"==typeof p.polyfill){var ret=[p.polyfill,p.version,"index.min.js"];window.FILES.js.unshift("https://static-card.dushu365.com/@npm/cdn.polyfills/"+ret.join("/"))}else p.polyfill()}
+
     </script>
 </head>
 <body>
@@ -111,7 +115,6 @@
                     数据统计与服务优化：我们会接入提供数据统计、数据分析类的第三方服务，用于分析您对我们服务的使用情况，并帮助我们不断优化相关服务。</p>
                 <p class="ct">3.1.2.3
                     服务运营及后续维护：我们会接入提供Crash监控类的第三方服务，用于在我们的服务出现异常时，上报相关异常的日志信息，帮助我们的研发人员分析服务使用方式、衡量服务有效性、快速发现并解决异常，提升您的产品体验。</p>
-                <p class="ct">3.1.2.4 消息推送：我们会接入消息推送类的第三方服务，用于帮助您接收系统通知及相关推送消息，如您不希望收到此类消息，可通过访问<b>【我的】-【设置】-【推送设置】</b>进行关闭。
                 </p>
                 <p class="ct">3.1.2.5
                     第三方登录/分享：我们会接入社交类的第三方服务，用于帮助您通过微信、QQ、微博等第三方账号登录我们的产品，以及向上述第三方平台进行内容分享。</p>
@@ -179,10 +182,10 @@
                 <p class="ct">6.3.2
                     特定的业务功能和服务将需要您的信息才能得以完成，若您撤回同意或授权后，我们可能无法继续为您提供撤回同意或授权所对应的功能和服务，也不再处理您的相应个人信息。但撤回同意或授权的决定，不会影响此前基于您的授权而开展的个人信息处理。</p>
                 <p class="ct">6.3.3
-                    如果您需要撤销隐私政策的全部授权，您可以通过【我的】-【设置】-【账号与安全】-【注销账号】方式来完成</p>
+                    如果您需要撤销隐私政策的全部授权，您可以通过【设置】-【注销账号】方式来完成</p>
                 <h3>6.4 注销账号</h3>
                 <p class="ct">
-                    我们为您提供多种账号注销途径，您可以在GptEveryAPP内，依次点击【我的】-【设置】-【注销账号】，阅读注销规则后确认注销即可。<b>需要向您说明的是，注销账号是立马生效，完成账号注销后，您将无法再以此账号登录、使用GptEveryAPP，该账号绑定的所有第三方账号均会解除绑定关系，该账号的所有资产和权益将被清除且无法被找回，该账号的全部使用痕迹，包括但不限于内容、信息、数据、记录等均会被删除或匿名化处理（但法律法规另有规定或监管部门另有要求的除外）</b>。
+                    我们为您提供多种账号注销途径，您可以在GptEveryAPP内，依次点击【设置】-【注销账号】，阅读注销规则后确认注销即可。<b>需要向您说明的是，注销账号是立马生效，完成账号注销后，您将无法再以此账号登录、使用GptEveryAPP，该账号绑定的所有第三方账号均会解除绑定关系，该账号的所有资产和权益将被清除且无法被找回，该账号的全部使用痕迹，包括但不限于内容、信息、数据、记录等均会被删除或匿名化处理（但法律法规另有规定或监管部门另有要求的除外）</b>。
                 </p>
                 <h3>6.5 投诉举报</h3>
                 <p class="ct">
@@ -196,7 +199,7 @@
                     若您是未成年人的监护人，当您对您所监护的未成年人的个人信息有相关疑问时，请通过本隐私政策公示的联系方式与我们联系。</p>
                 <h2>八、隐私政策的访问、修订与更新</h2>
                 <h3>8.1 访问隐私政策</h3>
-                <p class="ct">您可以在注册页面，或者登录个人账号，进入<b>【我的】-【隐私政策】</b>查看本隐私政策全部内容。
+                <p class="ct">您可以在注册页面，或者登录个人账号，进入<b>【设置】-【隐私政策】</b>查看本隐私政策全部内容。
                 </p>
                 <h3>8.2 修订与更新</h3>
                 <p class="ct">
@@ -220,6 +223,7 @@
 </div>
 <script>
     !function(){for(var s="",n=0;n<window.FILES.css.length;n++){s+='<link rel="stylesheet" href="'+window.FILES.css[n]+'">'}for(n=0;n<window.FILES.js.length;n++){s+='<script src="'+window.FILES.js[n]+'"><\/script>'}document.write(s)}()
+
 </script>
 <link rel="stylesheet" href="./帆书2_files/main@v23.9.14-alpha.3.css">
 <link rel="stylesheet" href="./帆书2_files/main.8c30c155.css">

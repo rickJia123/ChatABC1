@@ -1,12 +1,8 @@
 package river.chat.businese_main.share
 
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.NestedScrollView
 import com.umeng.socialize.bean.SHARE_MEDIA
 import river.chat.businese_common.report.ShareTracker
 import river.chat.businese_common.report.TrackerEventName
@@ -20,14 +16,14 @@ import river.chat.lib_core.tracker.postTrack
 import river.chat.lib_core.tracker.trackNode
 import river.chat.lib_core.utils.common.QRCodeUtils
 import river.chat.lib_core.utils.exts.ifEmptyOrBlank
+import river.chat.lib_core.utils.exts.view.toBitmap
+import river.chat.lib_core.utils.longan.copyToClipboard
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.main.dialog.BaseBindingDialogFragment
 import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_umeng.ShareManager
 import river.chat.lib_umeng.common.RiverShareContent
-import river.chat.lib_core.utils.exts.height
-import river.chat.lib_core.utils.exts.view.toBitmap
-import river.chat.lib_core.utils.longan.screenHeight
 
 /**
  * Created by beiyongChao on 2023/6/9
@@ -78,7 +74,12 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
             binding.viewPlatform.postTrack(
                 TrackerEventName.CLICK_SHARE,
             )
-            share(it)
+            if (it.platform == SHARE_MEDIA.MORE) {
+                (answerMsg?.content ?: "").copyToClipboard()
+                "回答已复制".toastSystem()
+            } else {
+                share(it)
+            }
         }
         binding.viewPlatform.mOnCancelClick = {
             closeDialog()

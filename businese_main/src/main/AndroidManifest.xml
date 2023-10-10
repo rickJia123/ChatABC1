@@ -28,4 +28,8 @@
         <activity android:name="river.chat.businese_main.vip.VipExchangeActivity"
             android:windowSoftInputMode="adjustNothing"
             android:screenOrientation="portrait"  />
+
+        <activity android:name="river.chat.businese_main.shareapp.ShareAppActivity"
+            android:windowSoftInputMode="adjustNothing"
+            android:screenOrientation="portrait"  />
 </application></manifest>

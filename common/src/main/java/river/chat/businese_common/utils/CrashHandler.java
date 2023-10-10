@@ -69,6 +69,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             Map params = new HashMap();
             params.put(TrackerKeys.CRASH_MSG, ex.getMessage());
             params.put(TrackerKeys.CRASH_DEVICE, collectDeviceInfo(context));
+            LogUtil.e(LOG_TAG, "crash:" + ex.getMessage());
             ReportManager.INSTANCE.reportEvent(TrackerEventName.CRASH, params);
             // 如果用户没有处理则让系统默认的异常处理器来处理
             defaultHandler.uncaughtException(thread, ex);

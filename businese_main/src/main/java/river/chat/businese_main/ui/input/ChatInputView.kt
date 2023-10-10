@@ -14,7 +14,7 @@ import river.chat.business_main.databinding.ViewInputBinding
 import river.chat.lib_core.BR
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.log
-import river.chat.lib_core.utils.longan.toast
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.base.LifecycleView
 
 
@@ -139,7 +139,7 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
 
     private fun checkCanSend(content: String): Boolean {
         if (content.isEmpty()) {
-            "内容不能为空".toast()
+            "内容不能为空".toastSystem()
         }
         return content.isNotEmpty()
     }

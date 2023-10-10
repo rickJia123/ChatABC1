@@ -45,10 +45,6 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
         userPlugin.refreshInfo()
 
         AppUpdateManager.showUpdateAppDialog(this)
-
-        //rick todo
-        PrivacyTestMethod.getAndroidId(activity)
-        PrivacyTestMethod.getDeviceId(activity)
     }
 
     override fun initDataBinding(binding: ActivityHomeBinding) {
@@ -61,41 +57,10 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
             VipManager.jump2VipPage()
         }
         initEventListener(binding)
-        //rick todo
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            getIMEI(activity)
-        }
+
     }
 
-    /**
-     * imei
-     */
-    //rick todo
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun getIMEI(context: Context?): String {
-        if (context == null) {
-            return ""
-        }
-//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-//            return ""
-//        }
-        var imei = ""
-        // 在某些平板上可能会抛出异常
-        try {
-//            if (checkPermissions(
-//                    context,
-//                    Manifest.permission.READ_PHONE_STATE
-//                )
-//            ) {
-            val mTelephonyMgr = context
-                .getSystemService(AppCompatActivity.TELEPHONY_SERVICE) as TelephonyManager
-            imei = mTelephonyMgr.imei
-//            }
-        } catch (e: Throwable) {
-            e.printStackTrace()
-        }
-        return imei ?: ""
-    }
+
 
     /**
      * 主Activity 初始化

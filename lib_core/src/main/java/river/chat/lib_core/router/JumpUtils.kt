@@ -51,3 +51,8 @@ fun jump2VipExchange() {
     ARouter.getInstance().build(HomeRouterConstants.VIP_EXCHANGE)
         .navigation()
 }
+
+fun jump2ShareApp() {
+    ARouter.getInstance().build(HomeRouterConstants.SHARE_APP)
+        .navigation()
+}
