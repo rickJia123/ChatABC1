@@ -32,6 +32,7 @@
         <river.chat.businese_main.ui.input.ChatInputView
             android:id="@+id/inputView"
             android:layout_width="0dp"
+            tools:layout_height="100dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -9,6 +9,7 @@ import androidx.dynamicanimation.animation.SpringForce
 import androidx.dynamicanimation.animation.SpringForce.DAMPING_RATIO_HIGH_BOUNCY
 import river.chat.business_user.R
 import river.chat.business_user.databinding.ViewLoginPolicyBinding
+import river.chat.lib_core.privacy.PrivacyManager
 import river.chat.lib_core.utils.exts.view.buildSpannableString
 import river.chat.lib_core.utils.exts.view.loadSimple
 import river.chat.lib_core.utils.exts.view.startSpringAnima
@@ -49,7 +50,7 @@ class LoginPolicyView @JvmOverloads constructor(
                 setColor("#4A90E2")
                 onClick {
                     LogUtil.i("AgentWebFragment policy")
-                    WebViewHelper.startWebViewActivity(AppConstants.POLICY_URL)
+                    WebViewHelper.startWebViewActivity(PrivacyManager.getPrivacyUrl())
                 }
             }
             addText("和")
@@ -57,7 +58,7 @@ class LoginPolicyView @JvmOverloads constructor(
             {
                 setColor("#4A90E2")
                 onClick {
-                    WebViewHelper.startWebViewActivity(AppConstants.POLICY_URL)
+                    WebViewHelper.startWebViewActivity(PrivacyManager.getPrivacyUrl())
                 }
             }
         }

@@ -45,7 +45,7 @@ class UserStatusView @JvmOverloads constructor(
         var userPlugin = getPlugin<UserPlugin>()
         var user = userPlugin.getUser()
         var remainTimes =
-            user.remainTryTimes
+            user.trialBalance
         var type = user.getVipType()
         when (type) {
 

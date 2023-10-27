@@ -2,7 +2,6 @@ package river.chat.lib_core.view.main.fragment
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import org.greenrobot.eventbus.EventBus
 import pub.devrel.easypermissions.EasyPermissions
@@ -16,6 +15,10 @@ import river.chat.lib_core.utils.permission.permission.PermissionHelper
 open class BaseFragment : Fragment() , EasyPermissions.PermissionCallbacks,
     EasyPermissions.RationaleCallbacks{
 
+
+
+
+
     /**
      * 是否注册eventBus
      *
@@ -25,6 +28,9 @@ open class BaseFragment : Fragment() , EasyPermissions.PermissionCallbacks,
         return false
     }
 
+    open fun getActivityContext(): AppCompatActivity? {
+        return activity as AppCompatActivity?
+    }
 
     fun requestPermissions(
         permissions: Array<out String>,

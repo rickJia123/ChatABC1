@@ -6,18 +6,20 @@ import river.chat.lib_resource.model.CreateOrderRequestBean
 import river.chat.lib_resource.model.CreateOrderResBean
 import river.chat.lib_resource.model.QueryOrderRequestBean
 import river.chat.lib_resource.model.QueryOrderResBean
+import river.chat.lib_resource.model.database.ConfigServiceBean
+import river.chat.lib_resource.model.database.ServiceConfigBean
 
 class CommonRequestViewModel : BaseViewModel() {
 
     private val commonRequest = CommonRequest(this)
 
     //获取配置信息
-    fun requestConfig(key: String, resultCallBack: (RequestResult<ConfigResBean>) -> Unit) {
+    fun requestConfig(key: String, resultCallBack: (RequestResult<ServiceConfigBean>) -> Unit) {
         commonRequest.requestConfig(key, resultCallBack)
     }
 
-    //获取配置信息
-    fun requestDefaultConfig(resultCallBack: (RequestResult<DefaultConfigResBean>) -> Unit) {
+    //获取版本更新配置信息
+    fun requestAppUpdateConfig(resultCallBack: (RequestResult<AppUpdateConfigResBean>) -> Unit) {
         commonRequest.requestDefaultConfig(resultCallBack)
     }
 

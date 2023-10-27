@@ -5,41 +5,44 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:background="@color/defaultBgColor">
+        android:background="@color/themeColor"
+        android:fitsSystemWindows="true">
 
-        <river.chat.lib_core.view.title.RiverTitle
+        <river.chat.businese_main.home.HomeTitleView
             android:id="@+id/toolBar"
             android:layout_width="0dp"
             android:layout_height="44dp"
             android:layout_marginTop="0dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tb_leftImage="@drawable/vip"
-            app:tb_rightImage="@drawable/mine"
-            app:title="GPTEvery"
-            app:titleSize="30sp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentChat"
-            android:name="river.chat.businese_main.chat.ChatFragment"
-            android:layout_width="match_parent"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:nestedScrollingEnabled="false"
+            app:layout_constraintBottom_toTopOf="@+id/viewTabView"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolBar" />
-
-        <river.chat.businese_main.vip.VipSimpleStatusView
-            android:id="@+id/viewVipStatus"
-            app:layout_constraintLeft_toLeftOf="parent"
+        <river.chat.businese_main.home.HomeTabView
+            android:id="@+id/viewTabView"
+            android:layout_width="0dp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="65dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <!--        <androidx.fragment.app.FragmentContainerView-->
+        <!--            android:id="@+id/fragmentChat"-->
+        <!--            android:name="river.chat.businese_main.chat.ChatFragment"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--            app:layout_constraintRight_toRightOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/toolBar" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

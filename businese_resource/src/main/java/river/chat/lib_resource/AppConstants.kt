@@ -6,13 +6,10 @@ package river.chat.lib_resource
  */
 object AppConstants {
 
-    /**
-     * 隐私政策url
-     */
-    const val POLICY_URL= "https://www.baidu.com"
-
-
-
+//    /**
+//     * 隐私政策url
+//     */
+//    const val POLICY_URL= "https://www.baidu.com"
 
 
 }

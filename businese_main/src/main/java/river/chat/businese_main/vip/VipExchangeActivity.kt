@@ -34,7 +34,7 @@ class VipExchangeActivity :
     override fun initDataBinding(binding: ActivityVipExchangeBinding) {
         onLoad()
         super.initDataBinding(binding)
-        binding.toolBar.setTitle("会员兑换")
+        binding.toolBar.setTitle("会员免费兑换")
         mBinding.btExchange.singleClick {
             it.postTrack(
                 TrackerEventName.CLICK_VIP,

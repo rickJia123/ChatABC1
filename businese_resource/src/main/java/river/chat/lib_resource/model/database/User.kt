@@ -23,24 +23,36 @@ data class User(
     var isNew: Int? = 0,
 
     //会员过期时间
-    var rightsExpireTime: String = "",
-
-    @Transient
-    //会员类型(日卡/月卡/季卡)：VipType
-   private var vipType: Int? = 0,
+    var rightsExpireTime: String? = "",
+    //权益状态:0没有权益;1会员权益;2会员过期;3体验权益；4体验用完
+    var rightsStatus: Int? = 0,
     //vip名称：日卡/月卡/季卡
     var rightsName: String = "",
     //剩余试用次数
-    var remainTryTimes: Int = 0
+    var trialBalance: Int? = 0,
+
+    //是否收藏
+    @Transient
+    var isCollection: Boolean = false
 
 ) : java.io.Serializable {
     fun getVipType(): Int {
         //rick todo
-//        return expireTime.isNotEmpty() && expireTime.toLong() > TimeUtils.getTimeStamp()
-        if (rightsExpireTime.isNotEmpty()) {
-            return VipType.VIP.value
+//        return if (rightsStatus == 1 && (rightsExpireTime?.toLong() ?: 0 > System.currentTimeMillis())) {
+//            VipType.VIP.value
+//        } else if (rightsStatus == 3 && ((trialBalance ?: 0) > 0)) {
+//            VipType.VIP.value
+//        } else {
+//            VipType.NORMAL.value
+//        }
+
+
+        return if (rightsStatus == 1) {
+            VipType.VIP.value
+        } else if (rightsStatus == 3 && ((trialBalance ?: 0) > 0)) {
+            VipType.VIP.value
         } else {
-            return VipType.NORMAL.value
+            VipType.NORMAL.value
         }
     }
 }

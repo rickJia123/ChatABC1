@@ -4,4 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="vip_no">您还不是超级会员</string>
+
+    //聊天输入框限制
+    <string name="vip_limit_tip">免费权益已用完，开通vip可以畅享ChatGpt</string>
 </resources>

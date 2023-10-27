@@ -8,6 +8,8 @@ import river.chat.businese_main.message.MessageHelper.buildAiAnswerEmptyMsg
 import river.chat.businese_main.message.MessageHelper.buildAiAnswerMsg
 import river.chat.businese_main.utils.logChat
 import river.chat.businese_main.vip.VipManager
+import river.chat.lib_core.config.AppLocalConfigKey
+import river.chat.lib_core.config.ConfigManager
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_resource.model.MessageBean
@@ -78,7 +80,7 @@ object MessageCenter {
 //                if (it.isSuccess) {
                 var msg = if (it.isSuccess) it.data ?: MessageBean() else MessageBean().apply {
                     status = MessageStatus.FAIL_COMMON
-                    content=it.errorMsg
+                    content = it.errorMsg
                 }
                 ("MessageCenter observerMsg:" + it.data).log()
                 distributeMsg(buildAiAnswerMsg(msg))
@@ -174,10 +176,14 @@ object MessageCenter {
      */
     private fun checkPermission(msg: MessageBean): Boolean {
         var hasPermission = true
-        var isLogin = getPlugin<UserPlugin>().isLogin()
+        var user = getPlugin<UserPlugin>()
+        var isLogin = user.isLogin()
         if (!isLogin) {
             hasPermission = false
             getPlugin<UserPlugin>().check2Login { }
+        }
+        if (!VipManager.check2Vip()) {
+            hasPermission = false
         }
         return hasPermission
     }

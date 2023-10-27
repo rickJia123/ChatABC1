@@ -85,7 +85,6 @@ class ChatCardView @JvmOverloads constructor(
     fun refresh(questionMsg: MessageBean? = null, answerMsg: MessageBean? = null) {
         this.questionMsg = questionMsg
         this.answerMsg = answerMsg
-        questionMsg?.toString()?.logChat()
         if (questionMsg != null) {
             viewBinding.tvQuestion.text = questionMsg.content
         }

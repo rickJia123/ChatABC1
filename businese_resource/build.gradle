@@ -105,6 +105,11 @@ dependencies {
     //二维码
     api 'com.journeyapps:zxing-android-embedded:4.3.0'
 
+    /**
+     * viewPager2
+     */
+    api 'androidx.viewpager2:viewpager2:1.0.0'
+
 }
 
 apply plugin: 'io.objectbox'

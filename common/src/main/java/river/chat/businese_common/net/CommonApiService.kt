@@ -7,6 +7,8 @@ import river.chat.lib_resource.model.CreateOrderRequestBean
 import river.chat.lib_resource.model.CreateOrderResBean
 import river.chat.lib_resource.model.QueryOrderRequestBean
 import river.chat.lib_resource.model.QueryOrderResBean
+import river.chat.lib_resource.model.database.ConfigServiceBean
+import river.chat.lib_resource.model.database.ServiceConfigBean
 
 /**
  * Created by beiyongChao on 2023/2/24
@@ -27,10 +29,10 @@ object CommonApiService  : BaseApiService() {
      */
     suspend fun requestConfig(
         key: String
-    ): BaseRequestBean<ConfigResBean> =
+    ): BaseRequestBean<ServiceConfigBean> =
         commonApi.requestConfig(
             ApiStorage.getBasedBody().apply {
-                this["key"] = key
+//                this["key"] = key
             }
         )
 
@@ -39,7 +41,7 @@ object CommonApiService  : BaseApiService() {
      * 获取配置信息
      */
     suspend fun requestDefaultConfig(
-    ): BaseRequestBean<DefaultConfigResBean> =
+    ): BaseRequestBean<AppUpdateConfigResBean> =
         commonApi.requestDefaultConfig(
             ApiStorage.getBasedBody()
         )

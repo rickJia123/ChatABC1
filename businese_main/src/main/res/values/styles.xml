@@ -100,4 +100,16 @@
         <attr name="item_left_color" format="reference" />
     </declare-styleable>
 
+    <!--   首页tab 样式-->
+    <style  name="HomeTabView">
+
+        <item name="android:layout_width">0dp</item>
+        <item name="android:weightSum">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/defaultLightTitleColor</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

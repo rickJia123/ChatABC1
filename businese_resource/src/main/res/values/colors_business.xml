@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--首页-->
+    <color name="home_tab_bg">#272826</color>
+    <color name="home_tab_item">#a3d366</color>
+
+    <!--    聊天相关色值-->
+    //聊天输入框背景色
+    <color name="inputEditBg">#b3bea5</color>
+    //聊天背景色
+    <color name="chatBg">#454643</color>
+    //聊天问题框背景色
+    <color name="chatQBg">#656861</color>
+    //聊天问题tv背景色
+    <color name="chatQTv">#f1f3e3</color>
+
+    //聊天回答tv背景色
+    <color name="chatATv">#f1f3e3</color>
+    <!--会话模块，昵称为nick-->
+    <color name="cv_back">#999999</color>//会话背景色
+    <color name="cv_system">#66686E</color>//系统消息字色
+    <color name="cv_time">#393B44</color>//时间字色
+    <color name="cv_self_back">#595B64</color>//我的会话背景色
+    <color name="cv_self_txt">#CCCCCC</color>//我的会话字色
+    <color name="cv_other_back">#30323B</color>//对方会话背景色
+    <color name="cv_other_txt">#CCCCCC</color>//对方会话字色
+
+    <!--会期颜色-->
+    <color name="vipTrial">#e8e8e8</color>
+    <color name="vipTrialHeavier">#505050</color>
+    <color name="vipTrialLighter">#f7f7f7</color>
+    <color name="vipMonth">#FFEA8D</color>
+    <color name="vipMonthHeaver">#f98c25</color>
+    <color name="vipMonthLighter">#fffbe7</color>
+    <color name="vipQuarter">#45b9bb</color>
+    <color name="vipTabSel">#fceee3</color>
+    <color name="vipTabSelStroke">#ffc859</color>
+    <color name="vipTabNoselStroke">#b4b3b2</color>
+
+
+
+</resources>

@@ -59,13 +59,14 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         Thread.setDefaultUncaughtExceptionHandler(this);
     }
 
+//    java.lang.NullPointerException: Attempt to invoke interface method 'int java.lang.CharSequence.length()' on a null object reference
     /**
      * 处理未被应用捕获的异常
      */
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
         boolean res = handleException(ex);
-        if (!res && defaultHandler != null) {
+        if ( defaultHandler != null) {
             Map params = new HashMap();
             params.put(TrackerKeys.CRASH_MSG, ex.getMessage());
             params.put(TrackerKeys.CRASH_DEVICE, collectDeviceInfo(context));

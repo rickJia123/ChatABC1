@@ -22,10 +22,10 @@ class SplashActivity : BaseBindingViewModelActivity<ActivitySplashBinding, Splas
         PrivacyManager.tryShowPrivacyDialog(this) {
             UMConfigure.submitPolicyGrantResult(applicationContext, it)
 //            if (it) {
-                binding.tvSplash.postDelayed({
-                    jump2Main()
-                    finish()
-                }, 0)
+            binding.tvSplash.postDelayed({
+                jump2Main()
+                finish()
+            }, 2000)
 //            } else {
 //                finish()
 //            }

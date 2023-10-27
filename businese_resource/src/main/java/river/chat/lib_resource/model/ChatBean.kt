@@ -17,15 +17,19 @@ data class MessageBean(
     var parentId: Long = 0,//问题id
 
     var content: String? = "",//消息内容
-    var time: Long = 0, //时间戳
+    var time: Long ?= 0, //时间戳
 
     //0 未发送 1 发送(接收)中 2 成功 3 失败
-    var status: Int = 0,
+    var status: Int ?= 0,
 
     //MessageSource
-    var source: Int = 0,
+    var source: Int ?= 0,
 
-    var avatar: Any? = null
+    var avatar: Any? = null,
+
+    var failFlag: String ?= "",
+
+    var failMsg: String ?= "",
 
 ) : java.io.Serializable {
     fun isSelf(): Boolean {

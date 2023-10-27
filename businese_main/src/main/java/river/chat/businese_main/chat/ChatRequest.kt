@@ -54,11 +54,9 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                 ReportManager.reportEvent(
                     TrackerEventName.REQUEST_CHAT,
                     mutableMapOf(
-                        REQUEST_CONTENT to "GPT接口错误---问题:" + content,
-                        REQUEST_TIME to "GPT接口错误--错误信息:${it.message}"
+                        REQUEST_CONTENT to "GPT接口错误---问题:" + content+"    错误信息:${it.message}",
                     )
                 )
-                it.message?.toastSystem()
                 chatRequestResult.value =
                     RequestResult(isSuccess = false, data = MessageBean().apply {
                         this.content = CHAT_TIP_FAIL

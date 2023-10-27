@@ -22,7 +22,7 @@ public abstract class BaseBox<T> {
             box = BoxUtils.INSTANCE.getBox()
                     .boxFor(getEntityClass());
         } catch (Exception e) {
-            LogShow.e("BaseBox  BaseBox", e.getMessage());
+            LogUtil.e("BaseBox  BaseBox", e.getMessage());
             LogUtil.save("baseBox创建异常==" + e.toString());
         }
     }

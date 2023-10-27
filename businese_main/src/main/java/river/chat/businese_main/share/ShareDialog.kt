@@ -3,11 +3,14 @@ package river.chat.businese_main.share
 
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import coil.load
 import com.umeng.socialize.bean.SHARE_MEDIA
+import river.chat.lib_core.config.ServiceConfigBox
 import river.chat.businese_common.report.ShareTracker
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.utils.exts.loadAvatar
 import river.chat.business_main.databinding.DialogShareBinding
+import river.chat.lib_core.privacy.PrivacyManager
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.share.SharePlatformBean
@@ -37,7 +40,7 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
     private var mBinding: DialogShareBinding? = null
 
     //测试地址
-    private var mTestUrl = "https://www.baidu.com/"
+//    private var mTestUrl = "https://www.baidu.com/"
 
     companion object {
         @JvmStatic
@@ -84,10 +87,10 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
         binding.viewPlatform.mOnCancelClick = {
             closeDialog()
         }
-        binding.includeContent.ivCode.setImageBitmap(QRCodeUtils.createQRCode(mTestUrl))
+        binding.includeContent.ivCode.setImageBitmap(QRCodeUtils.createQRCode(ServiceConfigBox.getConfig().appDownUrl))
         binding.includeContent.ivAvatar.loadAvatar(user.headImg)
         binding.includeContent.tvName.text = user.nickName.ifEmptyOrBlank("GptEvery用户")
-
+//        binding.includeContent.ivBg.load(ServiceConfigBox.getConfig().appShareBg ?: "")
 
         updateView()
     }
@@ -119,10 +122,7 @@ class ShareDialog(var dialogActivity: AppCompatActivity) :
             RiverShareContent().apply {
                 mTitle = "快来提问吧"
                 mText = "快来提问吧"
-
                 mBitmap = mBinding?.includeContent?.clContent?.toBitmap()
-
-
             }, platformBean.platform ?: SHARE_MEDIA.WEIXIN
         ).shareImageLocal(topActivity)
     }

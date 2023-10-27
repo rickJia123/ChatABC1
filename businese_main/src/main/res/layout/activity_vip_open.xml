@@ -13,7 +13,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/defaultBgColor"
+        android:background="@color/defaultLightBgColor"
         android:fitsSystemWindows="true">
 
         <river.chat.lib_core.view.title.RiverTitle
@@ -37,7 +37,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@color/defaultBgColor"
+                android:background="@color/themeColor"
                 android:fitsSystemWindows="true">
                 <river.chat.businese_main.vip.VipStatusView
                     android:id="@+id/viewVipStatus"

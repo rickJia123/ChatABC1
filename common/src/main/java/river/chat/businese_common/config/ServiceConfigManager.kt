@@ -3,6 +3,8 @@ package river.chat.businese_common.config
 import river.chat.businese_common.net.CommonRequestViewModel
 import river.chat.lib_core.config.AppServerConfigKey
 import river.chat.lib_core.config.ConfigManager
+import river.chat.lib_core.config.ServiceConfigBox
+import river.chat.lib_resource.model.database.ServiceConfigBean
 
 /**
  * Created by beiyongChao on 2023/6/9
@@ -23,8 +25,7 @@ object ServiceConfigManager {
     fun loadConfig() {
         CommonRequestViewModel().requestConfig(AppServerConfigKey.REQUEST_PRIVACY_VERSION) {
             if (it.isSuccess) {
-//                updatePrivacyVersion(it.data.safeToInt())
-                onLoadConfig()
+                onLoadConfig(it.data)
             }
         }
     }
@@ -33,7 +34,7 @@ object ServiceConfigManager {
      * 加载默认配置信息
      */
     fun loadConfigConfig() {
-        CommonRequestViewModel().requestDefaultConfig() {
+        CommonRequestViewModel().requestAppUpdateConfig() {
             if (it.isSuccess) {
                 it.data?.let {
                     if (it.appUrl.isNotEmpty()) {
@@ -52,23 +53,18 @@ object ServiceConfigManager {
                         it.content
                     )
                 }
-                onLoadConfig()
             }
         }
     }
 
-    private fun onLoadConfig() {
-
+    private fun onLoadConfig(config: ServiceConfigBean? ) {
+        config?.let {
+            ServiceConfigBox.updateConfig(it)
+        }
     }
 
 
-    fun getPrivacyVersion(): Int {
-        return ConfigManager.getAppConfigInt(AppServerConfigKey.REQUEST_PRIVACY_VERSION, 1)
-    }
 
-    fun updatePrivacyVersion(version: Int) {
-        ConfigManager.putAppConfig(AppServerConfigKey.REQUEST_PRIVACY_VERSION, version)
-    }
 
 
 }

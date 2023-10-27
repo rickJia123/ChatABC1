@@ -17,6 +17,11 @@ object AppLocalConfigKey {
      */
     const val UPDATE_DIALOG_SHOW_TIME = "UPDATE_DIALOG_SHOW_TIME"
 
+    /**
+     * 上次提示没有聊天权限时间
+     */
+    const val UPDATE_CHAT_LIMIT_TIME = "UPDATE_CHAT_LIMIT_TIME"
+
 }
 
 

@@ -15,6 +15,8 @@ import river.chat.lib_resource.model.CreateOrderRequestBean
 import river.chat.lib_resource.model.CreateOrderResBean
 import river.chat.lib_resource.model.QueryOrderRequestBean
 import river.chat.lib_resource.model.QueryOrderResBean
+import river.chat.lib_resource.model.database.ConfigServiceBean
+import river.chat.lib_resource.model.database.ServiceConfigBean
 
 /**
  * Created by beiyongChao on 2023/3/21
@@ -28,7 +30,7 @@ class CommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
     /**
      * 根据入参获取配置
      */
-    fun requestConfig(key: String, resultCallBack: (RequestResult<ConfigResBean>) -> Unit) {
+    fun requestConfig(key: String, resultCallBack: (RequestResult<ServiceConfigBean>) -> Unit) {
         launchFlow(
             request = {
                 CommonApiService.requestConfig(key)
@@ -37,7 +39,7 @@ class CommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                 resultCallBack.invoke(
                     RequestResult(
                         isSuccess = true,
-                        data = data ?: ConfigResBean()
+                        data = data ?: ServiceConfigBean()
                     )
                 )
             },
@@ -50,7 +52,7 @@ class CommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
     /**
      * 获取基本配置信息
      */
-    fun requestDefaultConfig(resultCallBack: (RequestResult<DefaultConfigResBean>) -> Unit) {
+    fun requestDefaultConfig(resultCallBack: (RequestResult<AppUpdateConfigResBean>) -> Unit) {
         launchFlow(
             request = {
                 CommonApiService.requestDefaultConfig()
@@ -59,7 +61,7 @@ class CommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                 resultCallBack.invoke(
                     RequestResult(
                         isSuccess = true,
-                        data = data ?: DefaultConfigResBean()
+                        data = data ?: AppUpdateConfigResBean()
                     )
                 )
             },

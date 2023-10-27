@@ -19,8 +19,7 @@ object AppUpdateManager {
     /**
      * 更新弹窗最少间隔时间
      */
-//    const val UPDATE_SHOW_LIMIT_TIME = 24 * 60 * 60 * 1000L
-    const val UPDATE_SHOW_LIMIT_TIME = 1 * 60 * 1000L
+    const val UPDATE_SHOW_LIMIT_TIME = 24 * 60 * 60 * 1000L
 
     /**
      * 是否需要更新app

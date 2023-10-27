@@ -4,12 +4,17 @@ import androidx.appcompat.app.AppCompatActivity
 import com.yl.lib.sentry.hook.PrivacySentry
 import river.chat.lib_core.config.AppLocalConfigKey
 import river.chat.lib_core.config.ConfigManager
+import river.chat.lib_core.config.ServiceConfigBox
 
 /**
  * Created by beiyongChao on 2023/6/9
  * Description:
  */
 object PrivacyManager {
+
+    fun getPrivacyUrl(): String {
+        return ServiceConfigBox.getConfig().appPolicyUrl ?: ""
+    }
 
     /**
      * 是否同意隐私协议
@@ -19,7 +24,7 @@ object PrivacyManager {
     }
 
     fun updatePrivacyAgree(isAgree: Boolean) {
-       var result= ConfigManager.putAppConfig(AppLocalConfigKey.PRIVACY_AGREE, isAgree)
+        var result = ConfigManager.putAppConfig(AppLocalConfigKey.PRIVACY_AGREE, isAgree)
         result
         if (isAgree) {
             PrivacySentry.Privacy.updatePrivacyShow()

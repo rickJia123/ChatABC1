@@ -34,7 +34,7 @@
     },
     {
       "id": "2:1069039445943354056",
-      "lastPropertyId": "7:6687217608201026724",
+      "lastPropertyId": "9:8264089621294145786",
       "name": "MessageBean",
       "properties": [
         {
@@ -72,13 +72,23 @@
           "id": "7:6687217608201026724",
           "name": "avatar",
           "type": 13
+        },
+        {
+          "id": "8:7692922191036781867",
+          "name": "failFlag",
+          "type": 9
+        },
+        {
+          "id": "9:8264089621294145786",
+          "name": "failMsg",
+          "type": 9
         }
       ],
       "relations": []
     },
     {
       "id": "3:3304178247595158897",
-      "lastPropertyId": "16:7187602779047667227",
+      "lastPropertyId": "18:5108645926706770242",
       "name": "User",
       "properties": [
         {
@@ -133,11 +143,6 @@
           "type": 5
         },
         {
-          "id": "13:947263676866663089",
-          "name": "remainTryTimes",
-          "type": 5
-        },
-        {
           "id": "15:3145697196039785372",
           "name": "rightsExpireTime",
           "type": 9
@@ -146,23 +151,87 @@
           "id": "16:7187602779047667227",
           "name": "rightsName",
           "type": 9
+        },
+        {
+          "id": "17:7261755244050677945",
+          "name": "rightsStatus",
+          "type": 5
+        },
+        {
+          "id": "18:5108645926706770242",
+          "name": "trialBalance",
+          "type": 5
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:4838110875145329383",
+      "lastPropertyId": "7:3579666824177434307",
+      "name": "ServiceConfigBean",
+      "properties": [
+        {
+          "id": "1:4635108379753873760",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1572527520905134523",
+          "name": "appDownUrl",
+          "type": 9
+        },
+        {
+          "id": "3:897142530958322346",
+          "name": "appPolicyUrl",
+          "type": 9
+        },
+        {
+          "id": "4:8259781867997120668",
+          "name": "appPrivacyPolicy",
+          "type": 9
+        },
+        {
+          "id": "5:9115659492274097278",
+          "name": "appShareBg",
+          "type": 9
+        },
+        {
+          "id": "6:6906284602082862005",
+          "name": "value",
+          "type": 9
+        },
+        {
+          "id": "7:3579666824177434307",
+          "name": "updateTime",
+          "type": 6
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "3:3304178247595158897",
+  "lastEntityId": "5:4838110875145329383",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
-  "retiredEntityUids": [],
+  "retiredEntityUids": [
+    8275117385326133141
+  ],
   "retiredIndexUids": [],
   "retiredPropertyUids": [
     2519847796985928009,
     44228003430968031,
-    2024869954982654919
+    2024869954982654919,
+    5521069612903149468,
+    2717484372667938951,
+    8106690997420191408,
+    7218546177645726979,
+    991925186970984231,
+    3751164920032685775,
+    7767958667971472496,
+    947263676866663089
   ],
   "retiredRelationUids": [],
   "version": 1

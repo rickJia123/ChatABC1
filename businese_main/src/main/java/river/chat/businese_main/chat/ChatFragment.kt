@@ -1,8 +1,10 @@
 package river.chat.businese_main.chat
 
+import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import org.koin.android.ext.android.inject
 import river.chat.businese_common.utils.onLoad
+import river.chat.businese_main.home.HomeFragment
 import river.chat.businese_main.home.HomeViewModel
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.message.MessageCenter.checkMsgStatus
@@ -19,6 +21,11 @@ class ChatFragment :
     private var mHomeActivityVm: HomeViewModel? = null
 
     private val userPlugin: UserPlugin by inject()
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = ChatFragment()
+    }
 
     override fun initDataBinding(binding: FragmentChatBinding) {
         onLoad()
@@ -56,7 +63,6 @@ class ChatFragment :
 //                viewModel.data.add(msg.msg)
 //            }
             ("ChatFragment receiver msg:" + msg + ":::" + 0 + "::::" + viewModel.data.size).log()
-            msg.msg.toString().log()
 
             scrollToBottom(binding)
         }

@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
 import river.chat.business_main.databinding.ViewSimpleVipStatusBinding
-import river.chat.business_main.databinding.ViewVipStatusBinding
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.exts.safeToString
@@ -44,7 +43,7 @@ class VipSimpleStatusView @JvmOverloads constructor(
 
     private fun updateStatus() {
         var remainTimes =
-            getPlugin<UserPlugin>().getUser().remainTryTimes
+            getPlugin<UserPlugin>().getUser().trialBalance
         viewBinding.tvTitle.buildSpannableString {
             addText("免费次数还剩")
             addText(remainTimes.safeToString()) {

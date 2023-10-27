@@ -36,7 +36,10 @@ object InitManager {
     fun initBusiness(application: Application) {
         initConfig(application)
         application.initTracker(UMTrackHandler())
-        CrashHandler.getInstance().init(application)
+        if (!isAppDebug) {
+            CrashHandler.getInstance().init(application)
+        }
+
     }
 
 

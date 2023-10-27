@@ -39,8 +39,13 @@ class ChatStatusView @JvmOverloads constructor(
     /**
      * 刷新数据
      */
-    fun refresh(questionMsg: MessageBean, answerMsg: MessageBean, answerText: AppCompatTextView, reloadView: AppCompatImageView) {
-        ("答案状态 statusMsg：" + answerMsg).logChat()
+    fun refresh(
+        questionMsg: MessageBean,
+        answerMsg: MessageBean,
+        answerText: AppCompatTextView,
+        reloadView: AppCompatImageView
+    ) {
+        ("聊天状态 问题：" + questionMsg + "" + "     答案状态 statusMsg：" + answerMsg).logChat()
         var status = answerMsg.status
         when (status) {
             MessageStatus.COMPLETE -> {
@@ -50,6 +55,7 @@ class ChatStatusView @JvmOverloads constructor(
                 visibility = GONE
                 reloadView.visibility = GONE
             }
+
             MessageStatus.LOADING -> {
                 answerText.visibility = GONE
                 visibility = VISIBLE
@@ -57,6 +63,7 @@ class ChatStatusView @JvmOverloads constructor(
 //                viewBinding.loadingView.start()
                 reloadView.visibility = GONE
             }
+
             MessageStatus.FAIL_COMMON -> {
                 answerText.text = "加载失败"
                 answerText.setTextColor(river.chat.lib_core.R.color.red.getColor())

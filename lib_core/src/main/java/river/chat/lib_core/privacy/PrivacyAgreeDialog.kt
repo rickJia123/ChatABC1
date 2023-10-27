@@ -7,17 +7,18 @@ import androidx.core.text.buildSpannedString
 import androidx.core.text.inSpans
 import androidx.core.text.italic
 import river.chat.lib_core.R
+import river.chat.lib_core.config.ServiceConfigBox
 import river.chat.lib_core.databinding.DialogPrivacyAgreeBinding
 import river.chat.lib_core.tracker.TrackNode
 import river.chat.lib_core.tracker.postTrack
 import river.chat.lib_core.tracker.trackNode
 import river.chat.lib_core.utils.exts.getColor
 import river.chat.lib_core.utils.exts.getString
+import river.chat.lib_core.utils.exts.ifEmptyOrBlank
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.ClickableSpan
 import river.chat.lib_core.view.main.dialog.BaseBindingDialogFragment
 import river.chat.lib_core.webview.WebViewHelper
-import river.chat.lib_resource.AppConstants
 
 /**
  * Created by beiyongChao on 2023/6/9
@@ -54,13 +55,13 @@ class PrivacyAgreeDialog(var dialogActivity: AppCompatActivity) :
 
     override fun initDataBinding(binding: DialogPrivacyAgreeBinding) {
 
-        binding.tvDes.text = mPrivacy
+        binding.tvDes.text = ServiceConfigBox.getConfig().appPrivacyPolicy.ifEmptyOrBlank(mPrivacy)
         binding.tvTips.movementMethod = LinkMovementMethod.getInstance() // 设置了才能点击
 
         binding.tvTips.text = buildSpannedString {
             append("请您仔细阅读完整版")
             inSpans(ClickableSpan(R.color.highTextColor.getColor(), true) {
-                WebViewHelper.startWebViewActivity(AppConstants.POLICY_URL)
+                WebViewHelper.startWebViewActivity(PrivacyManager.getPrivacyUrl())
             }) {
                 italic { // 设置斜体
                     append("服务协议")
@@ -68,7 +69,7 @@ class PrivacyAgreeDialog(var dialogActivity: AppCompatActivity) :
             }
             append("和")
             inSpans(ClickableSpan(R.color.highTextColor.getColor(), true) {
-                WebViewHelper.startWebViewActivity(AppConstants.POLICY_URL)
+                WebViewHelper.startWebViewActivity(PrivacyManager.getPrivacyUrl())
             }) {
                 italic { // 设置斜体
                     append("隐私政策")

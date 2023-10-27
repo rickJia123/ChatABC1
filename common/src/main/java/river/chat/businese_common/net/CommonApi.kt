@@ -4,11 +4,12 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
-import river.chat.lib_core.wx.WxAccessTokenBean
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApi
+import river.chat.lib_core.wx.WxAccessTokenBean
 import river.chat.lib_resource.model.CreateOrderResBean
 import river.chat.lib_resource.model.QueryOrderResBean
+import river.chat.lib_resource.model.database.ServiceConfigBean
 
 /**
  * Created by beiyongChao on 2023/2/24
@@ -20,13 +21,13 @@ interface CommonApi : BaseApi {
      *获取配置信息
      */
     @POST(CommonHttpUrl.SYSTEM_CONFIG)
-    suspend fun requestConfig(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<ConfigResBean>
+    suspend fun requestConfig(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<ServiceConfigBean>
 
     /**
      *获取配置信息
      */
     @POST(CommonHttpUrl.SYSTEM_DEFAULT_CONFIG)
-    suspend fun requestDefaultConfig(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<DefaultConfigResBean>
+    suspend fun requestDefaultConfig(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<AppUpdateConfigResBean>
 
     /**
      *获取配置信息
