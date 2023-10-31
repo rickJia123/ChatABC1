@@ -35,7 +35,7 @@ class SettingsActivity :
     override fun initDataBinding(binding: ActivitySettingsBinding) {
         onLoad()
         super.initDataBinding(binding)
-        mainThread { }
+
 
         binding.toolBar.setTitle("我的")
 

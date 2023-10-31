@@ -13,15 +13,15 @@
         android:layout_height="match_parent"
         app:ev_radius="10dp"
         android:background="@color/front_2_BgColor"
-        android:padding="2dp" >
+        >
         <river.chat.lib_core.view.roundview.EasyConstraintLayout
             android:id="@+id/clBg"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
-            app:ev_top_radius="10dp"
-            android:background="@color/home_tab_item"
+            app:ev_radius="10dp"
+            android:background="@color/themeColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="@id/tvChat"
             app:layout_constraintRight_toRightOf="@id/tvChat"

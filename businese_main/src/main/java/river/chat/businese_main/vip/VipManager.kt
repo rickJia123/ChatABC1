@@ -1,6 +1,7 @@
 package river.chat.businese_main.vip
 
 import river.chat.businese_common.constants.CommonEvent
+import river.chat.businese_common.router.jump2VipExchange
 import river.chat.businese_common.router.jump2VipOpen
 import river.chat.business_main.R
 import river.chat.lib_core.config.AppLocalConfigKey

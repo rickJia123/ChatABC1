@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.compose.ui.graphics.Color
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import river.chat.businese_common.report.TrackerEventName
@@ -14,6 +15,7 @@ import river.chat.businese_common.report.VIPTracker
 import river.chat.businese_common.utils.onReport
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewVipTabBinding
+import river.chat.lib_core.utils.exts.getColor
 import river.chat.lib_core.utils.exts.getDrawable
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.exts.view.buildSpannableString
@@ -125,8 +127,6 @@ class VipTabView @JvmOverloads constructor(
         var tvMonthPrice = tabView.second.findViewById<AppCompatTextView>(R.id.tvMonthPrice)
         var tvDiscount = tabView.second.findViewById<AppCompatTextView>(R.id.tvDiscount)
 
-
-
         tvDuration.text = bean.skuName
         tvMonthPrice.text = bean.promoText2
 
@@ -137,6 +137,8 @@ class VipTabView @JvmOverloads constructor(
         } else {
             tvDiscount.visibility = View.VISIBLE
         }
+        tvDuration.setTextColor(if (index != mCurrentPosition) R.color.defaultTitleColor.getColor()else  R.color.defaultDarkTitleColor.getColor())
+        tvMonthPrice.setTextColor(if (index != mCurrentPosition) R.color.defaultTitleColor.getColor()else  R.color.defaultDarkTitleColor.getColor())
         setPrice(tvPrice, bean, if (index != mCurrentPosition) "#030303" else "#FA601F")
 
     }

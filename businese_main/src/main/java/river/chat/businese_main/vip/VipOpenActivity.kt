@@ -2,6 +2,7 @@ package river.chat.businese_main.vip
 
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
+import river.chat.businese_common.router.jump2VipExchange
 import river.chat.businese_common.utils.onLoad
 import river.chat.business_main.databinding.ActivityVipOpenBinding
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
@@ -23,7 +24,11 @@ class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, Vip
         onLoad()
         super.initDataBinding(binding)
         binding.toolBar.setTitle("会员中心")
-
+        binding.toolBar.setRightText("免费兑换")
+        binding.toolBar.rightClick =
+            {
+                jump2VipExchange()
+            }
         binding.viewTabView.setTabClickListener { position, vipTabBean ->
             binding.viewPay.update(vipTabBean)
         }
@@ -62,8 +67,6 @@ class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, Vip
         viewModel.request.getPaySku()
         viewModel.request.getVipRights()
     }
-
-
 
 
     override fun createViewModel() = VipViewModel()

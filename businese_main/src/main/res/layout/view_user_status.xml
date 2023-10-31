@@ -10,7 +10,7 @@
         android:id="@+id/clRoot"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-
+        android:background="@color/front_1_BgColor"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
@@ -18,7 +18,7 @@
             android:id="@+id/ivAvatar"
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:background="@drawable/shape_white_circle"
+            android:background="@drawable/shape_avaror_circle"
             android:padding="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -49,8 +49,8 @@
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:src="@drawable/right_arrow"
             android:scaleType="centerCrop"
+            android:src="@drawable/right_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tvName"
             app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +59,7 @@
             android:id="@+id/clVipStatus"
             android:layout_width="150dp"
             android:layout_height="80dp"
-            android:background="@drawable/gradient_e3eaff_ffffff_10"
+            android:background="@drawable/gradient_bg1_bg2_10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">

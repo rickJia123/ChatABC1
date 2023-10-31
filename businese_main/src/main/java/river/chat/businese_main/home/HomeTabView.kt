@@ -84,6 +84,9 @@ class HomeTabView @JvmOverloads constructor(
                 var tabBgX: Float = textView.x
                 mBinding.clBg.animate().x(tabBgX).setDuration(if (hasAnim) 100 else 0).start()
                 updateStatus(position)
+                textView.setTextColor(R.color.defaultDarkTitleColor.getColor())
+            } else {
+                textView.setTextColor(R.color.defaultTitleColor.getColor())
             }
         }
     }

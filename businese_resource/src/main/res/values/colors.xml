@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    //主题色/默认背景色
-    <color name="themeColor">#000000</color>
+    // 默认背景色
+    <color name="themeBgColor">#000000</color>
+
+    //主题色
+    <color name="themeColor">#FAE284</color>
 
     //默认组件背景色，浅1级
-    <color name="front_1_BgColor">#272826</color>
+    <color name="front_1_BgColor">#1d1d1c</color>
 
     //默认组件背景色，浅2级
-    <color name="front_2_BgColor">#455134</color>
+    <color name="front_2_BgColor">#393832</color>
 
-    //默认亮色背景
-    <color name="defaultLightBgColor">#f1f3e3</color>
+
 
     //弹窗背景色
     <color name="dialogBgColor">#1A000000</color><!-- 10%透明度-->
-
-    //默认文字颜色
-    <color name="defaultTxtColor">#f1f3e3</color>
 
     <!--    Button-->
     //默认按钮颜色
@@ -35,19 +34,18 @@
     //默认图标不可用颜色
     <color name="iconDisableColor">#999999</color>
 
-
     <!--    文本颜色-->
+    //黑色默认颜色
+    <color name="defaultDarkTitleColor">#B3000000</color>
 
     //默认标题颜色
-    <color name="defaultTitleColor">#030303</color>
-
-    <color name="defaultLightTitleColor">#DDDDDD</color>
+    <color name="defaultTitleColor">#f1f3e3</color>
 
     //默认副标题颜色
     <color name="defaultSubTitleColor">#999999</color>
 
     //默认文字颜色
-    <color name="defaultTextColor">#999999</color>
+    <color name="defaultTextColor">#f1f3e3</color>
 
     //高亮文本颜色
     <color name="highTextColor">#4A90E2</color>
@@ -55,7 +53,5 @@
     <color name="recyclerview_divider_color">#DCDBDB</color>
 
     <color name="tipTxtColor">#FA601F</color>
-
-
 
 </resources>

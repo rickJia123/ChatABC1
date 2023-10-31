@@ -1,6 +1,7 @@
 package river.chat.businese_main.home
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -106,11 +107,17 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
                 super.onPageSelected(position)
                 mBinding.viewTabView.setTabPosition(position, true)
                 LogUtil.d("lyy", "当前fragment的位置-----: $position")
+                if (position == 2) {
+                    mBinding.toolBar.visibility = View.INVISIBLE
+                } else {
+                    mBinding.toolBar.visibility = View.VISIBLE
+                }
             }
 
             override fun onPageScrollStateChanged(state: Int) {
                 super.onPageScrollStateChanged(state)
-                mBinding.viewPager.isUserInputEnabled = !(state == SCROLL_STATE_DRAGGING &&   mBinding.viewPager.currentItem == 0)
+                //禁止滑动
+//                mBinding.viewPager.isUserInputEnabled = !(state == SCROLL_STATE_DRAGGING &&   mBinding.viewPager.currentItem == 0)
             }
         })
 

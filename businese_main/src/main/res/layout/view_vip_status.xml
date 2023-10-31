@@ -17,7 +17,7 @@
             android:id="@+id/ivAvatar"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/shape_white_circle"
+            android:background="@drawable/shape_avaror_circle"
             android:padding="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

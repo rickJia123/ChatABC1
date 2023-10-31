@@ -3,11 +3,11 @@
 
     <!--首页-->
     <color name="home_tab_bg">#272826</color>
-    <color name="home_tab_item">#a3d366</color>
+
 
     <!--    聊天相关色值-->
     //聊天输入框背景色
-    <color name="inputEditBg">#b3bea5</color>
+    <color name="inputEditBg">#383938</color>
     //聊天背景色
     <color name="chatBg">#454643</color>
     //聊天问题框背景色

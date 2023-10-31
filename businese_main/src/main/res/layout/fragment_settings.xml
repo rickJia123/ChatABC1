@@ -15,29 +15,18 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/themeColor">
+            android:background="@color/themeBgColor">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <View
                 android:id="@+id/ivStatusBg"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/bg_vipclub_bg"
+               android:background="@color/front_1_BgColor"
                 app:layout_constraintBottom_toBottomOf="@+id/viewUser"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <river.chat.lib_core.view.title.RiverTitle
-                android:id="@+id/toolBar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:title="设置"
-                app:titleSize="30sp" />
 
             <river.chat.businese_main.ui.common.UserStatusView
                 android:id="@+id/viewUser"
@@ -46,7 +35,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toolBar" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <river.chat.lib_core.view.roundview.EasyLinearLayout

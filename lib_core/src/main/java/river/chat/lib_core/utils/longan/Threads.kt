@@ -41,15 +41,6 @@ fun mainThread(delayMillis: Long, block: () -> Unit) =
     mainThreadHandler.postDelayed(block, delayMillis)
 
 
-fun workThread(scope: CoroutineScope, block: () -> Unit) {
-    scope.launch(Dispatchers.IO) {
-        flow<Int> {
-            emit(1)
-        }
-            .collect()
-    }
-
-}
 
 /**
  * 如果在 onCompletion 之前调用 catch，只有 catch 中能收到异常信息，onCompletion 中将收不到异常信息

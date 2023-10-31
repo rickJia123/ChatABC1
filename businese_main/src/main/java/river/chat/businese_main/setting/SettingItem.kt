@@ -77,7 +77,7 @@ class SettingItem @JvmOverloads constructor(
 
         tvName?.text = leftTitle
         tvName?.setTextColor(leftTitleColor)
-        setBackgroundColor(R.color.white.getColor())
+        setBackgroundColor(R.color.front_1_BgColor.getColor())
     }
 
     private fun findView() {

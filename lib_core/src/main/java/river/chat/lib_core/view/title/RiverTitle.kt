@@ -53,7 +53,7 @@ class RiverTitle @JvmOverloads constructor(
 
     private var title: String? = null
     private var titleTextColor: Int = Color.WHITE
-    private var leftImage: Int = R.drawable.back_title_black
+    private var leftImage: Int = R.drawable.back_title_white
     private var leftImageVisible = true
 
     private var leftText: String? = null
@@ -87,7 +87,7 @@ class RiverTitle @JvmOverloads constructor(
 
             leftImage = typedArray.getResourceId(
                 R.styleable.RiverTitle_tb_leftImage,
-                R.drawable.back_title_black
+                R.drawable.back_title_white
             )
             setLeftImage(leftImage)
 

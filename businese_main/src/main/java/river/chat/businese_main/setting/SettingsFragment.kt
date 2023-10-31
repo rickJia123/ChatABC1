@@ -44,8 +44,6 @@ class SettingsFragment :
         super.initDataBinding(binding)
         mainThread { }
 
-        binding.toolBar.setTitle("我的")
-        var test = ""
 //        MessageBox.getMsgList().forEach {
 //            test += it.toString() + "\n"
 //        }

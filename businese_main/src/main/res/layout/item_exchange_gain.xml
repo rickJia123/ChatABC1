@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/transparent"
         android:clickable="false"
         android:focusable="false">
 
@@ -34,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:lineSpacingMultiplier="1.4"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/defaultTitleColor"
             android:textSize="16sp"
             android:text="@{item}"
             app:layout_constraintRight_toRightOf="parent"

@@ -28,7 +28,6 @@ class UserStatusView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LifecycleView(context, attrs, defStyleAttr) {
 
-
     private val viewBinding: ViewUserStatusBinding = DataBindingUtil.inflate(
         LayoutInflater.from(context),
         R.layout.view_user_status,
@@ -72,7 +71,6 @@ class UserStatusView @JvmOverloads constructor(
                 TrackerEventName.CLICK_SETTING,
                 TrackNode(TrackerKeys.CLICK_TYPE to "个人区域-查看权益")
             )
-//            VipManager.jump2VipPage()
             jump2VipOpen()
         }
         viewBinding.tvName.singleClick {
