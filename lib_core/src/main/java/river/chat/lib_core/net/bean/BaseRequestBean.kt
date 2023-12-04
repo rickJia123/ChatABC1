@@ -3,8 +3,7 @@ package river.chat.lib_core.net.bean
 
 data class BaseRequestBean<T>
     (
-    var data: T,
-    var status: String, var msg: String, var page: PageModel
+    var data: T, var status: String, var msg: String, var page: PageModel
 ) {
     /**
      * 请求是否成功

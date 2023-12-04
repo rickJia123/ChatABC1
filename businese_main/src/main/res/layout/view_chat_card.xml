@@ -154,7 +154,7 @@
                         android:id="@+id/ivShare"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:src="@drawable/share" />
+                        android:src="@drawable/share_white" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
             </androidx.appcompat.widget.LinearLayoutCompat>

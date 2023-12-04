@@ -15,6 +15,16 @@
             android:launchMode="singleTask"
             android:taskAffinity="river.chat.chatevery"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity
+            android:name="river.chat.chatevery.wxapi.WaPayActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+        <activity-alias
+            android:name="${applicationId}.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:targetActivity="river.chat.chatevery.wxapi.WaPayActivity" />
+
     </application>
 
 

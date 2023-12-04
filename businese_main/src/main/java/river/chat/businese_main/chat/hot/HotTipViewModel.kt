@@ -27,7 +27,7 @@ class HotTipViewModel : BaseViewModel() {
                     ChatTracker.CLICK_ACTION to "热门问题点击：" + it.hotQuestion,
                 )
             )
-            MessageCenter.postReceiveMsg(MessageHelper.buildSelfMsg(it.hotQuestion ?: ""))
+            MessageCenter.postSendMsg(MessageHelper.buildSelfMsg(it.hotQuestion ?: ""))
         }
 
     }

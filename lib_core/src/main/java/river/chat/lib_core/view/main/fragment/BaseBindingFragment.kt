@@ -17,7 +17,7 @@ import river.chat.lib_core.utils.other.getBindingType
 abstract class BaseBindingFragment<BINDING : ViewDataBinding> : BaseFragment() {
 
     protected var mActivity: AppCompatActivity? = null
-
+    lateinit var mBinding: BINDING
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,14 +25,14 @@ abstract class BaseBindingFragment<BINDING : ViewDataBinding> : BaseFragment() {
     ): View? {
         mActivity = context as AppCompatActivity
         //创建 ViewDataBinding 实例
-        val binding = createDataBinding(inflater, container)
+        mBinding = createDataBinding(inflater, container)
         //绑定当前 Fragment 生命周期
-        binding.lifecycleOwner = this
+        mBinding.lifecycleOwner = this
 
         // 初始化数据绑定
-        initDataBinding(binding)
+        initDataBinding(mBinding)
         //返回布局 View 对象
-        return binding.root
+        return mBinding.root
     }
 
     /**
@@ -54,7 +54,6 @@ abstract class BaseBindingFragment<BINDING : ViewDataBinding> : BaseFragment() {
      * 子类实现该方法通过 binding 绑定数据
      */
     abstract fun initDataBinding(binding: BINDING)
-
 
 
 }

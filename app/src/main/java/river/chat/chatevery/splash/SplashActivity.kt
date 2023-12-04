@@ -25,7 +25,7 @@ class SplashActivity : BaseBindingViewModelActivity<ActivitySplashBinding, Splas
             binding.tvSplash.postDelayed({
                 jump2Main()
                 finish()
-            }, 2000)
+            }, 0)
 //            } else {
 //                finish()
 //            }

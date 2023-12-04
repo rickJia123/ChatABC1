@@ -42,6 +42,7 @@ fun jump2Feedback() {
 fun jump2VipOpen() {
     ARouter.getInstance().build(HomeRouterConstants.VIP_OPEN)
         .navigation()
+//    jump2PayResult()
 }
 
 /**
@@ -50,9 +51,16 @@ fun jump2VipOpen() {
 fun jump2VipExchange() {
     ARouter.getInstance().build(HomeRouterConstants.VIP_EXCHANGE)
         .navigation()
+
+
 }
 
 fun jump2ShareApp() {
     ARouter.getInstance().build(HomeRouterConstants.SHARE_APP)
+        .navigation()
+}
+
+fun jump2PayResult() {
+    ARouter.getInstance().build(HomeRouterConstants.VIP_PAY_RESULT)
         .navigation()
 }

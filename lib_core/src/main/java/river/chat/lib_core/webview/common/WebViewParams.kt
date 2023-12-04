@@ -8,7 +8,8 @@ package river.chat.lib_core.webview.common
 
 data class WebViewParams(
 
-    var url: String = ""
+    var url: String = "",
+    var isShowTitle:Boolean=true
 
 ) : java.io.Serializable {
 

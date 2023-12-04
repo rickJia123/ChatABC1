@@ -17,6 +17,17 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <View
+            android:id="@+id/viewLine"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolBar"
+            android:layout_width="0dp"
+            android:background="@color/front_1_BgColor"
+            android:layout_height="1dp"/>
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
             android:layout_width="0dp"
@@ -25,7 +36,7 @@
             app:layout_constraintBottom_toTopOf="@+id/viewTabView"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolBar" />
+            app:layout_constraintTop_toBottomOf="@+id/viewLine" />
         <river.chat.businese_main.home.HomeTabView
             android:id="@+id/viewTabView"
             android:layout_width="0dp"
@@ -33,16 +44,7 @@
             android:layout_height="65dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />
-
-        <!--        <androidx.fragment.app.FragmentContainerView-->
-        <!--            android:id="@+id/fragmentChat"-->
-        <!--            android:name="river.chat.businese_main.chat.ChatFragment"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--            app:layout_constraintRight_toRightOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/toolBar" />-->
+ >
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -17,7 +17,7 @@ class LoadingDialog : BaseBindingDialogFragment<FragmentLoadingBinding>() {
         ) {
             dialog = LoadingDialog()
             dialog?.show(
-                activity.supportFragmentManager, "ToastTipDialog"
+                activity.supportFragmentManager, "LoadingDialog"
             )
         }
 

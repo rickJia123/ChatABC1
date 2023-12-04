@@ -3,6 +3,7 @@ package river.chat.businese_main.home
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import river.chat.businese_main.vip.VipManager
 import river.chat.business_main.R
@@ -45,6 +46,8 @@ class HomeTitleView @JvmOverloads constructor(
         var remainTimes =
             user.trialBalance
     }
+
+
 
 
 }

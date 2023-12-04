@@ -1,16 +1,18 @@
 package river.chat.businese_main.chat
 
-import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import org.koin.android.ext.android.inject
+import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.utils.onLoad
-import river.chat.businese_main.home.HomeFragment
 import river.chat.businese_main.home.HomeViewModel
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.message.MessageCenter.checkMsgStatus
 import river.chat.businese_main.message.MessageHelper
 import river.chat.businese_main.message.MessageHelper.buildCardMsgList
 import river.chat.business_main.databinding.FragmentChatBinding
+import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.longan.log
 import river.chat.lib_core.view.main.fragment.BaseBindingViewModelFragment
@@ -31,8 +33,24 @@ class ChatFragment :
         onLoad()
         super.initDataBinding(binding)
         initMsgService(binding)
+        initEventListener()
+        initRecycleView()
     }
 
+    private fun initEventListener() {
+        EventCenter.registerReceiveEvent((context as AppCompatActivity).lifecycleScope) {
+            when (it.action) {
+                CommonEvent.SEND_MSG_SUCCESS -> {
+                    mBinding.inputView.clearInput()
+                }
+
+                CommonEvent.HIDE_SOFT_WINDOW -> {
+                    mBinding.inputView.hideSoftInput()
+                }
+
+            }
+        }
+    }
 
     /**
      * 初始化消息服务
@@ -66,6 +84,7 @@ class ChatFragment :
 
             scrollToBottom(binding)
         }
+        binding.inputView.requestFocus()
 //        MessageCenter.postReceiveMsg(MessageHelper.buildDefaultMsg())
     }
 
@@ -74,6 +93,14 @@ class ChatFragment :
 //            binding.recycleView.scrollTo(viewModel.data.lastIndex)
             binding.recycleView.scrollBy(0, 10000000)
         }
+    }
+
+    private fun initRecycleView() {
+        mBinding.recycleView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                MessageCenter.postHideSoftWindow()
+            }
+        })
     }
 
 

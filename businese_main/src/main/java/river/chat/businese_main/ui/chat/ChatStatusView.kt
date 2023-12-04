@@ -12,6 +12,7 @@ import river.chat.business_main.databinding.ViewChatStatusBinding
 import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_resource.model.MessageStatus
 import river.chat.lib_core.utils.exts.getColor
+import river.chat.lib_core.utils.exts.ifEmptyOrBlank
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.exts.view.loadSimple
 import river.chat.lib_core.view.base.LifecycleView
@@ -47,6 +48,8 @@ class ChatStatusView @JvmOverloads constructor(
     ) {
         ("聊天状态 问题：" + questionMsg + "" + "     答案状态 statusMsg：" + answerMsg).logChat()
         var status = answerMsg.status
+        var failFlag=answerMsg.failFlag
+        var failMsg=answerMsg.failMsg
         when (status) {
             MessageStatus.COMPLETE -> {
                 answerText.setTextColor(river.chat.lib_resource.R.color.chatATv.getColor())
@@ -65,7 +68,7 @@ class ChatStatusView @JvmOverloads constructor(
             }
 
             MessageStatus.FAIL_COMMON -> {
-                answerText.text = "加载失败"
+                answerText.text = answerMsg.failMsg.ifEmptyOrBlank("加载失败")
                 answerText.setTextColor(river.chat.lib_core.R.color.red.getColor())
                 answerText.visibility = VISIBLE
                 visibility = VISIBLE

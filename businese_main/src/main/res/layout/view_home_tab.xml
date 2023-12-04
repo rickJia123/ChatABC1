@@ -50,6 +50,7 @@
             android:id="@+id/tvSquare"
             style="@style/HomeTabView"
             android:text="广场"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/tvChat"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toRightOf="@+id/tvChat"

@@ -7,11 +7,15 @@ import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
+import org.greenrobot.eventbus.EventBus
+import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_main.chat.hot.HotTipViewModel
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.message.MessageHelper
 import river.chat.business_main.databinding.ViewInputBinding
 import river.chat.lib_core.BR
+import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.log
 import river.chat.lib_core.utils.longan.toastSystem
@@ -56,6 +60,16 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
         viewBinding.setVariable(BR.vm, hotTipViewModel)
         loadHotQuestion()
         observerMsg()
+        inputMethodManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+    }
+
+
+    /**
+     * 发送成功后，清空输入
+     */
+      fun clearInput() {
+        viewBinding.etWriteReply.setText("")
     }
 
     private fun loadHotQuestion() {
@@ -67,7 +81,9 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
 //        })
     }
 
-
+    fun hideSoftInput() {
+        inputMethodManager?.hideSoftInputFromWindow(viewBinding.etWriteReply.windowToken, 0)
+    }
     /**
      * 监听接口消息请求
      */
@@ -83,22 +99,6 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
         }
     }
 
-    // 弹出软键盘
-    private fun showSoftInput() {
-
-        viewBinding.etWriteReply.requestFocus()
-
-        inputMethodManager =
-            context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-        inputMethodManager?.showSoftInput(
-            viewBinding.etWriteReply,
-            InputMethodManager.SHOW_FORCED
-        )
-    }
-
-    fun hideSoftInput() {
-        inputMethodManager?.hideSoftInputFromWindow(viewBinding.etWriteReply.windowToken, 0)
-    }
 
     private fun initListener() {
         viewBinding.etWriteReply.addTextChangedListener(object : SimpleTextWatcher() {
@@ -128,8 +128,8 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
             var content = viewBinding.etWriteReply.text.toString().trim()
             if (checkCanSend(content)) {
                 content.log()
-                MessageCenter.postReceiveMsg(MessageHelper.buildSelfMsg(content))
-                viewBinding.etWriteReply.setText("")
+                MessageCenter.postSendMsg(MessageHelper.buildSelfMsg(content))
+
             }
 
         }
@@ -155,5 +155,6 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
             dismissView()
         }
     }
+
 
 }

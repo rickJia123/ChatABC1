@@ -15,6 +15,7 @@ import river.chat.lib_core.tracker.trackNode
 import river.chat.lib_core.utils.longan.DownloadRequestBuilder
 import river.chat.lib_core.utils.longan.download
 import river.chat.lib_core.utils.permission.permission.PermissionHelper
+import river.chat.lib_core.view.common.LoadingDialog
 
 /**
  *Author: chengminghui
@@ -128,6 +129,18 @@ open class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCallbac
         }
     }
 
+    private var mLoadingDialog: LoadingDialog? = null
+
+    fun showLoading() {
+        if (mLoadingDialog == null && this.isFinishing.not()) {
+            mLoadingDialog = LoadingDialog()
+        }
+        mLoadingDialog?.show(supportFragmentManager, "LoadingDialog")
+    }
+
+    fun dismissLoading() {
+        mLoadingDialog?.dismiss()
+    }
 
 
 }

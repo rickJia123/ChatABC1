@@ -25,19 +25,19 @@
             app:layout_constraintTop_toTopOf="@id/toolBar"
             app:layout_constraintBottom_toBottomOf="@id/toolBar"
             android:layout_marginRight="20dp"
-            android:src="@drawable/share"
+            android:src="@drawable/share_white"
             android:layout_width="20dp"
             android:layout_height="20dp"/>
 
-        <com.just.agentweb.AgentWebView
-            android:id="@+id/webView"
+
+        <FrameLayout
+            android:id="@+id/container_framelayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolBar" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

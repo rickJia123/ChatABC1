@@ -1,6 +1,8 @@
 package river.chat.businese_main.setting
 
+import androidx.lifecycle.lifecycleScope
 import org.koin.android.ext.android.inject
+import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.router.jump2Feedback
@@ -9,6 +11,7 @@ import river.chat.businese_common.update.AppUpdateManager
 import river.chat.businese_common.utils.exts.hideWithoutLogin
 import river.chat.businese_common.utils.onLoad
 import river.chat.business_main.databinding.FragmentSettingsBinding
+import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.privacy.PrivacyManager
 import river.chat.lib_core.router.plugin.module.HomePlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
@@ -31,7 +34,6 @@ class SettingsFragment :
     BaseBindingViewModelFragment<FragmentSettingsBinding, SettingsViewModel>() {
 
 
-    private val homePlugin: HomePlugin by inject()
     private val userPlugin: UserPlugin by inject()
 
     companion object {
@@ -44,10 +46,9 @@ class SettingsFragment :
         super.initDataBinding(binding)
         mainThread { }
 
-//        MessageBox.getMsgList().forEach {
-//            test += it.toString() + "\n"
-//        }
+
         initSettings(binding)
+        initEventListener()
     }
 
     private fun initSettings(binding: FragmentSettingsBinding) {
@@ -108,6 +109,17 @@ class SettingsFragment :
             TrackerEventName.CLICK_SETTING,
             TrackNode(TrackerKeys.CLICK_TYPE to (settingItem.name ?: ""))
         )
+    }
+
+    private fun initEventListener() {
+        EventCenter.registerReceiveEvent(lifecycleScope) {
+            when (it.action) {
+                CommonEvent.LOGIN_CHANGE -> {
+                  mBinding.viewUser.update()
+                    initSettings(mBinding)
+                }
+            }
+        }
     }
 
 

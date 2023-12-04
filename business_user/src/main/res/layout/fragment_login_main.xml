@@ -69,7 +69,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:text="微信登录"
-                android:textColor="@color/defaultTitleColor"
+                android:textColor="@color/defaultDarkTitleColor"
                 android:textSize="@dimen/titleSize_1"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

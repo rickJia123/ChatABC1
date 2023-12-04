@@ -41,9 +41,6 @@ class ChatCardView @JvmOverloads constructor(
         var chatWidth = screenWidth - 40.dp
         viewBinding.tvAnswer.maxWidth = chatWidth.toInt()
         viewBinding.tvQuestion.maxWidth = chatWidth.toInt()
-//        commentViewBinding.etWriteReply.postDelayed({
-//            showSoftInput()
-//        }, 150)
         initClick()
     }
 

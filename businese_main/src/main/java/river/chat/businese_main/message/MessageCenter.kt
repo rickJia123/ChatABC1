@@ -2,14 +2,15 @@ package river.chat.businese_main.message
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.dataBase.MessageBox
 import river.chat.businese_main.home.HomeActivity
 import river.chat.businese_main.message.MessageHelper.buildAiAnswerEmptyMsg
 import river.chat.businese_main.message.MessageHelper.buildAiAnswerMsg
 import river.chat.businese_main.utils.logChat
 import river.chat.businese_main.vip.VipManager
-import river.chat.lib_core.config.AppLocalConfigKey
-import river.chat.lib_core.config.ConfigManager
+import river.chat.lib_core.event.BaseActionEvent
+import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_resource.model.MessageBean
@@ -98,7 +99,7 @@ object MessageCenter {
      * 收到站内发过来的消息，先检查权限，然后请求接口，成功后分发消息消息到各个页面
      * @param isSendLocal 是否只发送到本地列表，不请求接口
      */
-    fun postReceiveMsg(questionMsg: MessageBean) {
+    fun postSendMsg(questionMsg: MessageBean) {
         if (checkPermission(questionMsg)) {
             if (questionMsg.source == MessageSource.FRE_SELF) {
                 distributeMsg(questionMsg)
@@ -113,7 +114,7 @@ object MessageCenter {
     }
 
     /**
-     * 分发消息
+     * 分发消息(发送和接收)
      */
     private fun distributeMsg(msg: MessageBean) {
         GlobalScope.launch() {
@@ -140,7 +141,7 @@ object MessageCenter {
     }
 
     /**
-     * 收到消息后处理
+     * 收到消息后处理(发送和接收)
      */
     private fun handleReceiveMsg(scope: CoroutineScope, receiveMsg: MessageBean): MessageBean {
         //是否需要更新ai发送消息
@@ -182,9 +183,13 @@ object MessageCenter {
             hasPermission = false
             getPlugin<UserPlugin>().check2Login { }
         }
-        if (!VipManager.check2Vip()) {
-            hasPermission = false
-        }
+
+        //本地发送前先 检查vip权限
+//        else {
+//            if (!VipManager.check2Vip()) {
+//                hasPermission = false
+//            }
+//        }
         return hasPermission
     }
 
@@ -206,7 +211,7 @@ object MessageCenter {
     fun beginReload(msg: MessageBean, onReloadLimitFinish: () -> Unit = {}) {
         if (canReload) {
             canReload = false
-            postReceiveMsg(msg)
+            postSendMsg(msg)
             GlobalScope.launch {
                 ("MessageCenter beginReload 可以重试了：" + msg).logChat()
                 delay(reloadTimeLimit.toLong())
@@ -214,6 +219,12 @@ object MessageCenter {
                 canReload = true
             }
         }
+    }
+
+    fun postHideSoftWindow() {
+        EventCenter.postEvent(BaseActionEvent().apply {
+            action = CommonEvent.HIDE_SOFT_WINDOW
+        })
     }
 
 }

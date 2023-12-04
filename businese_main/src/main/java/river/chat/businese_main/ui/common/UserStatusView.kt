@@ -47,11 +47,9 @@ class UserStatusView @JvmOverloads constructor(
             user.trialBalance
         var type = user.getVipType()
         when (type) {
-
             VipType.VIP.value -> {
                 viewBinding.tvVipTitle.text = user.rightsName
             }
-
             else -> {
                 viewBinding.tvVipTitle.text = R.string.vip_no.getString()
             }

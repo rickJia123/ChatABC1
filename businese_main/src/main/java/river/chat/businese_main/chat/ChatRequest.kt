@@ -1,6 +1,7 @@
 package river.chat.businese_main.chat
 
 import androidx.lifecycle.MutableLiveData
+import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.report.TrackerKeys.REQUEST_CONTENT
 import river.chat.businese_common.report.TrackerKeys.REQUEST_TIME
@@ -8,6 +9,8 @@ import river.chat.businese_common.report.ReportManager
 import river.chat.businese_main.api.MainBusinessApiService
 import river.chat.businese_main.chat.hot.HotTipItemBean
 import river.chat.businese_main.message.MessageHelper.CHAT_TIP_FAIL
+import river.chat.lib_core.event.BaseActionEvent
+import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.utils.longan.toastSystem
@@ -42,28 +45,57 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                         REQUEST_TIME to "GPT接口成功--耗时:${time}ms",
                     )
                 )
+
+                //rick todo
+                //错误消息仍然需要给成功状态，不然走不到success，取不到其他参数，
+
                 chatRequestResult.value =
                     RequestResult(isSuccess = true, data = MessageBean().apply {
                         this.content = data?.content
                         this.parentId = data?.id ?: 0
                         this.time = data?.time ?: 0
-                        this.status = MessageStatus.COMPLETE
+                        this.status =
+                            if (data?.failFlag == true) MessageStatus.FAIL_COMMON else MessageStatus.COMPLETE
+                        this.failFlag = data?.failFlag
                     })
+
+                EventCenter.postEvent(BaseActionEvent().apply {
+                    action = CommonEvent.SEND_MSG_SUCCESS
+                })
             },
             error = {
                 ReportManager.reportEvent(
                     TrackerEventName.REQUEST_CHAT,
                     mutableMapOf(
-                        REQUEST_CONTENT to "GPT接口错误---问题:" + content+"    错误信息:${it.message}",
+                        REQUEST_CONTENT to "GPT接口错误---问题:" + content + "    错误信息:${it.message}",
                     )
                 )
+//                chatRequestResult.value =
+//                    RequestResult(isSuccess = false, data = MessageBean().apply {
+//                        this.content = CHAT_TIP_FAIL
+//                        this.parentId = msgId.toLong() ?: 0
+//                        this.time = System.currentTimeMillis()
+//                        this.status = MessageStatus.FAIL_COMMON
+//                    }, errorMsg = it.message ?: "")
+
+
+
+                //rick todo 模拟数据
+                var data=MessageBean().apply {
+                    this.content="测试嘿嘿"
+                    this.failFlag=true
+                    this.parentId = msgId.toLong() ?: 0
+                    this.failMsg="测试失败"
+                }
                 chatRequestResult.value =
-                    RequestResult(isSuccess = false, data = MessageBean().apply {
-                        this.content = CHAT_TIP_FAIL
-                        this.parentId = msgId.toLong() ?: 0
-                        this.time = System.currentTimeMillis()
-                        this.status = MessageStatus.FAIL_COMMON
-                    }, errorMsg = it.message ?: "")
+                    RequestResult(isSuccess = true, data = MessageBean().apply {
+                        this.content = data.content
+                        this.parentId = data.id ?: 0
+                        this.time = data.time ?: 0
+                        this.status =
+                            if (data.failFlag == true) MessageStatus.FAIL_COMMON else MessageStatus.COMPLETE
+                        this.failFlag = data?.failFlag
+                    })
             }
         )
     }

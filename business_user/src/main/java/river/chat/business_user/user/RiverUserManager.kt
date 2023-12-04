@@ -1,8 +1,11 @@
 package river.chat.business_user.user
 
+import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.dataBase.UserBox
 import river.chat.businese_common.report.ReportManager
 import river.chat.businese_common.router.jump2Main
+import river.chat.lib_core.event.BaseActionEvent
+import river.chat.lib_core.event.EventCenter
 import river.chat.lib_resource.model.database.User
 import river.chat.lib_core.utils.longan.logConfig
 import river.chat.lib_core.utils.longan.toastSystem
@@ -26,6 +29,7 @@ object RiverUserManager {
      */
     fun onLoginSuccess(user: User, platFrom: String) {
         "登录成功".toastSystem()
+        EventCenter.postEvent(BaseActionEvent().apply { action = CommonEvent.LOGIN_CHANGE })
         jump2Main()
         updateUser(user)
         ReportManager.reportLogin(true, user.id.toString(), platFrom)
@@ -35,6 +39,7 @@ object RiverUserManager {
      * 退出成功
      */
     fun onLogoutSuccess() {
+        EventCenter.postEvent(BaseActionEvent().apply { action = CommonEvent.LOGIN_CHANGE })
         UserBox.deleteAll()
     }
 

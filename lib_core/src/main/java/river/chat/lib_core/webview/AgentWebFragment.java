@@ -70,7 +70,6 @@ import river.chat.lib_core.webview.common.WebViewParams;
 @Route(path = AgentWebGroup.FRAGMENT_AGENT_WEB)
 public class AgentWebFragment extends Fragment implements FileCompressor.FileCompressEngine {
 
-
     @Autowired(name = AgentWebGroup.PARAMS_WEB)
     public WebViewParams mWebParams;
 
@@ -104,7 +103,8 @@ public class AgentWebFragment extends Fragment implements FileCompressor.FileCom
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ARouter.getInstance().inject(this);
+        ARouter.getInstance()
+                .inject(this);
     }
 
     @Nullable
@@ -134,7 +134,7 @@ public class AgentWebFragment extends Fragment implements FileCompressor.FileCom
                 .setMainFrameErrorView(R.layout.web_error_page,
                                        -1) //参数1是错误显示的布局，参数2点击刷新控件ID -1表示点击整个布局都刷新， AgentWeb 3.0.0 加入。
                 .useMiddlewareWebChrome(getMiddlewareWebChrome()) //设置WebChromeClient中间件，支持多个WebChromeClient，AgentWeb 3.0.0 加入。
-                .additionalHttpHeader(getUrl(), "cookie", "41bc7ddf04a26b91803f6b11817a5a1c")
+//                .additionalHttpHeader(getUrl(), "cookie", "41bc7ddf04a26b91803f6b11817a5a1c")
                 .useMiddlewareWebClient(getMiddlewareWebClient()) //设置WebViewClient中间件，支持多个WebViewClient， AgentWeb 3.0.0 加入。
                 .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.ASK)//打开其他页面时，弹窗质询用户前往其他应用 AgentWeb 3.0.0 加入。
                 .interceptUnkownUrl() //拦截找不到相关页面的Url AgentWeb 3.0.0 加入。
@@ -284,7 +284,7 @@ public class AgentWebFragment extends Fragment implements FileCompressor.FileCom
         if (TextUtils.isEmpty(target)) {
             target = "http://cw.gzyunjuchuang.com/";
         }
-        LogUtil.i( "AgentWebFragment getUrl");
+        LogUtil.i("AgentWebFragment getUrl");
         return target;
     }
 
@@ -419,6 +419,11 @@ public class AgentWebFragment extends Fragment implements FileCompressor.FileCom
 
     protected void initView(View view) {
         mTitleBar = view.findViewById(R.id.titleBar);
+        if (mWebParams.isShowTitle()) {
+            mTitleBar.setVisibility(View.VISIBLE);
+        } else {
+            mTitleBar.setVisibility(View.GONE);
+        }
         pageNavigator(View.GONE);
         FileCompressor.getInstance()
                 .registerFileCompressEngine(this);
@@ -435,7 +440,9 @@ public class AgentWebFragment extends Fragment implements FileCompressor.FileCom
      */
     private void openBrowser(String targetUrl) {
         if (TextUtils.isEmpty(targetUrl) || targetUrl.startsWith("file://")) {
-            Toast.makeText(this.getContext(), targetUrl + " 该链接无法使用浏览器打开。", Toast.LENGTH_SHORT)
+            Toast.makeText(this.getContext(),
+                           targetUrl + " 该链接无法使用浏览器打开。",
+                           Toast.LENGTH_SHORT)
                     .show();
             return;
         }

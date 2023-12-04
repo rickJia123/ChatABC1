@@ -1,7 +1,6 @@
 package river.chat.businese_main.vip
 
 import river.chat.businese_common.constants.CommonEvent
-import river.chat.businese_common.router.jump2VipExchange
 import river.chat.businese_common.router.jump2VipOpen
 import river.chat.business_main.R
 import river.chat.lib_core.config.AppLocalConfigKey
@@ -42,7 +41,7 @@ object VipManager {
         var user = userPlugin.getUser()
         user.trialBalance = Math.max(0, (user.trialBalance ?: 0) - 1)
         userPlugin.updateUser(user)
-        EventCenter.postEvent(BaseActionEvent().apply { action = CommonEvent.UPDATE_VIP })
+        EventCenter.postEvent(BaseActionEvent().apply { action = CommonEvent.UPDATE_USER })
     }
 
     /**

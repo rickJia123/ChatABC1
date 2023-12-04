@@ -1,8 +1,10 @@
 package river.chat.businese_main.home
 
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -12,14 +14,17 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import river.chat.businese_common.config.ServiceConfigManager
+import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.constants.CommonVmEvents
-import river.chat.businese_common.router.jump2Settings
 import river.chat.businese_common.update.AppUpdateManager
 import river.chat.businese_main.chat.ChatFragment
+import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.setting.SettingsFragment
 import river.chat.businese_main.square.SquareFragment
 import river.chat.businese_main.vip.VipManager
 import river.chat.business_main.databinding.ActivityHomeBinding
+import river.chat.business_main.databinding.FragmentHomeBinding
+import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
 import river.chat.lib_core.router.plugin.module.UserPlugin
@@ -63,12 +68,29 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
         AppUpdateManager.showUpdateAppDialog(this)
     }
 
+    /**
+     * 主Activity 初始化
+     */
+    private fun initOnHomeActivity() {
+        MessageCenter.registerMsgCenter(this)
+    }
+
+    private fun initEventListener() {
+        EventCenter.registerReceiveEvent(lifecycleScope) {
+            when (it.action) {
+                CommonEvent.UPDATE_USER -> {
+                    mBinding.toolBar.update()
+                }
+            }
+        }
+    }
+
 
     private fun initFragment() {
         val fragmentChat = ChatFragment.newInstance()
         mFragments.add(fragmentChat as BaseFragment)
-        val fragmentSquare = SquareFragment.newInstance()
-        mFragments.add(fragmentSquare as BaseFragment)
+//        val fragmentSquare = SquareFragment.newInstance()
+//        mFragments.add(fragmentSquare as BaseFragment)
         val fragmentSettings = SettingsFragment.newInstance()
         mFragments.add(fragmentSettings as BaseFragment)
 
@@ -107,7 +129,7 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
                 super.onPageSelected(position)
                 mBinding.viewTabView.setTabPosition(position, true)
                 LogUtil.d("lyy", "当前fragment的位置-----: $position")
-                if (position == 2) {
+                if (position == 1) {
                     mBinding.toolBar.visibility = View.INVISIBLE
                 } else {
                     mBinding.toolBar.visibility = View.VISIBLE
@@ -117,13 +139,15 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
             override fun onPageScrollStateChanged(state: Int) {
                 super.onPageScrollStateChanged(state)
                 //禁止滑动
-//                mBinding.viewPager.isUserInputEnabled = !(state == SCROLL_STATE_DRAGGING &&   mBinding.viewPager.currentItem == 0)
+                mBinding.viewPager.isUserInputEnabled = !(state == SCROLL_STATE_DRAGGING)
             }
         })
 
         mBinding.viewTabView.setTabClickListener { position ->
             mBinding.viewPager.currentItem = position
         }
+
+        initEventListener()
     }
 
 
@@ -136,22 +160,11 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
 //        binding.toolBar.leftClick = {
 //            VipManager.jump2VipPage()
 //        }
-        initEventListener(binding)
+        initEventListener()
         initFragment()
         initView()
     }
 
-
-    /**
-     * 主Activity 初始化
-     */
-    private fun initOnHomeActivity() {
-
-    }
-
-    private fun initEventListener(binding: ActivityHomeBinding) {
-
-    }
 
     override fun onEvent(eventId: Int) {
         when (eventId) {

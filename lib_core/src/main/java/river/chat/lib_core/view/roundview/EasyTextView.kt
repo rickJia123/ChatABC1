@@ -12,12 +12,12 @@ import river.chat.lib_core.view.roundview.facade.EasyViewFacadeImpl
  * @Date: 2021/12/13
  */
 class EasyTextView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
-        AppCompatTextView(context, attrs, defStyleAttr), EasyViewExpose {
+    AppCompatTextView(context, attrs, defStyleAttr), EasyViewExpose {
 
     private val easyViewFacadeImpl = EasyViewFacadeImpl()
 
-    constructor(context: Context): this(context, null)
-    constructor(context: Context, attrs: AttributeSet?): this(context, attrs, 0){
+    constructor(context: Context) : this(context, null)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0) {
         easyViewFacadeImpl.init(context, this, attrs)
     }
 
@@ -35,7 +35,9 @@ class EasyTextView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
         easyViewFacadeImpl.setRadius(dp)
     }
 
-    override fun setRadius(topLeftDp: Float, topRightDp: Float, bottomRightDp: Float, bottomLeftDp: Float) {
+    override fun setRadius(
+        topLeftDp: Float, topRightDp: Float, bottomRightDp: Float, bottomLeftDp: Float
+    ) {
         easyViewFacadeImpl.setRadius(topLeftDp, topRightDp, bottomRightDp, bottomLeftDp)
     }
 

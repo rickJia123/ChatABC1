@@ -27,6 +27,7 @@ import river.chat.lib_resource.model.WechatPayModel
  * Description:
  */
 object PayCenter {
+      var mCurrentOrderBean: CreateOrderResBean? = null
 
     fun pay(requestBean: CreateOrderRequestBean?) {
         if (requestBean == null || requestBean.skuId.isNullOrEmpty()) {
@@ -34,6 +35,7 @@ object PayCenter {
         }
         //创建订单成功后下一步
         createOrder(requestBean) { resBean ->
+            mCurrentOrderBean = resBean
             ReportManager.reportEvent(
                 TrackerEventName.REQUEST_VIP,
                 mutableMapOf(
@@ -42,7 +44,7 @@ object PayCenter {
             )
             when (requestBean.payType) {
                 PayType.WECHAT_PAY -> {
-                    //微信支付
+                    //
                     GsonKits.fromJson<WechatPayModel>(resBean.payData)?.let { WxManager.pay(it) }
                 }
             }
@@ -70,16 +72,16 @@ object PayCenter {
      */
     fun onPaySuccess() {
         getPlugin<UserPlugin>().refreshInfo()
-        showSuccessDialog()
+//        showSuccessDialog()
     }
 
     fun postRefreshVipStatus() {
         EventCenter.postEvent(BaseActionEvent().apply {
-            action = CommonEvent.UPDATE_VIP
+            action = CommonEvent.UPDATE_USER
         })
     }
 
-    fun showSuccessDialog() {
+    private fun showSuccessDialog() {
         SimpleDialog.builder(topActivity as BaseActivity).config(
             SimpleDialogConfig()
                 .apply {

@@ -3,6 +3,7 @@ package river.chat.business_user.login.home
 import com.alibaba.android.arouter.facade.annotation.Route
 import org.koin.android.ext.android.inject
 import river.chat.businese_common.utils.onLoad
+import river.chat.business_user.R
 import river.chat.lib_core.wx.WxManager
 import river.chat.business_user.databinding.ActivityLoginBinding
 import river.chat.business_user.login.LoginPage
@@ -30,6 +31,7 @@ class LoginActivity : BaseBindingViewModelActivity<ActivityLoginBinding, LoginVi
         viewModel.loginPage.value = LoginPage.LOGIN_MAIN
         binding.fragmentMain.width(screenWidth)
         binding.fragmentPhone.width(screenWidth)
+        binding.toolBar.setLeftImage(R.drawable.back_title_black)
         binding.toolBar.leftClick= {
             onBackPressed()
         }

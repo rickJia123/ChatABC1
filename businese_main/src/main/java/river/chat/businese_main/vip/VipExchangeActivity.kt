@@ -44,6 +44,7 @@ class VipExchangeActivity :
         }
         loadDesData()
         observerMsg()
+        binding.inputView.requestFocus()
     }
 
     /**

@@ -10,6 +10,7 @@ import river.chat.lib_core.event.BaseConstants
 
 object HomeRouterConstants : BaseConstants() {
     private const val GROUP_HOME = "/home"
+    private const val GROUP_COMMON = "/common"
     const val HOME_PLUGIN = GROUP_HOME + "/plugin"
 
     /**
@@ -39,6 +40,11 @@ object HomeRouterConstants : BaseConstants() {
     const val VIP_OPEN = GROUP_HOME + "/vipOpen"
 
     const val VIP_EXCHANGE = GROUP_HOME + "/vipExchange"
+
+    /**
+     * 支付结果页
+     */
+    const val VIP_PAY_RESULT = GROUP_COMMON + "/vipResult"
 }
 
 

@@ -83,6 +83,8 @@
             android:background="@null"
             android:cursorVisible="true"
             android:focusable="true"
+            android:layout_marginLeft="10dp"
+            android:lineHeight="10dp"
             android:focusableInTouchMode="true"
             android:gravity="center_vertical"
             android:hint="输入关键词"
@@ -99,7 +101,7 @@
             app:layout_constraintRight_toRightOf="@+id/viewInputBg"
             app:layout_constraintTop_toTopOf="@+id/viewInputBg"
             app:layout_constraintVertical_bias="1.0"
-            tools:text="asjhskhsjkjk" />
+            tools:text="是可敬可嘉收到款九分裤是可敬可嘉收到款九分裤是可敬可嘉收到款九分裤是可敬可嘉收到款九分裤是可敬可嘉收到款九分裤" />
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivSend"
             android:layout_width="30dp"

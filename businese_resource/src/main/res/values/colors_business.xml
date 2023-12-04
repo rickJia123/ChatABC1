@@ -9,11 +9,11 @@
     //聊天输入框背景色
     <color name="inputEditBg">#383938</color>
     //聊天背景色
-    <color name="chatBg">#454643</color>
+    <color name="chatBg">#1d1d1c</color>
     //聊天问题框背景色
-    <color name="chatQBg">#656861</color>
+    <color name="chatQBg">#b2b2b2</color>
     //聊天问题tv背景色
-    <color name="chatQTv">#f1f3e3</color>
+    <color name="chatQTv">#ff000000</color>
 
     //聊天回答tv背景色
     <color name="chatATv">#f1f3e3</color>

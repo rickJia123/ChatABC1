@@ -6,9 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <river.chat.lib_core.view.title.RiverTitle
-        android:id="@+id/titleBar"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:background="@color/themeBgColor"
+        android:layout_height="wrap_content">
+        <river.chat.lib_core.view.title.RiverTitle
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
 
 </LinearLayout>

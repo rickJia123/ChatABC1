@@ -27,7 +27,7 @@ data class MessageBean(
 
     var avatar: Any? = null,
 
-    var failFlag: String ?= "",
+    var failFlag: Boolean ?= false,
 
     var failMsg: String ?= "",
 

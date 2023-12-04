@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.DataBindingUtil
+import river.chat.businese_main.message.MessageCenter
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewHomeTabBinding
 import river.chat.lib_core.utils.exts.getColor
@@ -45,7 +46,7 @@ class HomeTabView @JvmOverloads constructor(
     private fun initViews() {
         mTabList.clear()
         mTabList.add(mBinding.tvChat)
-        mTabList.add(mBinding.tvSquare)
+//        mTabList.add(mBinding.tvSquare)
         mTabList.add(mBinding.tvMine)
     }
 
@@ -70,6 +71,7 @@ class HomeTabView @JvmOverloads constructor(
             updateStatus(position)
             mOnTabClick.invoke(position)
         }
+        MessageCenter.postHideSoftWindow()
     }
 
 

@@ -54,7 +54,6 @@ class VipTabView @JvmOverloads constructor(
         )
         initViews()
         initClick()
-
     }
 
 
@@ -137,8 +136,8 @@ class VipTabView @JvmOverloads constructor(
         } else {
             tvDiscount.visibility = View.VISIBLE
         }
-        tvDuration.setTextColor(if (index != mCurrentPosition) R.color.defaultTitleColor.getColor()else  R.color.defaultDarkTitleColor.getColor())
-        tvMonthPrice.setTextColor(if (index != mCurrentPosition) R.color.defaultTitleColor.getColor()else  R.color.defaultDarkTitleColor.getColor())
+        tvDuration.setTextColor(if (index != mCurrentPosition) R.color.defaultTitleColor.getColor() else R.color.defaultDarkTitleColor.getColor())
+        tvMonthPrice.setTextColor(if (index != mCurrentPosition) R.color.defaultTitleColor.getColor() else R.color.defaultDarkTitleColor.getColor())
         setPrice(tvPrice, bean, if (index != mCurrentPosition) "#030303" else "#FA601F")
 
     }
