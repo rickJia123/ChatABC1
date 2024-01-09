@@ -1,5 +1,6 @@
 package river.chat.lib_resource.model
 
+import androidx.recyclerview.widget.DiffUtil
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 
@@ -7,6 +8,7 @@ import io.objectbox.annotation.Id
  * Created by beiyongChao on 2023/3/2
  * Description:
  */
+
 
 @Entity
 data class MessageBean(
@@ -17,31 +19,54 @@ data class MessageBean(
     var parentId: Long = 0,//问题id
 
     var content: String? = "",//消息内容
-    var time: Long ?= 0, //时间戳
+    var time: Long? = 0, //时间戳
 
     //0 未发送 1 发送(接收)中 2 成功 3 失败
-    var status: Int ?= 0,
+    var status: Int? = 0,
 
     //MessageSource
-    var source: Int ?= 0,
+    var source: Int? = 0,
 
     var avatar: Any? = null,
 
-    var failFlag: Boolean ?= false,
+    var failFlag: Boolean? = false,
 
-    var failMsg: String ?= "",
+    var failMsg: String? = "",
 
-) : java.io.Serializable {
+    //是否收藏
+    var isCollected: Boolean? = false,
+
+
+    ) : java.io.Serializable {
     fun isSelf(): Boolean {
         return source == MessageSource.FRE_SELF
     }
 }
+
+data class MessageBean2(
+    var msgList: MutableList<MessageFlowBean> = mutableListOf<MessageFlowBean>()
+
+)
+
+data class MessageFlowBean(
+    var data: String = "",
+    var status: Int = 0,
+
+    var id: String = "",
+
+    var failFlag: Boolean? = false,
+
+    var failMsg: String? = "",
+
+    )
+
 
 //消息状态
 object MessageStatus {
     const val LOADING = 0
     const val COMPLETE = 1
     const val FAIL_COMMON = 2
+
     //被禁止(超过限制/未登录)
     const val FAIL_LIMIT = 3
 }
@@ -63,5 +88,26 @@ data class CardMsgBean(
     var questionMsg: MessageBean = MessageBean(),
     var answerMsg: MessageBean = MessageBean()
 )
+{
+    companion object {
+        val DIFF = object : DiffUtil.ItemCallback<CardMsgBean>() {
+            override fun areItemsTheSame(
+                oldItem: CardMsgBean,
+                newItem: CardMsgBean
+            ): Boolean {
+//                return oldItem.questionMsg.id == newItem.questionMsg.id
+                return false
+            }
+
+            override fun areContentsTheSame(
+                oldItem: CardMsgBean,
+                newItem: CardMsgBean
+            ): Boolean {
+//                return oldItem == newItem
+                return false
+            }
+        }
+    }
+}
 
 

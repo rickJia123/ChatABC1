@@ -8,6 +8,7 @@ import river.chat.lib_core.net.cache.NetCacheKey
 import river.chat.lib_core.net.cache.NetCacheType
 import river.chat.lib_core.net.retrofit.BaseApi
 import river.chat.lib_resource.model.MessageBean
+import river.chat.lib_resource.model.MessageBean2
 import river.chat.lib_resource.model.VipRightsBean
 import river.chat.lib_resource.model.VipSkuBean
 
@@ -22,6 +23,13 @@ interface MainBusinessApi : BaseApi {
      */
     @POST("/chat/prompt")
     suspend fun requestAi(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<MessageBean>
+
+    /**
+     * AI 对话
+     */
+    @POST("/chat/prompt/v101")
+//    @Headers("Accept: text/event-stream")
+    suspend fun requestAiByFlow(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<MessageBean2>
 
 
     /**

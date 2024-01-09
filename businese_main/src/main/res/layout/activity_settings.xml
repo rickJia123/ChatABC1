@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="river.chat.businese_main.setting.SettingsViewModel" />
+            type="river.chat.businese_main.mine.SettingsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +28,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentSetting"
-            android:name="river.chat.businese_main.setting.SettingsFragment"
+            android:name="river.chat.businese_main.mine.SettingsFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"

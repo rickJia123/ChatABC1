@@ -1,7 +1,6 @@
 package river.chat.businese_main.home
 
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -19,11 +18,8 @@ import river.chat.businese_common.constants.CommonVmEvents
 import river.chat.businese_common.update.AppUpdateManager
 import river.chat.businese_main.chat.ChatFragment
 import river.chat.businese_main.message.MessageCenter
-import river.chat.businese_main.setting.SettingsFragment
-import river.chat.businese_main.square.SquareFragment
-import river.chat.businese_main.vip.VipManager
+import river.chat.businese_main.mine.SettingsFragment
 import river.chat.business_main.databinding.ActivityHomeBinding
-import river.chat.business_main.databinding.FragmentHomeBinding
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
@@ -80,6 +76,12 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
             when (it.action) {
                 CommonEvent.UPDATE_USER -> {
                     mBinding.toolBar.update()
+                }
+
+                CommonEvent.LOGIN_CHANGE -> {
+                    if (!userPlugin.isLogin()) {
+                        mBinding.toolBar.update()
+                    }
                 }
             }
         }

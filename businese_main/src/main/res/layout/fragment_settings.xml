@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="river.chat.businese_main.setting.SettingsViewModel" />
+            type="river.chat.businese_main.mine.SettingsViewModel" />
     </data>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -15,40 +15,48 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/themeBgColor">
+            android:background="@color/themeBgColor"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
             <View
                 android:id="@+id/ivStatusBg"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-               android:background="@color/front_1_BgColor"
+                android:background="@color/front_1_BgColor"
                 app:layout_constraintBottom_toBottomOf="@+id/viewUser"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <river.chat.businese_main.ui.common.UserStatusView
                 android:id="@+id/viewUser"
                 android:layout_width="0dp"
-                tools:layout_height="100dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_height="100dp" />
 
+            <river.chat.businese_main.mine.entrance.MineEntranceItemView
+                android:id="@+id/viewEntranceCollection"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/viewUser" />
 
             <river.chat.lib_core.view.roundview.EasyLinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 app:ev_radius="10dp"
-                android:layout_marginTop="60dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/viewUser">
+                app:layout_constraintTop_toBottomOf="@id/viewEntranceCollection">
 
-                <river.chat.businese_main.setting.SettingItem
+                <river.chat.businese_main.mine.SettingItem
                     android:id="@+id/viewSettingFeedback"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -58,7 +66,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <river.chat.businese_main.setting.SettingItem
+                <river.chat.businese_main.mine.SettingItem
                     android:id="@+id/viewCheckUpdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -68,7 +76,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <river.chat.businese_main.setting.SettingItem
+                <river.chat.businese_main.mine.SettingItem
                     android:id="@+id/viewSettingPrivacy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,7 +87,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <river.chat.businese_main.setting.SettingItem
+                <river.chat.businese_main.mine.SettingItem
                     android:id="@+id/viewSettingProtocol"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -89,8 +97,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
-                <river.chat.businese_main.setting.SettingItem
+                <river.chat.businese_main.mine.SettingItem
                     android:id="@+id/viewSettingShareApp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -100,7 +107,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <river.chat.businese_main.setting.SettingItem
+                <river.chat.businese_main.mine.SettingItem
                     android:id="@+id/viewSettingDestory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -110,7 +117,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <river.chat.businese_main.setting.SettingItem
+                <river.chat.businese_main.mine.SettingItem
                     android:id="@+id/viewSettingLogout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

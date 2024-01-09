@@ -1,6 +1,8 @@
 package river.chat.businese_main.message
 
 
+import river.chat.businese_common.dataBase.MessageBox
+import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_resource.model.CardMsgBean
 import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_resource.model.MessageSource
@@ -49,7 +51,6 @@ object MessageHelper {
         status = MessageStatus.LOADING
         avatar = river.chat.lib_resource.R.drawable.avatar_ai
         content = CHAT_TIP_LOADING
-//        user = buildAiUser()
     }
 
 
@@ -73,6 +74,8 @@ object MessageHelper {
         this.avatar = river.chat.lib_resource.R.drawable.avatar_ai
         this.status = answerMsg.status
         this.time = answerMsg.time
+        this.failMsg = answerMsg.failMsg
+        this.failFlag = answerMsg.failFlag
 //        user = buildAiUser()
     }
 
@@ -110,6 +113,17 @@ object MessageHelper {
 
         }
         return cardMsgList
+    }
+
+    //判断是否是重新加载的消息，如果是，只刷新当前item
+    fun isReloadMsg(answerMsg: MessageBean?): Boolean {
+        var isLastSuccess =
+            MessageBox.getMsgById(answerMsg?.id ?: 100).status == MessageStatus.COMPLETE
+//        var isLastSuccess = this.answerMsg?.status == MessageStatus.COMPLETE
+        var isCurrentSuccess = answerMsg?.status == MessageStatus.COMPLETE
+
+        LogUtil.i("rick MessageHelper isReloadMsg:"+(isLastSuccess && !isCurrentSuccess))
+        return isLastSuccess && !isCurrentSuccess
     }
 
 

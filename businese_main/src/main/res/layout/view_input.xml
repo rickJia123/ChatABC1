@@ -81,10 +81,11 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:background="@null"
+            android:lineSpacingExtra="5dp"
             android:cursorVisible="true"
             android:focusable="true"
             android:layout_marginLeft="10dp"
-            android:lineHeight="10dp"
+
             android:focusableInTouchMode="true"
             android:gravity="center_vertical"
             android:hint="输入关键词"

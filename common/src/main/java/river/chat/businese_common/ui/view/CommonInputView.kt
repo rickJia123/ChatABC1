@@ -27,10 +27,6 @@ class CommonInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) 
     constructor(context: Context, attr: AttributeSet) : this(context, attr, 0)
     constructor(context: Context) : this(context, null, 0)
 
-
-
-
-
     private val viewBinding: ViewInputCommonBinding = DataBindingUtil.inflate(
         LayoutInflater.from(context),
         R.layout.view_input_common,

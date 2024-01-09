@@ -1,7 +1,9 @@
 package river.chat.businese_main.chat
 
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.koin.android.ext.android.inject
 import river.chat.businese_common.constants.CommonEvent
@@ -14,15 +16,24 @@ import river.chat.businese_main.message.MessageHelper.buildCardMsgList
 import river.chat.business_main.databinding.FragmentChatBinding
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.module.UserPlugin
+import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.utils.longan.log
 import river.chat.lib_core.view.main.fragment.BaseBindingViewModelFragment
+import river.chat.lib_resource.model.CardMsgBean
 
 class ChatFragment :
     BaseBindingViewModelFragment<FragmentChatBinding, ChatViewModel>() {
 
     private var mHomeActivityVm: HomeViewModel? = null
 
-    private val userPlugin: UserPlugin by inject()
+    private var mMsgList = mutableListOf<CardMsgBean>()
+    private val mAdapter by lazy {
+        ChatAdapter().apply {
+            onClickItem = {
+
+            }
+        }
+    }
 
     companion object {
         @JvmStatic
@@ -41,7 +52,7 @@ class ChatFragment :
         EventCenter.registerReceiveEvent((context as AppCompatActivity).lifecycleScope) {
             when (it.action) {
                 CommonEvent.SEND_MSG_SUCCESS -> {
-                    mBinding.inputView.clearInput()
+
                 }
 
                 CommonEvent.HIDE_SOFT_WINDOW -> {
@@ -58,7 +69,7 @@ class ChatFragment :
     private fun initMsgService(binding: FragmentChatBinding) {
         //判断当前列表是否已经初始化过
         var hasDefaultMsg = false
-        viewModel.data.forEach {
+        mMsgList.forEach {
             if (it.answerMsg.id == MessageHelper.mDefaultMsgId) {
                 hasDefaultMsg = true
                 return@forEach
@@ -66,41 +77,56 @@ class ChatFragment :
         }
         if (!hasDefaultMsg) {
             checkMsgStatus()
-            viewModel.data.addAll(buildCardMsgList(MessageCenter.getHistoryMsg()))
-            scrollToBottom(binding)
+            mMsgList.addAll(buildCardMsgList(MessageCenter.getHistoryMsg()))
+            mAdapter.submitList(mMsgList)
+            scrollToBottom()
         }
 
         MessageCenter.registerReceiveMsg(lifecycleScope) { msg ->
-            viewModel.data.clear()
-            viewModel.data.addAll(buildCardMsgList(MessageCenter.getHistoryMsg()))
-//            var position = viewModel.data.indexOfFirst { it.id == msg.msg?.id }
+            var historyMsg=MessageCenter.getHistoryMsg()
+            ("ChatFragment receiver msg:" + msg + ":::" + historyMsg.size).log()
+            var newList = buildCardMsgList(historyMsg)
+            var isMsgNew = newList.size > mMsgList.size
 
-//            if (position >= 0) {
-//                viewModel.data[position] = msg.msg
-//            } else {
-//                viewModel.data.add(msg.msg)
-//            }
-            ("ChatFragment receiver msg:" + msg + ":::" + 0 + "::::" + viewModel.data.size).log()
-
-            scrollToBottom(binding)
+            mMsgList.clear()
+            mMsgList.addAll(newList)
+            mAdapter.submitList(mMsgList)
+            mAdapter.notifyDataSetChanged()
+//            var isReloadMsg=MessageHelper.isReloadMsg(historyMsg.filter { it.id==msg.msg?.id }.firstOrNull())
+            ("ChatFragment receiver msg:" + msg + ":::是否重新加载消息："  + "::::" + mMsgList.size).log()
+            if (isMsgNew) {
+                scrollToBottom()
+            }
         }
         binding.inputView.requestFocus()
 //        MessageCenter.postReceiveMsg(MessageHelper.buildDefaultMsg())
     }
 
-    private fun scrollToBottom(binding: FragmentChatBinding) {
-        binding.recycleView.post {
-//            binding.recycleView.scrollTo(viewModel.data.lastIndex)
-            binding.recycleView.scrollBy(0, 10000000)
-        }
+
+    private fun scrollToBottom() {
+        mBinding.recycleView.postDelayed({
+            mBinding.recycleView.scrollBy(0, 1980 * 1000)
+        }, 100)
     }
 
     private fun initRecycleView() {
+        mBinding.recycleView.adapter = mAdapter
+        mBinding.recycleView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false).apply {
+//                this.stackFromEnd = true
+            }
         mBinding.recycleView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 MessageCenter.postHideSoftWindow()
             }
         })
+        mBinding.recycleView.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
+            if (bottom < oldBottom) {
+                mBinding.recycleView.scrollBy(0, 1980 * 1000)
+            } else {
+
+            }
+        }
     }
 
 

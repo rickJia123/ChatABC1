@@ -9,10 +9,12 @@ import river.chat.businese_common.router.jump2Main
 import river.chat.businese_common.ui.view.dialog.SimpleDialog
 import river.chat.businese_common.ui.view.dialog.SimpleDialogConfig
 import river.chat.businese_common.utils.onLoad
+import river.chat.business_main.R
 import river.chat.business_main.databinding.ActivityVipExchangeBinding
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
 import river.chat.lib_core.tracker.TrackNode
 import river.chat.lib_core.tracker.postTrack
+import river.chat.lib_core.utils.exts.getDrawable
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.main.activity.BaseActivity
@@ -26,6 +28,8 @@ import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 @Route(path = HomeRouterConstants.VIP_EXCHANGE)
 class VipExchangeActivity :
     BaseBindingViewModelActivity<ActivityVipExchangeBinding, VipViewModel>() {
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +70,32 @@ class VipExchangeActivity :
                         }).show()
             }
         }
+        mBinding.inputView.addTextChangedListener(object : android.text.TextWatcher {
+            override fun afterTextChanged(s: android.text.Editable?) {
+               var inputStr = s.toString()
+                if (inputStr.isEmpty()) {
+                    mBinding.btExchange.background= R.drawable.back_input_corner.getDrawable()
+                }
+                else{
+                    mBinding.btExchange.background= R.drawable.back_input_corner.getDrawable()
+                }
 
+                mBinding.btExchange.isEnabled = inputStr.isNotEmpty()
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+                //do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                //do nothing
+            }
+        })
     }
 
     override fun onEvent(eventId: Int) {

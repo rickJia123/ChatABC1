@@ -64,3 +64,19 @@ fun jump2PayResult() {
     ARouter.getInstance().build(HomeRouterConstants.VIP_PAY_RESULT)
         .navigation()
 }
+
+
+/**
+ * 跳转收藏
+ */
+fun jump2Collection() {
+    ARouter.getInstance().build(HomeRouterConstants.HOME_COLLECTION)
+        .navigation()
+}
+/**
+ * 跳转收藏详情
+ */
+fun jump2CollectionDetail() {
+    ARouter.getInstance().build(HomeRouterConstants.HOME_COLLECTION_DETAIL)
+        .navigation()
+}

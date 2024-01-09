@@ -2,16 +2,20 @@
 <resources>
 
     // 默认背景色
-    <color name="themeBgColor">#000000</color>
+<!--    <color name="themeBgColor">#000000</color>-->
+    <color name="themeBgColor">#151514</color>
 
     //主题色
-    <color name="themeColor">#FAE284</color>
+    <color name="themeYellowColor">#FAE284</color>
 
     //默认组件背景色，浅1级
     <color name="front_1_BgColor">#1d1d1c</color>
 
     //默认组件背景色，浅2级
     <color name="front_2_BgColor">#b2b2b2</color>
+
+    //默认组件背景色，浅3级
+    <color name="front_3_BgColor">#E7E7E7</color>
 
 
 

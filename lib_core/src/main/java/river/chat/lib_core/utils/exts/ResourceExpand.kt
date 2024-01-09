@@ -84,6 +84,16 @@ fun String?.safeToInt(): Int {
         0
     }
 }
+/**
+ * 字符串安全转换成int
+ */
+fun String?.safeToLong(): Long {
+    return try {
+        (this ?: "0").toLong()
+    } catch (e: Exception) {
+        0
+    }
+}
 
 /**
  * int安全转换成字符串

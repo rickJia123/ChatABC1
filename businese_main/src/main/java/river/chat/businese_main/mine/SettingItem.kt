@@ -1,4 +1,4 @@
-package river.chat.businese_main.setting
+package river.chat.businese_main.mine
 
 import android.content.Context
 import android.util.AttributeSet
@@ -8,7 +8,6 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import river.chat.business_main.R
 import river.chat.lib_core.utils.exts.getColor
-import river.chat.lib_core.utils.exts.getDrawable
 import river.chat.lib_core.utils.exts.view.loadSimple
 
 

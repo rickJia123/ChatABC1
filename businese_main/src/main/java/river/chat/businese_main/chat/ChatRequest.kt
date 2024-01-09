@@ -1,22 +1,31 @@
 package river.chat.businese_main.chat
 
 import androidx.lifecycle.MutableLiveData
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import okhttp3.sse.EventSource
+import okhttp3.sse.EventSourceListener
+import okhttp3.sse.EventSources
 import river.chat.businese_common.constants.CommonEvent
+import river.chat.businese_common.report.ReportManager
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.report.TrackerKeys.REQUEST_CONTENT
 import river.chat.businese_common.report.TrackerKeys.REQUEST_TIME
-import river.chat.businese_common.report.ReportManager
 import river.chat.businese_main.api.MainBusinessApiService
+import river.chat.businese_main.api.MainBusinessApiService.receiveEventStream
 import river.chat.businese_main.chat.hot.HotTipItemBean
-import river.chat.businese_main.message.MessageHelper.CHAT_TIP_FAIL
+import river.chat.businese_main.message.MessageCenter
 import river.chat.lib_core.event.BaseActionEvent
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
-import river.chat.lib_core.utils.longan.toastSystem
+import river.chat.lib_core.utils.exts.safeToString
+import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.view.main.BaseViewModel
 import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_resource.model.MessageStatus
+
 
 /**
  * Created by beiyongChao on 2023/3/21
@@ -38,6 +47,8 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                 MainBusinessApiService.requestAi(content, msgId)
             },
             dataResp = { data, time ->
+
+                //rick todo
                 ReportManager.reportEvent(
                     TrackerEventName.REQUEST_CHAT,
                     mutableMapOf(
@@ -46,8 +57,7 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                     )
                 )
 
-                //rick todo
-                //错误消息仍然需要给成功状态，不然走不到success，取不到其他参数，
+
 
                 chatRequestResult.value =
                     RequestResult(isSuccess = true, data = MessageBean().apply {
@@ -57,6 +67,7 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                         this.status =
                             if (data?.failFlag == true) MessageStatus.FAIL_COMMON else MessageStatus.COMPLETE
                         this.failFlag = data?.failFlag
+                        this.failMsg = data?.failMsg
                     })
 
                 EventCenter.postEvent(BaseActionEvent().apply {
@@ -78,27 +89,59 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
 //                        this.status = MessageStatus.FAIL_COMMON
 //                    }, errorMsg = it.message ?: "")
 
-
-
                 //rick todo 模拟数据
-                var data=MessageBean().apply {
-                    this.content="测试嘿嘿"
-                    this.failFlag=true
+                var data = MessageBean().apply {
+                    this.content = "测试嘿嘿"
+                    this.failFlag = true
                     this.parentId = msgId.toLong() ?: 0
-                    this.failMsg="测试失败"
+                    this.failMsg = "您的对话权益已过期，请您充值后再继续使用哦～"
                 }
                 chatRequestResult.value =
                     RequestResult(isSuccess = true, data = MessageBean().apply {
                         this.content = data.content
-                        this.parentId = data.id ?: 0
+                        this.parentId = data.parentId ?: 0
                         this.time = data.time ?: 0
                         this.status =
                             if (data.failFlag == true) MessageStatus.FAIL_COMMON else MessageStatus.COMPLETE
-                        this.failFlag = data?.failFlag
+                        this.failFlag = data.failFlag
+                        this.failMsg = data.failMsg
                     })
             }
         )
     }
+
+
+    /**
+     * 获取GPT 答案
+     */
+    fun requestAiByFlow(content: String, msgId: Long) {
+//        receiveEventStream(content,msgId, listener = {
+//            LogUtil.i("requestAiByFlow success:"+it)
+//        })
+        LogUtil.i("requestAiByFlow 开始请求:" )
+        MessageCenter.mRequestTimeMap[msgId] =System.currentTimeMillis()
+        launchFlow(
+            request = {
+                MainBusinessApiService.requestAiByFlow(content, msgId.safeToString())
+            },
+            dataResp = { data, time ->
+                LogUtil.i("requestAiByFlow success:" + data)
+
+            },
+            error = {
+                LogUtil.i("requestAiByFlow error:" + it.message)
+                ReportManager.reportEvent(
+                    TrackerEventName.REQUEST_CHAT,
+                    mutableMapOf(
+                        REQUEST_CONTENT to "GPT接口错误---问题:" + content + "    错误信息:${it.message}",
+                    )
+                )
+
+
+            }
+        )
+    }
+
 
 
     /**

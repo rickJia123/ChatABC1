@@ -1,10 +1,13 @@
 package river.chat.businese_main.vip
 
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.facade.annotation.Route
+import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.router.jump2VipExchange
 import river.chat.businese_common.utils.onLoad
 import river.chat.business_main.databinding.ActivityVipOpenBinding
+import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
 import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 
@@ -35,6 +38,17 @@ class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, Vip
 
         loadData()
         observerMsg()
+        initEventListener()
+    }
+
+    private fun initEventListener() {
+        EventCenter.registerReceiveEvent(lifecycleScope) {
+            when (it.action) {
+                CommonEvent.UPDATE_USER -> {
+                    mBinding.viewVipStatus.update()
+                }
+            }
+        }
     }
 
     /**

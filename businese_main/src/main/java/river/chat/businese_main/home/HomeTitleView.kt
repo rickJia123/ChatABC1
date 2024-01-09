@@ -41,10 +41,7 @@ class HomeTitleView @JvmOverloads constructor(
 
 
     fun update() {
-        var userPlugin = getPlugin<UserPlugin>()
-        var user = userPlugin.getUser()
-        var remainTimes =
-            user.trialBalance
+        viewBinding.viewVip.refresh()
     }
 
 

@@ -1,4 +1,4 @@
-package river.chat.businese_main.setting
+package river.chat.businese_main.mine
 
 import androidx.lifecycle.lifecycleScope
 import org.koin.android.ext.android.inject
@@ -10,10 +10,10 @@ import river.chat.businese_common.router.jump2ShareApp
 import river.chat.businese_common.update.AppUpdateManager
 import river.chat.businese_common.utils.exts.hideWithoutLogin
 import river.chat.businese_common.utils.onLoad
+import river.chat.businese_main.constants.MainConstants
 import river.chat.business_main.databinding.FragmentSettingsBinding
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.privacy.PrivacyManager
-import river.chat.lib_core.router.plugin.module.HomePlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.tracker.TrackNode
 import river.chat.lib_core.tracker.postTrack
@@ -21,8 +21,6 @@ import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.appVersionName
 import river.chat.lib_core.utils.longan.mainThread
 import river.chat.lib_core.utils.longan.toastSystem
-import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
-import river.chat.lib_core.view.main.fragment.BaseBindingFragment
 import river.chat.lib_core.view.main.fragment.BaseBindingViewModelFragment
 import river.chat.lib_core.webview.WebViewHelper
 
@@ -102,6 +100,7 @@ class SettingsFragment :
 
         binding.viewSettingLogout.hideWithoutLogin()
         binding.viewSettingDestory.hideWithoutLogin()
+        binding.viewEntranceCollection.refreshData(MainConstants.ENTRANCE_TYPE_COLLECTION)
     }
 
     private fun onSettingClick(settingItem: SettingItem) {
@@ -115,8 +114,12 @@ class SettingsFragment :
         EventCenter.registerReceiveEvent(lifecycleScope) {
             when (it.action) {
                 CommonEvent.LOGIN_CHANGE -> {
-                  mBinding.viewUser.update()
+                    mBinding.viewUser.update()
                     initSettings(mBinding)
+                }
+
+                CommonEvent.UPDATE_USER -> {
+                    mBinding.viewUser.update()
                 }
             }
         }

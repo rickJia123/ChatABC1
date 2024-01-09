@@ -43,8 +43,7 @@ class UserStatusView @JvmOverloads constructor(
     fun update() {
         var userPlugin = getPlugin<UserPlugin>()
         var user = userPlugin.getUser()
-        var remainTimes =
-            user.trialBalance
+
         var type = user.getVipType()
         when (type) {
             VipType.VIP.value -> {
@@ -63,7 +62,8 @@ class UserStatusView @JvmOverloads constructor(
             viewBinding.tvName.text = user.nickName
         }
 
-        viewBinding.ivAvatar.loadAvatar(user.headImg)
+//        viewBinding.ivAvatar.loadAvatar(user.headImg)
+        viewBinding.ivAvatar.setImageResource(river.chat.lib_core.R.drawable.avator_default)
         viewBinding.viewClick.singleClick {
             viewBinding.viewClick.postTrack(
                 TrackerEventName.CLICK_SETTING,

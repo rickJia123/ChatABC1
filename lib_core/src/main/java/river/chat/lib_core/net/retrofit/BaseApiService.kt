@@ -11,6 +11,8 @@ import river.chat.lib_core.net.cache.DynamicCacheInterceptor
 import river.chat.lib_core.net.cache.DynamicCacheManager
 import river.chat.lib_core.net.common.ApiConfig
 import river.chat.lib_core.net.common.OperationException
+import river.chat.lib_core.net.convert.ConverterFactory
+import river.chat.lib_core.net.interceptor.FlowResponseInterceptor
 import river.chat.lib_core.net.interceptor.HeadInterceptor
 import river.chat.lib_core.net.request.TrusHttpClient
 import river.chat.lib_core.utils.log.LogUtil
@@ -27,6 +29,7 @@ open class BaseApiService {
 
 
     private var client: OkHttpClient? = null
+    private var flowClient: OkHttpClient? = null
 
     val DEFAULT_CONNECT_TIMEOUT: Long = 0 //默认超时时间为0，在OkHttpClientWrapper里面会重新设置超时时间
 
@@ -77,18 +80,73 @@ open class BaseApiService {
                         clientBuilder.addInterceptor(
                             loggingInterceptor.setLevel(
                                 HttpLoggingInterceptor.Level.BODY
-                        ))
+                            )
+                        )
                     } else {
                         clientBuilder.proxy(Proxy.NO_PROXY)
                     }
-                    client=clientBuilder.build()
+                    client = clientBuilder.build()
                 }
             }
         }
         return Retrofit.Builder()
             .client(client)
             .baseUrl(ApiConfig.getHost())
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(ConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+    }
+
+    /**
+     * 带设置超时时间的retrofit方法
+     */
+    fun retrofitFlow(
+
+    ): Retrofit {
+        //对主动设置超时时间的清空client重新走client配置流程
+
+        if (flowClient == null) {
+            synchronized(BaseApi::class.java) {
+                if (flowClient == null) {
+                    val clientBuilder = TrusHttpClient().trusClient
+                        .readTimeout(
+                            ApiConfig.READ_TIME_OUT.toLong(),
+                            TimeUnit.SECONDS
+                        )
+                        .connectTimeout(
+                            ApiConfig.CONNECT_TIME_OUT.toLong(),
+                            TimeUnit.SECONDS
+                        )
+                        .writeTimeout(
+                            ApiConfig.WRITE_TIME_OUT.toLong(),
+                            TimeUnit.SECONDS
+                        )
+                        .addInterceptor(HeadInterceptor())
+                        .addInterceptor(FlowResponseInterceptor())
+                        .followRedirects(false)
+                        .followSslRedirects(false)
+                    if (ApiConfig.isDebug()) {
+                        val loggingInterceptor = HttpLoggingInterceptor { message: String ->
+                            LogUtil.d(
+                                "river 网络日志： $message"
+                            )
+                        }
+                        clientBuilder.addInterceptor(
+                            loggingInterceptor.setLevel(
+                                HttpLoggingInterceptor.Level.BODY
+                            )
+                        )
+                    } else {
+                        clientBuilder.proxy(Proxy.NO_PROXY)
+                    }
+                    flowClient = clientBuilder.build()
+                }
+            }
+        }
+        return Retrofit.Builder()
+            .client(flowClient)
+            .baseUrl(ApiConfig.getHost())
+            .addConverterFactory(ConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }

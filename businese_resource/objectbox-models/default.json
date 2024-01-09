@@ -34,7 +34,7 @@
     },
     {
       "id": "2:1069039445943354056",
-      "lastPropertyId": "9:8264089621294145786",
+      "lastPropertyId": "10:6954221770125580812",
       "name": "MessageBean",
       "properties": [
         {
@@ -82,6 +82,11 @@
           "id": "9:8264089621294145786",
           "name": "failMsg",
           "type": 9
+        },
+        {
+          "id": "10:6954221770125580812",
+          "name": "isCollected",
+          "type": 1
         }
       ],
       "relations": []

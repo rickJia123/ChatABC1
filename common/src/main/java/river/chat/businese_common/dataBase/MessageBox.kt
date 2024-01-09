@@ -64,7 +64,7 @@ object MessageBox : BaseBox<MessageBean>() {
     }
 
     fun saveMsg(msg: MessageBean): Long {
-        ("MessageBox saveMsg:$msg").log()
+//        ("MessageBox saveMsg:$msg").log()
         return box?.put(msg) ?: 0
     }
 

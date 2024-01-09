@@ -11,11 +11,13 @@
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/dialogBgColor"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <river.chat.lib_core.view.roundview.EasyConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/white"
             app:ev_radius="10dp"

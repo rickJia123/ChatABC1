@@ -57,7 +57,7 @@ class DynamicCacheInterceptor(
 
         try {
             val response = chain.proceed(newRequest)
-            LogUtil.d("rick NetCacheInterceptor 没命中策略 begin:" + response.isSuccessful + "：：：" + response.toString())
+//            LogUtil.d("rick NetCacheInterceptor 没命中策略 begin:" + response.isSuccessful + "：：：" + response.toString())
             if (response.isSuccessful) {
                 //对应策略的接口存入缓存
                 if (DynamicCacheHelper.checkNeedStrategySave(cacheType ?: "")) {

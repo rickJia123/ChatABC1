@@ -6,9 +6,10 @@ import river.chat.businese_common.report.ReportManager
 import river.chat.businese_common.router.jump2Main
 import river.chat.lib_core.event.BaseActionEvent
 import river.chat.lib_core.event.EventCenter
-import river.chat.lib_resource.model.database.User
-import river.chat.lib_core.utils.longan.logConfig
+import river.chat.lib_core.router.plugin.core.getPlugin
+import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.longan.toastSystem
+import river.chat.lib_resource.model.database.User
 
 /**
  * Created by beiyongChao on 2023/3/15
@@ -20,7 +21,7 @@ object RiverUserManager {
      * 是否登录
      */
     fun isLogin(): Boolean {
-        getCurrentUser().toString().logConfig()
+//        getCurrentUser().toString().logConfig()
         return (getCurrentUser().id ?: 0) > 0
     }
 
@@ -33,6 +34,7 @@ object RiverUserManager {
         jump2Main()
         updateUser(user)
         ReportManager.reportLogin(true, user.id.toString(), platFrom)
+        getPlugin<UserPlugin>().refreshInfo()
     }
 
     /**

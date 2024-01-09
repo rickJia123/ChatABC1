@@ -23,7 +23,8 @@ object VipManager {
     /**
      * 提示没有聊天权益的间隔时间，6小时
      */
-    const val UPDATE_SHOW_OPEN_VIP = 3 * 60 * 60 * 1000L
+    const val UPDATE_SHOW_OPEN_VIP = 0.5 * 60 * 60 * 1000L
+
 
     /**
      * 跳转开通/兑换页
@@ -55,7 +56,6 @@ object VipManager {
     }
 
 
-
     /**
      * 是否有聊天权益,没有执行对应动作
      */
@@ -71,11 +71,11 @@ object VipManager {
         ) {
             R.string.vip_limit_tip.getString().toastSystem()
         } else {
+            //rick todo 这里改成弹窗
             jump2VipPage()
             ConfigManager.putAppConfig(AppLocalConfigKey.UPDATE_CHAT_LIMIT_TIME, true)
         }
         return permission
-
     }
 
 
@@ -90,7 +90,7 @@ object VipManager {
         var user = userPlugin.getUser()
         var remainStr = ""
         remainStr += if (isVip()) {
-            TimeUtils.getTimeStamp() + " 到期"
+            user.rightsExpireTime + " 到期"
         } else {
             "剩余体验次数:${user.trialBalance}次"
         }

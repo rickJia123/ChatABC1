@@ -18,7 +18,7 @@
                 <data android:scheme="um.64a30595a1a164591b4154f2" />
             </intent-filter>
         </activity>
-        <activity android:name="river.chat.businese_main.setting.SettingsActivity"
+        <activity android:name="river.chat.businese_main.mine.SettingsActivity"
             android:screenOrientation="portrait"  />
 
         <activity android:name="river.chat.businese_main.feedback.FeedBackActivity"
@@ -30,6 +30,14 @@
             android:screenOrientation="portrait"  />
 
         <activity android:name="river.chat.businese_main.shareapp.ShareAppActivity"
+            android:windowSoftInputMode="adjustNothing"
+            android:screenOrientation="portrait"  />
+
+        <activity android:name="river.chat.businese_main.collection.CollectionListActivity"
+            android:windowSoftInputMode="adjustNothing"
+            android:screenOrientation="portrait"  />
+
+        <activity android:name="river.chat.businese_main.collection.CollectionDetailActivity"
             android:windowSoftInputMode="adjustNothing"
             android:screenOrientation="portrait"  />
 </application></manifest>

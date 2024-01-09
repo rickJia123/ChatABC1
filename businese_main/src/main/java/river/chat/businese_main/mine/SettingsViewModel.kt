@@ -1,4 +1,4 @@
-package river.chat.businese_main.setting
+package river.chat.businese_main.mine
 
 import androidx.databinding.ObservableArrayList
 import androidx.recyclerview.widget.RecyclerView

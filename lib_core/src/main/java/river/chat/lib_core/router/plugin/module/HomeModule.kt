@@ -2,6 +2,8 @@ package river.chat.lib_core.router.plugin.module
 
 import com.alibaba.android.arouter.facade.template.IProvider
 import river.chat.lib_core.event.BaseConstants
+import river.chat.lib_resource.model.MessageBean
+import river.chat.lib_resource.model.MessageFlowBean
 
 /**
  * Created by beiyongChao on 2023/3/7
@@ -45,11 +47,22 @@ object HomeRouterConstants : BaseConstants() {
      * 支付结果页
      */
     const val VIP_PAY_RESULT = GROUP_COMMON + "/vipResult"
+
+    /**
+     * 收藏页
+     */
+    const val HOME_COLLECTION = GROUP_HOME + "/collection"
+
+    /**
+     * 收藏页详情
+     */
+    const val HOME_COLLECTION_DETAIL = GROUP_HOME + "/collectionDetail"
 }
 
 
 interface HomePlugin : IProvider {
 
     fun test()
+    fun onMsgReceive(msg: MessageBean)
 
 }

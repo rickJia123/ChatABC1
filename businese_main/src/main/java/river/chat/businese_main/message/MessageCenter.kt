@@ -11,13 +11,20 @@ import river.chat.businese_main.utils.logChat
 import river.chat.businese_main.vip.VipManager
 import river.chat.lib_core.event.BaseActionEvent
 import river.chat.lib_core.event.EventCenter
+import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
+import river.chat.lib_core.utils.common.GsonKits
+import river.chat.lib_core.utils.exts.safeToInt
+import river.chat.lib_core.utils.exts.safeToLong
+import river.chat.lib_core.utils.exts.safeToString
+import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_resource.model.MessageBean
 import river.chat.lib_resource.model.MessageReceiveBean
 import river.chat.lib_resource.model.MessageSource
 import river.chat.lib_resource.model.MessageStatus
 import river.chat.lib_core.utils.longan.log
+import river.chat.lib_resource.model.MessageFlowBean
 
 /**
  * Created by beiyongChao on 2023/3/12
@@ -28,10 +35,16 @@ object MessageCenter {
     var mActivity: HomeActivity? = null
     var mMsgViewModel: MessageViewModel? = null
 
+    //本次打开app是否已经提示没有会期，第一次会推送到消息列表，第二次会弹窗
+    private var mIsTipNoVip = false
+
     /**
      * 消息超时时间，超时的loading状态改为失败
      */
     var mMessageVaildTime = 30 * 1000L
+
+    //存储消息请求时间
+    var mRequestTimeMap = mutableMapOf<Long, Long>()
 
     init {
 
@@ -77,19 +90,47 @@ object MessageCenter {
      */
     private fun observerMsg() {
         mActivity?.let {
-            mMsgViewModel?.request?.chatRequestResult?.observe(it) {
+            mMsgViewModel?.request?.chatRequestResult?.observe(it) { result ->
 //                if (it.isSuccess) {
-                var msg = if (it.isSuccess) it.data ?: MessageBean() else MessageBean().apply {
-                    status = MessageStatus.FAIL_COMMON
-                    content = it.errorMsg
-                }
-                ("MessageCenter observerMsg:" + it.data).log()
-                distributeMsg(buildAiAnswerMsg(msg))
+                result.data?.let {
+                    var msg = it
+//                    ("MessageCenter observerMsg:" + msg).log()
+                    distributeMsg(buildAiAnswerMsg(msg))
 //                }
-                //请求成功后，更新vip状态
-                if (it.isSuccess) {
-                    VipManager.onUseVipTimes()
+                    //请求成功后，更新vip状态
+                    if (result.isSuccess) {
+                        VipManager.onUseVipTimes()
+                    }
                 }
+
+            }
+        }
+    }
+
+    fun onReceiveMsg(flowMsg: MessageBean) {
+        var endTime = System.currentTimeMillis()
+        var startTime = mRequestTimeMap[flowMsg.id] ?: 0
+        LogUtil.i("requestAiByFlow 请求结束 总时间:" + (endTime - startTime))
+        LogUtil.i("receiveEventStream MessageCenter :" + GsonKits.toJson(flowMsg))
+        var result: RequestResult<MessageBean>? = null
+        result = RequestResult(isSuccess = true, data = MessageBean().apply {
+            this.content = flowMsg.content
+            this.parentId = flowMsg.id
+            this.time = if (flowMsg.time ?: 0 > 0) flowMsg.time else System.currentTimeMillis()
+            this.status =
+                if (flowMsg.failFlag == true) MessageStatus.FAIL_COMMON else MessageStatus.COMPLETE
+            this.failFlag = flowMsg.failFlag
+            this.failMsg = flowMsg.failMsg
+        })
+
+        result?.data?.let {
+            var msg = it
+            ("MessageCenter observerMsg:" + msg).log()
+            distributeMsg(buildAiAnswerMsg(msg))
+//                }
+            //请求成功后，更新vip状态
+            if (result.isSuccess) {
+                VipManager.onUseVipTimes()
             }
         }
     }
@@ -107,7 +148,7 @@ object MessageCenter {
 //                var aiMsgId = createMsgId()
                 distributeMsg(buildAiAnswerEmptyMsg(questionMsg.id))
                 mMsgViewModel?.request?.requestAi(
-                    questionMsg.content ?: "", questionMsg.id.toString()
+                    questionMsg.content ?: "", questionMsg.id.safeToString()
                 )
             }
         }
@@ -118,7 +159,7 @@ object MessageCenter {
      */
     private fun distributeMsg(msg: MessageBean) {
         GlobalScope.launch() {
-            ("MessageCenter distributeMsg:" + msg).log()
+//            ("MessageCenter distributeMsg:" + msg).log()
             msgReceiver.emit(msg)
         }
     }
@@ -159,6 +200,8 @@ object MessageCenter {
                     it.time = receiveMsg.time
                     it.id = receiveMsg.id
                     it.parentId = receiveMsg.parentId
+                    it.failMsg = receiveMsg.failMsg
+                    it.failFlag = receiveMsg.failFlag
                     MessageBox.saveMsg(it)
                 }
             }
@@ -183,20 +226,28 @@ object MessageCenter {
             hasPermission = false
             getPlugin<UserPlugin>().check2Login { }
         }
-
         //本地发送前先 检查vip权限
-//        else {
-//            if (!VipManager.check2Vip()) {
-//                hasPermission = false
-//            }
-//        }
+        else {
+            //本次打开app是否已经提示没有会期，第一次会推送到消息列表，第二次会弹窗
+            //还没有推送到消息中
+            if (!mIsTipNoVip) {
+                if (!VipManager.isVip()) {
+                    mIsTipNoVip = true
+                }
+            } else {
+                //已经推送到消息中
+                if (!VipManager.check2Vip()) {
+                    hasPermission = false
+                }
+            }
+        }
         return hasPermission
     }
 
 
-    ///////////////////////////////////////////////////////////////////////////
-    // 消息重试 开始
-    ///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 消息重试 开始
+///////////////////////////////////////////////////////////////////////////
 
     //是否可以再次重试
     var canReload = true
@@ -209,16 +260,16 @@ object MessageCenter {
      * 重新发送消息
      */
     fun beginReload(msg: MessageBean, onReloadLimitFinish: () -> Unit = {}) {
-        if (canReload) {
-            canReload = false
-            postSendMsg(msg)
-            GlobalScope.launch {
-                ("MessageCenter beginReload 可以重试了：" + msg).logChat()
-                delay(reloadTimeLimit.toLong())
-                onReloadLimitFinish.invoke()
-                canReload = true
-            }
+//        if (canReload) {
+        canReload = false
+        postSendMsg(msg)
+        GlobalScope.launch {
+            ("MessageCenter beginReload 可以重试了：" + msg).logChat()
+            delay(reloadTimeLimit.toLong())
+            onReloadLimitFinish.invoke()
+            canReload = true
         }
+//        }
     }
 
     fun postHideSoftWindow() {
@@ -226,6 +277,13 @@ object MessageCenter {
             action = CommonEvent.HIDE_SOFT_WINDOW
         })
     }
+
+    fun updateMsg(msg: MessageBean?) {
+        msg?.let {
+            MessageBox.saveMsg(it)
+        }
+    }
+
 
 }
 

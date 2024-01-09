@@ -27,7 +27,6 @@ object EventCenter {
      */
       fun postEvent(event: BaseActionEvent) {
         GlobalScope.launch {
-            ("EventCenter distributeMsg:" + event).log()
             eventReceiver.emit(event)
         }
     }
@@ -44,7 +43,6 @@ object EventCenter {
                 true //过滤条件
             }.flowOn(Dispatchers.Default)
                 .collect {
-                    ("EventCenter receiver:" + it).log()
                     it.apply(msgCallback)
                 }
         }

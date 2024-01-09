@@ -40,11 +40,11 @@ class VipStatusView @JvmOverloads constructor(
         var user = userPlugin.getUser()
         var remainTimes =
             user.trialBalance
-        var vipExpireTimeStr = user.rightsExpireTime + "到期"
+
         var type = user.getVipType()
         when (type) {
             VipType.VIP.value -> {
-                viewBinding.tvRemainTimes.text = vipExpireTimeStr
+                viewBinding.tvRemainTimes.text = VipManager.getRemainTimeStr()
             }
 
             else -> {

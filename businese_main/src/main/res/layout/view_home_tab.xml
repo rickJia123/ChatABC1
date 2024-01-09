@@ -21,7 +21,7 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             app:ev_radius="10dp"
-            android:background="@color/themeColor"
+            android:background="@color/themeYellowColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="@id/tvChat"
             app:layout_constraintRight_toRightOf="@id/tvChat"

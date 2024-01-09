@@ -15,12 +15,17 @@ import river.chat.lib_core.router.plugin.module.UserPlugin
 
 //加载头像
 fun ImageView.loadAvatar(resource: Any?) {
-    this.load(resource) {
-        crossfade(true)
-        transformations(CircleCropTransformation())
-        placeholder(R.drawable.avator_default)
-        error(R.drawable.avator_default)
+    if (resource == null || resource.toString().isNullOrEmpty()) {
+        this.setImageResource(R.drawable.avator_default)
+    } else {
+        this.load(resource) {
+            crossfade(true)
+            transformations(CircleCropTransformation())
+            placeholder(R.drawable.avator_default)
+            error(R.drawable.avator_default)
+        }
     }
+
 }
 
 //未登录下隐藏view

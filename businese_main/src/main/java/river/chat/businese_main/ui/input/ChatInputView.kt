@@ -129,7 +129,7 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
             if (checkCanSend(content)) {
                 content.log()
                 MessageCenter.postSendMsg(MessageHelper.buildSelfMsg(content))
-
+                viewBinding.etWriteReply.setText("")
             }
 
         }

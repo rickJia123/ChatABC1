@@ -14,25 +14,11 @@ class CommonLifeCyclesImpl : AppLifeCycles {
     override fun attachBaseContext(application: Application, base: Context) {}
     override fun onAppRequired(application: Application) {}
     override fun onCreate(application: Application) {
-        if (application.isMainProcess()) {
-         workThread(
-                scope = GlobalScope,
-                block = {
-                    InitManager.initSdk(application)
-                    InitManager.initBusiness(application)
-                },
-                result = {
-                    if (it) {
-                        "initSdk success".log()
-                    } else {
-                        "initSdk failed".log()
-                    }
-                }
-            )
-            InitManager.initSdk(application)
-            InitManager.initBusiness(application)
-        }
+
+        InitManager.initSdk(application)
+        InitManager.initBusiness(application)
     }
+
 
     override fun onTerminate(application: Application) {
     }

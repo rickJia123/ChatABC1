@@ -54,10 +54,7 @@ class ChatViewModel : BaseViewModel() {
         return false
     }
 
-    fun onCopyitem(msg: MessageBean?) {
 
-
-    }
 
     private var morePopWindow: ChatItemMorePopWindow? = null
 

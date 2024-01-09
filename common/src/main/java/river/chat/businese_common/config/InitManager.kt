@@ -6,6 +6,7 @@ import com.tencent.tauth.Tencent
 import com.umeng.commonsdk.UMConfigure
 import com.yl.lib.sentry.hook.PrivacySentry
 import com.yl.lib.sentry.hook.PrivacySentryBuilder
+import kotlinx.coroutines.GlobalScope
 import river.chat.businese_common.report.UMTrackHandler
 import river.chat.businese_common.utils.CrashHandler
 import river.chat.lib_core.wx.WxManager
@@ -16,6 +17,7 @@ import river.chat.lib_core.utils.longan.application
 import river.chat.lib_core.utils.longan.deviceOaid
 import river.chat.lib_core.utils.longan.isAppDebug
 import river.chat.lib_core.utils.longan.log
+import river.chat.lib_core.utils.longan.workThread
 import river.chat.lib_resource.AccountsConstants
 import river.chat.lib_umeng.common.UmInitConfig
 
@@ -28,9 +30,24 @@ object InitManager {
 
     fun initSdk(application: Application) {
         initRouter()
-        initUmeng(application)
-        initPrivacy()
-        WxManager.regToWx(application)
+        workThread(
+            scope = GlobalScope,
+            block = {
+
+                initUmeng(application)
+                initPrivacy()
+                WxManager.regToWx(application)
+                InitManager.initBusiness(application)
+            },
+            result = {
+                if (it) {
+                    "initSdk success".log()
+                } else {
+                    "initSdk failed".log()
+                }
+            }
+        )
+
     }
 
     fun initBusiness(application: Application) {
