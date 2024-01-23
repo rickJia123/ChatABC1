@@ -1,11 +1,9 @@
 package river.chat.businese_main.chat
 
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import org.koin.android.ext.android.inject
 import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.utils.onLoad
 import river.chat.businese_main.home.HomeViewModel
@@ -15,11 +13,9 @@ import river.chat.businese_main.message.MessageHelper
 import river.chat.businese_main.message.MessageHelper.buildCardMsgList
 import river.chat.business_main.databinding.FragmentChatBinding
 import river.chat.lib_core.event.EventCenter
-import river.chat.lib_core.router.plugin.module.UserPlugin
-import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.utils.longan.log
 import river.chat.lib_core.view.main.fragment.BaseBindingViewModelFragment
-import river.chat.lib_resource.model.CardMsgBean
+import river.chat.lib_resource.model.database.CardMsgBean
 
 class ChatFragment :
     BaseBindingViewModelFragment<FragmentChatBinding, ChatViewModel>() {
@@ -27,13 +23,7 @@ class ChatFragment :
     private var mHomeActivityVm: HomeViewModel? = null
 
     private var mMsgList = mutableListOf<CardMsgBean>()
-    private val mAdapter by lazy {
-        ChatAdapter().apply {
-            onClickItem = {
-
-            }
-        }
-    }
+    private var mAdapter: ChatAdapter? = null
 
     companion object {
         @JvmStatic
@@ -43,9 +33,11 @@ class ChatFragment :
     override fun initDataBinding(binding: FragmentChatBinding) {
         onLoad()
         super.initDataBinding(binding)
+        initRecycleView()
         initMsgService(binding)
         initEventListener()
-        initRecycleView()
+
+
     }
 
     private fun initEventListener() {
@@ -59,6 +51,9 @@ class ChatFragment :
                     mBinding.inputView.hideSoftInput()
                 }
 
+                CommonEvent.COLLECTION_TOGGLE -> {
+                    refreshMsg(false)
+                }
             }
         }
     }
@@ -69,6 +64,9 @@ class ChatFragment :
     private fun initMsgService(binding: FragmentChatBinding) {
         //判断当前列表是否已经初始化过
         var hasDefaultMsg = false
+
+        //rick todo
+        //判断是否有ai的第一条消息
         mMsgList.forEach {
             if (it.answerMsg.id == MessageHelper.mDefaultMsgId) {
                 hasDefaultMsg = true
@@ -76,30 +74,40 @@ class ChatFragment :
             }
         }
         if (!hasDefaultMsg) {
-            checkMsgStatus()
-            mMsgList.addAll(buildCardMsgList(MessageCenter.getHistoryMsg()))
-            mAdapter.submitList(mMsgList)
-            scrollToBottom()
+            refreshMsg()
         }
 
         MessageCenter.registerReceiveMsg(lifecycleScope) { msg ->
-            var historyMsg=MessageCenter.getHistoryMsg()
+            var historyMsg = MessageCenter.getHistoryMsg()
             ("ChatFragment receiver msg:" + msg + ":::" + historyMsg.size).log()
             var newList = buildCardMsgList(historyMsg)
             var isMsgNew = newList.size > mMsgList.size
 
             mMsgList.clear()
             mMsgList.addAll(newList)
-            mAdapter.submitList(mMsgList)
-            mAdapter.notifyDataSetChanged()
+
+            mAdapter?.submitList(mMsgList)
+            mAdapter?.notifyDataSetChanged()
 //            var isReloadMsg=MessageHelper.isReloadMsg(historyMsg.filter { it.id==msg.msg?.id }.firstOrNull())
-            ("ChatFragment receiver msg:" + msg + ":::是否重新加载消息："  + "::::" + mMsgList.size).log()
+            ("ChatFragment receiver msg:" + msg + ":::是否重新加载消息：" + "::::" + mMsgList.size).log()
             if (isMsgNew) {
                 scrollToBottom()
             }
         }
         binding.inputView.requestFocus()
 //        MessageCenter.postReceiveMsg(MessageHelper.buildDefaultMsg())
+    }
+
+    private fun refreshMsg(needScroll: Boolean = true) {
+        mMsgList.clear()
+        checkMsgStatus()
+        mMsgList.addAll(buildCardMsgList(MessageCenter.getHistoryMsg()))
+        mAdapter?.submitList(mMsgList)
+        mAdapter?.notifyDataSetChanged()
+        if (needScroll) {
+            mBinding.recycleView.scrollBy(0, 1980 * 1000)
+        }
+
     }
 
 
@@ -110,6 +118,7 @@ class ChatFragment :
     }
 
     private fun initRecycleView() {
+        mAdapter = ChatAdapter()
         mBinding.recycleView.adapter = mAdapter
         mBinding.recycleView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false).apply {

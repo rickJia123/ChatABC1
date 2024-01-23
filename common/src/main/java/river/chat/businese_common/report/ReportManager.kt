@@ -18,7 +18,7 @@ object ReportManager {
     /**
      * 上报自定义事件
      */
-    fun reportEvent(eventId: String, params: MutableMap<String, String>) {
+    fun reportEvent(eventId: String?, params: MutableMap<String, String>) {
         var commonMap = getCommonTrackerMap()
         params.apply {
             putAll(commonMap)
@@ -26,7 +26,12 @@ object ReportManager {
         if (BuildConfig.DEBUG) {
             Log.d("Tracker", "onEvent: eventId = $eventId, params = $params")
         }
-        MobclickAgent.onEvent(application, eventId, params)
+
+        var limitParams= mutableMapOf<String, String>()
+        params.forEach { (t, u) ->
+            limitParams[t]=if (u.length>256) u.substring(0,256) else u
+        }
+        MobclickAgent.onEvent(application, eventId, limitParams)
     }
 
     /**

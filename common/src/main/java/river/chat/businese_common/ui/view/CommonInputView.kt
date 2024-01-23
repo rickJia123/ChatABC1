@@ -44,6 +44,10 @@ class CommonInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) 
     }
 
 
+    fun getInputText(): String {
+        return viewBinding.etInput.text.toString()
+    }
+
     private fun initListener() {
         viewBinding.etInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -55,21 +59,6 @@ class CommonInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) 
             }
 
             override fun afterTextChanged(s: Editable?) {
-
-
-//                if (remindNum > 10) {
-//                    commentViewBinding.tvRemindNum.visibility = GONE
-//                } else {
-//                    if (remindNum < 0) {
-//                        commentViewBinding.tvRemindNum.isEnabled = false
-//                        commentViewBinding.tvSendReply.isEnabled = false
-//                    } else {
-//                        commentViewBinding.tvSendReply.isEnabled = true
-//                        commentViewBinding.tvRemindNum.isEnabled = true
-//                    }
-//                    commentViewBinding.tvRemindNum.visibility = VISIBLE
-//                    commentViewBinding.tvRemindNum.text = remindNum.toString()
-//                }
 
             }
         })

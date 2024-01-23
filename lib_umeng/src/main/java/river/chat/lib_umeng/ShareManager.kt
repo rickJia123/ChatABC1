@@ -8,7 +8,16 @@ import com.umeng.socialize.bean.SHARE_MEDIA
 import com.umeng.socialize.media.UMImage
 import com.umeng.socialize.media.UMWeb
 import com.umeng.socialize.shareboard.ShareBoardConfig
+import com.xingin.xhssharesdk.callback.XhsShareCallback
+import com.xingin.xhssharesdk.core.XhsShareSdk
+import com.xingin.xhssharesdk.model.sharedata.XhsImageInfo
+import com.xingin.xhssharesdk.model.sharedata.XhsImageResourceBean
+import com.xingin.xhssharesdk.model.sharedata.XhsNote
+import io.dushu.sharekit.model.XhsShareContentModel
+import river.chat.lib_umeng.common.RIVER_SHARE_MEDIA
 import river.chat.lib_umeng.common.RiverShareContent
+import river.chat.lib_umeng.common.save2Local
+import java.io.File
 import java.lang.ref.WeakReference
 
 /**
@@ -18,7 +27,7 @@ import java.lang.ref.WeakReference
 object ShareManager {
     private var mShareListener: UMShareListener? = null
     private var mShareAction: ShareAction? = null
-    private var mShareMedia: SHARE_MEDIA? = null
+    private var mShareMedia: RIVER_SHARE_MEDIA? = null
 
     private var mShareContent = RiverShareContent()
 
@@ -26,15 +35,10 @@ object ShareManager {
     private var mActivityRef: WeakReference<Activity>? = null
 
 
-    fun update(shareContent: RiverShareContent, shareMedia: SHARE_MEDIA): ShareManager {
+    fun update(shareContent: RiverShareContent, shareMedia: RIVER_SHARE_MEDIA): ShareManager {
         mShareContent = shareContent
         mShareMedia = shareMedia
         return this
-    }
-
-    fun shareText() {
-        ShareAction(getActivity()).withText(mShareContent.mText)
-            .beginShare()
     }
 
 
@@ -43,7 +47,7 @@ object ShareManager {
         val imageLocal = UMImage(getActivity(), mShareContent.mBitmap)
         imageLocal.setThumb(UMImage(getActivity(), mShareContent.mBitmap))
         ShareAction(getActivity()).withMedia(imageLocal)
-            .beginShare()
+            .beginShare(activity)
     }
 
     fun shareUrl(activity: Activity) {
@@ -53,7 +57,7 @@ object ShareManager {
         web.setThumb(UMImage(getActivity(), R.mipmap.logo_trans))
         web.description = mShareContent.mDescription
         ShareAction(getActivity()).withMedia(web)
-            .beginShare()
+            .beginShare(activity)
     }
 
 
@@ -62,7 +66,7 @@ object ShareManager {
         val imageLocal = UMImage(getActivity(), mShareContent.mBitmap)
         imageLocal.setThumb(UMImage(getActivity(), R.mipmap.logo_trans))
         ShareAction(getActivity()).withText(mShareContent.mText)
-            .beginShare()
+            .beginShare(activity)
     }
 
 
@@ -77,9 +81,23 @@ object ShareManager {
     }
 
 
-    fun ShareAction.beginShare() {
-        this.setPlatform(mShareMedia)
-            .setCallback(mShareListener ?: mActivityRef?.get()?.let { buildShareListener(it) }).share()
+    fun ShareAction.beginShare(activity: Activity) {
+        mShareMedia?.let {
+            if (it == RIVER_SHARE_MEDIA.XIAOHONGSHU) {
+                shareXhs(activity, XhsShareContentModel().apply {
+                    this.content = mShareContent.mDescription
+                    this.imgLocalPath = mShareContent.mBitmap?.save2Local(activity)
+                })
+            } else {
+                this.setPlatform(
+                    convertShareModel(it)
+                )
+                    .setCallback(
+                        mShareListener ?: mActivityRef?.get()?.let { buildShareListener(it) })
+                    .share()
+            }
+
+        }
     }
 
 
@@ -145,6 +163,68 @@ object ShareManager {
         return mShareListener!!
     }
 
+    /**
+     * 分享到小红书 (图文笔记)
+     */
+    private fun shareXhs(activity: Activity?, shareModel: XhsShareContentModel) {
+
+        var shareTitle = "我在GPTEvery 与AI对话"
+
+
+        /**
+         * 把xhsTagList里面的标签加上#拼接成字符串tagStr
+         */
+        var tagStr = "#最懂你的AI工具" + "#这个回答有意思" + "#GTEvery"
+
+        var tagPrefixTag = "ChatGpt"
+
+        var shareContent =
+            "#$tagPrefixTag  $tagStr"
+
+        val xhsNote = XhsNote().apply {
+            this.title = shareTitle
+            this.content = shareContent
+            imageInfo = XhsImageInfo(listOf(XhsImageResourceBean(File(shareModel.imgLocalPath))))
+//            imageInfo = XhsImageInfo(listOf(XhsImageResourceBean.fromUrl("https://t7.baidu.com/it/u=4036010509,3445021118&fm=193&f=GIF")))
+        }
+        XhsShareSdk.shareNote(activity, xhsNote)
+        XhsShareSdk.setShareCallback(object : XhsShareCallback {
+            override fun onSuccess(sessionId: String?) {
+                XhsShareSdk.setShareCallback(null)
+            }
+
+            override fun onError(p0: String, p1: Int, p2: String, p3: Throwable?) {
+
+            }
+
+
+            // 1.1.0 版本后提供的新错误回调，内含新的错误码
+            override fun onError2(
+                sessionId: String,
+                newErrorCode: Int,
+                oldErrorCode: Int,
+                errorMessage: String,
+                throwable: Throwable?
+            ) {
+                XhsShareSdk.setShareCallback(null)
+            }
+
+        })
+    }
+
+
     private fun getActivity() = mActivityRef?.get()
+
+
+    private fun convertShareModel(shareMedia: RIVER_SHARE_MEDIA): SHARE_MEDIA {
+        return when (shareMedia) {
+            RIVER_SHARE_MEDIA.WEIXIN -> SHARE_MEDIA.WEIXIN
+            RIVER_SHARE_MEDIA.WEIXIN_CIRCLE -> SHARE_MEDIA.WEIXIN_CIRCLE
+            RIVER_SHARE_MEDIA.SINA -> SHARE_MEDIA.SINA
+            RIVER_SHARE_MEDIA.MORE -> SHARE_MEDIA.MORE
+            RIVER_SHARE_MEDIA.FOURSQUARE -> SHARE_MEDIA.FOURSQUARE
+            else -> SHARE_MEDIA.WEIXIN
+        }
+    }
 }
 

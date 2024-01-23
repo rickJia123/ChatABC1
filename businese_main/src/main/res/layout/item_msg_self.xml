@@ -5,7 +5,7 @@
 
         <variable
             name="item"
-            type="river.chat.lib_resource.model.MessageBean" />
+            type="river.chat.lib_resource.model.database.MessageBean" />
 
         <variable
             name="handler"

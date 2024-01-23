@@ -42,12 +42,27 @@
     <external-files-path
         name="share_files"
         path="." />
-
+    <!--小红书-->
+    <root-path
+        name="root"
+        path="/" />
     <!-- 领阅RN   -->
-    <cache-path name="cache" path="/" />
-    <external-cache-path name="myexternalimages" path="Download/" />
-    <files-path name="files" path="files" /> <!-- context.getFilesDir() -->
-    <external-path name="external" path="external" /> <!-- Environment.getExternalStorageDirectory() -->
-    <external-files-path name="name" path="path" /> <!-- context.getExternalFilesDirs() -->
-    <external-cache-path name="name" path="path" /> <!-- getExternalCacheDirs() -->
+    <cache-path
+        name="cache"
+        path="/" />
+    <external-cache-path
+        name="myexternalimages"
+        path="Download/" />
+    <files-path
+        name="files"
+        path="files" /> <!-- context.getFilesDir() -->
+    <external-path
+        name="external"
+        path="external" /> <!-- Environment.getExternalStorageDirectory() -->
+    <external-files-path
+        name="name"
+        path="path" /> <!-- context.getExternalFilesDirs() -->
+    <external-cache-path
+        name="name"
+        path="path" /> <!-- getExternalCacheDirs() -->
 </paths>

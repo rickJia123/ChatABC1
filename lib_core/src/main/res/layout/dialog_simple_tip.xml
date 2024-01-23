@@ -94,7 +94,7 @@
                     android:layout_weight="19"
                     android:gravity="center"
                     android:maxEms="16"
-                    android:textColor="@color/defaultTextColor"
+                    android:textColor="@color/color_676767"
                     android:textSize="18dp"
                     android:visibility="gone"
                     tools:text="知道"

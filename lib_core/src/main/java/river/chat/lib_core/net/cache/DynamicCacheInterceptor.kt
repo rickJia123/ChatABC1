@@ -23,7 +23,7 @@ class DynamicCacheInterceptor(
         val initialRequest = chain.request()
 
         // 读取请求体配置的缓存相关字段
-        val cacheType = initialRequest.header(NetCacheKey.Key_Cache_Type)
+        var cacheType = initialRequest.header(NetCacheKey.Key_Cache_Type)
 
         val strategy =
             DynamicCacheStrategy(cacheKey = DynamicCacheHelper.createCacheKey(initialRequest))
@@ -33,10 +33,13 @@ class DynamicCacheInterceptor(
         LogUtil.d(
             " === ============================\nrick NetCacheInterceptor begin key:" + cacheType + ":::" + newRequest.url
         )
+        var cacheResponse: Response? = null
+
+        //先使用缓存，再使用接口,本次接口数据下次使用，适用于
+        cacheType = NetCacheType.CACHE_NORMAL
         when (cacheType) {
-            //有效期内只使用缓存
             NetCacheType.CACHE_NORMAL -> {
-                val cacheResponse = DynamicCacheHelper.redCache(
+                cacheResponse = DynamicCacheHelper.redCache(
                     getCurrentCache(newRequest.url.toString()),
                     strategy,
                     newRequest
@@ -46,7 +49,6 @@ class DynamicCacheInterceptor(
                         cacheResponse
                     )
                 )
-                if (cacheResponse != null) return cacheResponse
             }
 
             // 直接请求网络
@@ -57,7 +59,6 @@ class DynamicCacheInterceptor(
 
         try {
             val response = chain.proceed(newRequest)
-//            LogUtil.d("rick NetCacheInterceptor 没命中策略 begin:" + response.isSuccessful + "：：：" + response.toString())
             if (response.isSuccessful) {
                 //对应策略的接口存入缓存
                 if (DynamicCacheHelper.checkNeedStrategySave(cacheType ?: "")) {
@@ -69,6 +70,8 @@ class DynamicCacheInterceptor(
                         response
                     )
                 }
+            } else {
+                return cacheResponse ?: response
             }
 
             return response

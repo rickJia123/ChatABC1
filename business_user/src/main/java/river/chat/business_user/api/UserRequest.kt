@@ -163,7 +163,7 @@ class UserRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
     }
 
     /**
-     * 注销账户
+     * 刷新用户
      */
     fun refreshUserInfo(resultCallback: (result: RequestResult<User>) -> Unit) {
         launchFlow(

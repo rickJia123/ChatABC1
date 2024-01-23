@@ -8,7 +8,10 @@ import river.chat.lib_core.event.BaseActionEvent
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
+import river.chat.lib_core.utils.common.GsonKits
+import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.utils.longan.toastSystem
+import river.chat.lib_resource.model.VipType
 import river.chat.lib_resource.model.database.User
 
 /**
@@ -50,9 +53,12 @@ object RiverUserManager {
      * 更新用户信息
      */
     fun updateUser(user: User) {
+        LogUtil.i("rick RiverUserManager updateUser:"+GsonKits.toJson(user))
         UserBox.deleteAll()
         UserBox.updateUser(user)
     }
+
+
 
     /**
      *

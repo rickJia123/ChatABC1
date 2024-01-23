@@ -3,7 +3,7 @@ ext {
     build_versions = [
             "build_tools" : "30.0.3",
             "target_sdk"  : 30,
-            "min_sdk"     : 21,
+            "min_sdk"     : 24,
             "appid"       : "river.chat.chatevery",
             "version_name": version_name,
             "version_code": Integer.parseInt(version_code),
@@ -12,7 +12,6 @@ ext {
     libVersion = [
             //androidx.appcompat:appcompat
             appcompat = '1.6.0',
-
             //androidx.core:core-ktx
             core_ktx = '1.9.0',
 

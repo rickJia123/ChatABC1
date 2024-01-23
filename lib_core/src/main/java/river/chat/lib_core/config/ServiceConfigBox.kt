@@ -21,22 +21,22 @@ object ServiceConfigBox : BaseBox<ServiceConfigBean>() {
 
     fun updateConfig(config: ServiceConfigBean): Long {
 //        return add(config) ?: 0
-        var localConfig: ServiceConfigBean? = all?.firstOrNull()?: ServiceConfigBean(
+        var localConfig = all?.firstOrNull() ?: ServiceConfigBean(
             updateTime = System.currentTimeMillis()
         )
         localConfig.apply {
-            this?.appDownUrl = config.appDownUrl
-            this?.appPolicyUrl = config.appPolicyUrl
-            this?.appPrivacyPolicy = config.appPrivacyPolicy
-            this?.appShareBg = config.appShareBg
-//            this?.value = config.value
-            this?.updateTime = System.currentTimeMillis()
+            this.appDownUrl = config.appDownUrl
+            this.appPolicyUrl = config.appPolicyUrl
+            this.appPrivacyPolicy = config.appPrivacyPolicy
+            this.appShareBg = config.appShareBg
+            this.appDownLink = config.appDownLink
+            this.updateTime = System.currentTimeMillis()
         }
 
         localConfig.let {
             return add(
                 it
-            ) ?:0
+            ) ?: 0
         }
         return 0
     }

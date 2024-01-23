@@ -11,7 +11,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancelAndJoin
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.utils.logChat
 import river.chat.business_main.R
@@ -19,12 +18,10 @@ import river.chat.business_main.databinding.ViewChatStatusBinding
 import river.chat.lib_core.utils.exts.getColor
 import river.chat.lib_core.utils.exts.ifEmptyOrBlank
 import river.chat.lib_core.utils.exts.singleClick
-import river.chat.lib_core.utils.longan.mainThread
-import river.chat.lib_core.utils.longan.workThread
 import river.chat.lib_core.utils.other.CutdownUtils
 import river.chat.lib_core.view.base.LifecycleView
-import river.chat.lib_resource.model.MessageBean
-import river.chat.lib_resource.model.MessageStatus
+import river.chat.lib_resource.model.database.MessageBean
+import river.chat.lib_resource.model.database.MessageStatus
 
 
 class ChatStatusView @JvmOverloads constructor(
@@ -79,7 +76,7 @@ class ChatStatusView @JvmOverloads constructor(
                 reloadView.visibility = GONE
                 visibility = VISIBLE
 //                viewBinding.loadingView.visibility = VISIBLE
-                viewBinding.viewPayGuide.visibility = GONE
+//                viewBinding.viewPayGuide.visibility = GONE
                 mIsLoading = true
                 beginLoading(answerText)
             }
@@ -89,20 +86,20 @@ class ChatStatusView @JvmOverloads constructor(
             MessageStatus.FAIL_COMMON -> {
                 visibility = VISIBLE
                 viewBinding.loadingView.visibility = GONE
-                if (failMsg.contains("权益")) {
-                    reloadView.visibility = GONE
-                    answerParent.visibility = View.INVISIBLE
-                    viewBinding.viewPayGuide.visibility = VISIBLE
-                    answerParent.visibility = GONE
-                    viewBinding.loadingView.visibility = GONE
-                } else {
+//                if (failMsg.contains("权益")) {
+//                    reloadView.visibility = GONE
+//                    answerParent.visibility = View.INVISIBLE
+////                    viewBinding.viewPayGuide.visibility = VISIBLE
+//                    answerParent.visibility = GONE
+//                    viewBinding.loadingView.visibility = GONE
+//                } else {
                     reloadView.visibility = VISIBLE
                     answerParent.visibility = VISIBLE
-                    viewBinding.viewPayGuide.visibility = GONE
+//                    viewBinding.viewPayGuide.visibility = GONE
                     answerText.text = failMsg
                     answerText.setTextColor(river.chat.lib_core.R.color.red.getColor())
                     reloadView.visibility = VISIBLE
-                }
+//                }
                 stopLoading()
             }
         }

@@ -46,9 +46,10 @@ class UserStatusView @JvmOverloads constructor(
 
         var type = user.getVipType()
         when (type) {
-            VipType.VIP.value -> {
+            VipType.VIP.value, VipType.TRIAL.value -> {
                 viewBinding.tvVipTitle.text = user.rightsName
             }
+
             else -> {
                 viewBinding.tvVipTitle.text = R.string.vip_no.getString()
             }
@@ -62,8 +63,9 @@ class UserStatusView @JvmOverloads constructor(
             viewBinding.tvName.text = user.nickName
         }
 
-//        viewBinding.ivAvatar.loadAvatar(user.headImg)
-        viewBinding.ivAvatar.setImageResource(river.chat.lib_core.R.drawable.avator_default)
+
+        viewBinding.ivAvatar.loadAvatar(user.headImg)
+//        viewBinding.ivAvatar.setImageResource(river.chat.lib_core.R.drawable.avator_default)
         viewBinding.viewClick.singleClick {
             viewBinding.viewClick.postTrack(
                 TrackerEventName.CLICK_SETTING,

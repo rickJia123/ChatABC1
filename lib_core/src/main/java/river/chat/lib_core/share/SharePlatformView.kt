@@ -11,6 +11,7 @@ import river.chat.lib_core.R
 import river.chat.lib_core.databinding.ViewSharePlatformBinding
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.view.base.LifecycleView
+import river.chat.lib_umeng.common.RIVER_SHARE_MEDIA
 
 /**
  * Created by beiyongChao on 2023/3/15
@@ -56,21 +57,28 @@ class SharePlatformView @JvmOverloads constructor(
             SharePlatformBean(
                 "微信",
                 R.drawable.umeng_socialize_wechat,
-                SHARE_MEDIA.WEIXIN
+                RIVER_SHARE_MEDIA.WEIXIN
+            )
+        )
+        platforms.add(
+            SharePlatformBean(
+                "小红书",
+                R.mipmap.share_platform_xhs,
+                RIVER_SHARE_MEDIA.XIAOHONGSHU
             )
         )
         platforms.add(
             SharePlatformBean(
                 "朋友圈",
                 R.drawable.umeng_socialize_wxcircle,
-                SHARE_MEDIA.WEIXIN_CIRCLE
+                RIVER_SHARE_MEDIA.WEIXIN_CIRCLE
             )
         )
         platforms.add(
             SharePlatformBean(
                 "复制回答",
                 R.drawable.copy,
-               SHARE_MEDIA.MORE
+                RIVER_SHARE_MEDIA.MORE
             )
         )
         mViewModel?.data?.addAll(platforms)

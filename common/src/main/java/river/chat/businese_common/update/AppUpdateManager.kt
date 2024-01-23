@@ -73,11 +73,6 @@ object AppUpdateManager {
         return ConfigManager.getAppConfigInt(AppServerConfigKey.REQUEST_APP_UPDATE_TYPE, UPDATE_NO)
     }
 
-    /**
-     * 获取版本更新下载地址
-     */
-    fun getUpdateUrl(): String {
-        return ConfigManager.getAppConfig(AppServerConfigKey.REQUEST_APP_UPDATE_URL, "")
-    }
+
 }
 

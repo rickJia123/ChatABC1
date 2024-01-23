@@ -33,6 +33,9 @@ class AppInitializer : Initializer<Unit> {
             onActivityCreated = { activity, _ ->
                 if (activity.javaClass.simpleName.contains("WXEntryActivity")) {
                     return@doOnActivityLifecycle
+                } else
+                    if (activity.javaClass.simpleName.contains("XhsShareActivity")) {
+                    return@doOnActivityLifecycle
                 }
                 activityCache.add(activity as AppCompatActivity)
             },

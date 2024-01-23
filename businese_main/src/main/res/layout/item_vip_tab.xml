@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="false"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clRoot"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/bg_vip_tab_sel">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:enabled="false"
+                android:focusable="false"
+                android:gravity="center"
+                android:maxLines="2"
+                android:layout_marginLeft="3dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="3dp"
+                android:textColor="@color/defaultTitleColor"
+                android:textSize="@dimen/defaultTxtSize_small"
+                app:layout_constraintBottom_toTopOf="@id/tvPrice"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="1个月1个月1个月1个月1个月" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:enabled="false"
+                android:focusable="false"
+                android:gravity="center"
+                android:textColor="@color/defaultTitleColor"
+                android:textSize="16dp"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="35" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMonthPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:enabled="false"
+                android:focusable="false"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:textColor="@color/defaultTitleColor"
+                android:textSize="11dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPrice"
+                tools:text="35/月" />
+
+            <river.chat.lib_core.view.roundview.EasyTextView
+                android:id="@+id/tvDiscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/color_FF3B30"
+                android:paddingLeft="3dp"
+                app:ev_topRight_radius="@dimen/corner_bg_common"
+                android:paddingTop="2dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="2dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:ev_bottomLeft_radius="@dimen/corner_bg_common"
+                android:textColor="@color/white"
+                android:textSize="9sp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="7折" />
+            <View
+                android:id="@+id/viewClick"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

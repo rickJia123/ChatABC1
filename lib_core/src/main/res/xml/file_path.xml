@@ -15,4 +15,8 @@
     <external-path
         name="dcim"
         path="DCIM/" />
+    <!--小红书-->
+    <root-path
+        name="root"
+        path="/" />
 </paths>

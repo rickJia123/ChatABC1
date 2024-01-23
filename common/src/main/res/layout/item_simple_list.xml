@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/viewRoot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:background="@color/front_3_BgColor"
+  >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:textColor="@color/defaultDarkTitleColor"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <river.chat.lib_core.view.common.dash.DashLine
+            android:id="@+id/viewLine"
+            android:layout_width="0dp"
+            android:background="@null"
+            android:enabled="false"
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="17dp"
+            android:textColor="@color/color_333333"
+            android:textSize="14sp"
+            app:dash_width="2dp"
+            app:insert_space_at_end="true"
+            app:layout_constraintTop_toBottomOf="@id/tvContent"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_height="1dp"
+            app:solid_color="@color/front_2_BgColor"
+            app:solid_line="false"
+            app:solid_width="1dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

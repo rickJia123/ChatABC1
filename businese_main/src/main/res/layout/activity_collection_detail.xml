@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="vm"
+            type="river.chat.businese_main.collection.CollectionViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/themeBgColor">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/themeBgColor">
+
+                <river.chat.lib_core.view.title.RiverTitle
+                    android:id="@+id/toolBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="44dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:title="设置"
+                    app:titleSize="30sp" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/llAction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    app:layout_constraintTop_toTopOf="@id/toolBar"
+                    app:layout_constraintBottom_toBottomOf="@id/toolBar"
+                    app:layout_constraintRight_toRightOf="@id/toolBar"
+                    android:orientation="horizontal"
+                    android:paddingRight="10dp" >
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivCopy"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/copy"
+                        android:visibility="gone" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivCollection"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/collection_nosel" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivShare"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginLeft="20dp"
+                        android:src="@drawable/share_white" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvQuestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/river_font"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:textColor="@color/vipMonth"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toolBar"
+                    app:layout_constraintWidth_default="wrap"
+                    tools:text="这是一个问题吗？" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAnswer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:lineSpacingExtra="5dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:textColor="@color/defaultSubTitleColor"
+                    android:textSize="14sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvQuestion"
+                    tools:text="我有有 个 有我有有个 有我有有个 有我有有 个 有我有有个 有我有有个 有我有有 个 有我有有个 有我有有个 有我有有 个 有我有有个 有我有有个 有我有有 个 有我有有个 有我有有个 有 " />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

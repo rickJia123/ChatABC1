@@ -50,7 +50,7 @@ data class User(
         return if (rightsStatus == 1) {
             VipType.VIP.value
         } else if (rightsStatus == 3 && ((trialBalance ?: 0) > 0)) {
-            VipType.VIP.value
+            VipType.TRIAL.value
         } else {
             VipType.NORMAL.value
         }

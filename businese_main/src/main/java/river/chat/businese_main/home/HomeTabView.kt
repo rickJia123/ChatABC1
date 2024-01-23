@@ -1,6 +1,7 @@
 package river.chat.businese_main.home
 
 import android.content.Context
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
@@ -46,7 +47,7 @@ class HomeTabView @JvmOverloads constructor(
     private fun initViews() {
         mTabList.clear()
         mTabList.add(mBinding.tvChat)
-//        mTabList.add(mBinding.tvSquare)
+        mTabList.add(mBinding.tvSquare)
         mTabList.add(mBinding.tvMine)
     }
 
@@ -65,8 +66,7 @@ class HomeTabView @JvmOverloads constructor(
         //选中项是否是当前所在项
         if (position != mCurrentPosition) {
             mCurrentPosition = position
-            var tabBgX = mBinding.clBg.x
-            tabBgX = textView.x
+            var tabBgX = textView.x
             mBinding.clBg.animate().x(tabBgX).setDuration(100).start()
             updateStatus(position)
             mOnTabClick.invoke(position)
@@ -86,20 +86,24 @@ class HomeTabView @JvmOverloads constructor(
                 var tabBgX: Float = textView.x
                 mBinding.clBg.animate().x(tabBgX).setDuration(if (hasAnim) 100 else 0).start()
                 updateStatus(position)
-                textView.setTextColor(R.color.defaultDarkTitleColor.getColor())
+                textView.setTextColor(R.color.white.getColor())
+                textView.textSize = 18f
+                textView.typeface = Typeface.DEFAULT_BOLD
             } else {
-                textView.setTextColor(R.color.defaultTitleColor.getColor())
+                textView.setTextColor(R.color.iconDisableColor.getColor())
+                textView.textSize = 16f
+                textView.typeface = Typeface.DEFAULT
             }
         }
     }
 
     private fun updateStatus(position: Int) {
         if (position == 0) {
-            mBinding.clRoot.setBackgroundColor(R.color.front_1_BgColor.getColor())
+//            mBinding.clRoot.setBackgroundColor(R.color.front_1_BgColor.getColor())
             mBinding.clRoot.setTopRadius(0f)
             mBinding.clRoot.setBottomRadius(10f)
         } else {
-            mBinding.clRoot.setBackgroundColor(0)
+//            mBinding.clRoot.setBackgroundColor(0)
             mBinding.clRoot.setRadius(10f)
         }
 

@@ -2,22 +2,19 @@ package river.chat.businese_main.api
 
 import okhttp3.Call
 import okhttp3.Callback
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody.Part.Companion.create
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.Response
-import okhttp3.sse.EventSource
 import okio.*
 import river.chat.businese_common.net.ApiStorage.getBasedBody
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApiService
 import river.chat.lib_core.utils.common.GsonKits
 import river.chat.lib_core.utils.log.LogUtil
-import river.chat.lib_resource.model.MessageBean
-import river.chat.lib_resource.model.MessageBean2
+import river.chat.lib_resource.model.database.AiPictureBean
+import river.chat.lib_resource.model.database.MessageBean
 import river.chat.lib_resource.model.VipRightsBean
 import river.chat.lib_resource.model.VipSkuBean
 import java.io.BufferedReader
@@ -38,12 +35,6 @@ object MainBusinessApiService : BaseApiService() {
 
 
     /**
-     * 获取主业务网络仓库
-     */
-    private val mainBusinessFlowApi: MainBusinessApi
-        get() = retrofitFlow().create(MainBusinessApi::class.java)
-
-    /**
      * 获取GPT 回答
      */
     suspend fun requestAi(
@@ -57,19 +48,6 @@ object MainBusinessApiService : BaseApiService() {
             }
         )
 
-    /**
-     * 获取GPT 回答
-     */
-    suspend fun requestAiByFlow(
-        content: String,
-        msgId: String
-    ): BaseRequestBean<MessageBean2> =
-        mainBusinessFlowApi.requestAiByFlow(
-            getBasedBody().apply {
-                this["content"] = content
-                this["id"] = msgId
-            }
-        )
 
     // 定义一个函数来处理 text/event-stream 数据
 //    fun requestAiByFlow(url: String, callback: (String) -> Unit) {
@@ -143,6 +121,19 @@ object MainBusinessApiService : BaseApiService() {
     ): BaseRequestBean<MutableList<String>> =
         mainBusinessApi.requestHotQuestion(
             getBasedBody().apply {
+            }
+        )
+
+
+    /**
+     * AI 绘图
+     */
+    suspend fun requestPicture(
+        content: String
+    ): BaseRequestBean<AiPictureBean> =
+        mainBusinessApi.requestPicture(
+            getBasedBody().apply {
+                this["content"] = content
             }
         )
 

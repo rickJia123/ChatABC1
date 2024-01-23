@@ -3,7 +3,7 @@ package river.chat.lib_core.storage.database
 
 import io.objectbox.BoxStore
 import river.chat.lib_core.app.BaseApplication
-import river.chat.lib_resource.model.MyObjectBox
+import river.chat.lib_resource.model.database.MyObjectBox
 
 
 /**

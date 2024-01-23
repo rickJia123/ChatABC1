@@ -2,58 +2,17 @@ package river.chat.businese_main.chat
 
 import android.view.View
 import androidx.databinding.ObservableArrayList
-import river.chat.businese_common.router.jump2Login
-import river.chat.business_main.R
-import river.chat.lib_resource.model.CardMsgBean
-import river.chat.lib_resource.model.MessageBean
-import river.chat.lib_core.utils.longan.*
+import river.chat.lib_core.utils.longan.copyToClipboard
+import river.chat.lib_core.utils.longan.shareText
+import river.chat.lib_core.utils.longan.toastSystem
+import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.main.BaseViewModel
-import river.chat.lib_core.view.recycleview.databingding.BaseBindingAdapter
+import river.chat.lib_resource.model.database.CardMsgBean
+import river.chat.lib_resource.model.database.MessageBean
 
 class ChatViewModel : BaseViewModel() {
 
     val data = ObservableArrayList<CardMsgBean>()
-
-    // 定义多 item 布局类型的创建器
-    val itemViewTypes = object : BaseBindingAdapter.ItemViewTypeCreator {
-
-        override fun getItemViewType(position: Int, item: Any?): Int {
-//            item as MessageBean
-//            return when (item.source) {
-//                MessageSource.FROM_AI -> 0
-//                MessageSource.FRE_SELF -> 1
-//                else -> 0
-//            }
-            return 0
-        }
-
-        override fun getItemLayout(viewType: Int): Int {
-            // 根据不同的布局类型返回不同的布局资源 id
-
-            return R.layout.item_msg_card
-        }
-
-    }
-
-    fun onItemClick(item: Any?) {
-        if (item is String) {
-            item.toastSystem()
-            jump2Login()
-        }
-    }
-
-    fun onItemLongClick(item: MessageBean?): Boolean {
-        item?.let {
-            if (it.isSelf()) {
-                "复制成功".toastSystem()
-            } else {
-                shareText(it.content ?: "", "分享到")
-//                shareText(it.content ?: "", "分享到")
-            }
-        }
-        return false
-    }
-
 
 
     private var morePopWindow: ChatItemMorePopWindow? = null

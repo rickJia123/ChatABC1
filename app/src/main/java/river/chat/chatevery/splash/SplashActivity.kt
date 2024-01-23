@@ -2,10 +2,8 @@ package river.chat.chatevery.splash
 
 import com.umeng.commonsdk.UMConfigure
 import river.chat.businese_common.router.jump2Main
-import river.chat.businese_main.home.HomeActivity
 import river.chat.chatevery.databinding.ActivitySplashBinding
 import river.chat.lib_core.privacy.PrivacyManager
-import river.chat.lib_core.utils.longan.deviceModel
 import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 
 /**
@@ -21,17 +19,65 @@ class SplashActivity : BaseBindingViewModelActivity<ActivitySplashBinding, Splas
         //rick todo
         PrivacyManager.tryShowPrivacyDialog(this) {
             UMConfigure.submitPolicyGrantResult(applicationContext, it)
-//            if (it) {
-            binding.tvSplash.postDelayed({
-                jump2Main()
+            if (it) {
+                binding.tvTitle1.postDelayed({
+                    go2Main()
+                }, 0)
+            } else {
                 finish()
-            }, 0)
-//            } else {
-//                finish()
-//            }
+            }
+//            initVideo()
+            showGif()
         }
+    }
 
+    private fun showGif() {
+//        mBinding.ivSplash.load(R.drawable.splash_1)
+    }
 
+    private fun initVideo() {
+        //总播放时间
+//        var totalPLayTime = 20
+//        //rick todo
+//        var uri = Uri.parse("http://vjs.zencdn.net/v/oceans.mp4")
+//        var videoView = mBinding.videoView
+//        videoView.setVideoURI(uri)
+//        videoView.requestFocus()
+//
+//        var totalDuration = videoView.duration
+//        if (totalDuration < 0) {
+//            totalDuration = 0
+//        }
+//        var startTime = Random.nextInt(8) - totalPLayTime
+//        if (startTime < 0) {
+//            startTime = 0
+//        }
+//        videoView.seekTo(startTime * 1000)
+//
+//        CutdownUtils.countDownCoroutines(
+//            totalPLayTime,
+//            scope = lifecycleScope,
+//            onTick = {},
+//            onFinish = {
+//                videoView.stopPlayback()
+//                go2Main()
+//            }, delayTime = 1000
+//        )
+//
+//        // 在播放完毕被回调
+//        videoView.setOnCompletionListener {
+//            go2Main()
+//        }
+//
+//        videoView.setOnErrorListener { mp, what, extra ->
+//            go2Main()
+//            return@setOnErrorListener true
+//        }
+    }
+
+    private fun go2Main() {
+        jump2Main()
+        finish()
     }
 
 

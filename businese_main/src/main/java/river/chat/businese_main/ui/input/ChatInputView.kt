@@ -7,15 +7,12 @@ import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.lifecycleScope
-import org.greenrobot.eventbus.EventBus
-import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_main.chat.hot.HotTipViewModel
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.message.MessageHelper
-import river.chat.business_main.databinding.ViewInputBinding
+import river.chat.businese_main.vip.VipManager
+import river.chat.business_main.databinding.ViewChatInputBinding
 import river.chat.lib_core.BR
-import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.log
 import river.chat.lib_core.utils.longan.toastSystem
@@ -37,9 +34,9 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
     private var inputMethodManager: InputMethodManager? = null
     var keyboardChangeListener: KeyboardChangeListener? = null
 
-    private val viewBinding: ViewInputBinding = DataBindingUtil.inflate(
+    private val viewBinding: ViewChatInputBinding = DataBindingUtil.inflate(
         LayoutInflater.from(context),
-        river.chat.business_main.R.layout.view_input,
+        river.chat.business_main.R.layout.view_chat_input,
         this,
         true
     )
@@ -68,7 +65,7 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
     /**
      * 发送成功后，清空输入
      */
-      fun clearInput() {
+    fun clearInput() {
         viewBinding.etWriteReply.setText("")
     }
 
@@ -84,6 +81,7 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
     fun hideSoftInput() {
         inputMethodManager?.hideSoftInputFromWindow(viewBinding.etWriteReply.windowToken, 0)
     }
+
     /**
      * 监听接口消息请求
      */
@@ -91,6 +89,7 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
         (context as AppCompatActivity).let {
             hotTipViewModel?.request?.hotQuestionResult?.observe(it) {
                 if (it.isSuccess) {
+                    viewBinding.groupHot.visibility = VISIBLE
                     ("ChatInputView observerMsg:" + it.data).log()
                     hotTipViewModel?.data?.clear()
                     it.data?.let { it1 -> hotTipViewModel?.data?.addAll(it1) }
@@ -129,7 +128,12 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
             if (checkCanSend(content)) {
                 content.log()
                 MessageCenter.postSendMsg(MessageHelper.buildSelfMsg(content))
-                viewBinding.etWriteReply.setText("")
+
+                //没有权益就不清楚输入框
+                if (VipManager.hasRights()) {
+                    viewBinding.etWriteReply.setText("")
+                }
+
             }
 
         }

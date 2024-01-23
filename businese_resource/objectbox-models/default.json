@@ -172,7 +172,7 @@
     },
     {
       "id": "5:4838110875145329383",
-      "lastPropertyId": "7:3579666824177434307",
+      "lastPropertyId": "8:8682007685053250390",
       "name": "ServiceConfigBean",
       "properties": [
         {
@@ -210,12 +210,61 @@
           "id": "7:3579666824177434307",
           "name": "updateTime",
           "type": 6
+        },
+        {
+          "id": "8:8682007685053250390",
+          "name": "appDownLink",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:5392709544161469680",
+      "lastPropertyId": "7:8296010696799654082",
+      "name": "AiPictureBean",
+      "properties": [
+        {
+          "id": "1:7255861065059194888",
+          "name": "pictureId",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:3841664145953485223",
+          "name": "id",
+          "type": 9
+        },
+        {
+          "id": "3:7426786913843107543",
+          "name": "content",
+          "type": 9
+        },
+        {
+          "id": "4:3519194698070633854",
+          "name": "time",
+          "type": 6
+        },
+        {
+          "id": "5:2137522061567783670",
+          "name": "failFlag",
+          "type": 1
+        },
+        {
+          "id": "6:317072702539057760",
+          "name": "failMsg",
+          "type": 9
+        },
+        {
+          "id": "7:8296010696799654082",
+          "name": "isAnswer",
+          "type": 1
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "5:4838110875145329383",
+  "lastEntityId": "6:5392709544161469680",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

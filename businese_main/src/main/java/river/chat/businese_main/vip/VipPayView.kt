@@ -50,7 +50,7 @@ class VipPayView @JvmOverloads constructor(
     }
 
     fun update(tabBean: VipSkuBean) {
-        mTabBean=tabBean
+        mTabBean = tabBean
         var priceColor = "#FA601F"
         mBinding.tvPrice.buildSpannableString {
             addText("￥", method = {
@@ -64,7 +64,7 @@ class VipPayView @JvmOverloads constructor(
         }
 
         mBinding.tvTip.text = tabBean.promoText3
-        mBinding.tvPay.text=if (VipManager.isVip()) "立即续费" else "立即开通"
+        mBinding.tvPay.text = if (VipManager.isOfficalVip()) "立即续费" else "立即开通"
     }
 
     private fun initViews() {
@@ -79,8 +79,8 @@ class VipPayView @JvmOverloads constructor(
                 TrackNode(TrackerKeys.CLICK_TYPE to "支付按钮:" + mTabBean?.skuName)
             )
             PayCenter.pay(CreateOrderRequestBean().apply {
-                skuId=mTabBean?.skuId?:""
-                price=mTabBean?.price.toString()
+                skuId = mTabBean?.skuId ?: ""
+                price = mTabBean?.price.toString()
             })
         }
     }

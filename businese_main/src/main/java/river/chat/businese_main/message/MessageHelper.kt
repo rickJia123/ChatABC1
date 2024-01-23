@@ -3,10 +3,10 @@ package river.chat.businese_main.message
 
 import river.chat.businese_common.dataBase.MessageBox
 import river.chat.lib_core.utils.log.LogUtil
-import river.chat.lib_resource.model.CardMsgBean
-import river.chat.lib_resource.model.MessageBean
-import river.chat.lib_resource.model.MessageSource
-import river.chat.lib_resource.model.MessageStatus
+import river.chat.lib_resource.model.database.CardMsgBean
+import river.chat.lib_resource.model.database.MessageBean
+import river.chat.lib_resource.model.database.MessageSource
+import river.chat.lib_resource.model.database.MessageStatus
 import java.util.*
 
 /**
@@ -32,12 +32,12 @@ object MessageHelper {
      * 创建初始消息
      */
     fun buildDefaultMsg() = MessageBean().apply {
-        source = MessageSource.FROM_AI
+        source = MessageSource.SINGLE_AI_DEFAULT
         avatar = river.chat.lib_resource.R.drawable.avatar_ai
         id = mDefaultMsgId
         this.time = System.currentTimeMillis()
         content =
-            "Hello ！我是您的 Al 智能小伙伴，我叫 ChatMe ，您可以询问我任何问题，我将知无不言。我还能【 AI 创作】，你输入关键词，我可以为你写作文、写诗歌、写大纲、写情诗、写祝福、写检讨、写文案、写总结概要、写社交动态，优化文章，智能翻译、作业解答哦～希望我们可以一起成长，祝您玩得开心！\n"
+            "Hello ！我是您的 Al 智能小伙伴\n我叫 GPTEvery ，您可以询问我任何问题，我将知无不言。我还能【 AI 创作】，你输入关键词，我可以为你写作文、写诗歌、写大纲、写情诗、写祝福、写检讨、写文案、写总结概要、写社交动态，优化文章，智能翻译、作业解答哦～\n希望我们可以一起成长，祝您玩得开心！"
     }
 
 
@@ -79,6 +79,15 @@ object MessageHelper {
 //        user = buildAiUser()
     }
 
+    /**
+     * 创建付费消息
+     */
+    fun buildPayMsg() = MessageBean().apply {
+        this.source = MessageSource.SINGLE_PAY_TIP
+        this.id = createMsgId()
+        this.time = System.currentTimeMillis()
+    }
+
 
     /**
      * 把消息列表组装成卡片内成对的消息
@@ -90,7 +99,7 @@ object MessageHelper {
          * 问题列表
          */
         var questionSourceList = mutableListOf<MessageBean>().apply {
-            addAll(msgList.filter { it.source == MessageSource.FRE_SELF })
+            addAll(msgList.filter { it.source == MessageSource.FRE_SELF || it.source == MessageSource.SINGLE_AI_DEFAULT || it.source == MessageSource.SINGLE_PAY_TIP })
         }
 
         /**
@@ -104,14 +113,23 @@ object MessageHelper {
          * 遍历问题，找到对应的回答
          */
         questionSourceList.forEach { question ->
-            var matchAnswer =
-                answerSourceList.firstOrNull { it.parentId == question.id }
-                    ?: MessageBean()
-            if (matchAnswer.status != MessageStatus.FAIL_LIMIT) {
-                cardMsgList.add(CardMsgBean(question, matchAnswer))
+            //如果是用户发出的则寻找答案配对
+            if (question.source == MessageSource.FRE_SELF) {
+                var matchAnswer =
+                    answerSourceList.firstOrNull { it.parentId == question.id }
+                        ?: MessageBean()
+                if (matchAnswer.status != MessageStatus.FAIL_LIMIT) {
+                    cardMsgList.add(CardMsgBean(question, matchAnswer))
+                }
+            }
+            //如果是单独消息，直接添加
+            else {
+                cardMsgList.add(CardMsgBean(question, MessageBean()))
             }
 
         }
+
+
         return cardMsgList
     }
 
@@ -122,7 +140,7 @@ object MessageHelper {
 //        var isLastSuccess = this.answerMsg?.status == MessageStatus.COMPLETE
         var isCurrentSuccess = answerMsg?.status == MessageStatus.COMPLETE
 
-        LogUtil.i("rick MessageHelper isReloadMsg:"+(isLastSuccess && !isCurrentSuccess))
+        LogUtil.i("rick MessageHelper isReloadMsg:" + (isLastSuccess && !isCurrentSuccess))
         return isLastSuccess && !isCurrentSuccess
     }
 

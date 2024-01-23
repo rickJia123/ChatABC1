@@ -18,4 +18,7 @@ object CommonEvent {
     //收起软键盘
     const val HIDE_SOFT_WINDOW = "HIDE_SOFT_WINDOW"
 
+    //收藏状态变化
+    const val COLLECTION_TOGGLE = "COLLECTION_TOGGLE"
+
 }

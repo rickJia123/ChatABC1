@@ -42,10 +42,7 @@ object AppServerConfigKey {
      */
     const val REQUEST_APP_UPDATE_TYPE = "REQUEST_APP_UPDATE_TYPE"
 
-    /**
-     * 用户版本更新下载链接
-     */
-    const val REQUEST_APP_UPDATE_URL = "REQUEST_APP_UPDATE_URL"
+
 
     /**
      * 用户版本更新下载内容

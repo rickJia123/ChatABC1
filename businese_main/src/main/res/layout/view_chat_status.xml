@@ -23,12 +23,12 @@
             app:layout_constraintWidth_default="wrap"
             tool:text="我 问题我有个问题我有个问题我有 " />
 
-        <river.chat.businese_common.ui.view.PayGuideView
-            android:id="@+id/viewPayGuide"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <river.chat.businese_common.ui.view.PayGuideView-->
+<!--            android:id="@+id/viewPayGuide"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
  n
     </androidx.constraintlayout.widget.ConstraintLayout>
 

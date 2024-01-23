@@ -73,10 +73,12 @@ fun jump2Collection() {
     ARouter.getInstance().build(HomeRouterConstants.HOME_COLLECTION)
         .navigation()
 }
+
 /**
  * 跳转收藏详情
  */
-fun jump2CollectionDetail() {
+fun jump2CollectionDetail(questionId: Long) {
     ARouter.getInstance().build(HomeRouterConstants.HOME_COLLECTION_DETAIL)
+        .withLong(HomeRouterConstants.Params.KEY_QUESTION_ID, questionId)
         .navigation()
 }

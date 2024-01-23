@@ -4,13 +4,22 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Rect
+import android.os.Build
+import android.os.Handler
+import android.os.Looper
+import android.view.PixelCopy
 import android.view.View
+import android.view.Window
 import android.widget.ImageView
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
 import river.chat.lib_core.R
+import river.chat.lib_core.app.BaseApplication
+import java.io.File
+import java.io.FileOutputStream
 
 
 fun ImageView.loadSimple(resource: Any?) {
@@ -89,9 +98,10 @@ fun View.toBitmap(): Bitmap {
             )
             bmp //return
         }
+
         else -> {
             val screenshot =
-                Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_4444)
+                Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(screenshot)
             if (background != null) {
                 background.setBounds(0, 0, width, measuredHeight)
@@ -105,29 +115,80 @@ fun View.toBitmap(): Bitmap {
     }
 }
 
+fun View.captureView(window: Window?, bitmapCallback: (Bitmap) -> Unit) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        // Above Android O, use PixelCopy
+        val bitmap = Bitmap.createBitmap(this.width, this.height, Bitmap.Config.ARGB_8888)
+        val location = IntArray(2)
+        this.getLocationInWindow(location)
+        window?.let {
+            PixelCopy.request(
+                it,
+                Rect(location[0], location[1], location[0] + this.width, location[1] + this.height),
+                bitmap,
+                {
+                    if (it == PixelCopy.SUCCESS) {
+                        bitmapCallback.invoke(bitmap)
+                    }
+                },
+                Handler(Looper.getMainLooper())
+            )
+        }
+
+    } else {
+        val tBitmap = Bitmap.createBitmap(
+            this.width, this.height, Bitmap.Config.RGB_565
+        )
+        val canvas = Canvas(tBitmap)
+        this.draw(canvas)
+        canvas.setBitmap(null)
+        bitmapCallback.invoke(tBitmap)
+    }
+}
+
+
 /**
  * 截取scrollview布局图片
  */
 fun NestedScrollView.toBitmap(): Bitmap {
     var h = 0
     var bitmap: Bitmap? = null
-    for (i in 0 until childCount) {
-        h += getChildAt(i)
-            .height
-        //设置背景色，否则屏幕外部分布景是黑色的
-        getChildAt(i)
-            .setBackgroundColor(getResources().getColor(R.color.color_FFF3D6))
+    for (i in 0 until this.childCount) {
+        h += this.getChildAt(i).height
+        this.getChildAt(i).setBackgroundColor(Color.parseColor("#ffffff"))
     }
-    // 创建对应大小的bitmap
-    bitmap = Bitmap.createBitmap(
-        width,
-        h,
-        Bitmap.Config.ARGB_8888
-    )
+    bitmap = Bitmap.createBitmap(this.width, h, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(bitmap)
-    draw(canvas)
+    this.draw(canvas)
     return bitmap
 }
+
+
+
+
+/**
+ * 截取scrollview布局图片
+ */
+//fun NestedScrollView.toBitmap(): Bitmap {
+//    var h = 0
+//    var bitmap: Bitmap? = null
+//    for (i in 0 until childCount) {
+//        h += getChildAt(i)
+//            .height
+//        //设置背景色，否则屏幕外部分布景是黑色的
+//        getChildAt(i)
+//            .setBackgroundColor(getResources().getColor(R.color.color_FFF3D6))
+//    }
+//    // 创建对应大小的bitmap
+//    bitmap = Bitmap.createBitmap(
+//        width,
+//        h,
+//        Bitmap.Config.ARGB_8888
+//    )
+//    val canvas = Canvas(bitmap)
+//    draw(canvas)
+//    return bitmap
+//}
 
 
 

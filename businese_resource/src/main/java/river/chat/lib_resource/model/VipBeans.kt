@@ -1,5 +1,7 @@
 package river.chat.lib_resource.model
 
+import androidx.recyclerview.widget.DiffUtil
+
 /**
  * Created by beiyongChao on 2023/8/15
  * Description:
@@ -26,6 +28,25 @@ data class VipSkuBean(
     var skuId: String = ""
 
 )
+{
+    companion object {
+        val DIFF = object : DiffUtil.ItemCallback<VipSkuBean>() {
+            override fun areItemsTheSame(
+                oldItem: VipSkuBean,
+                newItem: VipSkuBean
+            ): Boolean {
+                return false
+            }
+
+            override fun areContentsTheSame(
+                oldItem: VipSkuBean,
+                newItem: VipSkuBean
+            ): Boolean {
+                return false
+            }
+        }
+    }
+}
 
 
 data class VipRightsBean(
@@ -47,5 +68,6 @@ enum class VipType(val value: Int) {
      */
 
     NORMAL(0),
-    VIP(2)
+    VIP(2),
+    TRIAL(3)
 }

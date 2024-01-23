@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:src="@mipmap/share_bg" />
+
+            />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -35,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_eeeeee_solid_rectangle_top_20"
                 android:orientation="vertical"
-                android:scrollbars="vertical"
+                android:scrollbars="none"
                 app:layout_constraintBottom_toTopOf="@+id/clQRCode"
                 app:layout_constraintHeight_max="500dp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -116,8 +117,10 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:textColor="@color/defaultDarkTitleColor"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/river_font"
                             android:textSize="17sp"
+                            android:textStyle="bold"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintHorizontal_chainStyle="packed"
                             app:layout_constraintLeft_toRightOf="@+id/ivQuestion"
@@ -150,7 +153,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:textColor="#524D45"
-                            android:textSize="15sp"
+                            android:textSize="13sp"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintHorizontal_chainStyle="packed"
                             app:layout_constraintLeft_toRightOf="@+id/ivAnswer"

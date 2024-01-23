@@ -4,6 +4,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.dataBase.MessageBox
+import river.chat.businese_common.dataBase.MessageBox.saveMsg
 import river.chat.businese_main.home.HomeActivity
 import river.chat.businese_main.message.MessageHelper.buildAiAnswerEmptyMsg
 import river.chat.businese_main.message.MessageHelper.buildAiAnswerMsg
@@ -15,16 +16,14 @@ import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.common.GsonKits
-import river.chat.lib_core.utils.exts.safeToInt
-import river.chat.lib_core.utils.exts.safeToLong
 import river.chat.lib_core.utils.exts.safeToString
 import river.chat.lib_core.utils.log.LogUtil
-import river.chat.lib_resource.model.MessageBean
-import river.chat.lib_resource.model.MessageReceiveBean
-import river.chat.lib_resource.model.MessageSource
-import river.chat.lib_resource.model.MessageStatus
 import river.chat.lib_core.utils.longan.log
-import river.chat.lib_resource.model.MessageFlowBean
+import river.chat.lib_core.utils.longan.toastSystem
+import river.chat.lib_resource.model.database.MessageBean
+import river.chat.lib_resource.model.database.MessageReceiveBean
+import river.chat.lib_resource.model.database.MessageSource
+import river.chat.lib_resource.model.database.MessageStatus
 
 /**
  * Created by beiyongChao on 2023/3/12
@@ -44,7 +43,7 @@ object MessageCenter {
     var mMessageVaildTime = 30 * 1000L
 
     //存储消息请求时间
-    var mRequestTimeMap = mutableMapOf<Long, Long>()
+    var mRequestTimeMap = mutableMapOf<String, Long>()
 
     init {
 
@@ -65,7 +64,7 @@ object MessageCenter {
     fun getHistoryMsg(): List<MessageBean> {
         var msgList = MessageBox.getMsgList()
         msgList.add(0, MessageHelper.buildDefaultMsg())
-        return msgList
+        return msgList.filter { it.source != MessageSource.INVALID }
     }
 
 
@@ -78,7 +77,7 @@ object MessageCenter {
             var msg = it
             if (msg.status == MessageStatus.LOADING) {
                 msg.status = MessageStatus.FAIL_COMMON
-                MessageBox.saveMsg(it)
+                saveMsg(it)
             }
         }
 
@@ -94,13 +93,9 @@ object MessageCenter {
 //                if (it.isSuccess) {
                 result.data?.let {
                     var msg = it
-//                    ("MessageCenter observerMsg:" + msg).log()
                     distributeMsg(buildAiAnswerMsg(msg))
 //                }
-                    //请求成功后，更新vip状态
-                    if (result.isSuccess) {
-                        VipManager.onUseVipTimes()
-                    }
+
                 }
 
             }
@@ -109,7 +104,7 @@ object MessageCenter {
 
     fun onReceiveMsg(flowMsg: MessageBean) {
         var endTime = System.currentTimeMillis()
-        var startTime = mRequestTimeMap[flowMsg.id] ?: 0
+        var startTime = mRequestTimeMap[flowMsg.id.safeToString()] ?: 0
         LogUtil.i("requestAiByFlow 请求结束 总时间:" + (endTime - startTime))
         LogUtil.i("receiveEventStream MessageCenter :" + GsonKits.toJson(flowMsg))
         var result: RequestResult<MessageBean>? = null
@@ -123,16 +118,16 @@ object MessageCenter {
             this.failMsg = flowMsg.failMsg
         })
 
-        result?.data?.let {
+        result.data?.let {
             var msg = it
             ("MessageCenter observerMsg:" + msg).log()
             distributeMsg(buildAiAnswerMsg(msg))
 //                }
-            //请求成功后，更新vip状态
-            if (result.isSuccess) {
-                VipManager.onUseVipTimes()
-            }
         }
+    }
+
+    fun onComplete() {
+        VipManager.onUseVipTimes()
     }
 
 
@@ -141,17 +136,22 @@ object MessageCenter {
      * @param isSendLocal 是否只发送到本地列表，不请求接口
      */
     fun postSendMsg(questionMsg: MessageBean) {
-        if (checkPermission(questionMsg)) {
-            if (questionMsg.source == MessageSource.FRE_SELF) {
-                distributeMsg(questionMsg)
+        if (questionMsg.source == MessageSource.SINGLE_PAY_TIP) {
+            distributeMsg(questionMsg)
+        } else
+            if (checkPermission()) {
+                if (questionMsg.source == MessageSource.FRE_SELF) {
+                    distributeMsg(questionMsg)
 //                //发送ai回答空消息，用于占位
 //                var aiMsgId = createMsgId()
-                distributeMsg(buildAiAnswerEmptyMsg(questionMsg.id))
-                mMsgViewModel?.request?.requestAi(
-                    questionMsg.content ?: "", questionMsg.id.safeToString()
-                )
+                    distributeMsg(buildAiAnswerEmptyMsg(questionMsg.id))
+                    mMsgViewModel?.request?.requestByFlow(
+                        questionMsg.content ?: "", questionMsg.id.safeToString()
+                    )
+                }
             }
-        }
+
+
     }
 
     /**
@@ -202,14 +202,14 @@ object MessageCenter {
                     it.parentId = receiveMsg.parentId
                     it.failMsg = receiveMsg.failMsg
                     it.failFlag = receiveMsg.failFlag
-                    MessageBox.saveMsg(it)
+                    saveMsg(it)
                 }
             }
         }
 
         if (!needUpdateAiAnswer) {
             //保存消息到数据库
-            MessageBox.saveMsg(receiveMsg)
+            saveMsg(receiveMsg)
         }
 
         return resultMsg
@@ -218,7 +218,7 @@ object MessageCenter {
     /**
      * 检查消息发送 权限
      */
-    private fun checkPermission(msg: MessageBean): Boolean {
+    private fun checkPermission(): Boolean {
         var hasPermission = true
         var user = getPlugin<UserPlugin>()
         var isLogin = user.isLogin()
@@ -231,12 +231,32 @@ object MessageCenter {
             //本次打开app是否已经提示没有会期，第一次会推送到消息列表，第二次会弹窗
             //还没有推送到消息中
             if (!mIsTipNoVip) {
-                if (!VipManager.isVip()) {
+                if (!VipManager.hasRights()) {
                     mIsTipNoVip = true
+                    //最新一条是否是支付提示
+                    var isLastPay =
+                        getHistoryMsg().firstOrNull()?.source == MessageSource.SINGLE_PAY_TIP
+                    if (isLastPay) {
+                        VipManager.jump2VipPage()
+                        hasPermission = false
+                    } else {
+                        //把之前的支付消息删除再发送新的，保证列表只有一个支付提示
+                        getHistoryMsg().forEach {
+                            if (it.source == MessageSource.SINGLE_PAY_TIP) {
+                                it.source = MessageSource.INVALID
+                                saveMsg(it)
+                                return@forEach
+                            }
+                        }
+                        postSendMsg(MessageHelper.buildPayMsg())
+                    }
+
                 }
             } else {
                 //已经推送到消息中
-                if (!VipManager.check2Vip()) {
+                if (!VipManager.hasRights()) {
+                    //rick todo 这里改成弹窗
+                    VipManager.jump2VipPage()
                     hasPermission = false
                 }
             }
@@ -280,10 +300,29 @@ object MessageCenter {
 
     fun updateMsg(msg: MessageBean?) {
         msg?.let {
-            MessageBox.saveMsg(it)
+            saveMsg(it)
         }
     }
 
+    fun toggleCollectionStatus(msg: MessageBean?, needPost:Boolean=true) {
+        msg?.let {
+            if (msg.isCollected == true) {
+                msg.isCollected = false
+                "取消收藏".toastSystem()
+            } else {
+                msg.isCollected = true
+                "收藏成功".toastSystem()
+            }
+            saveMsg(it)
+            if (needPost)
+            {
+                EventCenter.postEvent(BaseActionEvent().apply {
+                    action = CommonEvent.COLLECTION_TOGGLE
+                })
+            }
+
+        }
+    }
 
 }
 

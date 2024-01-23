@@ -11,7 +11,11 @@ data class ServiceConfigBean(
     @Id
     var id: Long = 0,
 
+    //下载h5页面
     var appDownUrl: String = "",
+
+    //app下载链接
+    var appDownLink: String = "",
     var appPolicyUrl: String = "",
     var appPrivacyPolicy: String = "",
     var appShareBg: String = "",

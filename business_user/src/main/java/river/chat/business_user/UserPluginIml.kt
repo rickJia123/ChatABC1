@@ -82,7 +82,7 @@ class UserPluginIml : UserPlugin {
         if (isLogin()) {
             LoginViewModel().request.refreshUserInfo { result ->
                 if (result.isSuccess) {
-                  PayCenter.postRefreshVipStatus()
+                    PayCenter.postRefreshVipStatus()
                 }
             }
         }

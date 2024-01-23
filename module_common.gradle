@@ -25,6 +25,7 @@ android {
     }
 }
 dependencies {
+    api fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
 //    def commonModules = ["lib_base"]
 //    implDependencies delegate, commonModules
 //    kapt "com.alibaba:arouter-compiler:$arouter_compiler"

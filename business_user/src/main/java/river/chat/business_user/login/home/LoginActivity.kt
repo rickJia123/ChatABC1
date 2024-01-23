@@ -1,15 +1,12 @@
 package river.chat.business_user.login.home
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import org.koin.android.ext.android.inject
+import com.gyf.immersionbar.ImmersionBar
 import river.chat.businese_common.utils.onLoad
 import river.chat.business_user.R
-import river.chat.lib_core.wx.WxManager
 import river.chat.business_user.databinding.ActivityLoginBinding
 import river.chat.business_user.login.LoginPage
-import river.chat.business_user.login.LoginStatus
 import river.chat.business_user.login.LoginViewModel
-import river.chat.lib_core.router.plugin.module.HomePlugin
 import river.chat.lib_core.router.plugin.module.UserRouterConstants
 import river.chat.lib_core.utils.exts.width
 import river.chat.lib_core.utils.longan.screenWidth
@@ -36,6 +33,7 @@ class LoginActivity : BaseBindingViewModelActivity<ActivityLoginBinding, LoginVi
             onBackPressed()
         }
         observeData(binding)
+        ImmersionBar.with(this).statusBarDarkFont(true).navigationBarEnable(false).init()
     }
 
 

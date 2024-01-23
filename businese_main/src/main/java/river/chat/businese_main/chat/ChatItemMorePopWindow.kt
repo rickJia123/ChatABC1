@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.TextView
 import river.chat.business_main.R
-import river.chat.lib_resource.model.MessageBean
+import river.chat.lib_resource.model.database.MessageBean
 import river.chat.lib_core.utils.longan.dp
 import river.chat.lib_core.utils.longan.screenWidth
 
@@ -59,16 +59,16 @@ class ChatItemMorePopWindow(
             if (msg.isSelf()) {
                 showAsDropDown(
                     contentView,
-                    contentView.width/2,
+                    contentView.width / 2,
                     screenWidth - contentView.width / 2 - 11.dp.toInt(),
 //                    0,
-                    -1*(parent.height+70)
+                    -1 * (parent.height + 70)
                 )
             } else {
                 showAsDropDown(
                     parent,
                     contentView.width / 2 + 11.dp.toInt(),
-                  0
+                    0
                 )
             }
         } catch (e: Exception) {
@@ -80,7 +80,6 @@ class ChatItemMorePopWindow(
         try {
             super.dismiss()
         } catch (e: Exception) {
-
         }
     }
 

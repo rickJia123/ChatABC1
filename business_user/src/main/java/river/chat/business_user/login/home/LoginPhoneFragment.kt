@@ -118,12 +118,13 @@ class LoginPhoneFragment :
     }
 
     /**
-     * 检测验证码是否唯恐
+     * 检测验证码是否为空
      */
     private fun checkCode(callback: () -> Unit) {
         var isValidCode = getCode().isNullOrBlank()
-        if (!isValidCode) {
+        if (isValidCode) {
             "请输入验证码".toastSystem()
+            return
         }
         callback.invoke()
     }

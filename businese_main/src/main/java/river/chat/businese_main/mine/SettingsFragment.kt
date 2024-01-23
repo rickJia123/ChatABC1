@@ -54,13 +54,11 @@ class SettingsFragment :
             {
                 onSettingClick(binding.viewSettingPrivacy)
                 WebViewHelper.startWebViewActivity(PrivacyManager.getPrivacyUrl())
-                "隐私协议".toastSystem()
             }
         binding.viewSettingProtocol.click =
             {
                 onSettingClick(binding.viewSettingPrivacy)
                 WebViewHelper.startWebViewActivity(PrivacyManager.getPrivacyUrl())
-                "隐私协议".toastSystem()
             }
         binding.viewSettingLogout.singleClick {
             onSettingClick(binding.viewSettingLogout)

@@ -1,30 +1,23 @@
 package river.chat.businese_main.chat
 
 import androidx.lifecycle.MutableLiveData
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
-import okhttp3.sse.EventSource
-import okhttp3.sse.EventSourceListener
-import okhttp3.sse.EventSources
 import river.chat.businese_common.constants.CommonEvent
+import river.chat.businese_common.net.SSEClient
 import river.chat.businese_common.report.ReportManager
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.report.TrackerKeys.REQUEST_CONTENT
 import river.chat.businese_common.report.TrackerKeys.REQUEST_TIME
 import river.chat.businese_main.api.MainBusinessApiService
-import river.chat.businese_main.api.MainBusinessApiService.receiveEventStream
 import river.chat.businese_main.chat.hot.HotTipItemBean
-import river.chat.businese_main.message.MessageCenter
 import river.chat.lib_core.event.BaseActionEvent
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
-import river.chat.lib_core.utils.exts.safeToString
 import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.view.main.BaseViewModel
-import river.chat.lib_resource.model.MessageBean
-import river.chat.lib_resource.model.MessageStatus
+import river.chat.lib_resource.model.database.AiPictureBean
+import river.chat.lib_resource.model.database.MessageBean
+import river.chat.lib_resource.model.database.MessageStatus
 
 
 /**
@@ -36,6 +29,7 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
     val chatRequestResult = MutableLiveData<RequestResult<MessageBean>>()
 
     val hotQuestionResult = MutableLiveData<RequestResult<MutableList<HotTipItemBean>>>()
+    val pictureResult = MutableLiveData<RequestResult<AiPictureBean>>()
 
 
     /**
@@ -50,7 +44,7 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
 
                 //rick todo
                 ReportManager.reportEvent(
-                    TrackerEventName.REQUEST_CHAT,
+                    TrackerEventName.REQUEST_CHAT_SUCCESS,
                     mutableMapOf(
                         REQUEST_CONTENT to "GPT接口成功--问题:" + content + "     回答：" + data?.content,
                         REQUEST_TIME to "GPT接口成功--耗时:${time}ms",
@@ -76,7 +70,7 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             },
             error = {
                 ReportManager.reportEvent(
-                    TrackerEventName.REQUEST_CHAT,
+                    TrackerEventName.REQUEST_CHAT_SUCCESS,
                     mutableMapOf(
                         REQUEST_CONTENT to "GPT接口错误---问题:" + content + "    错误信息:${it.message}",
                     )
@@ -111,37 +105,28 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
     }
 
 
-    /**
-     * 获取GPT 答案
-     */
-    fun requestAiByFlow(content: String, msgId: Long) {
-//        receiveEventStream(content,msgId, listener = {
-//            LogUtil.i("requestAiByFlow success:"+it)
-//        })
-        LogUtil.i("requestAiByFlow 开始请求:" )
-        MessageCenter.mRequestTimeMap[msgId] =System.currentTimeMillis()
+
+
+    fun requestByFlow(content: String, msgId: String) {
+        SSEClient.start(content, msgId)
+    }
+
+    fun requestPicture(content: String) {
         launchFlow(
             request = {
-                MainBusinessApiService.requestAiByFlow(content, msgId.safeToString())
+                MainBusinessApiService.requestPicture(content)
             },
             dataResp = { data, time ->
-                LogUtil.i("requestAiByFlow success:" + data)
-
+                pictureResult.value =
+                    RequestResult(isSuccess = true, data =data)
             },
             error = {
-                LogUtil.i("requestAiByFlow error:" + it.message)
-                ReportManager.reportEvent(
-                    TrackerEventName.REQUEST_CHAT,
-                    mutableMapOf(
-                        REQUEST_CONTENT to "GPT接口错误---问题:" + content + "    错误信息:${it.message}",
-                    )
-                )
-
-
+                LogUtil.e("requestPicture error:${it.message}")
+                pictureResult.value =
+                    RequestResult(isSuccess = false, data = AiPictureBean())
             }
         )
     }
-
 
 
     /**

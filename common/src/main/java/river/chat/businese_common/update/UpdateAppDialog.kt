@@ -3,8 +3,10 @@ package river.chat.businese_common.update
 
 import android.app.Activity
 import android.app.DownloadManager
+import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.provider.Settings
 import android.view.KeyEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +15,7 @@ import river.chat.common.R
 import river.chat.common.databinding.DialogUpdateBinding
 import river.chat.lib_core.config.AppLocalConfigKey
 import river.chat.lib_core.config.ConfigManager
+import river.chat.lib_core.config.ServiceConfigBox
 import river.chat.lib_core.utils.exts.dp2px
 import river.chat.lib_core.utils.exts.getColor
 import river.chat.lib_core.utils.exts.singleClick
@@ -62,6 +65,7 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
 
     override fun initDataBinding(binding: DialogUpdateBinding) {
         onLoad()
+        apkLink = ServiceConfigBox.getConfig().appDownLink
         dialog?.setOnKeyListener { dialog, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_BACK && event.repeatCount == 0) {
                 closeDialog()
@@ -73,7 +77,7 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
         binding.viewRoot.post {
             mProgressWidth = binding.viewProgress.width
         }
-        apkLink = AppUpdateManager.getUpdateUrl()
+//        apkLink = AppUpdateManager.getUpdateUrl()
 
 
         binding.tvDes.text = AppUpdateManager.getUpdateContent()
@@ -138,9 +142,9 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
 
             STATUS_DOWNLOADING -> {
                 binding.tvRButton.isEnabled = false
-                binding.tvRButton.setTextColor(R.color.defaultTextColor.getColor())
+                binding.tvRButton.setTextColor(R.color.themeYellowColor.getColor())
                 binding.tvRButton.text = "下载中 " + (mProgress * 100).toInt() + "%"
-                binding.viewProgressMask.width(((1-mProgress) * mProgressWidth).toInt())
+                binding.viewProgressMask.width(((1 - mProgress) * mProgressWidth).toInt())
             }
 
             STATUS_COMPLETE -> {
@@ -148,8 +152,15 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
                 binding.tvRButton.setTextColor(R.color.highButtonColor.getColor())
                 binding.tvRButton.text = "安装"
                 binding.tvRButton.isEnabled = true
-                binding.viewProgressMask.visibility= View.GONE
-                completeUri?.let { installAPK(it) }
+                binding.viewProgressMask.visibility = View.GONE
+                completeUri?.let {
+
+                    var packageURI = Uri.parse("package:" + context?.packageName)
+//                    var intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI)
+//                    startActivityForResult(intent, 0)
+
+                    installAPK(packageURI)
+                }
             }
         }
     }

@@ -37,13 +37,6 @@ object ServiceConfigManager {
         CommonRequestViewModel().requestAppUpdateConfig() {
             if (it.isSuccess) {
                 it.data?.let {
-                    if (it.appUrl.isNotEmpty()) {
-                        ConfigManager.putAppConfig(
-                            AppServerConfigKey.REQUEST_APP_UPDATE_URL,
-                            it.appUrl
-                        )
-                    }
-
                     ConfigManager.putAppConfig(
                         AppServerConfigKey.REQUEST_APP_UPDATE_TYPE,
                         if (it.isForce == 1) 2 else if (it.isRenew == 1) 1 else 0

@@ -1,4 +1,4 @@
-package river.chat.lib_resource.model
+package river.chat.lib_resource.model.database
 
 import androidx.recyclerview.widget.DiffUtil
 import io.objectbox.annotation.Entity
@@ -37,7 +37,8 @@ data class MessageBean(
     var isCollected: Boolean? = false,
 
 
-    ) : java.io.Serializable {
+
+) : java.io.Serializable {
     fun isSelf(): Boolean {
         return source == MessageSource.FRE_SELF
     }
@@ -71,10 +72,26 @@ object MessageStatus {
     const val FAIL_LIMIT = 3
 }
 
+
+//消息类型：文本/图片
+object MessageType {
+    const val TEXT = 0
+    const val PICTURE = 1
+}
+
 //该条会话类型()
 object MessageSource {
+
+    //无效
+    const val INVALID = -1
     const val FROM_AI = 0
     const val FRE_SELF = 1
+
+    //单独消息(Ai招呼/热词提示等)
+    const val SINGLE_AI_DEFAULT = 2
+
+    //付费提示
+    const val SINGLE_PAY_TIP = 3
 }
 
 
@@ -87,8 +104,7 @@ data class MessageReceiveBean(
 data class CardMsgBean(
     var questionMsg: MessageBean = MessageBean(),
     var answerMsg: MessageBean = MessageBean()
-)
-{
+) {
     companion object {
         val DIFF = object : DiffUtil.ItemCallback<CardMsgBean>() {
             override fun areItemsTheSame(

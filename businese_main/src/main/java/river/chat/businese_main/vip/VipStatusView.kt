@@ -21,7 +21,6 @@ class VipStatusView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LifecycleView(context, attrs, defStyleAttr) {
 
-
     private val viewBinding: ViewVipStatusBinding = DataBindingUtil.inflate(
         LayoutInflater.from(context),
         river.chat.business_main.R.layout.view_vip_status,
@@ -38,12 +37,11 @@ class VipStatusView @JvmOverloads constructor(
     fun update() {
         var userPlugin = getPlugin<UserPlugin>()
         var user = userPlugin.getUser()
-        var remainTimes =
-            user.trialBalance
+
 
         var type = user.getVipType()
         when (type) {
-            VipType.VIP.value -> {
+            VipType.VIP.value,VipType.TRIAL.value -> {
                 viewBinding.tvRemainTimes.text = VipManager.getRemainTimeStr()
             }
 

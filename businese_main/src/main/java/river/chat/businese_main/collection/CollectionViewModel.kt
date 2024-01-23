@@ -6,7 +6,7 @@ import river.chat.business_main.R
 import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.main.BaseViewModel
 import river.chat.lib_core.view.recycleview.databingding.BaseBindingAdapter
-import river.chat.lib_resource.model.CardMsgBean
+import river.chat.lib_resource.model.database.CardMsgBean
 
 class CollectionViewModel : BaseViewModel() {
 
@@ -24,7 +24,7 @@ class CollectionViewModel : BaseViewModel() {
         override fun getItemLayout(viewType: Int): Int {
             // 根据不同的布局类型返回不同的布局资源 id
 
-            return R.layout.item_collection_card
+            return R.layout.item_simple_list
         }
 
     }

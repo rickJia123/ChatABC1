@@ -4,11 +4,10 @@ import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import river.chat.lib_core.net.bean.BaseRequestBean
-import river.chat.lib_core.net.cache.NetCacheKey
-import river.chat.lib_core.net.cache.NetCacheType
 import river.chat.lib_core.net.retrofit.BaseApi
-import river.chat.lib_resource.model.MessageBean
-import river.chat.lib_resource.model.MessageBean2
+import river.chat.lib_resource.model.database.AiPictureBean
+import river.chat.lib_resource.model.database.MessageBean
+import river.chat.lib_resource.model.database.MessageBean2
 import river.chat.lib_resource.model.VipRightsBean
 import river.chat.lib_resource.model.VipSkuBean
 
@@ -28,7 +27,7 @@ interface MainBusinessApi : BaseApi {
      * AI 对话
      */
     @POST("/chat/prompt/v101")
-//    @Headers("Accept: text/event-stream")
+    @Headers("Accept: text/event-stream")
     suspend fun requestAiByFlow(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<MessageBean2>
 
 
@@ -38,6 +37,12 @@ interface MainBusinessApi : BaseApi {
 //    @Headers(NetCacheKey.Key_Cache_Type, NetCacheType.CACHE_NORMAL)
     @POST("/chat/hotQuestion")
     suspend fun requestHotQuestion(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<MutableList<String>>
+
+    /**
+     * AI 绘图
+     */
+    @POST("/image/prompt")
+    suspend fun requestPicture(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<AiPictureBean>
 
     /**
      *意见反馈

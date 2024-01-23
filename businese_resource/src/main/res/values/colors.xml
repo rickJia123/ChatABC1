@@ -15,8 +15,7 @@
     <color name="front_2_BgColor">#b2b2b2</color>
 
     //默认组件背景色，浅3级
-    <color name="front_3_BgColor">#E7E7E7</color>
-
+    <color name="front_3_BgColor">#dddddd</color>
 
 
     //弹窗背景色

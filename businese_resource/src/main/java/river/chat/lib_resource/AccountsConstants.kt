@@ -21,6 +21,11 @@ object AccountsConstants {
      */
     const val WECHAT_SECRET= "1cb88656052791001ce68a43cac81936"
 
+    /**
+     * 小红书app
+     */
+    const val XHS_APP_KEY= "5d4b2c13591f58a456f2b2f63c2f0adb"
+
 
 
 }

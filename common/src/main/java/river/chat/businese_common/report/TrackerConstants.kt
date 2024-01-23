@@ -12,7 +12,8 @@ object TrackerEventName {
     /**
      * 聊天页面
      */
-    const val REQUEST_CHAT = "REQUEST_CHAT"
+    const val REQUEST_CHAT_SUCCESS = "REQUEST_CHAT_SUCCESS"
+    const val REQUEST_CHAT_ERROR = "REQUEST_CHAT_ERROR"
     const val CLICK_CHAT = "CLICK_CHAT"
 
 
@@ -63,7 +64,8 @@ object VIPTracker {
  */
 object ShareTracker {
     //分享的问题
-    const val KEY_CONTENT = "KEY_CONTENT"
+    const val KEY_ANSWER = "KEY_ANSWER"
+    const val KEY_QUESTION = "KEY_QUESTION"
 
     //分享平台
     const val KEY_PLATFORM = "KEY_PLATFORM"

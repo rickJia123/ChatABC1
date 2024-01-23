@@ -3,6 +3,7 @@ package river.chat.businese_main.ui.chat
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import river.chat.businese_common.dataBase.MessageBox
 import river.chat.businese_common.report.ChatTracker
@@ -10,7 +11,6 @@ import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.utils.onReport
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.share.ShareDialog
-import river.chat.businese_main.utils.logChat
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewChatCardBinding
 import river.chat.lib_core.utils.exts.singleClick
@@ -20,8 +20,8 @@ import river.chat.lib_core.utils.longan.screenWidth
 import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.base.LifecycleView
-import river.chat.lib_resource.model.MessageBean
-import river.chat.lib_resource.model.MessageStatus
+import river.chat.lib_resource.model.database.MessageBean
+import river.chat.lib_resource.model.database.MessageStatus
 
 
 class ChatCardView @JvmOverloads constructor(
@@ -76,14 +76,7 @@ class ChatCardView @JvmOverloads constructor(
             ShareDialog.builder(topActivity).show(questionMsg, answerMsg)
         }
         viewBinding.ivCollection.singleClick {
-            if (questionMsg?.isCollected == true) {
-                questionMsg?.isCollected = false
-                "取消收藏".toastSystem()
-            } else {
-                questionMsg?.isCollected = true
-                "收藏成功".toastSystem()
-            }
-            MessageCenter.updateMsg(questionMsg)
+            MessageCenter.toggleCollectionStatus(questionMsg, false)
             updateCollectionStatus(questionMsg)
         }
     }
@@ -114,6 +107,12 @@ class ChatCardView @JvmOverloads constructor(
 
         if (isLastSuccess && !isCurrentSuccess) {
             return
+        }
+
+        if (answerMsg?.status == MessageStatus.COMPLETE) {
+            viewBinding.llAction.visibility = VISIBLE
+        } else {
+            viewBinding.llAction.visibility = View.GONE
         }
         if (answerMsg != null && questionMsg != null) {
             viewBinding.tvAnswer.text = answerMsg.content

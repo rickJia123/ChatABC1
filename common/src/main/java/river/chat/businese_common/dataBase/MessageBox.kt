@@ -1,9 +1,8 @@
 package river.chat.businese_common.dataBase
 
 import river.chat.lib_core.storage.database.BaseBox
-import river.chat.lib_core.utils.longan.log
-import river.chat.lib_resource.model.MessageBean
-import river.chat.lib_resource.model.MessageBean_
+import river.chat.lib_resource.model.database.MessageBean
+import river.chat.lib_resource.model.database.MessageBean_
 
 /**
  * Created by beiyongChao on 2023/3/6

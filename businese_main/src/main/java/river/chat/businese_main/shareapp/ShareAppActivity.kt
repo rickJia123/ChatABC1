@@ -22,6 +22,7 @@ import river.chat.lib_core.webview.WebViewHelper
 import river.chat.lib_core.webview.common.AgentWebGroup
 import river.chat.lib_core.webview.common.WebViewParams
 import river.chat.lib_umeng.ShareManager
+import river.chat.lib_umeng.common.RIVER_SHARE_MEDIA
 import river.chat.lib_umeng.common.RiverShareContent
 
 
@@ -103,7 +104,7 @@ class ShareAppActivity :
                 mTitle = "GPTEvery--ChatGpt连接工具"
                 mUrl = ServiceConfigBox.getConfig().appDownUrl
                 mDescription="我发现了一个强大的ChatGpt工具,你也来试试吧"
-            }, SHARE_MEDIA.WEIXIN
+            }, RIVER_SHARE_MEDIA.WEIXIN
         ).shareUrl(topActivity)
     }
 

@@ -1,9 +1,13 @@
 package river.chat.businese_common.config
 
 import android.app.Application
+import androidx.annotation.Nullable
 import com.alibaba.android.arouter.launcher.ARouter
 import com.tencent.tauth.Tencent
 import com.umeng.commonsdk.UMConfigure
+import com.xingin.xhssharesdk.callback.XhsShareRegisterCallback
+import com.xingin.xhssharesdk.core.XhsShareSdk
+import com.xingin.xhssharesdk.model.config.XhsShareGlobalConfig
 import com.yl.lib.sentry.hook.PrivacySentry
 import com.yl.lib.sentry.hook.PrivacySentryBuilder
 import kotlinx.coroutines.GlobalScope
@@ -33,11 +37,11 @@ object InitManager {
         workThread(
             scope = GlobalScope,
             block = {
-
+                initXhs(application)
                 initUmeng(application)
                 initPrivacy()
                 WxManager.regToWx(application)
-                InitManager.initBusiness(application)
+                initBusiness(application)
             },
             result = {
                 if (it) {
@@ -102,6 +106,32 @@ object InitManager {
         }
 
 
+    }
+
+
+    /**
+     * 小红书分享
+     */
+    private fun initXhs(application: Application) {
+        XhsShareSdk.registerApp(application, AccountsConstants.XHS_APP_KEY,
+            XhsShareGlobalConfig()
+                .setEnableLog(isAppDebug)
+                .setFileProviderAuthority("river.chat.chatevery.fileprovider")
+                .setClearCacheWhenShareComplete(true),
+            object : XhsShareRegisterCallback {
+                override fun onSuccess() {
+
+                }
+
+                override fun onError(
+                    errorCode: Int,
+                    errorMessage: String,
+                    @Nullable exception: Exception?
+                ) {
+
+
+                }
+            })
     }
 
 

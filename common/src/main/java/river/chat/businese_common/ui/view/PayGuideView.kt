@@ -4,6 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
+import river.chat.businese_common.report.ChatTracker
+import river.chat.businese_common.report.ReportManager
+import river.chat.businese_common.report.TrackerEventName
+import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.router.jump2VipExchange
 import river.chat.businese_common.router.jump2VipOpen
 import river.chat.common.R
@@ -42,9 +46,21 @@ class PayGuideView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : L
     private fun initListener() {
         viewBinding.viewPay.action(PayItemActionSimple("开通会员") {
             jump2VipOpen()
+            ReportManager.reportEvent(
+                TrackerEventName.CLICK_CHAT,
+                mutableMapOf(
+                    ChatTracker.CLICK_ACTION to "开通会员："
+                )
+            )
         })
-        viewBinding.viewPay.action(PayItemActionSimple("获取兑换码") {
+        viewBinding.viewShare.action(PayItemActionSimple("兑换会员") {
             jump2VipExchange()
+            ReportManager.reportEvent(
+                TrackerEventName.CLICK_CHAT,
+                mutableMapOf(
+                    ChatTracker.CLICK_ACTION to "兑换会员："
+                )
+            )
         })
 
     }

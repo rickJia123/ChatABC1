@@ -5,14 +5,12 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import river.chat.lib_core.R
 import river.chat.lib_core.net.cache.DynamicCacheInterceptor
 import river.chat.lib_core.net.cache.DynamicCacheManager
 import river.chat.lib_core.net.common.ApiConfig
 import river.chat.lib_core.net.common.OperationException
 import river.chat.lib_core.net.convert.ConverterFactory
-import river.chat.lib_core.net.interceptor.FlowResponseInterceptor
 import river.chat.lib_core.net.interceptor.HeadInterceptor
 import river.chat.lib_core.net.request.TrusHttpClient
 import river.chat.lib_core.utils.log.LogUtil
@@ -65,7 +63,7 @@ open class BaseApiService {
                             TimeUnit.SECONDS
                         )
                         .addInterceptor(HeadInterceptor())
-                        .addInterceptor(DynamicCacheInterceptor(DynamicCacheManager()))
+//                        .addInterceptor(DynamicCacheInterceptor(DynamicCacheManager()))
                         .followRedirects(false)
                         .followSslRedirects(false)
                     //                            //ipv6域名切换
@@ -97,59 +95,6 @@ open class BaseApiService {
             .build()
     }
 
-    /**
-     * 带设置超时时间的retrofit方法
-     */
-    fun retrofitFlow(
-
-    ): Retrofit {
-        //对主动设置超时时间的清空client重新走client配置流程
-
-        if (flowClient == null) {
-            synchronized(BaseApi::class.java) {
-                if (flowClient == null) {
-                    val clientBuilder = TrusHttpClient().trusClient
-                        .readTimeout(
-                            ApiConfig.READ_TIME_OUT.toLong(),
-                            TimeUnit.SECONDS
-                        )
-                        .connectTimeout(
-                            ApiConfig.CONNECT_TIME_OUT.toLong(),
-                            TimeUnit.SECONDS
-                        )
-                        .writeTimeout(
-                            ApiConfig.WRITE_TIME_OUT.toLong(),
-                            TimeUnit.SECONDS
-                        )
-                        .addInterceptor(HeadInterceptor())
-                        .addInterceptor(FlowResponseInterceptor())
-                        .followRedirects(false)
-                        .followSslRedirects(false)
-                    if (ApiConfig.isDebug()) {
-                        val loggingInterceptor = HttpLoggingInterceptor { message: String ->
-                            LogUtil.d(
-                                "river 网络日志： $message"
-                            )
-                        }
-                        clientBuilder.addInterceptor(
-                            loggingInterceptor.setLevel(
-                                HttpLoggingInterceptor.Level.BODY
-                            )
-                        )
-                    } else {
-                        clientBuilder.proxy(Proxy.NO_PROXY)
-                    }
-                    flowClient = clientBuilder.build()
-                }
-            }
-        }
-        return Retrofit.Builder()
-            .client(flowClient)
-            .baseUrl(ApiConfig.getHost())
-            .addConverterFactory(ConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-    }
 
     private fun checkNetWorkConnected(context: Context) {
         if (!isNetworkAvailable) {

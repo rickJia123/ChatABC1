@@ -15,7 +15,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
 //    api project(':UMLibrary')
     implementation project(":businese_resource")
     // 友盟统计SDK

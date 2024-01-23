@@ -6,6 +6,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:id="@+id/viewRoot"
         android:layout_height="wrap_content">
 
         <river.chat.businese_main.collection.CollectionSimpleCardView

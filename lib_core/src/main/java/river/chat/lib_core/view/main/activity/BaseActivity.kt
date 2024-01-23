@@ -8,12 +8,8 @@ import com.gyf.immersionbar.ktx.immersionBar
 import com.umeng.socialize.UMShareAPI
 import org.greenrobot.eventbus.EventBus
 import pub.devrel.easypermissions.EasyPermissions
-import river.chat.lib_core.R
 import river.chat.lib_core.tracker.PageTrackNode
-import river.chat.lib_core.tracker.TrackNode
 import river.chat.lib_core.tracker.trackNode
-import river.chat.lib_core.utils.longan.DownloadRequestBuilder
-import river.chat.lib_core.utils.longan.download
 import river.chat.lib_core.utils.permission.permission.PermissionHelper
 import river.chat.lib_core.view.common.LoadingDialog
 

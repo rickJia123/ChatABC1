@@ -4,19 +4,12 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
-import river.chat.businese_common.report.ChatTracker
-import river.chat.businese_common.report.TrackerEventName
-import river.chat.businese_common.utils.onReport
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewCollectionSimpleCardViewBinding
-import river.chat.lib_core.utils.exts.singleClick
-import river.chat.lib_core.utils.longan.copyToClipboard
 import river.chat.lib_core.utils.longan.dp
 import river.chat.lib_core.utils.longan.screenWidth
-import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.base.LifecycleView
-import river.chat.lib_resource.model.MessageBean
-import river.chat.lib_resource.model.MessageStatus
+import river.chat.lib_resource.model.database.MessageBean
 
 
 class CollectionSimpleCardView @JvmOverloads constructor(
@@ -43,34 +36,32 @@ class CollectionSimpleCardView @JvmOverloads constructor(
     }
 
     private fun initClick() {
-        viewBinding.clAnswer.singleClick {
-            answerMsg?.let {
-                var toastMsg = "回答已复制"
-                if (it.status == MessageStatus.COMPLETE) {
-                    answerMsg?.content?.copyToClipboard()
-                } else {
-                    toastMsg = "该回答状态异常哦"
-                }
-                toastMsg.toastSystem()
-                onReport(
-                    TrackerEventName.CLICK_CHAT,
-                    ChatTracker.CLICK_ACTION to "复制回答：" + answerMsg?.content,
-                )
-            }
+//        viewBinding.clAnswer.singleClick {
+//            answerMsg?.let {
+//                var toastMsg = "回答已复制"
+//                if (it.status == MessageStatus.COMPLETE) {
+//                    answerMsg?.content?.copyToClipboard()
+//                } else {
+//                    toastMsg = "该回答状态异常哦"
+//                }
+//                toastMsg.toastSystem()
+//                onReport(
+//                    TrackerEventName.CLICK_CHAT,
+//                    ChatTracker.CLICK_ACTION to "复制回答：" + answerMsg?.content,
+//                )
+//            }
+//
+//
+//        }
+//        viewBinding.clQuestion.singleClick {
+//            "问题已复制".toastSystem()
+//            questionMsg?.content?.copyToClipboard()
+//            onReport(
+//                TrackerEventName.CLICK_CHAT,
+//                ChatTracker.CLICK_ACTION to "复制问题：" + questionMsg?.content,
+//            )
+//        }
 
-
-        }
-        viewBinding.clQuestion.singleClick {
-            "问题已复制".toastSystem()
-            questionMsg?.content?.copyToClipboard()
-            onReport(
-                TrackerEventName.CLICK_CHAT,
-                ChatTracker.CLICK_ACTION to "复制问题：" + questionMsg?.content,
-            )
-        }
-        viewBinding.viewRightClick.singleClick {
-
-        }
     }
 
     private fun updateCollectionStatus() {
@@ -84,10 +75,10 @@ class CollectionSimpleCardView @JvmOverloads constructor(
         this.questionMsg = questionMsg
         this.answerMsg = answerMsg
         if (questionMsg != null) {
-            viewBinding.tvQuestion.text = questionMsg.content
+            viewBinding.tvQuestion.text = "Q: " + questionMsg.content
         }
         if (answerMsg != null && questionMsg != null) {
-            viewBinding.tvAnswer.text = answerMsg.content
+            viewBinding.tvAnswer.text = "A: " + answerMsg.content
             updateCollectionStatus()
         }
     }

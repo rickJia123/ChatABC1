@@ -5,8 +5,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import river.chat.businese_main.message.MessageCenter
 import river.chat.lib_core.router.plugin.module.HomePlugin
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
-import river.chat.lib_resource.model.MessageBean
-import river.chat.lib_resource.model.MessageFlowBean
+import river.chat.lib_resource.model.database.MessageBean
 
 /**
  * Created by beiyongChao on 2023/3/8
@@ -20,6 +19,10 @@ class MainPluginIml : HomePlugin {
 
     override fun onMsgReceive(msg: MessageBean) {
         MessageCenter.onReceiveMsg(msg)
+    }
+
+    override fun onComplete() {
+        MessageCenter.onComplete()
     }
 
     override fun init(context: Context?) {

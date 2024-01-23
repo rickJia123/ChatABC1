@@ -19,6 +19,7 @@ import river.chat.businese_common.update.AppUpdateManager
 import river.chat.businese_main.chat.ChatFragment
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.mine.SettingsFragment
+import river.chat.businese_main.picture.PictureFragment
 import river.chat.business_main.databinding.ActivityHomeBinding
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
@@ -91,8 +92,8 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
     private fun initFragment() {
         val fragmentChat = ChatFragment.newInstance()
         mFragments.add(fragmentChat as BaseFragment)
-//        val fragmentSquare = SquareFragment.newInstance()
-//        mFragments.add(fragmentSquare as BaseFragment)
+        val fragmentPicture = PictureFragment.newInstance()
+        mFragments.add(fragmentPicture)
         val fragmentSettings = SettingsFragment.newInstance()
         mFragments.add(fragmentSettings as BaseFragment)
 

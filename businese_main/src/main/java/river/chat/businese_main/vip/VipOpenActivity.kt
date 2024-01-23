@@ -32,7 +32,7 @@ class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, Vip
             {
                 jump2VipExchange()
             }
-        binding.viewTabView.setTabClickListener { position, vipTabBean ->
+        binding.viewTabView.setTabClickListener { vipTabBean ->
             binding.viewPay.update(vipTabBean)
         }
 
@@ -58,7 +58,7 @@ class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, Vip
         viewModel.request.paySkuResult.observe(this) {
             if (it.isSuccess) {
                 it.data?.let {
-                    mBinding.viewTabView.update(it)
+                    mBinding.viewTabView.updateData(it)
                 }
             }
         }

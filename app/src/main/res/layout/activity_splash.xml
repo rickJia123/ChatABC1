@@ -8,14 +8,68 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvSplash"
+            android:id="@+id/tvTitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="30sp"
+            android:fontFamily="@font/river_font"
+            android:text="连\n结"
+            android:textColor="@color/themeYellowColor"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tvTitle2"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/river_font"
+            android:text="ChatGpt"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/themeYellowColor"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tvTitle3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle1" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/river_font"
+            android:text="与\n世\n界\n对\n话\n"
+            android:textColor="@color/themeYellowColor"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tvTitle4"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle2" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/river_font"
+            android:text="用\nAI\n创\n造"
+            android:textColor="@color/themeYellowColor"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/tvTitle3"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTitle3" />
+
+
+<!--        <VideoView-->
+<!--            android:id="@+id/videoView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

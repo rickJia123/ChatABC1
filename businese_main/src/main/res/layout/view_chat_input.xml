@@ -28,7 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:text="今日热词"
+
+            android:text="今日热门"
             android:textColor="@color/defaultTextColor"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -38,6 +39,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+
             android:layout_marginLeft="15dp"
             android:orientation="horizontal"
             app:data="@{vm.data}"
@@ -55,6 +57,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
+
+
             android:background="@color/recyclerview_divider_color"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -114,6 +118,12 @@
             app:layout_constraintTop_toTopOf="@id/viewInputBg"
             tools:visibility="visible" />
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupHot"
+            app:constraint_referenced_ids="recyclerView,tvHot,viewLine"
+            android:layout_width="wrap_content"
+            android:visibility="invisible"
+            android:layout_height="wrap_content"/>
     </river.chat.lib_core.view.roundview.EasyConstraintLayout>
 
 </layout>

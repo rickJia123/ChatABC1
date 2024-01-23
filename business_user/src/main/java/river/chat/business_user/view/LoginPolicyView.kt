@@ -17,7 +17,6 @@ import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.base.LifecycleView
 import river.chat.lib_core.webview.WebViewHelper
-import river.chat.lib_resource.AppConstants
 
 
 class LoginPolicyView @JvmOverloads constructor(

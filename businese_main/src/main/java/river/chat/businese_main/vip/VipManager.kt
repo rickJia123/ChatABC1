@@ -9,7 +9,6 @@ import river.chat.lib_core.event.BaseActionEvent
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
-import river.chat.lib_core.utils.common.TimeUtils
 import river.chat.lib_core.utils.exts.getString
 import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_resource.model.VipType
@@ -40,15 +39,26 @@ object VipManager {
     fun onUseVipTimes() {
         var userPlugin = getPlugin<UserPlugin>()
         var user = userPlugin.getUser()
-        user.trialBalance = Math.max(0, (user.trialBalance ?: 0) - 1)
+        user.trialBalance = 0.coerceAtLeast((user.trialBalance ?: 0) - 1)
         userPlugin.updateUser(user)
         EventCenter.postEvent(BaseActionEvent().apply { action = CommonEvent.UPDATE_USER })
     }
 
     /**
-     * 是否是vip
+     * 是否有权益（正式/体验）
      */
-    fun isVip(): Boolean {
+    fun hasRights(): Boolean {
+        var userPlugin = getPlugin<UserPlugin>()
+        var user = userPlugin.getUser()
+
+        return user.getVipType() == VipType.VIP.value || (user.getVipType() == VipType.TRIAL.value)
+
+    }
+
+    /**
+     * 是否是正式vip
+     */
+    fun isOfficalVip(): Boolean {
         var userPlugin = getPlugin<UserPlugin>()
         var user = userPlugin.getUser()
 
@@ -61,26 +71,27 @@ object VipManager {
      */
     fun check2Vip(): Boolean {
         var user = getPlugin<UserPlugin>().getUser()
-        var permission = isVip()
+        var permission = hasRights()
+//        //当前时间小于上次提示时间，只提示，超过了就直接跳转开通
+//        if (System.currentTimeMillis() < ((ConfigManager.getAppConfigBean(
+//                AppLocalConfigKey.UPDATE_CHAT_LIMIT_TIME
+//            )?.updateTime
+//                ?: 0) + UPDATE_SHOW_OPEN_VIP)
+//        ) {
+//            R.string.vip_limit_tip.getString().toastSystem()
+//        } else {
+//            //rick todo 这里改成弹窗
+//            jump2VipPage()
+//            ConfigManager.putAppConfig(AppLocalConfigKey.UPDATE_CHAT_LIMIT_TIME, true)
+//        }
 
-        //当前时间小于上次提示 小时，不提示更新
-        if (System.currentTimeMillis() < ((ConfigManager.getAppConfigBean(
-                AppLocalConfigKey.UPDATE_CHAT_LIMIT_TIME
-            )?.updateTime
-                ?: 0) + UPDATE_SHOW_OPEN_VIP)
-        ) {
-            R.string.vip_limit_tip.getString().toastSystem()
-        } else {
-            //rick todo 这里改成弹窗
-            jump2VipPage()
-            ConfigManager.putAppConfig(AppLocalConfigKey.UPDATE_CHAT_LIMIT_TIME, true)
-        }
+
+
         return permission
     }
 
 
     fun getVipType() = getPlugin<UserPlugin>().getUser().getVipType()
-
 
     /**
      * 获取剩余权益：到期时间/免费体验次数
@@ -89,8 +100,10 @@ object VipManager {
         var userPlugin = getPlugin<UserPlugin>()
         var user = userPlugin.getUser()
         var remainStr = ""
-        remainStr += if (isVip()) {
+        remainStr += if (user.rightsStatus == VipType.VIP.value) {
             user.rightsExpireTime + " 到期"
+        } else if (user.rightsStatus == VipType.TRIAL.value) {
+            "体验还剩:${user.trialBalance}次"
         } else {
             "剩余体验次数:${user.trialBalance}次"
         }
