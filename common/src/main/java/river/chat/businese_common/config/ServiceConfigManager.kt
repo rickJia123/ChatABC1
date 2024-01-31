@@ -1,9 +1,12 @@
 package river.chat.businese_common.config
 
+import river.chat.businese_common.dataBase.AppUpdateConfigBox
 import river.chat.businese_common.net.CommonRequestViewModel
+import river.chat.lib_core.app.BaseApplication
 import river.chat.lib_core.config.AppServerConfigKey
 import river.chat.lib_core.config.ConfigManager
 import river.chat.lib_core.config.ServiceConfigBox
+import river.chat.lib_core.utils.exts.view.preLoad
 import river.chat.lib_resource.model.database.ServiceConfigBean
 
 /**
@@ -31,33 +34,24 @@ object ServiceConfigManager {
     }
 
     /**
-     * 加载默认配置信息
+     *  获取版本更新配置信息
      */
-    fun loadConfigConfig() {
+    private fun loadConfigConfig() {
         CommonRequestViewModel().requestAppUpdateConfig() {
             if (it.isSuccess) {
                 it.data?.let {
-                    ConfigManager.putAppConfig(
-                        AppServerConfigKey.REQUEST_APP_UPDATE_TYPE,
-                        if (it.isForce == 1) 2 else if (it.isRenew == 1) 1 else 0
-                    )
-                    ConfigManager.putAppConfig(
-                        AppServerConfigKey.REQUEST_APP_UPDATE_CONTENT,
-                        it.content
-                    )
+                    AppUpdateConfigBox.updateConfig(it)
                 }
             }
         }
     }
 
-    private fun onLoadConfig(config: ServiceConfigBean? ) {
+    private fun onLoadConfig(config: ServiceConfigBean?) {
         config?.let {
             ServiceConfigBox.updateConfig(it)
+            preLoad(BaseApplication.getInstance(), it.appShareBg)
         }
     }
-
-
-
 
 
 }

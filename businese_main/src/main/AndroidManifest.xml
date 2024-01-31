@@ -40,4 +40,8 @@
         <activity android:name="river.chat.businese_main.collection.detail.CollectionDetailActivity"
             android:windowSoftInputMode="adjustNothing"
             android:screenOrientation="portrait"  />
+
+        <activity android:name="river.chat.businese_main.picture.PicturePreviewActivity"
+            android:windowSoftInputMode="adjustNothing"
+            android:screenOrientation="portrait"  />
 </application></manifest>

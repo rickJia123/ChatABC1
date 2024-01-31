@@ -2,6 +2,7 @@ package river.chat.businese_main.vip
 
 import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.router.jump2VipOpen
+import river.chat.businese_main.constants.MainConstants
 import river.chat.business_main.R
 import river.chat.lib_core.config.AppLocalConfigKey
 import river.chat.lib_core.config.ConfigManager
@@ -24,6 +25,9 @@ object VipManager {
      */
     const val UPDATE_SHOW_OPEN_VIP = 0.5 * 60 * 60 * 1000L
 
+
+    //本次打开app是否已经提示没有会期，第一次会推送到消息列表，第二次会弹窗
+    private var mIsTipNoVip = false
 
     /**
      * 跳转开通/兑换页
@@ -53,6 +57,34 @@ object VipManager {
 
         return user.getVipType() == VipType.VIP.value || (user.getVipType() == VipType.TRIAL.value)
 
+    }
+
+    /**
+     * 是否有聊天权益,没有执行对应动作
+     */
+    fun checkRightsWithBusiness(callBack: (String) -> Unit): Boolean {
+        var hasPermission = false
+        var user = getPlugin<UserPlugin>()
+        var isLogin = user.isLogin()
+        if (!isLogin) {
+            hasPermission = false
+            getPlugin<UserPlugin>().check2Login { }
+        } else {
+            //没有权益
+            if (!hasRights()) {
+                //没有消息格式的提示
+                if (!mIsTipNoVip) {
+                    callBack.invoke(MainConstants.RIGHTS_MSG_TIP)
+                    mIsTipNoVip = true
+                } else {
+                    callBack.invoke(MainConstants.RIGHTS_JUMP_OPEN)
+                }
+            } else {
+                hasPermission = true
+            }
+
+        }
+        return hasPermission
     }
 
     /**
@@ -86,7 +118,6 @@ object VipManager {
 //        }
 
 
-
         return permission
     }
 
@@ -100,12 +131,25 @@ object VipManager {
         var userPlugin = getPlugin<UserPlugin>()
         var user = userPlugin.getUser()
         var remainStr = ""
-        remainStr += if (user.rightsStatus == VipType.VIP.value) {
-            user.rightsExpireTime + " 到期"
-        } else if (user.rightsStatus == VipType.TRIAL.value) {
-            "体验还剩:${user.trialBalance}次"
-        } else {
-            "剩余体验次数:${user.trialBalance}次"
+        remainStr += when (user.rightsStatus) {
+            VipType.VIP.value -> {
+                user.rightsExpireTime + " 到期"
+            }
+            VipType.TRIAL.value -> {
+                "体验还剩:${user.trialBalance}次"
+            }
+            VipType.VIP_TIMEOUT.value -> {
+                "会员已过期"
+            }
+            VipType.TRIAL_END.value -> {
+                "体验已用完"
+            }
+            VipType.TRIAL.value -> {
+                "剩余体验次数:${user.trialBalance}次"
+            }
+            else -> {
+                "开通会员畅享AI"
+            }
         }
         return remainStr
     }

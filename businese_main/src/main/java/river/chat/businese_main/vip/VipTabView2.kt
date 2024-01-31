@@ -35,11 +35,13 @@ class VipTabView2 @JvmOverloads constructor(
     private val mAdapter by lazy {
         VipTabAdapter(selPosition = mDefaultTabPosition).apply {
             this.onClickItem = {
+                notifyDataSetChanged()
                 onReport(
                     TrackerEventName.CLICK_VIP,
                     VIPTracker.KEY_SKU_CHOOSE to it.skuName
                 )
                 mOnTabClick.invoke(it)
+
             }
         }
     }

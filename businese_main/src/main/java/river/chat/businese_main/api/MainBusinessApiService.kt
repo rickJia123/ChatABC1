@@ -129,11 +129,13 @@ object MainBusinessApiService : BaseApiService() {
      * AI 绘图
      */
     suspend fun requestPicture(
-        content: String
+        content: String,
+        id: String
     ): BaseRequestBean<AiPictureBean> =
         mainBusinessApi.requestPicture(
             getBasedBody().apply {
                 this["content"] = content
+                this["id"] = id
             }
         )
 

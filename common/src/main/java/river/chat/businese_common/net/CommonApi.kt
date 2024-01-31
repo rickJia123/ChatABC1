@@ -9,6 +9,7 @@ import river.chat.lib_core.net.retrofit.BaseApi
 import river.chat.lib_core.wx.WxAccessTokenBean
 import river.chat.lib_resource.model.CreateOrderResBean
 import river.chat.lib_resource.model.QueryOrderResBean
+import river.chat.lib_resource.model.database.AppUpdateConfigResBean
 import river.chat.lib_resource.model.database.ServiceConfigBean
 
 /**

@@ -99,15 +99,16 @@ class ChatCardView @JvmOverloads constructor(
             MessageBox.getMsgById(answerMsg?.id ?: 100).status == MessageStatus.COMPLETE
 //        var isLastSuccess = this.answerMsg?.status == MessageStatus.COMPLETE
         var isCurrentSuccess = answerMsg?.status == MessageStatus.COMPLETE
-        //上次成功，本次失败，不处理状态(针对同一个问题)
+
 
         if (questionMsg != null) {
             viewBinding.tvQuestion.text = questionMsg.content
         }
 
-        if (isLastSuccess && !isCurrentSuccess) {
-            return
-        }
+        //上次成功，本次没权益，不处理状态(重试)
+//        if (isLastSuccess && !isCurrentSuccess) {
+//            return
+//        }
 
         if (answerMsg?.status == MessageStatus.COMPLETE) {
             viewBinding.llAction.visibility = VISIBLE

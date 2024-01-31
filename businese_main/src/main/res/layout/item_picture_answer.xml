@@ -10,15 +10,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clPicture"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/front_3_BgColor"
+        android:padding="5dp"
+        android:paddingTop="20dp"
+        app:ev_radius="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
         <river.chat.lib_core.view.roundview.EasyImageView
             android:id="@+id/ivPicture"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/front_3_BgColor"
+            android:scaleType="fitXY"
+            app:ev_radius="10dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+        <river.chat.lib_core.view.roundview.EasyTextView
+            android:id="@+id/tvLoading"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@color/front_2_BgColor"
+            android:padding="10dp"
+            android:textColor="@color/front_3_BgColor"
+            app:ev_radius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:scaleType="fitXY"
-            android:layout_marginRight="10dp" />
-
+            app:layout_constraintWidth_default="wrap"
+            android:text="正在努力绘制中哦。。" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

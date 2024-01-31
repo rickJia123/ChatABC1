@@ -1,6 +1,7 @@
 package river.chat.businese_common.update
 
 import androidx.appcompat.app.AppCompatActivity
+import river.chat.businese_common.dataBase.AppUpdateConfigBox
 import river.chat.lib_core.config.AppLocalConfigKey
 import river.chat.lib_core.config.AppServerConfigKey
 import river.chat.lib_core.config.ConfigManager
@@ -63,14 +64,23 @@ object AppUpdateManager {
      * 获取版本更新文案
      */
     fun getUpdateContent(): String {
-        return ConfigManager.getAppConfig(AppServerConfigKey.REQUEST_APP_UPDATE_CONTENT, "")
+//        return ConfigManager.getAppConfig(AppServerConfigKey.REQUEST_APP_UPDATE_CONTENT, "")
+        return AppUpdateConfigBox.getConfig().content
     }
 
     /**
      * 获取版本更新类型
      */
     fun getUpdateType(): Int {
-        return ConfigManager.getAppConfigInt(AppServerConfigKey.REQUEST_APP_UPDATE_TYPE, UPDATE_NO)
+        var config=AppUpdateConfigBox.getConfig()
+        return if (config.isForce == 1) {
+            UPDATE_FORCE
+        } else if (config.isRenew == 1) {
+            UPDATE_UPDATE
+        } else {
+            UPDATE_NO
+        }
+
     }
 
 

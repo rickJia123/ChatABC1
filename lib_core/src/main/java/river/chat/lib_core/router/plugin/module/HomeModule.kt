@@ -57,9 +57,17 @@ object HomeRouterConstants : BaseConstants() {
      */
     const val HOME_COLLECTION_DETAIL = GROUP_HOME + "/collectionDetail"
 
+    /**
+     * 意见反馈页
+     */
+    const val HOME_PICTURE_PREVIEW = GROUP_HOME + "/picturePreviewActivity"
+
 
     object Params {
         const val KEY_QUESTION_ID = "KEY_QUESTION_ID"
+
+        //需要预览的图片id
+        const val PICTURE_PRELOAD_ID = "PICTURE_PRELOAD_ID"
     }
 }
 

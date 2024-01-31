@@ -60,7 +60,7 @@
                     android:id="@+id/tvRightsTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="30dp"
                     android:fontFamily="@font/river_font"
                     android:text="会员权益介绍"
                     android:textColor="@color/tipTxtColor"

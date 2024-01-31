@@ -39,6 +39,9 @@ class PrivacyAgreeDialog(var dialogActivity: AppCompatActivity) :
         """.trimIndent()
     var mTips = "请您仔细阅读完整版服务协议和隐私政策"
 
+
+
+
     companion object {
         @JvmStatic
         fun builder(activity: AppCompatActivity): PrivacyAgreeDialog = PrivacyAgreeDialog(activity)

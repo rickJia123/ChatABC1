@@ -40,13 +40,13 @@ object AppServerConfigKey {
     /**
      * 用户更新类型：0不更新 1建议更新 2强制更新
      */
-    const val REQUEST_APP_UPDATE_TYPE = "REQUEST_APP_UPDATE_TYPE"
+//    const val REQUEST_APP_UPDATE_TYPE = "REQUEST_APP_UPDATE_TYPE"
 
 
 
     /**
      * 用户版本更新下载内容
      */
-    const val REQUEST_APP_UPDATE_CONTENT = "REQUEST_APP_UPDATE_CONTENT"
+//    const val REQUEST_APP_UPDATE_CONTENT = "REQUEST_APP_UPDATE_CONTENT"
 
 }

@@ -43,42 +43,36 @@ object SSEClient {
     var flowBean = MessageBean()
     var mFlowBeanMap = mutableMapOf<String, MessageBean>()
 
+    //失败的消息id集合，敏感信息拿到后，本次不再继续
+    private var failMsgIdList = mutableListOf<String>()
+
     fun start(content: String?, msgId: String) {
         val url = ApiConfig.getHost() + "chat/prompt/v101"
-        val okHttpClient: OkHttpClient = OkHttpClient.Builder()
-            .connectTimeout(1, TimeUnit.DAYS)
-            .readTimeout(1, TimeUnit.DAYS)
-            .build()
+        val okHttpClient: OkHttpClient =
+            OkHttpClient.Builder().connectTimeout(1, TimeUnit.DAYS).readTimeout(1, TimeUnit.DAYS)
+                .build()
         var requestBody = getBasedBody().apply {
             this["content"] = content ?: ""
             this["id"] = msgId
         }
 
         val body: RequestBody = RequestBody.create(
-            "application/json".toMediaTypeOrNull(),
-            toJson(requestBody) ?: ""
+            "application/json".toMediaTypeOrNull(), toJson(requestBody) ?: ""
         )
-        val token: String = userPlugin.getUser()
-            .token
-        val request: Request = Request.Builder().url(url)
-            .header("header_token", token)
-            .header("header_lng", "")
-            .header("header_lat", "")
-            .header("header_source", AppLocalConfigKey.PLATFORM + "")
-            .header("header_version", appVersionName)
-            .addHeader("Accept", "text/event-stream")
-            .post(body)
-            .build()
+        val token: String = userPlugin.getUser().token
+        val request: Request =
+            Request.Builder().url(url).header("header_token", token).header("header_lng", "")
+                .header("header_lat", "").header("header_source", AppLocalConfigKey.PLATFORM + "")
+                .header("header_version", appVersionName).addHeader("Accept", "text/event-stream")
+                .post(body).build()
         val createFactory = EventSources.createFactory(okHttpClient)
 
         clearMsg()
+        failMsgIdList.remove(msgId)
 
         val eventSourceListener = object : EventSourceListener() {
             override fun onEvent(
-                eventSource: EventSource,
-                id: String?,
-                type: String?,
-                data: String
+                eventSource: EventSource, id: String?, type: String?, data: String
             ) {
                 //事件接收
                 LogUtil.e("sse 接收...", "建立sse连接..." + data + ":::" + id + ":::" + type)
@@ -96,7 +90,6 @@ object SSEClient {
 
     private fun onReceiveFlowMsg(question: String?, str: String, type: String, id: String) {
         try {
-
             fun handleStatus() {
                 if (STATUS_SUCCESS == type) {
                     flowBean.status = MessageStatus.COMPLETE
@@ -113,16 +106,15 @@ object SSEClient {
 //                    jsonStr = jsonStr.substring(0, jsonStr.length - 1)
 //                    jsonStr = jsonStr.trim().replace("\"", "")
 
-
-                    var failMsg =
-                        GsonKits.fromJson(str, MessageBean::class.java)
-                    LogUtil.i("receiveEventStream 失败消息:" + str + "::" + GsonKits.toJson(failMsg))
+                    var failMsg = GsonKits.fromJson(str, MessageBean::class.java)
+                    LogUtil.i("receiveEventStream 失败消息:" + str + "::" + toJson(failMsg))
                     homePlugin.onMsgReceive(failMsg ?: MessageBean())
+                    failMsgIdList.add(failMsg?.id.safeToString())
+                    mFlowBeanMap[id] = MessageBean()
                 }
                 //成功消息
                 else {
-                    val jsonStr = str.trim().replace("\"", "")
-                        .replace("\\\\n", "\n")
+                    val jsonStr = str.trim().replace("\"", "").replace("\\\\n", "\n")
 //                                    val jsonStr = str.substring(5).trim()
                     LogUtil.i("receiveEventStream 成功消息:" + str + MessageBean_.failMsg.id)
                     flowBean.content = jsonStr
@@ -130,8 +122,7 @@ object SSEClient {
                     //rick todo
                     if (jsonStr.contains("[COMPLETE]")) {
                         ReportManager.reportEvent(
-                            TrackerEventName.REQUEST_CHAT_SUCCESS,
-                            mutableMapOf(
+                            TrackerEventName.REQUEST_CHAT_SUCCESS, mutableMapOf(
                                 TrackerKeys.REQUEST_CONTENT to "GPT接口成功:" + question,
                             )
                         )
@@ -146,12 +137,16 @@ object SSEClient {
 
             LogUtil.i("onReceiveFlowMsg allStr:$str:$type")
             flowBean.id = id.safeToLong()
+
             handleStatus()
             handleStrMsg()
+            if (failMsgIdList.contains(flowBean.id.safeToString())) {
+                LogUtil.i("onReceiveFlowMsg failMsgIdList contains:" + flowBean.id)
+                return
+            }
             if (!flowBean.content.isNullOrEmpty() && flowBean.id > 0) {
                 var postBean = GsonKits.fromJson(
-                    toJson(flowBean),
-                    MessageBean::class.java
+                    toJson(flowBean), MessageBean::class.java
                 ) ?: MessageBean()
 
                 var oriContent = postBean.content
@@ -163,14 +158,11 @@ object SSEClient {
                 )
                 homePlugin.onMsgReceive(postBean)
                 mFlowBeanMap[postBean.id.safeToString()] = postBean
-
-
             }
         } catch (e: Exception) {
             LogUtil.e("sse 接收异常", e.message)
             ReportManager.reportEvent(
-                TrackerEventName.REQUEST_CHAT_ERROR,
-                mutableMapOf(
+                TrackerEventName.REQUEST_CHAT_ERROR, mutableMapOf(
                     TrackerKeys.REQUEST_CONTENT to "GPT接口错误--接收异常：" + (e.message ?: "")
                 )
             )

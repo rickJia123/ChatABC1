@@ -4,8 +4,14 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ItemVipTabBinding
+import river.chat.lib_core.utils.exts.dp2px
 import river.chat.lib_core.utils.exts.getColor
+import river.chat.lib_core.utils.exts.getDrawable
+import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.exts.view.buildSpannableString
+import river.chat.lib_core.utils.exts.width
+import river.chat.lib_core.utils.longan.dp
+import river.chat.lib_core.utils.longan.screenWidth
 import river.chat.lib_core.view.recycleview.common.ItemViewHolder
 import river.chat.lib_core.view.recycleview.common.SimpleListHolderAdapter
 import river.chat.lib_resource.model.VipSkuBean
@@ -33,7 +39,7 @@ class VipTabAdapter(override val layoutId: Int = R.layout.item_vip_tab, var selP
         binding.tvDuration.text = item.skuName
         binding.tvMonthPrice.text = item.promoText2
 
-
+        binding.clRoot.width((screenWidth - 40f.dp2px() - 30f.dp2px())/3)
         binding.tvDiscount.text = item.promoText1
         if (item.promoText1.isNullOrEmpty()) {
             binding.tvDiscount.visibility = View.GONE
@@ -42,9 +48,28 @@ class VipTabAdapter(override val layoutId: Int = R.layout.item_vip_tab, var selP
         }
 
         var isSelected = position == selPosition
-        binding.tvDuration.setTextColor(if (isSelected) R.color.defaultTitleColor.getColor() else R.color.defaultDarkTitleColor.getColor())
-        binding.tvMonthPrice.setTextColor(if (isSelected) R.color.defaultTitleColor.getColor() else R.color.defaultDarkTitleColor.getColor())
+        binding.tvDuration.setTextColor(if (isSelected) R.color.defaultSubTitleColor.getColor() else R.color.defaultDarkTitleColor.getColor())
+        binding.tvMonthPrice.setTextColor(if (isSelected) R.color.defaultSubTitleColor.getColor() else R.color.defaultDarkTitleColor.getColor())
         setPrice(binding.tvPrice, item, if (isSelected) "#030303" else "#FA601F")
+        if (isSelected) {
+            binding.clRoot.background = R.drawable.bg_vip_tab_sel.getDrawable()
+        } else {
+            binding.clRoot.background = R.drawable.bg_vip_tab_nosel.getDrawable()
+        }
+
+        binding.viewClick.singleClick {
+            onClick(position, item)
+        }
+        if (position < 3) {
+            binding.viewHolder.visibility = View.GONE
+        } else {
+            binding.viewHolder.visibility = View.VISIBLE
+        }
+    }
+
+    private fun onClick(position: Int, item: VipSkuBean) {
+        selPosition = position
+        onClickItem(item)
     }
 
     private fun setPrice(tvPrice: AppCompatTextView, bean: VipSkuBean, color: String) {

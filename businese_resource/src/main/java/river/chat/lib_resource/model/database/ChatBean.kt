@@ -37,7 +37,6 @@ data class MessageBean(
     var isCollected: Boolean? = false,
 
 
-
 ) : java.io.Serializable {
     fun isSelf(): Boolean {
         return source == MessageSource.FRE_SELF

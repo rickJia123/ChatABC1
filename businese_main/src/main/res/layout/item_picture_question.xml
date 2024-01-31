@@ -16,6 +16,7 @@
             android:maxWidth="100dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
+            android:padding="10dp"
             android:background="@color/chatATv"
             android:textColor="@color/chatQTv"
             app:ev_radius="10dp"

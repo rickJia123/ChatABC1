@@ -86,12 +86,17 @@ class ChatFragment :
             mMsgList.clear()
             mMsgList.addAll(newList)
 
-            mAdapter?.submitList(mMsgList)
-            mAdapter?.notifyDataSetChanged()
+            mAdapter?.submitList(mMsgList) {
+                mAdapter?.notifyDataSetChanged()
+                mBinding.recycleView.post {
+                    scroll2Bottom()
+                }
+            }
+
 //            var isReloadMsg=MessageHelper.isReloadMsg(historyMsg.filter { it.id==msg.msg?.id }.firstOrNull())
             ("ChatFragment receiver msg:" + msg + ":::是否重新加载消息：" + "::::" + mMsgList.size).log()
             if (isMsgNew) {
-                scrollToBottom()
+                scroll2Bottom()
             }
         }
         binding.inputView.requestFocus()
@@ -105,16 +110,20 @@ class ChatFragment :
         mAdapter?.submitList(mMsgList)
         mAdapter?.notifyDataSetChanged()
         if (needScroll) {
-            mBinding.recycleView.scrollBy(0, 1980 * 1000)
+            scroll2Bottom()
+//            mBinding.recycleView.scrollBy(0, 1980 * 1000)
         }
 
     }
 
 
-    private fun scrollToBottom() {
-        mBinding.recycleView.postDelayed({
-            mBinding.recycleView.scrollBy(0, 1980 * 1000)
-        }, 100)
+//    private fun scrollToBottom() {
+//        mBinding.recycleView.postDelayed({
+//            mBinding.recycleView.scrollBy(0, 1980 * 1000)
+//        }, 100)
+//    }
+    private fun scroll2Bottom() {
+        mBinding.recycleView.scrollToPosition(mMsgList.size - 1)
     }
 
     private fun initRecycleView() {
@@ -131,11 +140,16 @@ class ChatFragment :
         })
         mBinding.recycleView.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
             if (bottom < oldBottom) {
-                mBinding.recycleView.scrollBy(0, 1980 * 1000)
+              scroll2Bottom()
             } else {
 
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mBinding.inputView.hideSoftInput()
     }
 
 

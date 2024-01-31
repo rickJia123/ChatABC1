@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import river.chat.businese_common.router.jump2Login
 import river.chat.businese_common.ui.recycleview.CustomItemDecoration
 import river.chat.business_main.R
+import river.chat.lib_core.utils.exts.dp2px
 import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.main.BaseViewModel
 import river.chat.lib_core.view.recycleview.databingding.BaseBindingAdapter
@@ -16,7 +17,7 @@ class SettingsViewModel : BaseViewModel() {
 
     val data = ObservableArrayList<MessageBean>()
     val itemDecorations =
-        listOf<RecyclerView.ItemDecoration>(CustomItemDecoration(), CustomItemDecoration())
+        listOf<RecyclerView.ItemDecoration>(CustomItemDecoration(20f.dp2px()), CustomItemDecoration(20f.dp2px()))
 
     // 定义多 item 布局类型的创建器
     val itemViewTypes = object : BaseBindingAdapter.ItemViewTypeCreator {

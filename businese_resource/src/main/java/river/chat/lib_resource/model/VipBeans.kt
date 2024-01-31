@@ -27,8 +27,7 @@ data class VipSkuBean(
 
     var skuId: String = ""
 
-)
-{
+) {
     companion object {
         val DIFF = object : DiffUtil.ItemCallback<VipSkuBean>() {
             override fun areItemsTheSame(
@@ -67,7 +66,10 @@ enum class VipType(val value: Int) {
 
      */
 
+    //    权益状态:0没有权益;1会员权益;2会员过期;3体验权益；4体验用完；
     NORMAL(0),
-    VIP(2),
-    TRIAL(3)
+    VIP(1),
+    VIP_TIMEOUT(1),
+    TRIAL(3),
+    TRIAL_END(4)
 }

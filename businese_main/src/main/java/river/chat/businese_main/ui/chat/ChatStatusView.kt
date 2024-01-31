@@ -86,20 +86,12 @@ class ChatStatusView @JvmOverloads constructor(
             MessageStatus.FAIL_COMMON -> {
                 visibility = VISIBLE
                 viewBinding.loadingView.visibility = GONE
-//                if (failMsg.contains("权益")) {
-//                    reloadView.visibility = GONE
-//                    answerParent.visibility = View.INVISIBLE
-////                    viewBinding.viewPayGuide.visibility = VISIBLE
-//                    answerParent.visibility = GONE
-//                    viewBinding.loadingView.visibility = GONE
-//                } else {
                     reloadView.visibility = VISIBLE
                     answerParent.visibility = VISIBLE
 //                    viewBinding.viewPayGuide.visibility = GONE
                     answerText.text = failMsg
                     answerText.setTextColor(river.chat.lib_core.R.color.red.getColor())
                     reloadView.visibility = VISIBLE
-//                }
                 stopLoading()
             }
         }

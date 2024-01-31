@@ -111,10 +111,10 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
         SSEClient.start(content, msgId)
     }
 
-    fun requestPicture(content: String) {
+    fun requestPicture(content: String,  id: String) {
         launchFlow(
             request = {
-                MainBusinessApiService.requestPicture(content)
+                MainBusinessApiService.requestPicture(content,id)
             },
             dataResp = { data, time ->
                 pictureResult.value =

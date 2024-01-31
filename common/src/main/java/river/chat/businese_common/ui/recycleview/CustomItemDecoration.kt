@@ -7,14 +7,15 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
+import river.chat.lib_core.utils.exts.dp2px
 
 
-class CustomItemDecoration : ItemDecoration() {
+class CustomItemDecoration(var bottom:Int) : ItemDecoration() {
     private var mPaint: Paint = Paint()
 
     init {
         mPaint.isAntiAlias = true
-        mPaint.color = Color.RED
+        mPaint.color = Color.TRANSPARENT
         mPaint.style = Paint.Style.FILL
     }
     override fun getItemOffsets(
@@ -23,7 +24,7 @@ class CustomItemDecoration : ItemDecoration() {
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        outRect.set(0, 0,0,100)
+        outRect.set(0, 0,0,bottom)
     }
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {

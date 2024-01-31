@@ -3,7 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="vip_no">您还不是超级会员</string>
+    <string name="vip_no">普通用户</string>
 
     //聊天输入框限制
     <string name="vip_limit_tip">权益已用完，开通vip可以畅享ChatGpt</string>

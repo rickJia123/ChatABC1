@@ -110,17 +110,6 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
         //binding.viewpager.currentItem = 1
         //设置缓存页
         mBinding.viewPager.offscreenPageLimit = mFragments.size
-        //设置viewPage2切换效果
-        //binding.viewpager.setPageTransformer(TransFormer())
-
-        //一屏多个fragment
-//        val recyclerView:RecyclerView = binding.viewpager.getChildAt(0) as RecyclerView
-//        val padding = resources.getDimensionPixelOffset(R.dimen.app_icon_size) + resources.getDimensionPixelOffset(R.dimen.app_icon_size)
-//        recyclerView.setPadding(padding, 0, padding, 0)
-//        recyclerView.clipToPadding = false
-
-        //设置滑动时fragment之间的间距
-        // binding.viewpager.setPageTransformer( MarginPageTransformer(100))
         //同时设置多个动画
         val compositePageTransformer = CompositePageTransformer()
         compositePageTransformer.addTransformer(MarginPageTransformer(100))
@@ -132,11 +121,11 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
                 super.onPageSelected(position)
                 mBinding.viewTabView.setTabPosition(position, true)
                 LogUtil.d("lyy", "当前fragment的位置-----: $position")
-                if (position == 1) {
-                    mBinding.toolBar.visibility = View.INVISIBLE
-                } else {
-                    mBinding.toolBar.visibility = View.VISIBLE
-                }
+//                if (position == 1) {
+//                    mBinding.toolBar.visibility = View.INVISIBLE
+//                } else {
+//                    mBinding.toolBar.visibility = View.VISIBLE
+//                }
             }
 
             override fun onPageScrollStateChanged(state: Int) {

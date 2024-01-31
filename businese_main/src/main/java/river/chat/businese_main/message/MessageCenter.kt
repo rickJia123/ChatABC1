@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.*
 import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.dataBase.MessageBox
 import river.chat.businese_common.dataBase.MessageBox.saveMsg
+import river.chat.businese_main.constants.MainConstants
 import river.chat.businese_main.home.HomeActivity
 import river.chat.businese_main.message.MessageHelper.buildAiAnswerEmptyMsg
 import river.chat.businese_main.message.MessageHelper.buildAiAnswerMsg
@@ -34,8 +35,6 @@ object MessageCenter {
     var mActivity: HomeActivity? = null
     var mMsgViewModel: MessageViewModel? = null
 
-    //本次打开app是否已经提示没有会期，第一次会推送到消息列表，第二次会弹窗
-    private var mIsTipNoVip = false
 
     /**
      * 消息超时时间，超时的loading状态改为失败
@@ -220,25 +219,16 @@ object MessageCenter {
      */
     private fun checkPermission(): Boolean {
         var hasPermission = true
-        var user = getPlugin<UserPlugin>()
-        var isLogin = user.isLogin()
-        if (!isLogin) {
-            hasPermission = false
-            getPlugin<UserPlugin>().check2Login { }
-        }
         //本地发送前先 检查vip权限
-        else {
-            //本次打开app是否已经提示没有会期，第一次会推送到消息列表，第二次会弹窗
-            //还没有推送到消息中
-            if (!mIsTipNoVip) {
-                if (!VipManager.hasRights()) {
-                    mIsTipNoVip = true
+        //本次打开app是否已经提示没有会期，第一次会推送到消息列表，第二次会弹窗
+        hasPermission = VipManager.checkRightsWithBusiness {
+            when (it) {
+                MainConstants.RIGHTS_MSG_TIP -> {
                     //最新一条是否是支付提示
                     var isLastPay =
                         getHistoryMsg().firstOrNull()?.source == MessageSource.SINGLE_PAY_TIP
                     if (isLastPay) {
                         VipManager.jump2VipPage()
-                        hasPermission = false
                     } else {
                         //把之前的支付消息删除再发送新的，保证列表只有一个支付提示
                         getHistoryMsg().forEach {
@@ -250,17 +240,14 @@ object MessageCenter {
                         }
                         postSendMsg(MessageHelper.buildPayMsg())
                     }
-
                 }
-            } else {
-                //已经推送到消息中
-                if (!VipManager.hasRights()) {
-                    //rick todo 这里改成弹窗
+
+                MainConstants.RIGHTS_JUMP_OPEN -> {
                     VipManager.jump2VipPage()
-                    hasPermission = false
                 }
             }
         }
+
         return hasPermission
     }
 
@@ -304,7 +291,7 @@ object MessageCenter {
         }
     }
 
-    fun toggleCollectionStatus(msg: MessageBean?, needPost:Boolean=true) {
+    fun toggleCollectionStatus(msg: MessageBean?, needPost: Boolean = true) {
         msg?.let {
             if (msg.isCollected == true) {
                 msg.isCollected = false
@@ -314,8 +301,7 @@ object MessageCenter {
                 "收藏成功".toastSystem()
             }
             saveMsg(it)
-            if (needPost)
-            {
+            if (needPost) {
                 EventCenter.postEvent(BaseActionEvent().apply {
                     action = CommonEvent.COLLECTION_TOGGLE
                 })

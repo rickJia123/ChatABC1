@@ -5,6 +5,7 @@ import com.yl.lib.sentry.hook.PrivacySentry
 import river.chat.lib_core.config.AppLocalConfigKey
 import river.chat.lib_core.config.ConfigManager
 import river.chat.lib_core.config.ServiceConfigBox
+import river.chat.lib_core.utils.exts.ifEmptyOrBlank
 
 /**
  * Created by beiyongChao on 2023/6/9
@@ -12,8 +13,11 @@ import river.chat.lib_core.config.ServiceConfigBox
  */
 object PrivacyManager {
 
+
+    //默认链接，第一次还没开始请求网络
+    private var mDefaultPrivacyUrl="http://www.bljy.cc/policy/policy.html"
     fun getPrivacyUrl(): String {
-        return ServiceConfigBox.getConfig().appPolicyUrl ?: ""
+        return ServiceConfigBox.getConfig().appPolicyUrl.ifEmptyOrBlank(mDefaultPrivacyUrl)
     }
 
     /**

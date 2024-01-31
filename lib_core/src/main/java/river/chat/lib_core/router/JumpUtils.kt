@@ -82,3 +82,12 @@ fun jump2CollectionDetail(questionId: Long) {
         .withLong(HomeRouterConstants.Params.KEY_QUESTION_ID, questionId)
         .navigation()
 }
+
+/**
+ * 跳转图片预览
+ */
+fun jump2PicturePreView(id: String) {
+    ARouter.getInstance().build(HomeRouterConstants.HOME_PICTURE_PREVIEW)
+        .withString(HomeRouterConstants.Params.PICTURE_PRELOAD_ID, id)
+        .navigation()
+}

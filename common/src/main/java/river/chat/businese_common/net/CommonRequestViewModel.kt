@@ -6,7 +6,7 @@ import river.chat.lib_resource.model.CreateOrderRequestBean
 import river.chat.lib_resource.model.CreateOrderResBean
 import river.chat.lib_resource.model.QueryOrderRequestBean
 import river.chat.lib_resource.model.QueryOrderResBean
-import river.chat.lib_resource.model.database.ConfigServiceBean
+import river.chat.lib_resource.model.database.AppUpdateConfigResBean
 import river.chat.lib_resource.model.database.ServiceConfigBean
 
 class CommonRequestViewModel : BaseViewModel() {

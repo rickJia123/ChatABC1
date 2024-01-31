@@ -221,7 +221,7 @@
     },
     {
       "id": "6:5392709544161469680",
-      "lastPropertyId": "7:8296010696799654082",
+      "lastPropertyId": "9:5667632487003181665",
       "name": "AiPictureBean",
       "properties": [
         {
@@ -256,15 +256,64 @@
           "type": 9
         },
         {
-          "id": "7:8296010696799654082",
-          "name": "isAnswer",
-          "type": 1
+          "id": "8:8982946522954061959",
+          "name": "type",
+          "type": 5
+        },
+        {
+          "id": "9:5667632487003181665",
+          "name": "status",
+          "type": 5
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "7:1417429780767089355",
+      "lastPropertyId": "7:7178551119611038190",
+      "name": "AppUpdateConfigResBean",
+      "properties": [
+        {
+          "id": "1:8145211103208905151",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4453446464195285451",
+          "name": "appUrl",
+          "type": 9
+        },
+        {
+          "id": "3:6507392572956001867",
+          "name": "appVersion",
+          "type": 9
+        },
+        {
+          "id": "4:88638259340548874",
+          "name": "content",
+          "type": 9
+        },
+        {
+          "id": "5:794051018525830887",
+          "name": "isForce",
+          "type": 5
+        },
+        {
+          "id": "6:375512042631881700",
+          "name": "isRenew",
+          "type": 5
+        },
+        {
+          "id": "7:7178551119611038190",
+          "name": "updateTime",
+          "type": 6
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "6:5392709544161469680",
+  "lastEntityId": "7:1417429780767089355",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
@@ -285,7 +334,8 @@
     991925186970984231,
     3751164920032685775,
     7767958667971472496,
-    947263676866663089
+    947263676866663089,
+    8296010696799654082
   ],
   "retiredRelationUids": [],
   "version": 1

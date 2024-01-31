@@ -3,6 +3,7 @@ package river.chat.businese_main.mine
 import androidx.lifecycle.lifecycleScope
 import org.koin.android.ext.android.inject
 import river.chat.businese_common.constants.CommonEvent
+import river.chat.businese_common.dataBase.AppUpdateConfigBox
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.router.jump2Feedback
@@ -81,7 +82,8 @@ class SettingsFragment :
                     }
                 }
             }
-            sub = "V$appVersionName"
+            sub =
+                "V" + if (AppUpdateManager.isNeedUpdate()) AppUpdateConfigBox.getConfig().appVersion else appVersionName
             tipVisible = AppUpdateManager.isNeedUpdate()
         }
 

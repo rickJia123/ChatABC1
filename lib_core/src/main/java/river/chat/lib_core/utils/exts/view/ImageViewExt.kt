@@ -1,25 +1,48 @@
 package river.chat.lib_core.utils.exts.view
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Rect
+import android.media.MediaScannerConnection
+import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.provider.MediaStore
+import android.text.TextUtils
 import android.view.PixelCopy
 import android.view.View
 import android.view.Window
 import android.widget.ImageView
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
+import coil.ImageLoader
 import coil.load
+import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import river.chat.lib_core.R
-import river.chat.lib_core.app.BaseApplication
-import java.io.File
-import java.io.FileOutputStream
+import river.chat.lib_core.utils.longan.toastSystem
+
+
+/**
+ * 图片预加载
+ */
+fun preLoad(context: Context, resource: Any?) {
+    val imageLoader = ImageLoader.Builder(context)
+        .build()
+// 预加载图片到缓存
+    val request = ImageRequest.Builder(context)
+        .data(resource) // 图片 URL
+        .target(null) // 可以提供一个空的目标，因为我们只是预加载图片而不显示
+        .build()
+
+    imageLoader.enqueue(request)
+
+}
 
 
 fun ImageView.loadSimple(resource: Any?) {
@@ -27,6 +50,7 @@ fun ImageView.loadSimple(resource: Any?) {
         crossfade(true)
     }
 }
+
 
 fun ImageView.loadCircle(resource: Any?, placeHolder: Int = R.mipmap.ic_placeholder) {
     this.load(resource) {
@@ -164,8 +188,6 @@ fun NestedScrollView.toBitmap(): Bitmap {
 }
 
 
-
-
 /**
  * 截取scrollview布局图片
  */
@@ -191,6 +213,53 @@ fun NestedScrollView.toBitmap(): Bitmap {
 //}
 
 
+/**
+ *下载图片到相册
+ */
+fun saveBitmapToMediaStore(
+    context: Context,
+    bitmap: Bitmap?,
+    fileName: String?
+): String? {
+    var path = ""
+    try {
+        val cr = context.contentResolver
+        val uri = MediaStore.Images.Media.insertImage(
+            cr,
+            bitmap,
+            fileName,
+            ""
+        )
+        if (!TextUtils.isEmpty(uri)) {
+            // 因为Android4.4中限制了系统应用才有权限使用广播通知系统扫描SD卡。
+            // sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
+            // 所以通知系统重新扫描SD卡  解决方式：
+            path = getAbsoluteImagePath(context, Uri.parse(uri)) ?: ""
+            MediaScannerConnection.scanFile(
+                context, arrayOf(path),
+                null,
+                null
+            )
+            val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE) //发通知刷新图库，解决保存本地后微信查不到图片的问题
+            val uriScan = Uri.parse(path)
+            intent.data = uriScan
+            context.sendBroadcast(intent)
+        }
+        "图片已保存".toastSystem()
+    } catch (ex: Exception) {
+        ex.printStackTrace()
+        "图片保存失败".toastSystem()
+    }
+    return path
+}
 
+fun getAbsoluteImagePath(context: Context, uri: Uri): String? {
+    val path = arrayOf(MediaStore.Images.Media.DATA)
+    val cursor = context.contentResolver
+        .query(uri, path, null, null, null)
+    val column_index = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+    cursor.moveToFirst()
+    return cursor.getString(column_index)
+}
 
 
