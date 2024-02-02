@@ -19,8 +19,42 @@ data class ServiceConfigBean(
     var appPolicyUrl: String = "",
     var appPrivacyPolicy: String = "",
     var appShareBg: String = "",
-    var value: String ?= "",
+    var value: String? = "",
 
     //更新时间
-    var updateTime: Long =0
-) : java.io.Serializable
+    var updateTime: Long = 0,
+
+
+    var closeModulesStr: String? = "",
+
+    ) : java.io.Serializable {
+    companion object {
+    }
+}
+
+/**
+ * 接口获取的配置信息
+ */
+data class ServiceConfigServiceBean(
+
+    var id: Long = 0,
+
+    //下载h5页面
+    var appDownUrl: String = "",
+
+    //app下载链接
+    var appDownLink: String = "",
+    var appPolicyUrl: String = "",
+    var appPrivacyPolicy: String = "",
+    var appShareBg: String = "",
+    var value: String? = "",
+
+    //更新时间
+    var updateTime: Long = 0,
+
+    //关闭的模块
+    var closeModules: MutableList<String> = mutableListOf(),
+
+
+    ) : java.io.Serializable {
+}

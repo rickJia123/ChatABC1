@@ -1,55 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tool="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@color/chatBg"
         android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clPicture"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/front_3_BgColor"
-        android:padding="5dp"
-        android:paddingTop="20dp"
-        app:ev_radius="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-        <river.chat.lib_core.view.roundview.EasyImageView
-            android:id="@+id/ivPicture"
-            android:layout_width="wrap_content"
+        <river.chat.lib_core.view.roundview.EasyConstraintLayout
+            android:id="@+id/clPicture"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@color/front_3_BgColor"
-            android:scaleType="fitXY"
+            android:padding="5dp"
+            android:paddingTop="20dp"
+            tools:layout_height="100dp"
+            tools:layout_width="200dp"
             app:ev_radius="10dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent">
+            <river.chat.lib_core.view.roundview.EasyImageView
+                android:id="@+id/ivPicture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/front_3_BgColor"
+                app:ev_radius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </river.chat.lib_core.view.roundview.EasyConstraintLayout>
         <river.chat.lib_core.view.roundview.EasyTextView
             android:id="@+id/tvLoading"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
             android:background="@color/front_2_BgColor"
             android:padding="10dp"
+            android:text="正在努力绘制中哦。。"
             android:textColor="@color/front_3_BgColor"
             app:ev_radius="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_default="wrap"
-            android:text="正在努力绘制中哦。。" />
+            app:layout_constraintWidth_default="wrap" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/llAction"
+            android:layout_width="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clPicture"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivDownload"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/download" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivShare"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/share_white" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

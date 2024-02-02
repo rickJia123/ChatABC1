@@ -41,6 +41,16 @@
             app:layout_constraintTop_toTopOf="parent"
             android:text="GPTEvery" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/viewService"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/service"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

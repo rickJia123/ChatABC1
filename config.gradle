@@ -69,6 +69,7 @@ ext {
      */
     duShuModules = [
             'lib_core',
+//            'lib_aar',
             'common',
             'business_user',
             'businese_resource',

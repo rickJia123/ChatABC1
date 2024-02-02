@@ -90,7 +90,7 @@ class ChatStatusView @JvmOverloads constructor(
                     answerParent.visibility = VISIBLE
 //                    viewBinding.viewPayGuide.visibility = GONE
                     answerText.text = failMsg
-                    answerText.setTextColor(river.chat.lib_core.R.color.red.getColor())
+                    answerText.setTextColor(R.color.tipTxtColor.getColor())
                     reloadView.visibility = VISIBLE
                 stopLoading()
             }

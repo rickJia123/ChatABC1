@@ -25,6 +25,7 @@ import coil.load
 import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import river.chat.lib_core.R
+import river.chat.lib_core.utils.common.TimeUtils
 import river.chat.lib_core.utils.longan.toastSystem
 
 
@@ -219,7 +220,7 @@ fun NestedScrollView.toBitmap(): Bitmap {
 fun saveBitmapToMediaStore(
     context: Context,
     bitmap: Bitmap?,
-    fileName: String?
+    fileName: String? = "AI绘图" + TimeUtils.montageSystemTime() + ".jpg"
 ): String? {
     var path = ""
     try {

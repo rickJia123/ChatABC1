@@ -35,13 +35,9 @@ class LoginMainFragment :
         binding.clLogin.singleClick {
             onReport(
                 TrackerEventName.CLICK_LOGIN,
-                TrackerKeys.CLICK_TYPE to "登录首页-点击登录"
+                TrackerKeys.CLICK_TYPE to "登录首页-微信登录"
             )
             binding.viewLoginPolicy.checkSelected {
-                onReport(
-                    TrackerEventName.CLICK_LOGIN,
-                    TrackerKeys.CLICK_TYPE to "登录首页-点击查看条款"
-                )
                 WxManager.getLoginCode()
             }
         }

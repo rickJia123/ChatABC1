@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import river.chat.businese_common.config.ServiceConfigManager
 import river.chat.lib_core.wx.WxManager
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
@@ -18,6 +19,7 @@ import river.chat.lib_resource.model.QueryOrderResBean
 import river.chat.lib_resource.model.database.AppUpdateConfigResBean
 import river.chat.lib_resource.model.database.ConfigServiceBean
 import river.chat.lib_resource.model.database.ServiceConfigBean
+import river.chat.lib_resource.model.database.ServiceConfigServiceBean
 
 /**
  * Created by beiyongChao on 2023/3/21
@@ -37,12 +39,27 @@ class CommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                 CommonApiService.requestConfig(key)
             },
             dataResp = { data, time ->
-                resultCallBack.invoke(
-                    RequestResult(
-                        isSuccess = true,
-                        data = data ?: ServiceConfigBean()
+                data?.let {
+                    resultCallBack.invoke(
+                        RequestResult(
+                            isSuccess = true,
+                            ServiceConfigBean().apply {
+                                this.id = data.id
+                                this.appDownUrl = data.appDownUrl
+                                this.appDownLink = data.appDownLink
+                                this.appPolicyUrl = data.appPolicyUrl
+                                this.appPrivacyPolicy = data.appPrivacyPolicy
+                                this.value = data.value
+                                this.appShareBg = data.appShareBg
+                                this.updateTime = System.currentTimeMillis()
+                                this.closeModulesStr =
+                                    ServiceConfigManager.getCloseModulesStr(data.closeModules)
+                            }
+
+                        )
                     )
-                )
+                }
+
             },
             error = {
                 resultCallBack.invoke(RequestResult(errorMsg = it.message ?: ""))

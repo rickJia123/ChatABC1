@@ -106,7 +106,7 @@ class SettingsFragment :
     private fun onSettingClick(settingItem: SettingItem) {
         settingItem.postTrack(
             TrackerEventName.CLICK_SETTING,
-            TrackNode(TrackerKeys.CLICK_TYPE to (settingItem.name ?: ""))
+            TrackNode(TrackerKeys.CLICK_TYPE to settingItem.getTitle())
         )
     }
 

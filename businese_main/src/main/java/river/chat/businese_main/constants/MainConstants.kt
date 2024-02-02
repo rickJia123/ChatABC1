@@ -10,7 +10,12 @@ object MainConstants {
 
     const val RIGHTS_MSG_TIP = "RIGHTS_MSG_TIP"
     const val RIGHTS_JUMP_OPEN = "RIGHTS_JUMP_OPEN"
-    const val RIGHTS_TOAST = "RIGHTS_TOAST"
+
+
+    /**
+     * 跳转企业微信链接
+     */
+    const val SERVICE_LINK = "https://work.weixin.qq.com/ca/cawcdefc75c3235bb8"
 }
 
 

@@ -1,9 +1,11 @@
 package river.chat.business_user.user
 
+import river.chat.businese_common.constants.CommonConstants
 import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.dataBase.UserBox
 import river.chat.businese_common.report.ReportManager
 import river.chat.businese_common.router.jump2Main
+import river.chat.lib_core.config.ServiceConfigBox
 import river.chat.lib_core.event.BaseActionEvent
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
@@ -12,6 +14,7 @@ import river.chat.lib_core.utils.common.GsonKits
 import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_resource.model.VipType
+import river.chat.lib_resource.model.database.ServiceConfigBean
 import river.chat.lib_resource.model.database.User
 
 /**
@@ -69,5 +72,7 @@ object RiverUserManager {
      * 从数据库读取用户
      */
     private fun getCurrentUserByDb() = UserBox.getCurrentUser()
+
+
 
 }

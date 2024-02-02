@@ -29,11 +29,18 @@
             android:layout_height="30dp"
             android:layout_marginLeft="50dp"
             android:layout_marginBottom="50dp"
-            android:src="@drawable/avatar_ai"
+            android:src="@drawable/download"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintWidth_default="wrap" />
-
+            app:layout_constraintLeft_toLeftOf="parent" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivShare"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="50dp"
+            android:src="@drawable/share_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"  />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

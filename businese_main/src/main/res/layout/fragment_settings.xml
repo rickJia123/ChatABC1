@@ -76,6 +76,8 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+ 
+
                 <river.chat.businese_main.mine.SettingItem
                     android:id="@+id/viewSettingPrivacy"
                     android:layout_width="match_parent"

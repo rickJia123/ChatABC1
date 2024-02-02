@@ -36,8 +36,6 @@ class ChatFragment :
         initRecycleView()
         initMsgService(binding)
         initEventListener()
-
-
     }
 
     private fun initEventListener() {
@@ -117,7 +115,7 @@ class ChatFragment :
     }
 
 
-//    private fun scrollToBottom() {
+    //    private fun scrollToBottom() {
 //        mBinding.recycleView.postDelayed({
 //            mBinding.recycleView.scrollBy(0, 1980 * 1000)
 //        }, 100)
@@ -140,7 +138,7 @@ class ChatFragment :
         })
         mBinding.recycleView.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
             if (bottom < oldBottom) {
-              scroll2Bottom()
+                scroll2Bottom()
             } else {
 
             }

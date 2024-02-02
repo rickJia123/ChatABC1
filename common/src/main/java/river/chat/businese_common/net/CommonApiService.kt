@@ -10,6 +10,7 @@ import river.chat.lib_resource.model.QueryOrderResBean
 import river.chat.lib_resource.model.database.AppUpdateConfigResBean
 import river.chat.lib_resource.model.database.ConfigServiceBean
 import river.chat.lib_resource.model.database.ServiceConfigBean
+import river.chat.lib_resource.model.database.ServiceConfigServiceBean
 
 /**
  * Created by beiyongChao on 2023/2/24
@@ -30,7 +31,7 @@ object CommonApiService  : BaseApiService() {
      */
     suspend fun requestConfig(
         key: String
-    ): BaseRequestBean<ServiceConfigBean> =
+    ): BaseRequestBean<ServiceConfigServiceBean> =
         commonApi.requestConfig(
             ApiStorage.getBasedBody().apply {
 //                this["key"] = key

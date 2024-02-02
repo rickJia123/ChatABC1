@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
+import river.chat.businese_common.config.ServiceConfigManager
 import river.chat.businese_common.report.ChatTracker
 import river.chat.businese_common.report.ReportManager
 import river.chat.businese_common.report.TrackerEventName
@@ -38,10 +39,23 @@ class PayGuideView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : L
 //        commentViewBinding.etWriteReply.postDelayed({
 //            showSoftInput()
 //        }, 150)
-
+        initView()
         initListener()
     }
 
+
+    private fun initView() {
+        if (ServiceConfigManager.isNeedHideVip()) {
+            viewBinding.viewPay.visibility = GONE
+        }
+        if (ServiceConfigManager.isNeedHideExchange()) {
+            viewBinding.viewShare.visibility = GONE
+        }
+
+        if (ServiceConfigManager.isNeedHideVip() && ServiceConfigManager.isNeedHideExchange()) {
+            viewBinding.root.visibility = GONE
+        }
+    }
 
     private fun initListener() {
         viewBinding.viewPay.action(PayItemActionSimple("开通会员") {

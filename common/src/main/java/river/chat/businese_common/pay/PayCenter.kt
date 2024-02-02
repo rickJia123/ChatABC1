@@ -86,7 +86,7 @@ object PayCenter {
             SimpleDialogConfig()
                 .apply {
                     title = "购买成功"
-                    des = "恭喜您，已经为您开通了VIP会员\n快去体验ChatGpt吧！"
+                    des = "恭喜您，已经为您开通了VIP会员\n快去体验吧！"
                     leftButtonStr = "取消"
                     rightButtonStr = "去体验"
                     rightClick = {

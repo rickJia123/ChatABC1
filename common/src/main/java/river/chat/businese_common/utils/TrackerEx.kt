@@ -32,6 +32,14 @@ fun <T : BaseActivity> T.getOfficalName(
             "登录页"
         } else if (it.contains("ShareActivity")) {
             "分享弹窗"
+        } else if (it.contains("BaseBindingViewModelActivity")) {
+            "收藏列表页"
+        } else if (it.contains("CollectionDetailActivity")) {
+            "收藏详情页"
+        } else if (it.contains("PicturePreviewActivity")) {
+            "图片浏览页"
+        } else if (it.contains("ShareAppActivity")) {
+            "app分享页"
         } else {
             it
         }

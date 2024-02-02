@@ -2,16 +2,15 @@ package river.chat.businese_main.picture
 
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
-import org.koin.android.ext.android.inject
 import river.chat.businese_common.dataBase.AiPictureBox
-import river.chat.businese_main.utils.getBitmap
+import river.chat.businese_common.utils.exts.getBitmap
+import river.chat.businese_common.utils.onLoad
+import river.chat.businese_main.share.SharePictureDialog
 import river.chat.business_main.databinding.ActivityPictureBinding
-import river.chat.lib_core.router.plugin.module.HomePlugin
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
-import river.chat.lib_core.router.plugin.module.UserPlugin
-import river.chat.lib_core.utils.common.TimeUtils
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.exts.view.saveBitmapToMediaStore
+import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 import river.chat.lib_resource.model.database.AiPictureBean
 
@@ -28,13 +27,12 @@ class PicturePreviewActivity :
     @JvmField
     var mPreviewId: String = ""
 
-    var mPicture : AiPictureBean ?= null
-    private val homePlugin: HomePlugin by inject()
-    private val userPlugin: UserPlugin by inject()
+    var mPicture: AiPictureBean? = null
 
 
     override fun initDataBinding(binding: ActivityPictureBinding) {
         super.initDataBinding(binding)
+        onLoad()
         mPicture = AiPictureBox.getAnswerById(mPreviewId)
         mPicture.getBitmap()?.let {
             binding.ivPicture.setImageBitmap(it)
@@ -54,10 +52,14 @@ class PicturePreviewActivity :
         }
         mBinding.ivDownload.singleClick {
             mPicture.getBitmap()?.let {
-                val fileName = "AI绘图" + TimeUtils.montageSystemTime() + ".jpg"
-                saveBitmapToMediaStore(applicationContext, it,fileName)
+                saveBitmapToMediaStore(applicationContext, it)
             }
-
+        }
+        mBinding.ivShare.singleClick {
+            mPicture.getBitmap()?.let {
+                SharePictureDialog.builder(topActivity)
+                    .show(mPreviewId ?: "", mPicture?.question ?: "")
+            }
         }
     }
 

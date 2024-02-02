@@ -90,6 +90,7 @@ boolean isRelease() {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     for (module in appModules) {
         implementation project(":$module")
     }

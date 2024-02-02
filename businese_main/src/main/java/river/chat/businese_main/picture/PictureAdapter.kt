@@ -1,7 +1,5 @@
 package river.chat.businese_main.picture
 
-import android.content.Context
-import android.graphics.Bitmap
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
@@ -9,20 +7,21 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
-import coil.load
 import kotlinx.coroutines.Job
 import river.chat.businese_common.router.jump2PicturePreView
-import river.chat.businese_common.utils.BusinessUtils
-import river.chat.businese_main.utils.getBitmap
+import river.chat.businese_common.utils.exts.getBitmap
+import river.chat.businese_main.share.SharePictureDialog
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ItemPictureAnswerBinding
 import river.chat.business_main.databinding.ItemPictureQuestionBinding
 import river.chat.lib_core.utils.common.GsonKits
 import river.chat.lib_core.utils.exts.dp2px
+import river.chat.lib_core.utils.exts.getColor
 import river.chat.lib_core.utils.exts.singleClick
-import river.chat.lib_core.utils.exts.view.loadCircle
+import river.chat.lib_core.utils.exts.view.saveBitmapToMediaStore
 import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.utils.longan.screenWidth
+import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.utils.other.CutdownUtils
 import river.chat.lib_core.view.recycleview.common.ItemMultiViewHolder
 import river.chat.lib_core.view.recycleview.common.MultiListAdapter
@@ -87,19 +86,32 @@ class PictureAdapter(var context: FragmentActivity?) :
             AiPictureBean.TYPE_ANSWER -> {
                 var answerBingDing = holder.binding as ItemPictureAnswerBinding
                 answerBingDing.tvLoading.visibility = GONE
-                answerBingDing.ivPicture.visibility = GONE
+                answerBingDing.clPicture.visibility = GONE
+                answerBingDing.llAction.visibility = GONE
+                answerBingDing.tvLoading.setTextColor(R.color.front_3_BgColor.getColor())
                 mIsLoading = false
                 mLoadingJop?.cancel()
                 when (item.status) {
                     MessageStatus.COMPLETE -> {
-                        answerBingDing.ivPicture.setImageBitmap(item.getBitmap())
+                        answerBingDing.llAction.visibility = VISIBLE
+                        answerBingDing.clPicture.visibility = VISIBLE
+                        var bitmap = item.getBitmap()
+                        answerBingDing.ivPicture.setImageBitmap(bitmap)
+                        answerBingDing.ivPicture.setRadius(10f)
                         answerBingDing.ivPicture.visibility = VISIBLE
                         answerBingDing.ivPicture.singleClick {
-                           jump2PicturePreView(item.id?:"")
+                            jump2PicturePreView(item.id ?: "")
+                        }
+                        answerBingDing.ivDownload.singleClick {
+                            context?.let { it1 -> saveBitmapToMediaStore(it1, bitmap) }
+                        }
+                        answerBingDing.ivShare.singleClick {
+                            SharePictureDialog.builder(topActivity).show(item.id ?: "",item.question?:"")
                         }
                     }
 
                     MessageStatus.FAIL_COMMON -> {
+                        answerBingDing.tvLoading.setTextColor(R.color.tipTxtColor.getColor())
                         answerBingDing.tvLoading.visibility = VISIBLE
                         answerBingDing.tvLoading.text = item.failMsg
                     }
@@ -118,7 +130,6 @@ class PictureAdapter(var context: FragmentActivity?) :
         }
 
     }
-
 
 
     private fun beginLoading(answerTxt: AppCompatTextView) {

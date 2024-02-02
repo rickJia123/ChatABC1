@@ -35,7 +35,7 @@ object AiPictureBox : BaseBox<AiPictureBean>() {
                 .firstOrNull()
                 ?.let {
                     resultMsg.add(it)
-                }
+                } ?: resultMsg.remove(msg)
             LogUtil.i("rick PictureFragment getMsgOnCard:" + msg.id + "::" + msg.content)
         }
         return resultMsg
@@ -54,8 +54,8 @@ object AiPictureBox : BaseBox<AiPictureBean>() {
      */
     fun getAnswerById(id: String): AiPictureBean {
         //是否包含
-        var msgList= getMsgList()
-        return msgList.firstOrNull { it.id == id && it.type == AiPictureBean.TYPE_ANSWER &&it.status == MessageStatus.COMPLETE }
+        var msgList = getMsgList()
+        return msgList.firstOrNull { it.id == id && it.type == AiPictureBean.TYPE_ANSWER && it.status == MessageStatus.COMPLETE }
             ?: AiPictureBean()
     }
 

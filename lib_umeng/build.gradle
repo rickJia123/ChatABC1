@@ -17,6 +17,7 @@ android {
 dependencies {
 //    api project(':UMLibrary')
     implementation project(":businese_resource")
+//    api project(":lib_aar")
     // 友盟统计SDK
     api 'com.umeng.umsdk:common:9.6.1' // (必选)版本号
     api 'com.umeng.umsdk:asms:1.8.0' // asms包依赖(必选)

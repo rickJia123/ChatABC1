@@ -1,17 +1,15 @@
 package river.chat.businese_main.vip
 
+import river.chat.businese_common.config.ServiceConfigManager
 import river.chat.businese_common.constants.CommonEvent
+import river.chat.businese_common.router.jump2VipExchange
 import river.chat.businese_common.router.jump2VipOpen
 import river.chat.businese_main.constants.MainConstants
-import river.chat.business_main.R
-import river.chat.lib_core.config.AppLocalConfigKey
-import river.chat.lib_core.config.ConfigManager
+import river.chat.businese_main.manager.MainCommonHelper
 import river.chat.lib_core.event.BaseActionEvent
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
-import river.chat.lib_core.utils.exts.getString
-import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_resource.model.VipType
 
 /**
@@ -33,8 +31,14 @@ object VipManager {
      * 跳转开通/兑换页
      */
     fun jump2VipPage() {
-//        jump2VipExchange()
-        jump2VipOpen()
+        if (ServiceConfigManager.isNeedHideVip()) {
+            if (!ServiceConfigManager.isNeedHideExchange()) {
+                jump2VipExchange()
+            }
+        } else {
+            jump2VipOpen()
+        }
+
     }
 
     /**
@@ -135,18 +139,23 @@ object VipManager {
             VipType.VIP.value -> {
                 user.rightsExpireTime + " 到期"
             }
+
             VipType.TRIAL.value -> {
                 "体验还剩:${user.trialBalance}次"
             }
+
             VipType.VIP_TIMEOUT.value -> {
                 "会员已过期"
             }
+
             VipType.TRIAL_END.value -> {
                 "体验已用完"
             }
+
             VipType.TRIAL.value -> {
                 "剩余体验次数:${user.trialBalance}次"
             }
+
             else -> {
                 "开通会员畅享AI"
             }

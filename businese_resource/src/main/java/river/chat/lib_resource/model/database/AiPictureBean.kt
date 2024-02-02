@@ -25,6 +25,7 @@ data class AiPictureBean(
     var type: Int = 0,
 
     var status: Int? = MessageStatus.COMPLETE,
+    var question: String? = "",
 ) {
     companion object {
         const val TYPE_QUESTION = 0

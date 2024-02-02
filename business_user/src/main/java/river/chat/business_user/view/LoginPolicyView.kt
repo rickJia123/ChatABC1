@@ -7,6 +7,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.dynamicanimation.animation.SpringForce
 import androidx.dynamicanimation.animation.SpringForce.DAMPING_RATIO_HIGH_BOUNCY
+import river.chat.businese_common.report.TrackerEventName
+import river.chat.businese_common.report.TrackerKeys
+import river.chat.businese_common.utils.onReport
 import river.chat.business_user.R
 import river.chat.business_user.databinding.ViewLoginPolicyBinding
 import river.chat.lib_core.privacy.PrivacyManager
@@ -49,6 +52,10 @@ class LoginPolicyView @JvmOverloads constructor(
                 setColor("#4A90E2")
                 onClick {
                     LogUtil.i("AgentWebFragment policy")
+                    onReport(
+                        TrackerEventName.CLICK_LOGIN,
+                        TrackerKeys.CLICK_TYPE to "登录验证码页-点击查看条款"
+                    )
                     WebViewHelper.startWebViewActivity(PrivacyManager.getPrivacyUrl())
                 }
             }
@@ -57,6 +64,10 @@ class LoginPolicyView @JvmOverloads constructor(
             {
                 setColor("#4A90E2")
                 onClick {
+                    onReport(
+                        TrackerEventName.CLICK_LOGIN,
+                        TrackerKeys.CLICK_TYPE to "登录验证码页-点击查看条款"
+                    )
                     WebViewHelper.startWebViewActivity(PrivacyManager.getPrivacyUrl())
                 }
             }
@@ -68,7 +79,13 @@ class LoginPolicyView @JvmOverloads constructor(
             callback()
         } else {
             ("请先同意服务协议和隐私政策").toastSystem()
-            viewBinding.ivSelector.startSpringAnima(DynamicAnimation.X, -20f,20f, SpringForce.STIFFNESS_LOW,DAMPING_RATIO_HIGH_BOUNCY)
+            viewBinding.ivSelector.startSpringAnima(
+                DynamicAnimation.X,
+                -20f,
+                20f,
+                SpringForce.STIFFNESS_LOW,
+                DAMPING_RATIO_HIGH_BOUNCY
+            )
         }
     }
 

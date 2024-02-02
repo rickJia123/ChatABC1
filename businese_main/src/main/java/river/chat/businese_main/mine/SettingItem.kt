@@ -119,6 +119,10 @@ class SettingItem @JvmOverloads constructor(
             setOnClickListener { value() }
         }
 
+    fun getTitle(): String {
+        return tvName?.text.toString()
+    }
+
     /**
      * 初始化设置条目
      */

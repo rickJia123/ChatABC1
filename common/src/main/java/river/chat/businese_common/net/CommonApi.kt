@@ -11,6 +11,7 @@ import river.chat.lib_resource.model.CreateOrderResBean
 import river.chat.lib_resource.model.QueryOrderResBean
 import river.chat.lib_resource.model.database.AppUpdateConfigResBean
 import river.chat.lib_resource.model.database.ServiceConfigBean
+import river.chat.lib_resource.model.database.ServiceConfigServiceBean
 
 /**
  * Created by beiyongChao on 2023/2/24
@@ -22,7 +23,7 @@ interface CommonApi : BaseApi {
      *获取配置信息
      */
     @POST(CommonHttpUrl.SYSTEM_CONFIG)
-    suspend fun requestConfig(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<ServiceConfigBean>
+    suspend fun requestConfig(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<ServiceConfigServiceBean>
 
     /**
      *获取配置信息

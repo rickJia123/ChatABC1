@@ -30,6 +30,7 @@ object ServiceConfigBox : BaseBox<ServiceConfigBean>() {
             this.appPrivacyPolicy = config.appPrivacyPolicy
             this.appShareBg = config.appShareBg
             this.appDownLink = config.appDownLink
+            this.closeModulesStr = config.closeModulesStr
             this.updateTime = System.currentTimeMillis()
         }
 

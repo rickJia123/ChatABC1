@@ -119,7 +119,6 @@ object SSEClient {
                     LogUtil.i("receiveEventStream 成功消息:" + str + MessageBean_.failMsg.id)
                     flowBean.content = jsonStr
 
-                    //rick todo
                     if (jsonStr.contains("[COMPLETE]")) {
                         ReportManager.reportEvent(
                             TrackerEventName.REQUEST_CHAT_SUCCESS, mutableMapOf(
@@ -129,6 +128,7 @@ object SSEClient {
                         clearMsg()
                         mFlowBeanMap[id] = MessageBean()
                         homePlugin.onComplete()
+
                     }
                     //处理数据
                 }

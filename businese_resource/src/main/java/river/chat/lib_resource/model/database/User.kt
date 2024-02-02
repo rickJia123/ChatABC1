@@ -33,20 +33,17 @@ data class User(
 
     //是否收藏
     @Transient
-    var isCollection: Boolean = false
+    var isCollection: Boolean = false,
 
-) : java.io.Serializable {
+    //关闭的模块
+    @Transient
+    var closeModules: MutableList<String> = mutableListOf(),
+
+//关闭的模块
+    var closeModulesStr: String = "",
+
+    ) : java.io.Serializable {
     fun getVipType(): Int {
-        //rick todo
-//        return if (rightsStatus == 1 && (rightsExpireTime?.toLong() ?: 0 > System.currentTimeMillis())) {
-//            VipType.VIP.value
-//        } else if (rightsStatus == 3 && ((trialBalance ?: 0) > 0)) {
-//            VipType.VIP.value
-//        } else {
-//            VipType.NORMAL.value
-//        }
-
-
         return if (rightsStatus == 1) {
             VipType.VIP.value
         } else if (rightsStatus == 3 && ((trialBalance ?: 0) > 0)) {

@@ -84,5 +84,42 @@ class SharePlatformView @JvmOverloads constructor(
         mViewModel?.data?.addAll(platforms)
     }
 
+    /**
+     * 设置分享渠道
+     */
+    public fun setPictureChannels() {
+        var platforms = mutableListOf<SharePlatformBean>()
+        platforms.add(
+            SharePlatformBean(
+                "微信",
+                R.drawable.umeng_socialize_wechat,
+                RIVER_SHARE_MEDIA.WEIXIN
+            )
+        )
+        platforms.add(
+            SharePlatformBean(
+                "小红书",
+                R.mipmap.share_platform_xhs,
+                RIVER_SHARE_MEDIA.XIAOHONGSHU
+            )
+        )
+        platforms.add(
+            SharePlatformBean(
+                "朋友圈",
+                R.drawable.umeng_socialize_wxcircle,
+                RIVER_SHARE_MEDIA.WEIXIN_CIRCLE
+            )
+        )
+        platforms.add(
+            SharePlatformBean(
+                "下载",
+                R.drawable.download_black,
+                RIVER_SHARE_MEDIA.MORE
+            )
+        )
+        mViewModel?.data?.clear()
+        mViewModel?.data?.addAll(platforms)
+    }
+
 
 }

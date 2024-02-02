@@ -42,7 +42,6 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             },
             dataResp = { data, time ->
 
-                //rick todo
                 ReportManager.reportEvent(
                     TrackerEventName.REQUEST_CHAT_SUCCESS,
                     mutableMapOf(
@@ -50,8 +49,6 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                         REQUEST_TIME to "GPT接口成功--耗时:${time}ms",
                     )
                 )
-
-
 
                 chatRequestResult.value =
                     RequestResult(isSuccess = true, data = MessageBean().apply {

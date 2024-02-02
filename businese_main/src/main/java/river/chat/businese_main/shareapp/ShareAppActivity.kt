@@ -7,6 +7,7 @@ import com.umeng.socialize.bean.SHARE_MEDIA
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import river.chat.businese_common.constants.CommonVmEvents
+import river.chat.businese_common.utils.onLoad
 import river.chat.business_main.databinding.ActivityShareappBinding
 import river.chat.lib_core.R
 import river.chat.lib_core.config.ServiceConfigBox
@@ -44,6 +45,7 @@ class ShareAppActivity :
 
     override fun initDataBinding(binding: ActivityShareappBinding) {
         super.initDataBinding(binding)
+        onLoad()
         binding.toolBar.setTitle("分享GPTEvery")
 
         binding.ivShare.singleClick {

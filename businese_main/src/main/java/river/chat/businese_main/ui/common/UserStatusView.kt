@@ -5,10 +5,12 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.databinding.DataBindingUtil
+import river.chat.businese_common.config.ServiceConfigManager
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.router.jump2VipOpen
 import river.chat.businese_common.utils.exts.loadAvatar
+import river.chat.businese_main.manager.MainCommonHelper
 import river.chat.businese_main.vip.VipManager
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewUserStatusBinding
@@ -37,6 +39,9 @@ class UserStatusView @JvmOverloads constructor(
 
     init {
         update()
+        if (ServiceConfigManager.isNeedHideVip()&&ServiceConfigManager.isNeedHideExchange()) {
+            viewBinding.root.visibility = View.GONE
+        }
     }
 
 
@@ -71,7 +76,7 @@ class UserStatusView @JvmOverloads constructor(
                 TrackerEventName.CLICK_SETTING,
                 TrackNode(TrackerKeys.CLICK_TYPE to "个人区域-查看权益")
             )
-            jump2VipOpen()
+            VipManager.jump2VipPage()
         }
         viewBinding.tvName.singleClick {
             userPlugin.check2Login {

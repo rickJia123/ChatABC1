@@ -1,0 +1,11 @@
+
+
+ext {
+    groupId = "river.chat"
+    artifactId = "aar"
+}
+apply plugin: 'com.android.library'
+apply from: "../module_common.gradle"
+
+configurations.maybeCreate("default")
+artifacts.add("default", file("staticip.aar"))

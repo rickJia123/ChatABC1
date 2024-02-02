@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
 import river.chat.businese_common.router.jump2Collection
-import river.chat.businese_common.router.jump2VipOpen
 import river.chat.businese_main.constants.MainConstants
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewMineItemEntraceBinding

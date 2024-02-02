@@ -36,12 +36,10 @@ class PictureFragment :
         }
     }
 
-    //是否可以发送消息
-    private var mIsCanSend = true
 
     private var mPicMsgList = mutableListOf<AiPictureBean>()
     private var inputMethodManager: InputMethodManager? = null
-    private var mAnswerPre = "answerId:"
+
 
     companion object {
         @JvmStatic
@@ -62,7 +60,6 @@ class PictureFragment :
             mBinding.recycleView.post {
                 scroll2Bottom()
             }
-
         }
         initEventListener()
         observeRequest()
@@ -77,18 +74,24 @@ class PictureFragment :
             mBinding.inputView.mSendEnable = true
             if (it.isSuccess) {
                 it.data?.let {
-                    onMsgUpdate(it.apply {
-                        this.type = AiPictureBean.TYPE_ANSWER
-                        this.status = MessageStatus.COMPLETE
-                        this.id = it.id
-                    })
+                    if (it.failFlag == false) {
+                        onMsgUpdate(it.apply {
+                            this.type = AiPictureBean.TYPE_ANSWER
+                            this.status = MessageStatus.COMPLETE
+                            this.question =
+                                mPicMsgList.find { it.id == this.id && it.type == AiPictureBean.TYPE_QUESTION }?.content
+                                    ?: ""
+                            this.id = it.id
+                        })
+                    } else {
+                        onMsgUpdate(AiPictureBean().apply {
+                            this.type = AiPictureBean.TYPE_ANSWER
+                            this.status = MessageStatus.FAIL_COMMON
+                            this.failMsg = it.failMsg
+                            this.id = it.id
+                        })
+                    }
                 }
-            } else {
-                onMsgUpdate(AiPictureBean().apply {
-                    this.type = AiPictureBean.TYPE_ANSWER
-                    this.status = MessageStatus.FAIL_COMMON
-                    this.failMsg = it.errorMsg
-                })
             }
         }
 
@@ -98,7 +101,6 @@ class PictureFragment :
             } else {
                 "请等待当前回答结束".toastSystem()
             }
-
         }
     }
 

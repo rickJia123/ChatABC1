@@ -3,8 +3,11 @@ package river.chat.businese_main.vip
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.databinding.DataBindingUtil
+import river.chat.businese_common.config.ServiceConfigManager
 import river.chat.businese_common.utils.exts.loadAvatar
+import river.chat.businese_main.manager.MainCommonHelper
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewVipStatusBinding
 import river.chat.lib_core.router.plugin.core.getPlugin
@@ -30,6 +33,9 @@ class VipStatusView @JvmOverloads constructor(
 
 
     init {
+        if (ServiceConfigManager.isNeedHideVip()&&ServiceConfigManager.isNeedHideExchange()) {
+            viewBinding.root.visibility = View.GONE
+        }
         update()
     }
 

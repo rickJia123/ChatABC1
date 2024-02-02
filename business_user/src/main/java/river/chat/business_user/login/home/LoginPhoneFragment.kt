@@ -76,10 +76,6 @@ class LoginPhoneFragment :
                 TrackerKeys.CLICK_TYPE to "登录验证码页-点击登录"
             )
             binding.viewLoginPolicy.checkSelected {
-                onReport(
-                    TrackerEventName.CLICK_LOGIN,
-                    TrackerKeys.CLICK_TYPE to "登录验证码页-点击查看条款"
-                )
                 checkCode {
                     viewModel.request.loginByPhone("0", getPhoneNum(), getCode())
                 }

@@ -93,7 +93,7 @@
     },
     {
       "id": "3:3304178247595158897",
-      "lastPropertyId": "18:5108645926706770242",
+      "lastPropertyId": "19:3144412210685165922",
       "name": "User",
       "properties": [
         {
@@ -166,13 +166,18 @@
           "id": "18:5108645926706770242",
           "name": "trialBalance",
           "type": 5
+        },
+        {
+          "id": "19:3144412210685165922",
+          "name": "closeModulesStr",
+          "type": 9
         }
       ],
       "relations": []
     },
     {
       "id": "5:4838110875145329383",
-      "lastPropertyId": "8:8682007685053250390",
+      "lastPropertyId": "11:7571632947629574095",
       "name": "ServiceConfigBean",
       "properties": [
         {
@@ -215,13 +220,18 @@
           "id": "8:8682007685053250390",
           "name": "appDownLink",
           "type": 9
+        },
+        {
+          "id": "10:7401089923460656441",
+          "name": "closeModulesStr",
+          "type": 9
         }
       ],
       "relations": []
     },
     {
       "id": "6:5392709544161469680",
-      "lastPropertyId": "9:5667632487003181665",
+      "lastPropertyId": "10:7378659879776764294",
       "name": "AiPictureBean",
       "properties": [
         {
@@ -264,6 +274,11 @@
           "id": "9:5667632487003181665",
           "name": "status",
           "type": 5
+        },
+        {
+          "id": "10:7378659879776764294",
+          "name": "question",
+          "type": 9
         }
       ],
       "relations": []
@@ -335,7 +350,9 @@
     3751164920032685775,
     7767958667971472496,
     947263676866663089,
-    8296010696799654082
+    8296010696799654082,
+    894244666512519414,
+    7571632947629574095
   ],
   "retiredRelationUids": [],
   "version": 1

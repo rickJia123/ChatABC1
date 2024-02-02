@@ -18,7 +18,6 @@ object MessageHelper {
     const val mDefaultMsgId = 12345L
 
     const val CHAT_TIP_LOADING = "正在思考中哦。。。"
-    const val CHAT_TIP_FAIL = "ChatGpt 服务异常，请稍后再试！"
 
     /**
      * 生成消息id
