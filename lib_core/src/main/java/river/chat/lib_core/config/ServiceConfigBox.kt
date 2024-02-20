@@ -32,6 +32,8 @@ object ServiceConfigBox : BaseBox<ServiceConfigBean>() {
             this.appDownLink = config.appDownLink
             this.closeModulesStr = config.closeModulesStr
             this.updateTime = System.currentTimeMillis()
+            this.activityTitle = config.activityTitle
+            this.activityEndTime = config.activityEndTime
         }
 
         localConfig.let {

@@ -101,7 +101,7 @@
     </declare-styleable>
 
     <!--   首页tab 样式-->
-    <style  name="HomeTabView">
+    <style name="HomeTabView">
 
         <item name="android:layout_width">0dp</item>
         <item name="android:weightSum">1</item>
@@ -111,6 +111,12 @@
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/defaultTitleColor</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--测试页面，切换style-->
+    <style name="Develop_Switch_style">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/color_4A4A4A</item>
     </style>
 
 </resources>

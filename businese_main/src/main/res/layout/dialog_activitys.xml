@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivClose"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/close"
+            android:layout_marginRight="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/clActivity"
+            app:layout_constraintRight_toRightOf="parent" />
+        <river.chat.lib_core.view.roundview.EasyConstraintLayout
+            android:id="@+id/clActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/front_1_BgColor"
+            android:padding="10dp"
+            app:ev_radius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <river.chat.businese_main.vip.VipActivityView
+                android:id="@+id/viewActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/viewTabView"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:layout_height="100dp" />
+
+            <river.chat.businese_main.vip.VipTabView2
+                android:id="@+id/viewTabView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/viewPay"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:layout_height="100dp" />
+
+            <river.chat.businese_main.vip.VipPayView
+                android:id="@+id/viewPay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+        </river.chat.lib_core.view.roundview.EasyConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

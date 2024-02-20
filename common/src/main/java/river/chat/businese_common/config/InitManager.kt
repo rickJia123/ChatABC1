@@ -3,6 +3,8 @@ package river.chat.businese_common.config
 import android.app.Application
 import androidx.annotation.Nullable
 import com.alibaba.android.arouter.launcher.ARouter
+import com.tencent.bugly.crashreport.CrashReport
+import com.tencent.bugly.crashreport.CrashReport.UserStrategy
 import com.tencent.tauth.Tencent
 import com.umeng.commonsdk.UMConfigure
 import com.xingin.xhssharesdk.callback.XhsShareRegisterCallback
@@ -13,15 +15,17 @@ import com.yl.lib.sentry.hook.PrivacySentryBuilder
 import kotlinx.coroutines.GlobalScope
 import river.chat.businese_common.report.UMTrackHandler
 import river.chat.businese_common.utils.CrashHandler
-import river.chat.lib_core.wx.WxManager
 import river.chat.lib_core.storage.file.StorageUtil
 import river.chat.lib_core.tracker.initTracker
 import river.chat.lib_core.utils.log.LogUtil
+import river.chat.lib_core.utils.longan.appVersionName
 import river.chat.lib_core.utils.longan.application
+import river.chat.lib_core.utils.longan.deviceModel
 import river.chat.lib_core.utils.longan.deviceOaid
 import river.chat.lib_core.utils.longan.isAppDebug
 import river.chat.lib_core.utils.longan.log
 import river.chat.lib_core.utils.longan.workThread
+import river.chat.lib_core.wx.WxManager
 import river.chat.lib_resource.AccountsConstants
 import river.chat.lib_umeng.common.UmInitConfig
 
@@ -34,6 +38,7 @@ object InitManager {
 
     fun initSdk(application: Application) {
         initRouter()
+        initBugly()
         workThread(
             scope = GlobalScope,
             block = {
@@ -42,6 +47,7 @@ object InitManager {
                 initPrivacy()
                 WxManager.regToWx(application)
                 initBusiness(application)
+
             },
             result = {
                 if (it) {
@@ -54,12 +60,29 @@ object InitManager {
 
     }
 
+    /**
+     * 业务代码初始化
+     */
     fun initBusiness(application: Application) {
         initConfig(application)
         application.initTracker(UMTrackHandler())
         if (!isAppDebug) {
             CrashHandler.getInstance().init(application)
         }
+    }
+
+    /**
+     * 初始化bugly
+     */
+    private fun initBugly() {
+        val strategy = UserStrategy(application)
+        strategy.deviceModel = deviceModel
+        strategy.appVersion = appVersionName;      //App的版本
+        strategy.appPackageName =AccountsConstants.PACKAGE_NAME  //App的包名
+        strategy.appReportDelay = 10000;   //Bugly会在启动10s后联网同步数据
+        CrashReport.setIsDevelopmentDevice(application, isAppDebug)
+        CrashReport.initCrashReport(application,AccountsConstants.BUGLY_APP_ID, isAppDebug,strategy)
+
 
     }
 
@@ -102,6 +125,10 @@ object InitManager {
             application
         ) { oaid ->
             deviceOaid = oaid ?: ""
+            // 也可以通过CrashReport类设置，适合无法在初始化sdk时获取到deviceId的场景，context和deviceId不能为空（或空字符串）
+            CrashReport.setDeviceId(application, deviceOaid)
+
+
             "initUmeng oaid".log()
         }
 

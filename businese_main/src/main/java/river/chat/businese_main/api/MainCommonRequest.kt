@@ -5,6 +5,7 @@ import retrofit2.http.Body
 import river.chat.businese_common.report.ReportManager
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.report.TrackerKeys
+import river.chat.businese_main.manager.MainCommonHelper
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.utils.longan.deviceInfos
@@ -61,6 +62,7 @@ class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             dataResp = { data, time ->
                 paySkuResult.value =
                     RequestResult(isSuccess = true, data = data)
+                MainCommonHelper.mSkuPayList =data
             },
             error = {
                 paySkuResult.value =
@@ -81,6 +83,7 @@ class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             dataResp = { data, time ->
                 vipRightResult.value =
                     RequestResult(isSuccess = true, data = data)
+                MainCommonHelper.mVipRightsBean = data
             },
             error = {
                 vipRightResult.value =

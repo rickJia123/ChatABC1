@@ -57,6 +57,15 @@
                 app:layout_constraintTop_toBottomOf="@id/viewEntranceCollection">
 
                 <river.chat.businese_main.mine.SettingItem
+                    android:id="@+id/viewSettingDevelop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:item_left_title="开发者工具"
+                    app:item_type="icon"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <river.chat.businese_main.mine.SettingItem
                     android:id="@+id/viewSettingFeedback"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

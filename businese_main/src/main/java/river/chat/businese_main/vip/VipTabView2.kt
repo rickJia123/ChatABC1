@@ -49,7 +49,7 @@ class VipTabView2 @JvmOverloads constructor(
     private var payList: MutableList<VipSkuBean> = mutableListOf()
 
     //默认选中按钮
-    private var mDefaultTabPosition = 1
+    private var mDefaultTabPosition = 0
 
 
     init {
@@ -72,7 +72,9 @@ class VipTabView2 @JvmOverloads constructor(
     fun updateData(payList: MutableList<VipSkuBean>) {
         this.payList = payList
         mAdapter.submitList(payList)
-
+        mBinding.recyclerView.postDelayed({
+            mOnTabClick.invoke(payList[mDefaultTabPosition])
+        }, 500)
     }
 
 

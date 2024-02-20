@@ -5,12 +5,8 @@ import river.chat.businese_common.dataBase.AppUpdateConfigBox
 import river.chat.businese_common.net.CommonRequestViewModel
 import river.chat.lib_core.app.BaseApplication
 import river.chat.lib_core.config.AppServerConfigKey
-import river.chat.lib_core.config.ConfigManager
 import river.chat.lib_core.config.ServiceConfigBox
-import river.chat.lib_core.router.plugin.core.getPlugin
-import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.exts.view.preLoad
-import river.chat.lib_resource.model.database.ServiceConfigBean
 
 /**
  * Created by beiyongChao on 2023/6/9
@@ -21,7 +17,7 @@ object ServiceConfigManager {
 
     fun loadAllConfig() {
         loadConfig()
-        loadConfigConfig()
+        loadUpdateConfig()
     }
 
 
@@ -32,7 +28,11 @@ object ServiceConfigManager {
         CommonRequestViewModel().requestConfig(AppServerConfigKey.REQUEST_PRIVACY_VERSION) {
             if (it.isSuccess) {
                 it.data?.let {
-                    ServiceConfigBox.updateConfig(it)
+                    ServiceConfigBox.updateConfig(it.apply {
+                        //rick todo
+                        this.activityTitle = "春节特惠"
+                        this.activityEndTime = System.currentTimeMillis() + 10 * 60 * 1000
+                    })
                     preLoad(BaseApplication.getInstance(), it.appShareBg)
                 }
 
@@ -43,11 +43,12 @@ object ServiceConfigManager {
     /**
      *  获取版本更新配置信息
      */
-    private fun loadConfigConfig() {
+    private fun loadUpdateConfig() {
         CommonRequestViewModel().requestAppUpdateConfig() {
             if (it.isSuccess) {
                 it.data?.let {
-                    AppUpdateConfigBox.updateConfig(it)
+                    AppUpdateConfigBox.updateConfig(it.apply {
+                    })
                 }
             }
         }
@@ -71,8 +72,7 @@ object ServiceConfigManager {
     //是否需要隐藏会员入口
     fun isNeedHideVip(): Boolean {
 //        return ServiceConfigBox.getConfig().closeModulesStr?.contains(CommonConstants.CLOSE_MODULE_VIP_ENTRANCE) == true
-
-        //rick todo
+        //rick todo test
         return false
     }
 
@@ -86,7 +86,7 @@ object ServiceConfigManager {
 //        return ServiceConfigBox.getConfig().closeModulesStr?.contains(CommonConstants.CLOSE_MODULE_EXCHANGE_ENTRANCE)==true
 
 
-        //rick todo
+        //rick todo test
         return false
 
     }

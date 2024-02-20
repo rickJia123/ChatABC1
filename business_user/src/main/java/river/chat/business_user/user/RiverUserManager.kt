@@ -1,5 +1,6 @@
 package river.chat.business_user.user
 
+import com.tencent.bugly.crashreport.CrashReport
 import river.chat.businese_common.constants.CommonConstants
 import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.dataBase.UserBox
@@ -11,6 +12,7 @@ import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.common.GsonKits
+import river.chat.lib_core.utils.exts.safeToString
 import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_resource.model.VipType
@@ -57,6 +59,8 @@ object RiverUserManager {
      */
     fun updateUser(user: User) {
         LogUtil.i("rick RiverUserManager updateUser:"+GsonKits.toJson(user))
+        //赋值用户id给bugly
+        CrashReport.setUserId(user?.id.safeToString())  //该用户本次启动后的异常日志用户ID都将是9527
         UserBox.deleteAll()
         UserBox.updateUser(user)
     }

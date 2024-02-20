@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import river.chat.businese_main.vip.VipManager
 import river.chat.common.R
 import river.chat.common.databinding.ViewInputCommonBinding
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.base.LifecycleView
 
 /**
@@ -71,6 +72,10 @@ class CommonChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: I
 
         viewBinding.ivSend.setOnClickListener {
             var content = getInputText()
+            if (content.isNullOrEmpty()) {
+               "请输入内容".toastSystem()
+                return@setOnClickListener
+            }
             if (mSendEnable) {
                 if (VipManager.hasRights()) {
                     viewBinding.etInput.setText("")

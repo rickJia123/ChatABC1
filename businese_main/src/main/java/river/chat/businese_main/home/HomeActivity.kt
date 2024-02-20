@@ -17,9 +17,11 @@ import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.constants.CommonVmEvents
 import river.chat.businese_common.update.AppUpdateManager
 import river.chat.businese_main.chat.ChatFragment
+import river.chat.businese_main.manager.MainCommonHelper
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.mine.SettingsFragment
 import river.chat.businese_main.picture.PictureFragment
+import river.chat.businese_main.vip.ActivitiesDialog
 import river.chat.business_main.databinding.ActivityHomeBinding
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
@@ -61,8 +63,13 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
         //请求配置信息
         ServiceConfigManager.loadAllConfig()
         userPlugin.refreshInfo()
+        loadPreService()
+        observerPreServices()
 
         AppUpdateManager.showUpdateAppDialog(this)
+       mBinding.root.postDelayed({
+           ActivitiesDialog().showActivityDialog(this)
+       }, 1000)
     }
 
     /**
@@ -174,5 +181,29 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
         // Do something
     }
 
+    /**
+     * 请求需要预加载的接口
+     */
+    fun loadPreService() {
+        viewModel.vipRequest.getPaySku()
+        viewModel.vipRequest.getVipRights()
+    }
 
+    /**
+     * 监听接口消息请求
+     */
+    private fun observerPreServices() {
+        viewModel.vipRequest.paySkuResult.observe(this) {
+            if (it.isSuccess) {
+
+            }
+        }
+        viewModel.vipRequest.vipRightResult.observe(this) {
+            if (it.isSuccess) {
+                it.data?.let {
+
+                }
+            }
+        }
+    }
 }

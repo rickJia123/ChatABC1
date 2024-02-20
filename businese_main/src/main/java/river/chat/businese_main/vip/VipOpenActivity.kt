@@ -6,6 +6,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.router.jump2VipExchange
 import river.chat.businese_common.utils.onLoad
+import river.chat.businese_main.manager.MainCommonHelper
 import river.chat.business_main.databinding.ActivityVipOpenBinding
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
@@ -35,7 +36,7 @@ class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, Vip
         binding.viewTabView.setTabClickListener { vipTabBean ->
             binding.viewPay.update(vipTabBean)
         }
-
+        binding.viewActivity.update(this)
         loadData()
         observerMsg()
         initEventListener()
@@ -78,8 +79,17 @@ class VipOpenActivity : BaseBindingViewModelActivity<ActivityVipOpenBinding, Vip
     }
 
     private fun loadData() {
-        viewModel.request.getPaySku()
-        viewModel.request.getVipRights()
+        if (!MainCommonHelper.mSkuPayList.isNullOrEmpty()) {
+            MainCommonHelper.mSkuPayList?.let {
+                mBinding.viewTabView.updateData(it)
+            }
+        } else {
+            viewModel.request.getPaySku()
+        }
+
+        MainCommonHelper.mVipRightsBean?.let {
+            mBinding.viewVipRights.updateRights(it)
+        } ?:  viewModel.request.getVipRights()
     }
 
 

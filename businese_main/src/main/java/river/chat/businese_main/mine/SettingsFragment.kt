@@ -1,11 +1,13 @@
 package river.chat.businese_main.mine
 
+import android.view.View
 import androidx.lifecycle.lifecycleScope
 import org.koin.android.ext.android.inject
 import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.dataBase.AppUpdateConfigBox
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.report.TrackerKeys
+import river.chat.businese_common.router.jump2Develop
 import river.chat.businese_common.router.jump2Feedback
 import river.chat.businese_common.router.jump2ShareApp
 import river.chat.businese_common.update.AppUpdateManager
@@ -20,6 +22,7 @@ import river.chat.lib_core.tracker.TrackNode
 import river.chat.lib_core.tracker.postTrack
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.appVersionName
+import river.chat.lib_core.utils.longan.isAppDebug
 import river.chat.lib_core.utils.longan.mainThread
 import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.main.fragment.BaseBindingViewModelFragment
@@ -51,6 +54,12 @@ class SettingsFragment :
     }
 
     private fun initSettings(binding: FragmentSettingsBinding) {
+        if (isAppDebug) {
+            binding.viewSettingDevelop.visibility = View.VISIBLE
+            binding.viewSettingDevelop.singleClick { jump2Develop() }
+        } else {
+            binding.viewSettingDevelop.visibility = View.GONE
+        }
         binding.viewSettingPrivacy.click =
             {
                 onSettingClick(binding.viewSettingPrivacy)

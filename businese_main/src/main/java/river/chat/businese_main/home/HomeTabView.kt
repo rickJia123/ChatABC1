@@ -98,7 +98,7 @@ class HomeTabView @JvmOverloads constructor(
     }
 
     private fun updateStatus(position: Int) {
-        if (position == 0) {
+        if (position == 0 || position == 1) {
 //            mBinding.clRoot.setBackgroundColor(R.color.front_1_BgColor.getColor())
             mBinding.clRoot.setTopRadius(0f)
             mBinding.clRoot.setBottomRadius(10f)

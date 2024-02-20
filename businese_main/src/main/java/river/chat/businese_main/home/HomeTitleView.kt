@@ -6,14 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import river.chat.businese_common.config.ServiceConfigManager
+import river.chat.businese_common.ui.view.dialog.simplelist.SimpleDialogListBean
+import river.chat.businese_common.ui.view.dialog.simplelist.SimpleDialogListConfig
+import river.chat.businese_common.ui.view.dialog.simplelist.SimpleListDialog
 import river.chat.businese_main.constants.MainConstants.SERVICE_LINK
+import river.chat.businese_main.message.MessageCenter
+import river.chat.businese_main.share.ShareDialog
 import river.chat.businese_main.vip.VipManager
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewHomeTitleBinding
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.exts.singleClick
+import river.chat.lib_core.utils.longan.toastSystem
+import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.view.base.LifecycleView
+import river.chat.lib_core.view.main.activity.BaseActivity
 import river.chat.lib_core.webview.WebViewHelper
 
 
@@ -41,14 +49,39 @@ class HomeTitleView @JvmOverloads constructor(
             VipManager.jump2VipPage()
         }
         viewBinding.viewService.singleClick {
-           WebViewHelper.startWebViewActivity(SERVICE_LINK)
+            onServiceClick()
         }
+    }
+
+    /**
+     * 点击客服，先弹窗，再
+     */
+    private fun onServiceClick() {
+        var tipStr = "请在设置-帮助与反馈中提交您的问题"
+        SimpleListDialog.builder(topActivity as BaseActivity).config(
+            SimpleDialogListConfig()
+                .apply {
+                    list.add(SimpleDialogListBean("支付问题") {
+                        tipStr.toastSystem()
+                    })
+                    list.add(SimpleDialogListBean("功能问题") {
+                        tipStr.toastSystem()
+                    })
+                    list.add(SimpleDialogListBean("其他问题") {
+                        tipStr.toastSystem()
+                    })
+                    list.add(SimpleDialogListBean("人工客服") {
+                        WebViewHelper.startWebViewActivity(SERVICE_LINK)
+                    })
+                    list.add(SimpleDialogListBean("取消") {
+                    })
+                }).show()
     }
 
 
     fun update() {
 
-        if (ServiceConfigManager.isNeedHideVip()&&ServiceConfigManager.isNeedHideExchange()) {
+        if (ServiceConfigManager.isNeedHideVip() && ServiceConfigManager.isNeedHideExchange()) {
             viewBinding.viewVip.visibility = View.GONE
         }
         viewBinding.viewVip.refresh()

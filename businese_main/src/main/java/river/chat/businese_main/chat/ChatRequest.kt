@@ -32,74 +32,7 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
     val pictureResult = MutableLiveData<RequestResult<AiPictureBean>>()
 
 
-    /**
-     * 获取GPT 答案
-     */
-    fun requestAi(content: String, msgId: String) {
-        launchFlow(
-            request = {
-                MainBusinessApiService.requestAi(content, msgId)
-            },
-            dataResp = { data, time ->
 
-                ReportManager.reportEvent(
-                    TrackerEventName.REQUEST_CHAT_SUCCESS,
-                    mutableMapOf(
-                        REQUEST_CONTENT to "GPT接口成功--问题:" + content + "     回答：" + data?.content,
-                        REQUEST_TIME to "GPT接口成功--耗时:${time}ms",
-                    )
-                )
-
-                chatRequestResult.value =
-                    RequestResult(isSuccess = true, data = MessageBean().apply {
-                        this.content = data?.content
-                        this.parentId = data?.id ?: 0
-                        this.time = data?.time ?: 0
-                        this.status =
-                            if (data?.failFlag == true) MessageStatus.FAIL_COMMON else MessageStatus.COMPLETE
-                        this.failFlag = data?.failFlag
-                        this.failMsg = data?.failMsg
-                    })
-
-                EventCenter.postEvent(BaseActionEvent().apply {
-                    action = CommonEvent.SEND_MSG_SUCCESS
-                })
-            },
-            error = {
-                ReportManager.reportEvent(
-                    TrackerEventName.REQUEST_CHAT_SUCCESS,
-                    mutableMapOf(
-                        REQUEST_CONTENT to "GPT接口错误---问题:" + content + "    错误信息:${it.message}",
-                    )
-                )
-//                chatRequestResult.value =
-//                    RequestResult(isSuccess = false, data = MessageBean().apply {
-//                        this.content = CHAT_TIP_FAIL
-//                        this.parentId = msgId.toLong() ?: 0
-//                        this.time = System.currentTimeMillis()
-//                        this.status = MessageStatus.FAIL_COMMON
-//                    }, errorMsg = it.message ?: "")
-
-                //rick todo 模拟数据
-                var data = MessageBean().apply {
-                    this.content = "测试嘿嘿"
-                    this.failFlag = true
-                    this.parentId = msgId.toLong() ?: 0
-                    this.failMsg = "您的对话权益已过期，请您充值后再继续使用哦～"
-                }
-                chatRequestResult.value =
-                    RequestResult(isSuccess = true, data = MessageBean().apply {
-                        this.content = data.content
-                        this.parentId = data.parentId ?: 0
-                        this.time = data.time ?: 0
-                        this.status =
-                            if (data.failFlag == true) MessageStatus.FAIL_COMMON else MessageStatus.COMPLETE
-                        this.failFlag = data.failFlag
-                        this.failMsg = data.failMsg
-                    })
-            }
-        )
-    }
 
 
 

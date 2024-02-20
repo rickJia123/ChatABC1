@@ -15,7 +15,12 @@ data class VipSkuBean(
 
     //仅1.1元/天
     var promoText3: String? = "",
+    //当前售价
+
     var price: Float? = 0.0f,
+
+    //原价
+    var oriPrice: Float? = 0.0f,
 
     /**
      * 单位价格文案（7.6/天，25/月）

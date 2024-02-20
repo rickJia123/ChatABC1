@@ -63,6 +63,11 @@ object HomeRouterConstants : BaseConstants() {
     const val HOME_PICTURE_PREVIEW = GROUP_HOME + "/picturePreviewActivity"
 
 
+    /**
+     * 意见反馈页
+     */
+    const val HOME_DEVELOP = GROUP_HOME + "/developActivity"
+
     object Params {
         const val KEY_QUESTION_ID = "KEY_QUESTION_ID"
 

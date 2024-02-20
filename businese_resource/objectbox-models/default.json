@@ -177,7 +177,7 @@
     },
     {
       "id": "5:4838110875145329383",
-      "lastPropertyId": "11:7571632947629574095",
+      "lastPropertyId": "13:6863692527412104327",
       "name": "ServiceConfigBean",
       "properties": [
         {
@@ -225,6 +225,16 @@
           "id": "10:7401089923460656441",
           "name": "closeModulesStr",
           "type": 9
+        },
+        {
+          "id": "12:6047086380323662226",
+          "name": "activityTitle",
+          "type": 9
+        },
+        {
+          "id": "13:6863692527412104327",
+          "name": "activityEndTime",
+          "type": 6
         }
       ],
       "relations": []

@@ -62,7 +62,16 @@ class CollectionFragment :
                 MessageCenter.getHistoryMsg()
             ).reversed()
         )
-        mAdapter.submitList(mMsgList.filter { it.questionMsg.isCollected == true })
+        var filterList=mMsgList.filter { it.questionMsg.isCollected == true }
+        mAdapter.submitList(filterList)
+
+        if (filterList.isNotEmpty()) {
+            mBinding.tvEmpty.visibility = android.view.View.GONE
+            mBinding.recycleView.visibility = android.view.View.VISIBLE
+        } else {
+            mBinding.tvEmpty.visibility = android.view.View.VISIBLE
+            mBinding.recycleView.visibility = android.view.View.GONE
+        }
     }
 
 

@@ -22,6 +22,16 @@ object AppLocalConfigKey {
      */
     const val UPDATE_CHAT_LIMIT_TIME = "UPDATE_CHAT_LIMIT_TIME"
 
+
+    /**
+     * 设备id
+     */
+    const val DEVICE_ID = "DEVICE_ID"
+
+    /**
+     * 设备
+     */
+    const val DEVICE_MODE = "DEVICE_MODE"
 }
 
 

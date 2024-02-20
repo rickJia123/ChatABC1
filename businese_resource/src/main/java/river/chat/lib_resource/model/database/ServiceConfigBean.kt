@@ -27,6 +27,10 @@ data class ServiceConfigBean(
 
     var closeModulesStr: String? = "",
 
+    var activityTitle: String? = "",
+
+    var activityEndTime: Long = 0,
+
     ) : java.io.Serializable {
     companion object {
     }

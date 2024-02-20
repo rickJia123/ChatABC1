@@ -17,6 +17,7 @@
 package river.chat.lib_core.utils.longan
 
 import android.os.Build
+import river.chat.lib_core.privacy.PrivacyManager
 
 inline val sdkVersionName: String get() = Build.VERSION.RELEASE
 
@@ -24,7 +25,7 @@ inline val sdkVersionCode: Int get() = Build.VERSION.SDK_INT
 
 inline val deviceManufacturer: String get() = Build.MANUFACTURER
 
-inline val deviceModel: String get() = Build.MODEL
+inline val deviceModel: String get() = PrivacyManager.getDeviceMode()
 
   var deviceOaid:String=""
 

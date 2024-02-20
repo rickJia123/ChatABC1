@@ -91,3 +91,12 @@ fun jump2PicturePreView(id: String) {
         .withString(HomeRouterConstants.Params.PICTURE_PRELOAD_ID, id)
         .navigation()
 }
+
+
+/**
+ * 跳转开发者工具
+ */
+fun jump2Develop() {
+    ARouter.getInstance().build(HomeRouterConstants.HOME_DEVELOP)
+        .navigation()
+}

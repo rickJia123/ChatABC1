@@ -12,4 +12,13 @@ apply from: "../module_common.gradle"
 dependencies {
     implementation project(":common")
     kapt "com.alibaba:arouter-compiler:$arouter_compiler"
+//
+    //滴滴辅助工具
+//    debugImplementation ("io.github.didi.dokit:dokitx:3.5.0"){
+//        exclude group: 'com.google.zxing', module: 'core'
+//    }
+//    releaseImplementation ("io.github.didi.dokit:dokitx-no-op:3.5.0"){
+//        exclude group: 'com.google.zxing', module: 'core'
+//    }
+
 }
