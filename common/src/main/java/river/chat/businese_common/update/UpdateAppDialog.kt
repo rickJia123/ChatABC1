@@ -10,6 +10,7 @@ import android.provider.Settings
 import android.view.KeyEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import river.chat.businese_common.helper.TimeIntervalHelper
 import river.chat.businese_common.utils.onLoad
 import river.chat.common.R
 import river.chat.common.databinding.DialogUpdateBinding
@@ -187,7 +188,7 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
 
     fun show() {
         dialogActivity.supportFragmentManager.let {
-            ConfigManager.putAppConfig(AppLocalConfigKey.UPDATE_DIALOG_SHOW_TIME, true)
+            TimeIntervalHelper.updateUpdateTime()
             show(it, "DialogUpdateBinding")
         }
     }

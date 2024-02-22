@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
 
-        <variable
-            name="vm"
-            type="river.chat.businese_main.chat.ChatViewModel" />
+
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
+
         android:layout_height="match_parent"
         tools:context="river.chat.businese_main.chat.ChatFragment">
 

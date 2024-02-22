@@ -5,6 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import river.chat.businese_common.constants.CommonEvent
+import river.chat.businese_common.constants.ModelEvent
 import river.chat.businese_common.utils.onLoad
 import river.chat.businese_main.home.HomeViewModel
 import river.chat.businese_main.message.MessageCenter
@@ -13,14 +14,20 @@ import river.chat.businese_main.message.MessageHelper
 import river.chat.businese_main.message.MessageHelper.buildCardMsgList
 import river.chat.business_main.databinding.FragmentChatBinding
 import river.chat.lib_core.event.EventCenter
+import river.chat.lib_core.utils.common.SoftKeyboardStateHelper
+import river.chat.lib_core.utils.log.LogUtil
+import river.chat.lib_core.utils.longan.lifecycleOwner
 import river.chat.lib_core.utils.longan.log
+import river.chat.lib_core.utils.longan.toastSystem
+import river.chat.lib_core.view.ktx.bind
+import river.chat.lib_core.view.ktx.observe
 import river.chat.lib_core.view.main.fragment.BaseBindingViewModelFragment
 import river.chat.lib_resource.model.database.CardMsgBean
 
 class ChatFragment :
-    BaseBindingViewModelFragment<FragmentChatBinding, ChatViewModel>() {
+    BaseBindingViewModelFragment<FragmentChatBinding, HomeViewModel>() {
 
-    private var mHomeActivityVm: HomeViewModel? = null
+//    private var mHomeActivityVm: HomeViewModel? = null
 
     private var mMsgList = mutableListOf<CardMsgBean>()
     private var mAdapter: ChatAdapter? = null
@@ -36,6 +43,8 @@ class ChatFragment :
         initRecycleView()
         initMsgService(binding)
         initEventListener()
+        LogUtil.i("viewModel ChatFragment:"+viewModel)
+        viewModel.bind(this)
     }
 
     private fun initEventListener() {
@@ -52,9 +61,28 @@ class ChatFragment :
                 CommonEvent.COLLECTION_TOGGLE -> {
                     refreshMsg(false)
                 }
+                ModelEvent.EVENT_SOFT_OPEN -> {
+                 mBinding.recycleView.translationY= SoftKeyboardStateHelper.lastSoftKeyboardHeightInPx*-1f
+                }
+                ModelEvent.EVENT_SOFT_CLOSE -> {
+                    mBinding.recycleView.translationY=SoftKeyboardStateHelper.lastSoftKeyboardHeightInPx*1f
+                    ("onSoftKeyboardClosed ChatFragment:").toastSystem()
+                }
             }
         }
     }
+
+//    override fun onEvent(eventId: Int) {
+//        when (eventId) {
+//            ModelEvent.EVENT_SOFT_OPEN -> {
+//                ("onSoftKeyboardOpened ChatFragment:").toastSystem()
+//            }
+//            ModelEvent.EVENT_SOFT_CLOSE->
+//            {
+//                ("onSoftKeyboardClosed ChatFragment:").toastSystem()
+//            }
+//        }
+//    }
 
     /**
      * 初始化消息服务
@@ -151,10 +179,7 @@ class ChatFragment :
     }
 
 
-    override fun createViewModel(): ChatViewModel {
-        mHomeActivityVm = getActivityScopeViewModel(HomeViewModel::class.java)
-        return ChatViewModel()
-    }
+    override fun createViewModel() = getActivityScopeViewModel(HomeViewModel::class.java)
 
 
 }

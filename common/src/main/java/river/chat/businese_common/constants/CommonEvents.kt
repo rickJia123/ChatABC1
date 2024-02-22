@@ -22,3 +22,12 @@ object CommonEvent {
     const val COLLECTION_TOGGLE = "COLLECTION_TOGGLE"
 
 }
+
+
+object ModelEvent {
+
+    const val EVENT_SOFT_OPEN = "EVENT_SOFT_OPEN"
+
+    const val EVENT_SOFT_CLOSE = "EVENT_SOFT_CLOSE"
+
+}

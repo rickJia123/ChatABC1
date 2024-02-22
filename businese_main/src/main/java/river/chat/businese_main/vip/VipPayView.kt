@@ -28,7 +28,7 @@ class VipPayView @JvmOverloads constructor(
 
     var mBinding: ViewVipPayBinding
     var mActivity: AppCompatActivity? = null
-    private var mOnTabClick: (Int) -> Unit = {}
+      var onPayClick: ( ) -> Unit = {}
 
     private var payList: MutableList<VipSkuBean> = mutableListOf()
 
@@ -74,6 +74,7 @@ class VipPayView @JvmOverloads constructor(
 
     private fun initClick() {
         mBinding.clPay.singleClick {
+            onPayClick.invoke()
             postTrack(
                 TrackerEventName.CLICK_VIP,
                 TrackNode(TrackerKeys.CLICK_TYPE to "支付按钮:" + mTabBean?.skuName)
@@ -82,6 +83,7 @@ class VipPayView @JvmOverloads constructor(
                 skuId = mTabBean?.skuId ?: ""
                 price = mTabBean?.price.toString()
             })
+
         }
     }
 

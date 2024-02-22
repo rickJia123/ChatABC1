@@ -15,18 +15,20 @@ import org.greenrobot.eventbus.ThreadMode
 import river.chat.businese_common.config.ServiceConfigManager
 import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.constants.CommonVmEvents
+import river.chat.businese_common.constants.ModelEvent
 import river.chat.businese_common.update.AppUpdateManager
 import river.chat.businese_main.chat.ChatFragment
-import river.chat.businese_main.manager.MainCommonHelper
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.mine.SettingsFragment
 import river.chat.businese_main.picture.PictureFragment
 import river.chat.businese_main.vip.ActivitiesDialog
 import river.chat.business_main.databinding.ActivityHomeBinding
+import river.chat.lib_core.event.BaseActionEvent
 import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.router.plugin.core.getPlugin
 import river.chat.lib_core.router.plugin.module.HomeRouterConstants
 import river.chat.lib_core.router.plugin.module.UserPlugin
+import river.chat.lib_core.utils.common.SoftKeyboardStateHelper
 import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 import river.chat.lib_core.view.main.fragment.BaseFragment
@@ -61,15 +63,15 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
         super.onCreate(savedInstanceState)
         initOnHomeActivity()
         //请求配置信息
-        ServiceConfigManager.loadAllConfig()
+        ServiceConfigManager.loadAllConfig {
+            ActivitiesDialog().showActivityDialog(this)
+        }
         userPlugin.refreshInfo()
         loadPreService()
         observerPreServices()
 
         AppUpdateManager.showUpdateAppDialog(this)
-       mBinding.root.postDelayed({
-           ActivitiesDialog().showActivityDialog(this)
-       }, 1000)
+        LogUtil.i("viewModel ChatFragment:"+viewModel)
     }
 
     /**
@@ -147,6 +149,7 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
         }
 
         initEventListener()
+        addSoftKeyboardHelper(mBinding.root)
     }
 
 
@@ -174,12 +177,8 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
     }
 
 
-    override fun createViewModel() = HomeViewModel()
+    override fun createViewModel() = getActivityScopeViewModel(HomeViewModel::class.java)
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(event: String?) {
-        // Do something
-    }
 
     /**
      * 请求需要预加载的接口
@@ -205,5 +204,30 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
                 }
             }
         }
+    }
+
+    /**
+     * 添加软键盘监听
+     */
+    private fun addSoftKeyboardHelper(view: View) {
+        val helper = SoftKeyboardStateHelper(view)
+        helper.addSoftKeyboardStateListener(object :
+            SoftKeyboardStateHelper.SoftKeyboardStateListener {
+            override fun onSoftKeyboardOpened(keyboardHeightInPx: Int) {
+                //rick todo
+//                viewModel.postEvent(ModelEvent.EVENT_SOFT_OPEN)
+                EventCenter.postEvent(BaseActionEvent().apply {
+                    action = ModelEvent.EVENT_SOFT_OPEN
+                })
+            }
+
+            override fun onSoftKeyboardClosed() {
+//                viewModel.postEvent(ModelEvent.EVENT_SOFT_CLOSE)
+                EventCenter.postEvent(BaseActionEvent().apply {
+                    action = ModelEvent.EVENT_SOFT_CLOSE
+                })
+            }
+
+        })
     }
 }

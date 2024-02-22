@@ -2,6 +2,7 @@ package river.chat.businese_common.update
 
 import androidx.appcompat.app.AppCompatActivity
 import river.chat.businese_common.dataBase.AppUpdateConfigBox
+import river.chat.businese_common.helper.TimeIntervalHelper
 import river.chat.lib_core.config.AppLocalConfigKey
 import river.chat.lib_core.config.AppServerConfigKey
 import river.chat.lib_core.config.ConfigManager
@@ -48,11 +49,7 @@ object AppUpdateManager {
             UpdateAppDialog.builder(activity).config(true).show()
         } else {
             //当前时间小于上次提示更新的时间+24小时，不提示更新
-            if (!isFromSetting && (System.currentTimeMillis() < ((ConfigManager.getAppConfigBean(
-                    AppLocalConfigKey.UPDATE_DIALOG_SHOW_TIME
-                )?.updateTime
-                    ?: 0) + UPDATE_SHOW_LIMIT_TIME)
-                        )
+            if (!isFromSetting && TimeIntervalHelper.isUpdateLimit()
             ) {
                 return
             }
@@ -73,14 +70,15 @@ object AppUpdateManager {
      */
     fun getUpdateType(): Int {
         var config=AppUpdateConfigBox.getConfig()
-        return if (config.isForce == 1) {
-            UPDATE_FORCE
-        } else if (config.isRenew == 1) {
-            UPDATE_UPDATE
-        } else {
-            UPDATE_NO
-        }
+//        return if (config.isForce == 1) {
+//            UPDATE_FORCE
+//        } else if (config.isRenew == 1) {
+//            UPDATE_UPDATE
+//        } else {
+//            UPDATE_NO
+//        }
 
+        return UPDATE_UPDATE
     }
 
 

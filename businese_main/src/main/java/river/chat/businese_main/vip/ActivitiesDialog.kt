@@ -2,10 +2,15 @@ package river.chat.businese_main.vip
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
+import river.chat.businese_common.helper.TimeIntervalHelper
 import river.chat.businese_common.utils.onLoad
 import river.chat.businese_main.manager.MainCommonHelper
 import river.chat.business_main.databinding.DialogActivitysBinding
 import river.chat.business_main.databinding.ViewVipActivityBinding
+import river.chat.lib_core.config.AppLocalConfigKey
+import river.chat.lib_core.config.ConfigManager
+import river.chat.lib_core.router.plugin.core.getPlugin
+import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.view.main.dialog.BaseBindingDialogViewModelFragment
 
@@ -34,6 +39,12 @@ class ActivitiesDialog :
         mBinding?.viewTabView?.setTabClickListener { vipTabBean ->
             mBinding?.viewPay?.update(vipTabBean)
         }
+
+        mBinding?.viewPay?.onPayClick = {
+            if (getPlugin<UserPlugin>().isLogin()) {
+                ConfigManager.putAppConfig(AppLocalConfigKey.ACTIVITY_HAS_CLICK, true)
+            }
+        }
     }
 
 
@@ -49,11 +60,11 @@ class ActivitiesDialog :
     }
 
     fun showActivityDialog(activity: AppCompatActivity) {
-        if (MainCommonHelper.checkNeedPayActivity()) {
+        //检测是否需要展示活动并且在本地限制时间内
+        if (MainCommonHelper.checkNeedPayActivity() && !TimeIntervalHelper.isActivityDialogLimit()) {
+            TimeIntervalHelper.updateActivityDialogTime()
             show(activity.supportFragmentManager, "ActivitiesDialog")
         }
 
     }
-
-
 }

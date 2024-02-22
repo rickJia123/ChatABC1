@@ -22,7 +22,19 @@ object AppLocalConfigKey {
      */
     const val UPDATE_CHAT_LIMIT_TIME = "UPDATE_CHAT_LIMIT_TIME"
 
+    /**
+     * 上次活动弹窗更新的时间
+     */
+    const val ACTIVITY_DIALOG_SHOW_TIME = "UPDATE_DIALOG_SHOW_TIME"
+    /**
+     * 上次活动弹窗内容
+     */
+    const val ACTIVITY_CONTENT = "ACTIVITY_CONTENT"
 
+    /**
+     * 是否点击过活动弹窗
+     */
+    const val ACTIVITY_HAS_CLICK = "ACTIVITY_HAS_CLICK"
     /**
      * 设备id
      */
