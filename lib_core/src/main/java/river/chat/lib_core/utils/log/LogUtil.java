@@ -284,7 +284,7 @@ public class LogUtil extends LogShow {
                     return fileName.endsWith(".log") && !fileName.contains(date);
                 };
                 File[] list = fileDir.listFiles(filter);
-                //rick todo
+
 //                for (File file : list) {
 //                    if (!file.getName()
 //                            .startsWith("log_")) {

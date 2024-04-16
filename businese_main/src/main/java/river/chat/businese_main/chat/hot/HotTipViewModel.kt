@@ -1,12 +1,15 @@
 package river.chat.businese_main.chat.hot
 
 import androidx.databinding.ObservableArrayList
+import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.report.ChatTracker
 import river.chat.businese_common.report.ReportManager
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_main.chat.ChatRequest
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.message.MessageHelper
+import river.chat.lib_core.event.BaseActionEvent
+import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.view.main.BaseViewModel
 
@@ -27,7 +30,11 @@ class HotTipViewModel : BaseViewModel() {
                     ChatTracker.CLICK_ACTION to "热门问题点击：" + it.hotQuestion,
                 )
             )
-            MessageCenter.postSendMsg(MessageHelper.buildSelfMsg(it.hotQuestion ?: ""))
+            EventCenter.postEvent(BaseActionEvent().apply {
+                action = CommonEvent.RECEIVE_MSG_INPUT
+                simpleValue = it.hotQuestion ?: ""
+            })
+//            MessageCenter.postSendMsg(MessageHelper.buildSelfMsg(it.hotQuestion ?: ""))
         }
 
     }

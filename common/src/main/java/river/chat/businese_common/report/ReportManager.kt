@@ -63,7 +63,6 @@ object ReportManager {
 
 
     private fun getCommonTrackerMap(): MutableMap<String, String> {
-        //rick todo
         var user = getPlugin<UserPlugin>().getUser()
         var commonMap = mutableMapOf<String, String>()
             .apply {

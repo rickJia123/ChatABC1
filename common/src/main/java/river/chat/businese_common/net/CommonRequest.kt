@@ -8,18 +8,16 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import river.chat.businese_common.config.ServiceConfigManager
-import river.chat.lib_core.wx.WxManager
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.view.main.BaseViewModel
+import river.chat.lib_core.wx.WxManager
 import river.chat.lib_resource.model.CreateOrderRequestBean
 import river.chat.lib_resource.model.CreateOrderResBean
 import river.chat.lib_resource.model.QueryOrderRequestBean
 import river.chat.lib_resource.model.QueryOrderResBean
 import river.chat.lib_resource.model.database.AppUpdateConfigResBean
-import river.chat.lib_resource.model.database.ConfigServiceBean
 import river.chat.lib_resource.model.database.ServiceConfigBean
-import river.chat.lib_resource.model.database.ServiceConfigServiceBean
 
 /**
  * Created by beiyongChao on 2023/3/21
@@ -51,6 +49,8 @@ class CommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
                                 this.appPrivacyPolicy = data.appPrivacyPolicy
                                 this.value = data.value
                                 this.appShareBg = data.appShareBg
+                                this.activityTitle = data.activityTitle
+                                this.activityEndTime = data.activityEndTime
                                 this.updateTime = System.currentTimeMillis()
                                 this.closeModulesStr =
                                     ServiceConfigManager.getCloseModulesStr(data.closeModules)

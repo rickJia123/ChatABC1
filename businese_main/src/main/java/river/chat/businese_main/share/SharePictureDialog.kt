@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
 import river.chat.businese_common.dataBase.AiPictureBox
+import river.chat.businese_common.report.ReportManager
 import river.chat.businese_common.report.ShareTracker
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.utils.exts.getBitmap
@@ -45,11 +46,13 @@ class SharePictureDialog(var dialogActivity: AppCompatActivity) :
 
     override fun onStart() {
         super.onStart()
-        this.trackNode = TrackNode(
-            ShareTracker.KEY_QUESTION to ("图片分享:"+mQuestion), ShareTracker.KEY_ANSWER to ("图片")
-        )
-        postTrack(
+
+        ReportManager.reportEvent(
             TrackerEventName.LOAD_SHARE,
+            mutableMapOf(
+                ShareTracker.KEY_QUESTION to ("图片分享:" + mQuestion),
+                ShareTracker.KEY_ANSWER to ("图片")
+            )
         )
     }
 

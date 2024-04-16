@@ -21,7 +21,7 @@ object MessageBox : BaseBox<MessageBean>() {
      * 获取全部消息记录
      */
     fun getMsgList(): MutableList<MessageBean> {
-        return box.query().order(MessageBean_.time).build().find()
+        return box?.query()?.order(MessageBean_.time)?.build()?.find()?: mutableListOf()
     }
 
     /**

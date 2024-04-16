@@ -53,7 +53,8 @@ class ChatStatusView @JvmOverloads constructor(
         answerMsg: MessageBean,
         answerParent: ConstraintLayout,
         answerText: AppCompatTextView,
-        reloadView: AppCompatImageView
+        reloadView: AppCompatImageView,
+        isLastItem:Boolean=false
     ) {
         ("聊天状态 问题：" + questionMsg + "" + "     答案状态 statusMsg：" + answerMsg).logChat()
         var status = answerMsg.status
@@ -94,6 +95,9 @@ class ChatStatusView @JvmOverloads constructor(
                     reloadView.visibility = VISIBLE
                 stopLoading()
             }
+        }
+        if (!isLastItem) {
+            visibility = GONE
         }
         reloadView.singleClick {
 //            reloadView.animate().rotationBy(360f).

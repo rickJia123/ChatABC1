@@ -1,6 +1,7 @@
 package river.chat.businese_common.dataBase
 
 import river.chat.lib_core.storage.database.BaseBox
+import river.chat.lib_core.utils.exts.ifEmptyOrBlank
 import river.chat.lib_resource.model.database.AppUpdateConfigResBean
 
 /**
@@ -24,9 +25,9 @@ object AppUpdateConfigBox : BaseBox<AppUpdateConfigResBean>() {
             updateTime = System.currentTimeMillis()
         )
         localConfig.apply {
-            this.appUrl = config.appUrl
-            this.appVersion = config.appVersion
-            this.content = config.content
+            this.appUrl = config.appUrl.ifEmptyOrBlank("")
+            this.appVersion = config.appVersion.ifEmptyOrBlank("")
+            this.content = config.content.ifEmptyOrBlank("")
             this.isForce = config.isForce
             this.isRenew = config.isRenew
             this.updateTime = System.currentTimeMillis()

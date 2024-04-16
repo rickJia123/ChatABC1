@@ -36,21 +36,43 @@ android {
             javaMaxHeapSize "4G"//设置允许分配的的最大堆内存
         }
         manifestPlaceholders = [qqappid: "11111111111111111111"]
+        if (isRelease()) {
+            ////64位包
+
+            ndk {
+                abiFilters 'arm64-v8a'
+            }
+            packagingOptions {
+                doNotStrip "*/arm64-v8a/*.so"
+                exclude 'META-INF/io.netty.versions.properties'
+                exclude 'META-INF/INDEX.LIST'
+            }
+        }
+
     }
 
 
     signingConfigs {
         release {
-            storeFile file('/Users/rick/Desktop/rick/personal/program/chatEvery/chatEveryKey')
+            storeFile file('/Users/rick/Desktop/rick/personal/program/chatEvery/chatEveryKey.jks')
             storePassword mProperties.getProperty("storePassword")
             keyAlias mProperties.getProperty("keyAlias")
             keyPassword mProperties.getProperty("keyPassword")
         }
         debug {
-            storeFile file('/Users/rick/Desktop/rick/personal/program/chatEvery/chatEveryKey')
+            storeFile file('/Users/rick/Desktop/rick/personal/program/chatEvery/chatEveryKey.jks')
             storePassword mProperties.getProperty("storePassword")
             keyAlias mProperties.getProperty("keyAlias")
             keyPassword mProperties.getProperty("keyPassword")
+        }
+    }
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            if (variant.buildType.name == 'release') {
+                outputFileName = "GPTEvery-${versionName}-${new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("GMT+8"))}-release.apk"
+            } else {
+                outputFileName = "GPTEvery-${versionName}-${new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("GMT+8"))}-debug.apk"
+            }
         }
     }
 
@@ -103,30 +125,28 @@ privacy {
     // 设置免hook的名单
     blackList = []
     // 开关PrivacySentry插件功能
-//    enablePrivacy = true
+    enablePrivacy = false
     // 开启hook反射的方法
-    hookReflex = true
-
-    // debug是否应用此插件
-    debugEnable =true
+    hookReflex = false
     // 开启hook 替换类，目前支持file
-    hookConstructor = true
+    hookConstructor = false
     // 是否开启hook变量，默认为false，建议弃用
-    hookField = true
+    hookField = false
 
 
-    // 以下是为了解决小米照明弹自启动问题的尝试, 如果没有自启动的需求，这里关闭即可
-    // hook Service的部分代码，修复在MIUI上的自启动问题
-    // 部分Service把自己的Priority设置为1000，这里开启代理功能，可以代理成0
-//    enableReplacePriority = true
-//    replacePriority = 1
-//
-//    // 支持关闭Service的Export功能，默认为false，注意部分厂商通道之类的push(xiaomi、vivo、huawei等厂商的pushService)，不能关闭
-//    enableCloseServiceExport = true
-//    // Export白名单Service, 这里根据厂商的名称设置了白名单
-//    serviceExportPkgWhiteList = ["xiaomi","vivo","honor","meizu","oppo","Oppo","Hms","huawei","stp","Honor"]
-//    // 修改Service的onStartCommand 返回值修改为START_NOT_STICKY
-//    enableHookServiceStartCommand = true
+
+//     以下是为了解决小米照明弹自启动问题的尝试, 如果没有自启动的需求，这里关闭即可
+//     hook Service的部分代码，修复在MIUI上的自启动问题
+//     部分Service把自己的Priority设置为1000，这里开启代理功能，可以代理成0
+    enableReplacePriority = true
+    replacePriority = 1
+
+    // 支持关闭Service的Export功能，默认为false，注意部分厂商通道之类的push(xiaomi、vivo、huawei等厂商的pushService)，不能关闭
+    enableCloseServiceExport = true
+    // Export白名单Service, 这里根据厂商的名称设置了白名单
+    serviceExportPkgWhiteList = ["xiaomi","vivo","honor","meizu","oppo","Oppo","Hms","huawei","stp","Honor"]
+    // 修改Service的onStartCommand 返回值修改为START_NOT_STICKY
+    enableHookServiceStartCommand = true
 }
 /**
  * 合规 end

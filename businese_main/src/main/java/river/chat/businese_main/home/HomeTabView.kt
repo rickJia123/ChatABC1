@@ -48,6 +48,7 @@ class HomeTabView @JvmOverloads constructor(
         mTabList.clear()
         mTabList.add(mBinding.tvChat)
         mTabList.add(mBinding.tvSquare)
+        mTabList.add(mBinding.tvCreation)
         mTabList.add(mBinding.tvMine)
     }
 

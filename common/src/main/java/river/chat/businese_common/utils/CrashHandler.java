@@ -80,8 +80,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             } catch (InterruptedException e) {
                 LogUtil.e(LOG_TAG, "error : " + e);
             }
-            // 退出程序
-            android.os.Process.killProcess(android.os.Process.myPid());
+
             System.exit(1);
         }
 

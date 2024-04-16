@@ -9,8 +9,6 @@ import river.chat.lib_core.config.ConfigManager
  */
 object TimeIntervalHelper {
 
-    //一个月，点击后等情况就近期不再弹出
-    private var longLimitTime = 30 * 24 * 60 * 60 * 1000L
 
     /**
      * 更新弹窗最少间隔时间
@@ -25,8 +23,7 @@ object TimeIntervalHelper {
      * 活动弹窗最少间隔时间
      */
     private var activityDialogInterval = TimeIntervalBean().apply {
-//        limitTime = 24 * 60 * 60 * 1000L
-        limitTime = 1 * 20 * 1000L
+        limitTime = 24 * 60 * 60 * 1000L
         key = AppLocalConfigKey.ACTIVITY_DIALOG_SHOW_TIME
     }
 

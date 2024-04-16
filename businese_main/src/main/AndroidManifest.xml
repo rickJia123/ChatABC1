@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="river.chat.business_main">
 
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <application>
         <meta-data android:name="river.chat.businese_main.config.MainConfigurationImpl"
             android:value="ConfigModule" />

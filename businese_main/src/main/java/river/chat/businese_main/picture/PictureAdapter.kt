@@ -8,8 +8,11 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Job
+import river.chat.businese_common.report.ChatTracker
+import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.router.jump2PicturePreView
 import river.chat.businese_common.utils.exts.getBitmap
+import river.chat.businese_common.utils.onReport
 import river.chat.businese_main.share.SharePictureDialog
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ItemPictureAnswerBinding
@@ -20,7 +23,9 @@ import river.chat.lib_core.utils.exts.getColor
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.exts.view.saveBitmapToMediaStore
 import river.chat.lib_core.utils.log.LogUtil
+import river.chat.lib_core.utils.longan.copyToClipboard
 import river.chat.lib_core.utils.longan.screenWidth
+import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.utils.longan.topActivity
 import river.chat.lib_core.utils.other.CutdownUtils
 import river.chat.lib_core.view.recycleview.common.ItemMultiViewHolder
@@ -78,9 +83,13 @@ class PictureAdapter(var context: FragmentActivity?) :
         LogUtil.i("rick PictureFragment convert:" + GsonKits.toJson(item))
         when (item.type) {
             AiPictureBean.TYPE_QUESTION -> {
+                30.dp2px()
                 var questionBingDing = holder.binding as ItemPictureQuestionBinding
                 questionBingDing.tvQuestion.maxWidth = screenWidth - 20f.dp2px()
                 questionBingDing.tvQuestion.text = item.content
+                questionBingDing.tvQuestion.singleClick {
+                    "问题已复制".toastSystem()
+                }
             }
 
             AiPictureBean.TYPE_ANSWER -> {
@@ -106,7 +115,8 @@ class PictureAdapter(var context: FragmentActivity?) :
                             context?.let { it1 -> saveBitmapToMediaStore(it1, bitmap) }
                         }
                         answerBingDing.ivShare.singleClick {
-                            SharePictureDialog.builder(topActivity).show(item.id ?: "",item.question?:"")
+                            SharePictureDialog.builder(topActivity)
+                                .show(item.id ?: "", item.question ?: "")
                         }
                     }
 

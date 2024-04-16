@@ -53,9 +53,6 @@ class VipTabAdapter(override val layoutId: Int = R.layout.item_vip_tab, var selP
         binding.tvMonthPrice.setTextColor(if (isSelected) R.color.defaultSubTitleColor.getColor() else R.color.defaultDarkTitleColor.getColor())
         setPrice(binding.tvPrice, item, if (isSelected) "#030303" else "#999999")
 
-        //rick todo
-        item.oriPrice = 100f
-
         if ((item.oriPrice ?: 0f) > 0f) {
             var oriPriceStr ="￥"+item.oriPrice.toString()
             val originalPrice = SpannableString(oriPriceStr)

@@ -69,16 +69,16 @@ object AppUpdateManager {
      * 获取版本更新类型
      */
     fun getUpdateType(): Int {
-        var config=AppUpdateConfigBox.getConfig()
-//        return if (config.isForce == 1) {
-//            UPDATE_FORCE
-//        } else if (config.isRenew == 1) {
-//            UPDATE_UPDATE
-//        } else {
-//            UPDATE_NO
-//        }
+        var config = AppUpdateConfigBox.getConfig()
+        return if (config.isForce == 1) {
+            UPDATE_FORCE
+        } else if (config.isRenew == 1) {
+            UPDATE_UPDATE
+        } else {
+            UPDATE_NO
+        }
 
-        return UPDATE_UPDATE
+
     }
 
 

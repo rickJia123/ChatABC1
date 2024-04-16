@@ -1,5 +1,6 @@
 package river.chat.lib_core.utils.common;
 
+import android.content.Context;
 import android.graphics.Rect;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -101,4 +102,6 @@ public class SoftKeyboardStateHelper implements ViewTreeObserver.OnGlobalLayoutL
             }
         }
     }
+
+
 }

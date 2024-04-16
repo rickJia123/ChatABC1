@@ -82,7 +82,12 @@ class VipActivityView @JvmOverloads constructor(
             return
         }
         onEnabled.invoke(true)
-        startCutDown(endTime, activity)
+
+        if (endTime > 0L|| endTime > System.currentTimeMillis()) {
+            startCutDown(endTime, activity)
+            mBinding.tvRemainTime.visibility = VISIBLE
+        }
+
         mBinding.tvTitle.text = activityTitle
         mHandler.sendEmptyMessageDelayed(0, DELAY_TIME)
     }
@@ -145,7 +150,7 @@ class VipActivityView @JvmOverloads constructor(
                     timeText = finishText
                 }
                 mBinding.tvRemainTime.buildSpannableString {
-                    addText("活动结束还剩") {
+                    addText("还剩") {
                         setColor("#666666")
                     }
                     addText(timeText) {

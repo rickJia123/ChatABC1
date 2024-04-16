@@ -10,7 +10,11 @@ import android.provider.Settings
 import android.view.KeyEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import river.chat.businese_common.dataBase.AppUpdateConfigBox
 import river.chat.businese_common.helper.TimeIntervalHelper
+import river.chat.businese_common.report.ReportManager
+import river.chat.businese_common.report.TrackerEventName
+import river.chat.businese_common.report.TrackerKeys
 import river.chat.businese_common.utils.onLoad
 import river.chat.common.R
 import river.chat.common.databinding.DialogUpdateBinding
@@ -21,6 +25,7 @@ import river.chat.lib_core.utils.exts.dp2px
 import river.chat.lib_core.utils.exts.getColor
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.exts.width
+import river.chat.lib_core.utils.longan.appVersionName
 import river.chat.lib_core.utils.longan.download
 import river.chat.lib_core.utils.longan.installAPK
 import river.chat.lib_core.utils.longan.log
@@ -66,6 +71,13 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
 
     override fun initDataBinding(binding: DialogUpdateBinding) {
         onLoad()
+        ReportManager.reportEvent(
+            TrackerEventName.DIALOG_UPDATE,
+            mutableMapOf(
+                TrackerKeys.LOAD_PAGE to "当前版本：" + appVersionName + " 推送版本：" + AppUpdateConfigBox.getConfig().appVersion
+            )
+        )
+
         apkLink = ServiceConfigBox.getConfig().appDownLink
         dialog?.setOnKeyListener { dialog, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_BACK && event.repeatCount == 0) {
@@ -83,11 +95,22 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
 
         binding.tvDes.text = AppUpdateManager.getUpdateContent()
         binding.tvLButton.singleClick {
+            ReportManager.reportEvent(
+                TrackerEventName.DIALOG_UPDATE,
+                mutableMapOf(
+                    TrackerKeys.CLICK_TYPE to "取消：" + appVersionName + " 推送版本：" + AppUpdateConfigBox.getConfig().appVersion
+                )
+            )
             closeDialog()
         }
         changeBtStatus(binding, STATUS_READY)
         binding.tvRButton.singleClick {
-
+            ReportManager.reportEvent(
+                TrackerEventName.DIALOG_UPDATE,
+                mutableMapOf(
+                    TrackerKeys.CLICK_TYPE to "确认升级：" + appVersionName + " 推送版本：" + AppUpdateConfigBox.getConfig().appVersion
+                )
+            )
             when (downloadStatus) {
                 STATUS_READY -> {
                     download(apkLink) {
@@ -128,7 +151,7 @@ class UpdateAppDialog(var dialogActivity: AppCompatActivity) :
             }
         }
         binding.viewRoot.singleClick {
-            closeDialog()
+//            closeDialog()
         }
     }
 

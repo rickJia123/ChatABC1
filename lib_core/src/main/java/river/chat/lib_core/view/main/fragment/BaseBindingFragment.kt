@@ -1,11 +1,11 @@
 package river.chat.lib_core.view.main.fragment
 
-import android.app.Dialog
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import river.chat.lib_core.R
 import river.chat.lib_core.utils.other.getBindingType
 
 /**
@@ -18,6 +18,9 @@ abstract class BaseBindingFragment<BINDING : ViewDataBinding> : BaseFragment() {
 
     protected var mActivity: AppCompatActivity? = null
     lateinit var mBinding: BINDING
+    protected var mParams: Array<Any?>? = null
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,11 +32,21 @@ abstract class BaseBindingFragment<BINDING : ViewDataBinding> : BaseFragment() {
         //绑定当前 Fragment 生命周期
         mBinding.lifecycleOwner = this
 
+
+        //获取参数
+        var bundle = arguments
+
+        mParams = bundle?.getSerializable(PARAMS) as Array<Any?>?
+
+        initParams(mParams)
+
         // 初始化数据绑定
         initDataBinding(mBinding)
         //返回布局 View 对象
         return mBinding.root
     }
+
+    open fun initParams(params: Array<Any?>?) {}
 
     /**
      * 根据泛型 BINDING 创建 ViewDataBinding 实例

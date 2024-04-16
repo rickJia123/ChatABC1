@@ -24,6 +24,7 @@ class CollectionAdapter(override val layoutId: Int = R.layout.item_collection_ca
     SimpleListHolderAdapter<CardMsgBean, ItemCollectionCardBinding>(CardMsgBean.DIFF) {
 
 
+
     override fun convert(
         binding: ItemCollectionCardBinding,
         item: CardMsgBean,

@@ -16,6 +16,10 @@ open class BaseFragment : Fragment() , EasyPermissions.PermissionCallbacks,
     EasyPermissions.RationaleCallbacks{
 
 
+    companion object
+    {
+        const val PARAMS = "PARAMS"
+    }
 
 
 
@@ -27,6 +31,8 @@ open class BaseFragment : Fragment() , EasyPermissions.PermissionCallbacks,
     protected open fun registerEventBus(): Boolean {
         return false
     }
+
+
 
     open fun getActivityContext(): AppCompatActivity? {
         return activity as AppCompatActivity?

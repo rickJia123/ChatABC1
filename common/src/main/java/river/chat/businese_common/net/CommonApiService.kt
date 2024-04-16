@@ -1,15 +1,13 @@
 package river.chat.businese_common.net
 
-import river.chat.lib_core.wx.WxAccessTokenBean
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApiService
+import river.chat.lib_core.wx.WxAccessTokenBean
 import river.chat.lib_resource.model.CreateOrderRequestBean
 import river.chat.lib_resource.model.CreateOrderResBean
 import river.chat.lib_resource.model.QueryOrderRequestBean
 import river.chat.lib_resource.model.QueryOrderResBean
 import river.chat.lib_resource.model.database.AppUpdateConfigResBean
-import river.chat.lib_resource.model.database.ConfigServiceBean
-import river.chat.lib_resource.model.database.ServiceConfigBean
 import river.chat.lib_resource.model.database.ServiceConfigServiceBean
 
 /**

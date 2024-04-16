@@ -47,7 +47,7 @@ fun Int.getString(): String {
 /**
  * dp转px
  */
-fun Float.dp2px(): Int { 
+fun Float.dp2px(): Int {
     return DisplayUtil.dp2px(this)
 }
 
@@ -84,6 +84,7 @@ fun String?.safeToInt(): Int {
         0
     }
 }
+
 /**
  * 字符串安全转换成int
  */

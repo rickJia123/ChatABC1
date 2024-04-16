@@ -17,9 +17,9 @@ import river.chat.lib_core.utils.exts.view.preLoad
 object ServiceConfigManager {
 
 
-    fun loadAllConfig(onBaseConfigLoaded:(()->Unit)?=null) {
+    fun loadAllConfig(onBaseConfigLoaded:(()->Unit)?=null,onAppDateConfigLoaded:(()->Unit)?=null) {
         loadConfig(onBaseConfigLoaded)
-        loadUpdateConfig()
+        loadUpdateConfig(onAppDateConfigLoaded)
     }
 
 
@@ -33,9 +33,7 @@ object ServiceConfigManager {
                     var lastActivity =
                         ConfigManager.getAppConfig(AppLocalConfigKey.ACTIVITY_CONTENT, "")
                     ServiceConfigBox.updateConfig(it.apply {
-                        //rick todo
-                        this.activityTitle = "春节特惠123"
-                        this.activityEndTime = System.currentTimeMillis() -10 * 60 * 1000
+//                        this.activityTitle = "春节特惠123"
                     })
 
                     //上次活动，对比本次有没有更新,有更新就替换本地长期过期时间
@@ -59,12 +57,13 @@ object ServiceConfigManager {
     /**
      *  获取版本更新配置信息
      */
-    private fun loadUpdateConfig() {
+    private fun loadUpdateConfig(onAppDateConfigLoaded:(()->Unit)?=null) {
         CommonRequestViewModel().requestAppUpdateConfig() {
             if (it.isSuccess) {
                 it.data?.let {
                     AppUpdateConfigBox.updateConfig(it.apply {
                     })
+                    onAppDateConfigLoaded?.invoke()
                 }
             }
         }
@@ -87,9 +86,7 @@ object ServiceConfigManager {
 
     //是否需要隐藏会员入口
     fun isNeedHideVip(): Boolean {
-//        return ServiceConfigBox.getConfig().closeModulesStr?.contains(CommonConstants.CLOSE_MODULE_VIP_ENTRANCE) == true
-        //rick todo test
-        return false
+        return ServiceConfigBox.getConfig().closeModulesStr?.contains(CommonConstants.CLOSE_MODULE_VIP_ENTRANCE) == true
     }
 
     //是否需要隐藏分享入口
@@ -99,11 +96,9 @@ object ServiceConfigManager {
 
     //是否需要隐藏兑换入口
     fun isNeedHideExchange(): Boolean {
-//        return ServiceConfigBox.getConfig().closeModulesStr?.contains(CommonConstants.CLOSE_MODULE_EXCHANGE_ENTRANCE)==true
+        return ServiceConfigBox.getConfig().closeModulesStr?.contains(CommonConstants.CLOSE_MODULE_EXCHANGE_ENTRANCE)==true
 
 
-        //rick todo test
-        return false
 
     }
 

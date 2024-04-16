@@ -10,6 +10,8 @@ import okhttp3.internal.http.RealResponseBody
 import okio.Buffer
 import okio.Source
 import okio.buffer
+import river.chat.lib_core.config.NetCacheBox
+import river.chat.lib_core.utils.common.GsonKits
 import river.chat.lib_core.utils.log.LogUtil
 import java.io.EOFException
 import java.io.IOException
@@ -22,9 +24,45 @@ import java.util.concurrent.TimeUnit
 
 object DynamicCacheHelper {
 
+    /**
+     * 保存缓存
+     */
+    inline fun <reified T> saveCache(key: String?, bean: T?): Long {
+        try {
+            return NetCacheBox.putCache(key ?: "", GsonKits.toJson(bean) ?: "")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return -1
+    }
 
+    /**
+     * 根据keu获取缓存
+     */
+    inline fun <reified T> getCacheByKey(key: String?): T? {
+        try {
+            return NetCacheBox.getCache(key ?: "")?.let {
+                GsonKits.fromJson(it.data, T::class.java)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
 
-
+    /**
+     * 根据keu获取缓存
+     */
+    inline fun <reified T> getListCacheByKey(key: String?): ArrayList<T>? {
+        try {
+            return NetCacheBox.getCache(key ?: "")?.let {
+                GsonKits.jsonToArrayList(it.data, T::class.java)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
 
 
     /**
@@ -179,7 +217,6 @@ object DynamicCacheHelper {
     fun checkNeedStrategySave(cacheMode: String): Boolean {
         return cacheMode == NetCacheType.CACHE_NORMAL
     }
-
 
 
 }

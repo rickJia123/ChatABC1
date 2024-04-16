@@ -1,6 +1,8 @@
 package river.chat.businese_main.home
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +12,9 @@ import river.chat.businese_common.ui.view.dialog.simplelist.SimpleDialogListBean
 import river.chat.businese_common.ui.view.dialog.simplelist.SimpleDialogListConfig
 import river.chat.businese_common.ui.view.dialog.simplelist.SimpleListDialog
 import river.chat.businese_main.constants.MainConstants.SERVICE_LINK
-import river.chat.businese_main.message.MessageCenter
-import river.chat.businese_main.share.ShareDialog
 import river.chat.businese_main.vip.VipManager
 import river.chat.business_main.R
 import river.chat.business_main.databinding.ViewHomeTitleBinding
-import river.chat.lib_core.router.plugin.core.getPlugin
-import river.chat.lib_core.router.plugin.module.UserPlugin
 import river.chat.lib_core.utils.exts.singleClick
 import river.chat.lib_core.utils.longan.toastSystem
 import river.chat.lib_core.utils.longan.topActivity
@@ -42,12 +40,14 @@ class HomeTitleView @JvmOverloads constructor(
     init {
         update()
         initClick()
+
     }
 
     private fun initClick() {
         viewBinding.viewVip.singleClick {
             VipManager.jump2VipPage()
         }
+
         viewBinding.viewService.singleClick {
             onServiceClick()
         }
@@ -71,6 +71,14 @@ class HomeTitleView @JvmOverloads constructor(
                         tipStr.toastSystem()
                     })
                     list.add(SimpleDialogListBean("人工客服") {
+
+//        WebViewHelper.launcher(Api.API_CARD + Api.Eula)
+//                .launchAgent(context);
+//                        val intent = Intent()
+//                        intent.action = "android.intent.action.VIEW"
+//                        val content_url = Uri.parse(SERVICE_LINK)
+//                        intent.data = content_url
+//                        context.startActivity(intent)
                         WebViewHelper.startWebViewActivity(SERVICE_LINK)
                     })
                     list.add(SimpleDialogListBean("取消") {
@@ -80,11 +88,20 @@ class HomeTitleView @JvmOverloads constructor(
 
 
     fun update() {
-
         if (ServiceConfigManager.isNeedHideVip() && ServiceConfigManager.isNeedHideExchange()) {
             viewBinding.viewVip.visibility = View.GONE
         }
         viewBinding.viewVip.refresh()
+    }
+
+    fun onSelection(position: Int) {
+        if (position >= 3) {
+            viewBinding.viewService.visibility = View.VISIBLE
+        } else {
+            viewBinding.viewService.visibility = View.GONE
+        }
+
+
     }
 
 

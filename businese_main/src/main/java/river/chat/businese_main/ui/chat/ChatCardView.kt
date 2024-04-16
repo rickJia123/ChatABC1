@@ -94,7 +94,7 @@ class ChatCardView @JvmOverloads constructor(
     /**
      * 刷新数据
      */
-    fun refresh(questionMsg: MessageBean? = null, answerMsg: MessageBean? = null) {
+    fun refresh(questionMsg: MessageBean? = null, answerMsg: MessageBean? = null,isLastItem:Boolean=false) {
         var isLastSuccess =
             MessageBox.getMsgById(answerMsg?.id ?: 100).status == MessageStatus.COMPLETE
 //        var isLastSuccess = this.answerMsg?.status == MessageStatus.COMPLETE

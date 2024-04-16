@@ -1,8 +1,11 @@
 package river.chat.lib_core.net.cache
+
 import okhttp3.internal.cache.DiskLruCache
 import okhttp3.internal.concurrent.TaskRunner
 import okhttp3.internal.io.FileSystem
 import okhttp3.internal.threadFactory
+import river.chat.lib_core.config.NetCacheBox
+import river.chat.lib_core.utils.common.GsonKits
 import java.io.File
 import java.util.concurrent.Executor
 import java.util.concurrent.LinkedBlockingQueue
@@ -14,6 +17,7 @@ import java.util.concurrent.TimeUnit
  * Description:
  */
 internal object OkHttpHelper {
+
 
     /**
      * 获取diskLruCache
@@ -71,4 +75,6 @@ internal object OkHttpHelper {
             }
         }
     }
+
+
 }

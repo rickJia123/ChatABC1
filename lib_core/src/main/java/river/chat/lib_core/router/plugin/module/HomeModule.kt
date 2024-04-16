@@ -73,6 +73,10 @@ object HomeRouterConstants : BaseConstants() {
 
         //需要预览的图片id
         const val PICTURE_PRELOAD_ID = "PICTURE_PRELOAD_ID"
+
+
+        //聊天模式
+        const val CHAT_MODEL = "CHAT_MODEL"
     }
 }
 

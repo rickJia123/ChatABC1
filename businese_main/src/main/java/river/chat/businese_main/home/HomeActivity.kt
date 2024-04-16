@@ -18,6 +18,8 @@ import river.chat.businese_common.constants.CommonVmEvents
 import river.chat.businese_common.constants.ModelEvent
 import river.chat.businese_common.update.AppUpdateManager
 import river.chat.businese_main.chat.ChatFragment
+import river.chat.businese_main.constants.ChatConstants
+import river.chat.businese_main.creation.HomeCreationFragment
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.mine.SettingsFragment
 import river.chat.businese_main.picture.PictureFragment
@@ -63,15 +65,14 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
         super.onCreate(savedInstanceState)
         initOnHomeActivity()
         //请求配置信息
-        ServiceConfigManager.loadAllConfig {
-            ActivitiesDialog().showActivityDialog(this)
-        }
+        ServiceConfigManager.loadAllConfig(
+            onBaseConfigLoaded = { ActivitiesDialog().showActivityDialog(this) },
+            onAppDateConfigLoaded = { AppUpdateManager.showUpdateAppDialog(this) }
+        )
         userPlugin.refreshInfo()
         loadPreService()
         observerPreServices()
-
-        AppUpdateManager.showUpdateAppDialog(this)
-        LogUtil.i("viewModel ChatFragment:"+viewModel)
+        LogUtil.i("viewModel ChatFragment:" + viewModel)
     }
 
     /**
@@ -99,10 +100,12 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
 
 
     private fun initFragment() {
-        val fragmentChat = ChatFragment.newInstance()
+        val fragmentChat = ChatFragment.newInstance(ChatConstants.CHAT_MODE_NORMAl)
         mFragments.add(fragmentChat as BaseFragment)
         val fragmentPicture = PictureFragment.newInstance()
         mFragments.add(fragmentPicture)
+        val fragmentCreation = HomeCreationFragment.newInstance()
+        mFragments.add(fragmentCreation)
         val fragmentSettings = SettingsFragment.newInstance()
         mFragments.add(fragmentSettings as BaseFragment)
 
@@ -135,12 +138,14 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
 //                } else {
 //                    mBinding.toolBar.visibility = View.VISIBLE
 //                }
+                mBinding.toolBar.onSelection(position)
             }
 
             override fun onPageScrollStateChanged(state: Int) {
                 super.onPageScrollStateChanged(state)
                 //禁止滑动
                 mBinding.viewPager.isUserInputEnabled = !(state == SCROLL_STATE_DRAGGING)
+
             }
         })
 
@@ -214,8 +219,6 @@ class HomeActivity : BaseBindingViewModelActivity<ActivityHomeBinding, HomeViewM
         helper.addSoftKeyboardStateListener(object :
             SoftKeyboardStateHelper.SoftKeyboardStateListener {
             override fun onSoftKeyboardOpened(keyboardHeightInPx: Int) {
-                //rick todo
-//                viewModel.postEvent(ModelEvent.EVENT_SOFT_OPEN)
                 EventCenter.postEvent(BaseActionEvent().apply {
                     action = ModelEvent.EVENT_SOFT_OPEN
                 })

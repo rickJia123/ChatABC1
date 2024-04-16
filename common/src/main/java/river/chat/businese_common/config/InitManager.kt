@@ -5,11 +5,11 @@ import androidx.annotation.Nullable
 import com.alibaba.android.arouter.launcher.ARouter
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.bugly.crashreport.CrashReport.UserStrategy
-import com.tencent.tauth.Tencent
 import com.umeng.commonsdk.UMConfigure
 import com.xingin.xhssharesdk.callback.XhsShareRegisterCallback
 import com.xingin.xhssharesdk.core.XhsShareSdk
 import com.xingin.xhssharesdk.model.config.XhsShareGlobalConfig
+import com.yl.lib.sentry.hook.PrivacyResultCallBack
 import com.yl.lib.sentry.hook.PrivacySentry
 import com.yl.lib.sentry.hook.PrivacySentryBuilder
 import kotlinx.coroutines.GlobalScope
@@ -78,10 +78,15 @@ object InitManager {
         val strategy = UserStrategy(application)
         strategy.deviceModel = deviceModel
         strategy.appVersion = appVersionName;      //App的版本
-        strategy.appPackageName =AccountsConstants.PACKAGE_NAME  //App的包名
+        strategy.appPackageName = AccountsConstants.PACKAGE_NAME  //App的包名
         strategy.appReportDelay = 10000;   //Bugly会在启动10s后联网同步数据
         CrashReport.setIsDevelopmentDevice(application, isAppDebug)
-        CrashReport.initCrashReport(application,AccountsConstants.BUGLY_APP_ID, isAppDebug,strategy)
+        CrashReport.initCrashReport(
+            application,
+            AccountsConstants.BUGLY_APP_ID,
+            isAppDebug,
+            strategy
+        )
 
 
     }
@@ -119,8 +124,6 @@ object InitManager {
         //友盟正式初始化
         val umInitConfig = UmInitConfig()
         umInitConfig.UMinit(application)
-        //QQ官方sdk授权
-        Tencent.setIsPermissionGranted(true)
         UMConfigure.getOaid(
             application
         ) { oaid ->
@@ -170,18 +173,17 @@ object InitManager {
         var builder = PrivacySentryBuilder()
             // 自定义文件结果的输出名
             .configResultFileName("buyer_privacy")
-            // 配置游客模式，true打开游客模式，false关闭游客模式
-            .configVisitorModel(false)
             // 配置写入文件日志 , 线上包这个开关不要打开！！！！，true打开文件输入，false关闭文件输入
             .enableFileResult(isAppDebug)
+            .syncDebug(isAppDebug)
             // 持续写入文件30分钟
-            .configWatchTime(30 * 60 * 1000)
-        // 文件输出后的回调
-//            .configResultCallBack(object : PrivacySentryBuilder.ResultCallBack {
-//                override fun onResult(result: String) {
-//                    // 这里可以拿到文件输出的结果
-//                }
-//            }
+            .configWatchTime(10 * 60 * 1000)
+            // 文件输出后的回调
+            .configResultCallBack(object : PrivacyResultCallBack {
+                override fun onResultCallBack(filePath: String) {
+                    LogUtil.d("PrivacySentry", "onResultCallBack: $filePath")
+                }
+            })
         // 添加默认结果输出，包含log输出和文件输出
         PrivacySentry.Privacy.init(application, builder)
     }

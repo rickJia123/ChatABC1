@@ -13,19 +13,20 @@ import river.chat.lib_core.view.main.activity.BaseBindingViewModelActivity
 
 class SplashActivity : BaseBindingViewModelActivity<ActivitySplashBinding, SplashViewModel>() {
 
-
     override fun initDataBinding(binding: ActivitySplashBinding) {
         super.initDataBinding(binding)
-        //rick todo
         PrivacyManager.tryShowPrivacyDialog(this) {
             UMConfigure.submitPolicyGrantResult(applicationContext, it)
-            if (it) {
-                binding.tvTitle1.postDelayed({
-                    go2Main()
-                }, 0)
-            } else {
-                finish()
-            }
+//            if (it) {
+//                binding.tvTitle1.postDelayed({
+//                    go2Main()
+//                }, 0)
+//            } else {
+//                finish()
+//            }
+            binding.tvTitle1.postDelayed({
+                go2Main()
+            }, 0)
 //            initVideo()
             showGif()
         }
@@ -38,7 +39,6 @@ class SplashActivity : BaseBindingViewModelActivity<ActivitySplashBinding, Splas
     private fun initVideo() {
         //总播放时间
 //        var totalPLayTime = 20
-//        //rick todo
 //        var uri = Uri.parse("http://vjs.zencdn.net/v/oceans.mp4")
 //        var videoView = mBinding.videoView
 //        videoView.setVideoURI(uri)

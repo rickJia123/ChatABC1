@@ -3,6 +3,8 @@ package river.chat.businese_main.api
 import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import river.chat.businese_main.creation.CreationBeans
+import river.chat.businese_main.creation.CreationItemsBeans
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApi
 import river.chat.lib_resource.model.database.AiPictureBean
@@ -68,5 +70,11 @@ interface MainBusinessApi : BaseApi {
      */
     @POST("/redeemCode/useCode")
     suspend fun exchangeVip(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<Boolean>
+
+    /**
+     * 模板列表
+     */
+    @POST("/template/list")
+    suspend fun modelList(@Body body: Map<String, @JvmSuppressWildcards Any?>): BaseRequestBean<MutableList<CreationBeans>>
 
 }

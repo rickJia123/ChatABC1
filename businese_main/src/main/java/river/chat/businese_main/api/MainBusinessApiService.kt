@@ -9,6 +9,8 @@ import okhttp3.RequestBody
 import okhttp3.Response
 import okio.*
 import river.chat.businese_common.net.ApiStorage.getBasedBody
+import river.chat.businese_main.creation.CreationBeans
+import river.chat.businese_main.creation.CreationItemsBeans
 import river.chat.lib_core.net.bean.BaseRequestBean
 import river.chat.lib_core.net.retrofit.BaseApiService
 import river.chat.lib_core.utils.common.GsonKits
@@ -184,6 +186,16 @@ object MainBusinessApiService : BaseApiService() {
         mainBusinessApi.exchangeVip(
             getBasedBody().apply {
                 this["code"] = code
+            }
+        )
+
+    /**
+     * 模板列表
+     */
+    suspend fun modelList(
+    ): BaseRequestBean<MutableList<CreationBeans>> =
+        mainBusinessApi.modelList(
+            getBasedBody().apply {
             }
         )
 }

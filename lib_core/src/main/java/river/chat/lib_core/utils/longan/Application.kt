@@ -62,12 +62,12 @@ fun launchAppSettings(): Boolean =
     .apply { data = Uri.fromParts("package", packageName, null) }
     .startForActivity()
 
-fun relaunchApp(killProcess: Boolean = true) =
-  application.packageManager.getLaunchIntentForPackage(packageName)?.let {
-    it.addFlags(FLAG_ACTIVITY_CLEAR_TASK or FLAG_ACTIVITY_CLEAR_TOP)
-    startActivity(it)
-    if (killProcess) Process.killProcess(Process.myPid())
-  }
+//fun relaunchApp(killProcess: Boolean = true) =
+//  application.packageManager.getLaunchIntentForPackage(packageName)?.let {
+//    it.addFlags(FLAG_ACTIVITY_CLEAR_TASK or FLAG_ACTIVITY_CLEAR_TOP)
+//    startActivity(it)
+//    if (killProcess) Process.killProcess(Process.myPid())
+//  }
 
 fun doOnAppStatusChanged(onForeground: ((Activity) -> Unit)? = null, onBackground: ((Activity) -> Unit)? = null) =
   doOnAppStatusChanged(object : OnAppStatusChangedListener {

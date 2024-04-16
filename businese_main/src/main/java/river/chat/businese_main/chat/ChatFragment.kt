@@ -1,5 +1,6 @@
 package river.chat.businese_main.chat
 
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.constants.ModelEvent
 import river.chat.businese_common.utils.onLoad
+import river.chat.businese_main.constants.ChatConstants
 import river.chat.businese_main.home.HomeViewModel
 import river.chat.businese_main.message.MessageCenter
 import river.chat.businese_main.message.MessageCenter.checkMsgStatus
@@ -14,27 +16,32 @@ import river.chat.businese_main.message.MessageHelper
 import river.chat.businese_main.message.MessageHelper.buildCardMsgList
 import river.chat.business_main.databinding.FragmentChatBinding
 import river.chat.lib_core.event.EventCenter
+import river.chat.lib_core.router.plugin.module.HomeRouterConstants
 import river.chat.lib_core.utils.common.SoftKeyboardStateHelper
+import river.chat.lib_core.utils.exts.height
 import river.chat.lib_core.utils.log.LogUtil
-import river.chat.lib_core.utils.longan.lifecycleOwner
 import river.chat.lib_core.utils.longan.log
-import river.chat.lib_core.utils.longan.toastSystem
+import river.chat.lib_core.utils.longan.pxToDp
 import river.chat.lib_core.view.ktx.bind
-import river.chat.lib_core.view.ktx.observe
+import river.chat.lib_core.view.ktx.newInstance
 import river.chat.lib_core.view.main.fragment.BaseBindingViewModelFragment
 import river.chat.lib_resource.model.database.CardMsgBean
 
 class ChatFragment :
     BaseBindingViewModelFragment<FragmentChatBinding, HomeViewModel>() {
 
-//    private var mHomeActivityVm: HomeViewModel? = null
 
     private var mMsgList = mutableListOf<CardMsgBean>()
     private var mAdapter: ChatAdapter? = null
 
+    private var holderHeight = 0
+
+    //当前聊天模式
+    private var mCurrentMode = ChatConstants.CHAT_MODE_NORMAl
+
     companion object {
         @JvmStatic
-        fun newInstance() = ChatFragment()
+        fun newInstance(currentMode: String) = ChatFragment().newInstance(currentMode)
     }
 
     override fun initDataBinding(binding: FragmentChatBinding) {
@@ -43,15 +50,23 @@ class ChatFragment :
         initRecycleView()
         initMsgService(binding)
         initEventListener()
-        LogUtil.i("viewModel ChatFragment:"+viewModel)
         viewModel.bind(this)
+        mBinding.inputView.post {
+            holderHeight = mBinding.inputView.height
+            mBinding.viewHolder.height(holderHeight)
+        }
+    }
+
+    override fun initParams(params: Array<Any?>?) {
+        super.initParams(params)
+        mCurrentMode = params?.getOrNull(0) as? String ?: ""
     }
 
     private fun initEventListener() {
         EventCenter.registerReceiveEvent((context as AppCompatActivity).lifecycleScope) {
             when (it.action) {
-                CommonEvent.SEND_MSG_SUCCESS -> {
-
+                CommonEvent.RECEIVE_MSG_INPUT -> {
+                    mBinding.inputView.setInput(it.simpleValue)
                 }
 
                 CommonEvent.HIDE_SOFT_WINDOW -> {
@@ -61,28 +76,19 @@ class ChatFragment :
                 CommonEvent.COLLECTION_TOGGLE -> {
                     refreshMsg(false)
                 }
+
                 ModelEvent.EVENT_SOFT_OPEN -> {
-                 mBinding.recycleView.translationY= SoftKeyboardStateHelper.lastSoftKeyboardHeightInPx*-1f
+                    var disY = SoftKeyboardStateHelper.lastSoftKeyboardHeightInPx * 1f
+                    mBinding.viewHolder.height(disY.toInt().pxToDp() - 100)
                 }
+
                 ModelEvent.EVENT_SOFT_CLOSE -> {
-                    mBinding.recycleView.translationY=SoftKeyboardStateHelper.lastSoftKeyboardHeightInPx*1f
-                    ("onSoftKeyboardClosed ChatFragment:").toastSystem()
+                    mBinding.viewHolder.height(holderHeight)
                 }
             }
         }
     }
 
-//    override fun onEvent(eventId: Int) {
-//        when (eventId) {
-//            ModelEvent.EVENT_SOFT_OPEN -> {
-//                ("onSoftKeyboardOpened ChatFragment:").toastSystem()
-//            }
-//            ModelEvent.EVENT_SOFT_CLOSE->
-//            {
-//                ("onSoftKeyboardClosed ChatFragment:").toastSystem()
-//            }
-//        }
-//    }
 
     /**
      * 初始化消息服务
@@ -91,7 +97,6 @@ class ChatFragment :
         //判断当前列表是否已经初始化过
         var hasDefaultMsg = false
 
-        //rick todo
         //判断是否有ai的第一条消息
         mMsgList.forEach {
             if (it.answerMsg.id == MessageHelper.mDefaultMsgId) {
@@ -119,14 +124,12 @@ class ChatFragment :
                 }
             }
 
-//            var isReloadMsg=MessageHelper.isReloadMsg(historyMsg.filter { it.id==msg.msg?.id }.firstOrNull())
             ("ChatFragment receiver msg:" + msg + ":::是否重新加载消息：" + "::::" + mMsgList.size).log()
             if (isMsgNew) {
                 scroll2Bottom()
             }
         }
         binding.inputView.requestFocus()
-//        MessageCenter.postReceiveMsg(MessageHelper.buildDefaultMsg())
     }
 
     private fun refreshMsg(needScroll: Boolean = true) {
@@ -137,17 +140,10 @@ class ChatFragment :
         mAdapter?.notifyDataSetChanged()
         if (needScroll) {
             scroll2Bottom()
-//            mBinding.recycleView.scrollBy(0, 1980 * 1000)
         }
 
     }
 
-
-    //    private fun scrollToBottom() {
-//        mBinding.recycleView.postDelayed({
-//            mBinding.recycleView.scrollBy(0, 1980 * 1000)
-//        }, 100)
-//    }
     private fun scroll2Bottom() {
         mBinding.recycleView.scrollToPosition(mMsgList.size - 1)
     }

@@ -1,23 +1,15 @@
 package river.chat.businese_main.chat
 
 import androidx.lifecycle.MutableLiveData
-import river.chat.businese_common.constants.CommonEvent
 import river.chat.businese_common.net.SSEClient
-import river.chat.businese_common.report.ReportManager
-import river.chat.businese_common.report.TrackerEventName
-import river.chat.businese_common.report.TrackerKeys.REQUEST_CONTENT
-import river.chat.businese_common.report.TrackerKeys.REQUEST_TIME
 import river.chat.businese_main.api.MainBusinessApiService
 import river.chat.businese_main.chat.hot.HotTipItemBean
-import river.chat.lib_core.event.BaseActionEvent
-import river.chat.lib_core.event.EventCenter
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
 import river.chat.lib_core.utils.log.LogUtil
 import river.chat.lib_core.view.main.BaseViewModel
 import river.chat.lib_resource.model.database.AiPictureBean
 import river.chat.lib_resource.model.database.MessageBean
-import river.chat.lib_resource.model.database.MessageStatus
 
 
 /**
@@ -30,10 +22,6 @@ class ChatRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
 
     val hotQuestionResult = MutableLiveData<RequestResult<MutableList<HotTipItemBean>>>()
     val pictureResult = MutableLiveData<RequestResult<AiPictureBean>>()
-
-
-
-
 
 
 

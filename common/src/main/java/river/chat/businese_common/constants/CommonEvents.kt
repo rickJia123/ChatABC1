@@ -21,6 +21,10 @@ object CommonEvent {
     //收藏状态变化
     const val COLLECTION_TOGGLE = "COLLECTION_TOGGLE"
 
+    //输入框接受消息
+    const val RECEIVE_MSG_INPUT = "RECEIVE_MSG_INPUT"
+
+
 }
 
 

@@ -102,28 +102,6 @@ object VipManager {
     }
 
 
-    /**
-     * 是否有聊天权益,没有执行对应动作
-     */
-    fun check2Vip(): Boolean {
-        var user = getPlugin<UserPlugin>().getUser()
-        var permission = hasRights()
-//        //当前时间小于上次提示时间，只提示，超过了就直接跳转开通
-//        if (System.currentTimeMillis() < ((ConfigManager.getAppConfigBean(
-//                AppLocalConfigKey.UPDATE_CHAT_LIMIT_TIME
-//            )?.updateTime
-//                ?: 0) + UPDATE_SHOW_OPEN_VIP)
-//        ) {
-//            R.string.vip_limit_tip.getString().toastSystem()
-//        } else {
-//            //rick todo 这里改成弹窗
-//            jump2VipPage()
-//            ConfigManager.putAppConfig(AppLocalConfigKey.UPDATE_CHAT_LIMIT_TIME, true)
-//        }
-
-
-        return permission
-    }
 
 
     fun getVipType() = getPlugin<UserPlugin>().getUser().getVipType()

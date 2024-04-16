@@ -5,6 +5,9 @@ import retrofit2.http.Body
 import river.chat.businese_common.report.ReportManager
 import river.chat.businese_common.report.TrackerEventName
 import river.chat.businese_common.report.TrackerKeys
+import river.chat.businese_main.creation.CreationBeans
+import river.chat.businese_main.creation.CreationHelper
+import river.chat.businese_main.creation.CreationItemsBeans
 import river.chat.businese_main.manager.MainCommonHelper
 import river.chat.lib_core.net.request.BaseRequest
 import river.chat.lib_core.net.request.RequestResult
@@ -24,6 +27,7 @@ class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
     val paySkuResult = MutableLiveData<RequestResult<MutableList<VipSkuBean>>>()
     val vipRightResult = MutableLiveData<RequestResult<VipRightsBean>>()
     val exChangeResult = MutableLiveData<RequestResult<Boolean>>()
+    val modelList = MutableLiveData<RequestResult<MutableList<CreationBeans>>>()
 
 
     /**
@@ -62,7 +66,7 @@ class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             dataResp = { data, time ->
                 paySkuResult.value =
                     RequestResult(isSuccess = true, data = data)
-                MainCommonHelper.mSkuPayList =data
+                MainCommonHelper.mSkuPayList = data
             },
             error = {
                 paySkuResult.value =
@@ -115,6 +119,50 @@ class MainCommonRequest(viewModel: BaseViewModel) : BaseRequest(viewModel) {
             error = {
                 ("兑换失败：" + it.message ?: "").toastSystem()
                 exChangeResult.value =
+                    RequestResult(isSuccess = false)
+            }
+        )
+    }
+
+    /**
+     * 模板列表
+     */
+    fun getModelList(
+    ) {
+        launchFlow(
+            request = {
+                MainBusinessApiService.modelList()
+            },
+            dataResp = { data, time ->
+                if (data.isNullOrEmpty()) {
+                    modelList.value =
+                        RequestResult(isSuccess = false)
+                } else {
+
+//                    CreationHelper.saveSelectedModels(valeue)
+                    var list = mutableListOf<CreationBeans>()
+                    var templates = mutableListOf<CreationItemsBeans>()
+                    var oriTemps = data[0].templates
+
+                    repeat(20)
+                    {
+                        templates.addAll(oriTemps)
+                    }
+
+                    data.forEach {
+                        it.apply {
+                            this.templates = templates
+                        }
+                    }
+                    list.addAll(data)
+                    list.addAll(data)
+                    list.addAll(data)
+                    modelList.value =
+                        RequestResult(isSuccess = true, data = list)
+                }
+            },
+            error = {
+                modelList.value =
                     RequestResult(isSuccess = false)
             }
         )

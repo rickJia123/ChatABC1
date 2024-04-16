@@ -174,12 +174,12 @@ object ShareManager {
         /**
          * 把xhsTagList里面的标签加上#拼接成字符串tagStr
          */
-        var tagStr = "#最懂你的AI工具" + "#这个回答有意思" + "#GTEvery"
+        var tagStr = "最懂你的AI工具  " + "   \n#这个回答有意思" + " #我在GPTEvery与AI对话"
 
         var tagPrefixTag = "ChatGpt"
 
         var shareContent =
-            "#$tagPrefixTag  $tagStr"
+            "#$tagPrefixTag   #$tagStr"
 
         val xhsNote = XhsNote().apply {
             this.title = shareTitle

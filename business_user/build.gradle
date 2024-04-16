@@ -20,6 +20,6 @@ android {
 
 dependencies {
     implementation project(":common")
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation "com.google.android.material:material:$material"
     kapt "com.alibaba:arouter-compiler:$arouter_compiler"
 }

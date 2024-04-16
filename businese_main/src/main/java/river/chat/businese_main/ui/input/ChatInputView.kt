@@ -45,10 +45,6 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
 
     init {
         initListener()
-//        commentViewBinding.etWriteReply.postDelayed({
-//            showSoftInput()
-//        }, 150)
-
         if (keyboardChangeListener == null) {
             keyboardChangeListener = KeyboardChangeListener(context as AppCompatActivity)
             keyboardChangeListener?.setKeyBoardListener(this)
@@ -69,13 +65,13 @@ class ChatInputView(context: Context, attr: AttributeSet?, defStyleAttr: Int) : 
         viewBinding.etWriteReply.setText("")
     }
 
+    fun setInput(msg: String) {
+        viewBinding.etWriteReply.setText(msg)
+    }
+
+
     private fun loadHotQuestion() {
         hotTipViewModel?.request?.requestHotQuestion()
-//        hotTipViewModel?.data?.addAll(mutableListOf<HotTipItemBean?>().apply {
-//            add(HotTipItemBean("特朗皮"))
-//            add(HotTipItemBean("梅德韦杰夫"))
-//            add(HotTipItemBean("金牌值多少钱"))
-//        })
     }
 
     fun hideSoftInput() {

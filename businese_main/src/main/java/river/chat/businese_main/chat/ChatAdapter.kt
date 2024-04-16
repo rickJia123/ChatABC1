@@ -33,6 +33,9 @@ class ChatAdapter() :
     }
 
     override fun convert(holder: ItemMultiViewHolder, binding: ViewDataBinding, item: CardMsgBean) {
+        var position=holder.adapterPosition
+        var totalCount=itemCount
+        var isLast=position==totalCount-1
         when (item.questionMsg.source) {
             MessageSource.SINGLE_AI_DEFAULT -> {
                 var aiBingDing = holder.binding as ItemMsgAiBinding
@@ -44,7 +47,7 @@ class ChatAdapter() :
             }
             else -> {
                 var msdBingDing = holder.binding as ItemMsgCardBinding
-                msdBingDing.viewChatCard.refresh(item.questionMsg, item.answerMsg)
+                msdBingDing.viewChatCard.refresh(item.questionMsg, item.answerMsg,isLast)
             }
         }
 

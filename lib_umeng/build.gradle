@@ -30,8 +30,8 @@ dependencies {
     api 'com.umeng.umsdk:share-core:7.3.2'
 
     //QQ
-    api files('libs/open_sdk_3.5.14.3_rc26220c_lite.jar')
-    api 'com.umeng.umsdk:share-qq:7.3.2'
+//    api files('libs/open_sdk_3.5.14.3_rc26220c_lite.jar')
+//    api 'com.umeng.umsdk:share-qq:7.3.2'
 
     //微信
 //    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
@@ -42,9 +42,9 @@ dependencies {
     api 'io.github.sinaweibosdk:core:12.5.0@aar'
     api 'com.umeng.umsdk:share-sina:7.3.2'
 
-    //钉钉
-    api 'com.alibaba.android:ddsharesdk:1.2.0@jar'
-    api 'com.umeng.umsdk:share-dingding:7.3.2'
+//    //钉钉
+//    api 'com.alibaba.android:ddsharesdk:1.2.0@jar'
+//    api 'com.umeng.umsdk:share-dingding:7.3.2'
 
     //抖音
 //    implementation 'com.bytedance.ies.ugc.aweme:opensdk-china-external:0.1.9.0'

@@ -37,6 +37,15 @@ object TrackerEventName {
      */
     const val CRASH = "CRASH"
 
+    //升级弹窗
+    const val DIALOG_UPDATE = "DIALOG_UPDATE"
+
+    //客服弹窗
+    const val DIALOG_SERVICE = "DIALOG_SERVICE"
+
+    //活动弹窗
+    const val DIALOG_ACTIVITY = "DIALOG_ACTIVITY"
+
 }
 
 

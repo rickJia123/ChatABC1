@@ -52,6 +52,16 @@
                 app:layout_constraintBottom_toBottomOf="@id/tvChat"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintLeft_toRightOf="@+id/tvChat"
+                app:layout_constraintRight_toLeftOf="@id/tvCreation"
+                app:layout_constraintTop_toTopOf="@id/tvChat" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCreation"
+                style="@style/HomeTabView"
+                android:text="创造"
+                app:layout_constraintBottom_toBottomOf="@id/tvChat"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintLeft_toRightOf="@+id/tvSquare"
                 app:layout_constraintRight_toLeftOf="@id/tvMine"
                 app:layout_constraintTop_toTopOf="@id/tvChat" />
 
@@ -61,7 +71,7 @@
                 android:text="我的"
                 app:layout_constraintBottom_toBottomOf="@id/tvChat"
                 app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toRightOf="@id/tvSquare"
+                app:layout_constraintLeft_toRightOf="@id/tvCreation"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tvChat" />
         </river.chat.lib_core.view.roundview.EasyConstraintLayout>
